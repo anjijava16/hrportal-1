@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="saptalabs" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+		<class>com.sapta.hr.domainobject.UserDO</class>
+		<class>com.sapta.hr.domainobject.EmployeeDO</class>
+		<class>com.sapta.hr.domainobject.AddressDO</class>
+		<class>com.sapta.hr.domainobject.EmpDetailDO</class>
+		<class>com.sapta.hr.domainobject.EmpAccDetailDO</class>
+		<class>com.sapta.hr.domainobject.ProjectDO</class>
+		<class>com.sapta.hr.domainobject.CustomerDO</class>
+		<class>com.sapta.hr.domainobject.EmpAssignmentDO</class>
+		<class>com.sapta.hr.domainobject.EmpAboutDO</class>
+		<class>com.sapta.hr.domainobject.EmpAchievementsDO</class>
+		<class>com.sapta.hr.domainobject.EmpEmploymentHistoryDO</class>
+		<class>com.sapta.hr.domainobject.EmpSportsDO</class>
+		<class>com.sapta.hr.domainobject.EmpCulturalsDO</class>
+		<class>com.sapta.hr.domainobject.EmpEducationDO</class>
+		<class>com.sapta.hr.domainobject.EmpLanguageKnownDO</class>
+		<class>com.sapta.hr.domainobject.EmpReferencesDO</class>
+		<class>com.sapta.hr.domainobject.EmpSkillSetDO</class>
+		<class>com.sapta.hr.domainobject.EmpFamilyBackgroundDO</class>
+		<class>com.sapta.hr.domainobject.AssetDO</class>
+		<class>com.sapta.hr.domainobject.AssetTypeDO</class>
+		<class>com.sapta.hr.domainobject.EmpCTCDO</class>
+		<class>com.sapta.hr.domainobject.ExpenseDO</class>
+		<class>com.sapta.hr.domainobject.ExpTypeDO</class>
+		<class>com.sapta.hr.domainobject.InvoiceDO</class>
+		<class>com.sapta.hr.domainobject.PayrollDO</class>
+		<class>com.sapta.hr.domainobject.ProfessionalTaxDO</class>
+		<class>com.sapta.hr.domainobject.TDSDO</class>
+		<class>com.sapta.hr.domainobject.VendorDO</class>
+		<class>com.sapta.hr.domainobject.BillsDO</class>
+		<class>com.sapta.hr.domainobject.EmpLoseOfPayDO</class>
+		
+		<!-- shouldn't be valid for java SE per specification, but it works for 
+			EclipseLink ... -->
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+		<!-- For Local Testing -->
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hrportal" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.cache.shared.default" value="false" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+			<property name="eclipselink.logging.level" value="SEVERE" />
+		</properties>
+	</persistence-unit>
+</persistence>
