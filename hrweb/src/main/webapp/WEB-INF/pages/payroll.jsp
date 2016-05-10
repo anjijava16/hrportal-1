@@ -233,7 +233,7 @@
 									</tr>
 									<tr>
 										<td class="bottomcell2 MOBWIDTH">Bonus</td>
-										<td class="bottomcell6 MOBWIDTH"><div id="mbonus" class="sal_details_table_div" contenteditable="true" style="width: 100px; float: right; border: 1px solid #dcdcdc;border-radius: 2px;padding: 2px;"></div></td>
+										<td class="bottomcell6 MOBWIDTH"><div id="mbonus" class="sal_details_table_div"  style="width: 100px;  float: right; padding: 2px;" ></div></td>
 										<td class="bottomcell2 MOBWIDTH"><div id="" class="sal_details_table_div"></div></td>
 										<td class="bottomcell3 MOBWIDTH"><div id="" class="sal_details_table_div"></div></td>
 									</tr>
@@ -931,7 +931,7 @@
 				
 				montlySalCalculator(monthlyctc);
 			}else{
-				$("#mbonus").html(0);
+				$("#mbonus").html("");
 			}
 		});
 		function paysalarynow(payrolltype){
@@ -941,7 +941,6 @@
 			var misc = $("#mmisc").html();
 			var personal = $("#mpersonal").html();
 			var conveyance = $("#mconvay").html();
-			var bonus = $("#mbonus").html();
 			var pt = $("#mpt").html();
 			var tds = $("#tds").html();
 			var pf = $("#mpf").html();
@@ -968,9 +967,7 @@
 			if(lop == null || lop == undefined || lop == "" || lop == 0.00 || lop == "0.00"){
 				lop = 0;
 			}
-			if(bonus == null || bonus == undefined || bonus == "" || bonus == 0.00 || bonus == "0.00"){
-				bonus = 0;
-			}
+		
 			if(totaldeduction == null || totaldeduction == undefined || totaldeduction == "" || totaldeduction == 0.00 || totaldeduction == "0.00"){
 				totaldeduction = 0;
 			}
@@ -980,7 +977,7 @@
 				payrollmonth = payrollmonth.split('/').join('-');
 			}
 			
-			var resourceURL = $("#contextpath").val()+"/payroll/add/"+empid+"/"+basic+"/"+hra+"/"+personal+"/"+conveyance+"/"+bonus+"/"+pt+"/"+tds+"/"+pf+"/"+lop+"/"+totalearnings+"/"+totaldeduction+"/"+empmonthlyctc+"/"+netpayableamount+"/"+payrollmonth+"/"+dayspayable+"/"+payrolltype;
+			var resourceURL = $("#contextpath").val()+"/payroll/add/"+empid+"/"+basic+"/"+hra+"/"+personal+"/"+conveyance+"/"+pt+"/"+tds+"/"+pf+"/"+lop+"/"+totalearnings+"/"+totaldeduction+"/"+empmonthlyctc+"/"+netpayableamount+"/"+payrollmonth+"/"+dayspayable+"/"+payrolltype;
 			$.ajax({
 		        url : resourceURL,
 		        type : 'GET',
@@ -1206,9 +1203,37 @@
 							error: function (xhr, ajaxOptions, thrownError) {
 							}
 						});
+						
+						
+						// ajax call for bonus start
+						var bonusMonth = monthConversion(date);
+							bonusMonth = bonusMonth.split('/').join('-');
+						var resourceURL = $("#contextpath").val()+"/empbonus/getempbonus/"+empid+"/"+bonusMonth;
+						$.ajax({
+							url : resourceURL,
+							type : 'GET',
+							async : false,
+							dataType : 'text',
+							success: function(data) {
+								if(data != 0){
+									$("#mbonus").html(data);
+								}else{
+									$("#mbonus").html("");
+								}
+									
+							},
+							error: function (xhr, ajaxOptions, thrownError) {
+								$("#errorMsgContent").html(thrownError);
+								$.fancybox.open('#errorMsg');
+							}
+						});
+						// ajax call for bonus end
+						
+						
 						var currentmonth  = date;
 						currentmonth = monthConversion(currentmonth);
 						currentmonth = currentmonth.split('/').join('-');
+						
 						var resourceURL = $("#contextpath").val()+"/payroll/retrivebyempidandcurrentmonth/"+empid+"/"+currentmonth;
 						
 						$.ajax({
@@ -1235,7 +1260,7 @@
 											$("#lop_table").show();
 											$("#lossofpay").html(result.lossofpay);
 										}
-										$("#mbonus").html((result.bonus == undefined || result.bonus == null || result.bonus.length <= 0 || result.bonus == 0) ? "" : (result.bonus).toFixed(2));
+										//$("#mbonus").html((result.bonus == undefined || result.bonus == null || result.bonus.length <= 0 || result.bonus == 0) ? "" : (result.bonus).toFixed(2));
 										$("#tds").html((result.taxdeductionsource == undefined || result.taxdeductionsource == null || result.taxdeductionsource.length <= 0 || result.taxdeductionsource == 0) ? "" : (result.taxdeductionsource).toFixed(2));
 										$("#totalearnings").html((result.totalearnings == undefined || result.totalearnings == null || result.totalearnings.length <= 0) ? "" : (result.totalearnings).toFixed(2));
 										$("#totaldeduction").html((result.totaldeduction == undefined || result.totaldeduction == null || result.totaldeduction.length <= 0) ? "" : (result.totaldeduction).toFixed(2));
@@ -1243,14 +1268,14 @@
 										$("#monthlyctc").val((result.empmonthlyctc == undefined || result.empmonthlyctc == null || result.empmonthlyctc.length <= 0) ? "" : (result.empmonthlyctc).toFixed(2));
 										$("#days").html((result.dayspayable == undefined || result.dayspayable == null || result.dayspayable.length <= 0) ? "" : result.dayspayable);
 										$("#tds").prop("contenteditable", false).css("border","none");
-										$("#mbonus").prop("contenteditable", false).css("border","none");
+										/* $("#mbonus").prop("contenteditable", false).css("border","none"); */
 									}); 
 								}else{
 								}
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
 								$("#tds").prop("contenteditable", true).css("border","1px solid #dcdcdc");
-								$("#mbonus").prop("contenteditable", true).css("border","1px solid #dcdcdc");
+								/* $("#mbonus").prop("contenteditable", true).css("border","1px solid #dcdcdc"); */
 								salarynotpaidcalculation(date);
 							}
 						});
@@ -1478,12 +1503,7 @@
 								}else{
 									$("#tds").html(0);
 								}
-								var bonus = 0.00;
-								if(bonus != 0 && bonus != 0.00){
-									$("#mbonus").html(parseFloat(bonus).toFixed(2));
-								}else{
-									$("#mbonus").html(0);
-								}
+								
 								
 								if(pf != 0 && pf != 0.00){
 									$("#mpf").html(parseFloat(pf).toFixed(2));
@@ -1565,7 +1585,7 @@
 			$("#mconvay").html((conveyallowances).toFixed(2));
 			}
 			if(bonus == "") bonus = 0;
-			if(bonus > 0){
+			if(parseFloat(bonus) > 0){
 				totalearnings = (basicsalary + hraallowances + conveyallowances + personalallowances + parseFloat(bonus));
 			}else{
 				totalearnings = (basicsalary + hraallowances + conveyallowances + personalallowances);

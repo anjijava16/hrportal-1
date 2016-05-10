@@ -20,12 +20,14 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sapta.hr.domainobject.EmpAccDetailDO;
+import com.sapta.hr.domainobject.EmpBonusDO;
 import com.sapta.hr.domainobject.EmpDetailDO;
 import com.sapta.hr.domainobject.EmpFamilyBackgroundDO;
 import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.SaptaProfileDO;
 import com.sapta.hr.service.EmpAccDetailService;
+import com.sapta.hr.service.EmpBonusService;
 import com.sapta.hr.service.EmpDetailService;
 import com.sapta.hr.service.EmpFamilyBackgroundService;
 import com.sapta.hr.service.EmployeeService;
@@ -90,7 +92,6 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 		List<EmpAccDetailDO> employeeAccountList = null;
 		List<EmpFamilyBackgroundDO> employeeFamilyList = null;
 		List<PayrollDO> payrollList = null;
-		
 		Font font8 = new Font(base, 8, Font.NORMAL, BaseColor.BLACK);
 		
 		try{
@@ -561,13 +562,21 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 		
 		PdfPTable payroll = new PdfPTable(4);
 		List<PayrollDO> payrollList = null;
+		List<EmpBonusDO> empBonusList = null;
 		NumberFormat twodigitconversion = NumberFormat.getInstance();
 		twodigitconversion.setMinimumFractionDigits(2);
-		
+		long bonusamount = 0;
 		Font font8 = new Font(base, 8, Font.NORMAL, BaseColor.BLACK);
 		Font fontbold8 = new Font(base, 8, Font.BOLD, BaseColor.BLACK);
 		try{
 			payrollList = new PayrollService().retriveByEmpidMonth(Long.parseLong(employeeid),CommonUtil.convertStringToDate(currentdate));
+			empBonusList = new EmpBonusService().retriveByEmpIdMonth(Long.parseLong(employeeid), CommonUtil.convertStringToDate(currentdate));
+			
+			
+			for (EmpBonusDO empBonusDO : empBonusList) {
+				bonusamount = bonusamount + empBonusDO.getBonusamount();
+			}
+			
 			Rectangle rectangle = new Rectangle(523, 770);
 			payroll.setWidthPercentage(new float[] { 175, 86.5f, 175, 86.5f }, rectangle);
 
@@ -790,7 +799,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payroll.addCell(payrolldescamtcell_4);
 				}
 				
-				if(pay.getBonus() != null){
+				if(bonusamount != 0){
 					PdfPCell payrollcell_bonus = new PdfPCell(new Paragraph("Bonus", font8));
 					payrollcell_bonus.setHorizontalAlignment(Element.ALIGN_LEFT);
 					payrollcell_bonus.setPaddingTop(5);
@@ -800,7 +809,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrollcell_bonus.setBorder(Rectangle.LEFT);
 					payroll.addCell(payrollcell_bonus);
 					
-					PdfPCell payrollamountcell_bonus = new PdfPCell(new Paragraph(String.valueOf(twodigitconversion.format(pay.getBonus())), font8));
+					PdfPCell payrollamountcell_bonus = new PdfPCell(new Paragraph(String.valueOf(twodigitconversion.format(bonusamount)), font8));
 					payrollamountcell_bonus.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrollamountcell_bonus.setPaddingTop(5);
 					payrollamountcell_bonus.setPaddingBottom(5);

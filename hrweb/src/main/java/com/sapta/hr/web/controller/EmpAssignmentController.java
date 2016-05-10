@@ -80,8 +80,8 @@ public class EmpAssignmentController {
 		return pagename;
 	}
 	
-	@RequestMapping(value = "/add/{sdate}/{edate}/{comment}/{status}/{eid}/{projid}", method = RequestMethod.GET)
-	public @ResponseBody String add(@PathVariable String sdate, @PathVariable String edate,
+	@RequestMapping(value = "/add/{sdate}/{edate}/{powo}/{comment}/{status}/{eid}/{projid}", method = RequestMethod.GET)
+	public @ResponseBody String add(@PathVariable String sdate, @PathVariable String edate, @PathVariable String powo,
 			@PathVariable String comment, @PathVariable String status,  @PathVariable String eid, 
 			@PathVariable String projid, Model model, HttpServletRequest request) {
 		try {
@@ -90,7 +90,6 @@ public class EmpAssignmentController {
 				empid = Long.valueOf(eid);
 				pid = Long.valueOf(projid);
 				Date Sdate = CommonUtil.convertStringToDate(sdate);
-				//List<EmpAssignmentDO> empassignment = new EmpAssignmentService().retriveByEmpId(empid);
 				List<EmpDetailDO> empdetail = new EmpDetailService().retriveByEmpId(empid);
 				List<ProjectDO> project = new ProjectService().retriveById(pid);
 				
@@ -110,10 +109,6 @@ public class EmpAssignmentController {
 					}
 				}
 				
-				/*if( empassignment.size() > 0 && empassignment.get(0).getProjectid() == pid){
-					return CommonWebUtil.buildErrorResponse("Project already assigned ").toString();
-				}*/
-				
 				if( empdetail.size() > 0 && Sdate.before(empdetail.get(0).getJdate())){
 					return CommonWebUtil.buildErrorResponse("Start date should be greater than joining date ...").toString();
 				}
@@ -128,7 +123,7 @@ public class EmpAssignmentController {
 					assigndo.setEnddate(CommonUtil.convertStringToDate(edate));
 				}
 				assigndo.setStatus(status.charAt(0));
-				
+				if (!powo.equalsIgnoreCase("null"))  assigndo.setPo_wo(powo);
 				if (!comment.equalsIgnoreCase("null")) assigndo.setComments(comment);
 
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
@@ -266,8 +261,8 @@ public class EmpAssignmentController {
 		return jsonresp != null ? jsonresp.toString() : "";
 	}
 	
-	@RequestMapping(value = "/update/{id}/{startdate}/{enddate}/{status}/{eid}/{projid}/{comments}", method = RequestMethod.GET)
-	public @ResponseBody String update(@PathVariable long id, @PathVariable String startdate, @PathVariable String enddate, @PathVariable char status,
+	@RequestMapping(value = "/update/{id}/{startdate}/{enddate}/{powo}/{status}/{eid}/{projid}/{comments}", method = RequestMethod.GET)
+	public @ResponseBody String update(@PathVariable long id, @PathVariable String startdate, @PathVariable String enddate, @PathVariable String powo, @PathVariable char status,
 			  @PathVariable long eid, @PathVariable long projid, @PathVariable String comments, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
@@ -284,6 +279,9 @@ public class EmpAssignmentController {
 				
 				if (!comments.equalsIgnoreCase("null"))
 				assigndo.setComments(comments);
+				
+				if (!powo.equalsIgnoreCase("null"))
+					assigndo.setPo_wo(powo);
 				
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				assigndo.setUpdatedby(user.getUsername());

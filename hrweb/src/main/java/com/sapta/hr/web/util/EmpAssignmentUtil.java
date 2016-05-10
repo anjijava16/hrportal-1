@@ -95,7 +95,7 @@ public class EmpAssignmentUtil {
 		result.put(CommonConstants.END_DATE, CommonUtil.convertDateToStringWithOutTime(assigndo.getEnddate()));
 		result.put(CommonConstants.STATUS, String.valueOf(assigndo.getStatus()));
 		result.put(CommonConstants.COMMENTS, assigndo.getComments());
-		
+		result.put(CommonConstants.POWO, assigndo.getPo_wo());
 		return result;
 	}
 
@@ -121,7 +121,7 @@ public class EmpAssignmentUtil {
 		List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
 		for(EmployeeDO employee : employeeList){
 			if(String.valueOf(employee.getId()).equalsIgnoreCase(String.valueOf(assigndo.getEmpid()))){
-				result.put(employee.getFname());
+				result.put(employee.getFname()+" "+employee.getLname());
 			}
 		}
 		List<ProjectDO> projectList = new ProjectService().retriveProject();

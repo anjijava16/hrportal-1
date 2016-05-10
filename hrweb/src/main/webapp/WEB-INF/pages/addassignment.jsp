@@ -59,6 +59,12 @@
 								<td align="right">End Date&nbsp;:</td>
 								<td><b style="float:left"><input name="edate" id="edate" readonly="readonly" type="text"  class="datePcK"/></b></td>
 							</tr>
+							
+							<tr  class="hidden addassignmentdetailtr">
+								<td align="right">PO / WO&nbsp;:</td>
+								<td><input name="powo" id="powo" type="text"  /></td>
+							</tr>
+							
 							<tr  class="hidden addassignmentdetailtr">
 								<td align="right">Status&nbsp;:</td>
 								<td>
@@ -199,6 +205,7 @@
 				var status = $("#status").val();
 				var eid = $("#sempid").val();
 				var projid = $("#sprojid").val();
+				var powo = $("#powo").val();
 				
 				if(sdate == "" || sdate.length == 0) validation = false;
 				//if(edate == "" || edate.length == 0) validation = false;
@@ -215,7 +222,8 @@
 				}else{
 					if(comment == "" || comment.length == 0) comment = "null";
 					if(edate == "" || edate.length == 0) edate = "null";
-					var resourceURL = $("#contextpath").val()+"/assignment/add/"+sdate+"/"+edate+"/"+comment+"/"+status+"/"+eid+"/"+projid;
+					if(powo == "" || powo.length == 0) powo = "null";
+					var resourceURL = $("#contextpath").val()+"/assignment/add/"+sdate+"/"+edate+"/"+powo+"/"+comment+"/"+status+"/"+eid+"/"+projid;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -228,7 +236,7 @@
 							$("#status").val("");
 							$("#sempid").val("");
 							$("#sprojid").val("");
-							
+							$("#powo").val("");
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;

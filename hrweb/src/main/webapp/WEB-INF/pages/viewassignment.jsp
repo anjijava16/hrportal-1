@@ -45,7 +45,7 @@
 						<a href="#tab21" class="ass_tab_arrow"><div class="tabImagLt"><img src="<%=request.getContextPath() %>/resources/images/previous.png" alt="Previous" style="width:15px;"/></div></a>
 						<div class="scrl" >
 						<div class="scrlMenu">
-						 	 <ul class="tab-links"  style="width:345px">
+						 	 <ul class="tab-links"  style="width:350px">
 							    <li id="tab_li1" class="active"><a href="#tab1">Assignment</a></li>
 							    <li id="tab_li2"><a href="#tab2">Employee Details</a></li>
 							    <li id="tab_li3"><a href="#tab3">Project</a></li>
@@ -87,6 +87,10 @@
 										<b style="float:left; height: 20px;"><input id="enddate" readonly="readonly" disabled="disabled" type="text" class="inputdisable datePcKview" style="margin: 1px;"></b>
 									</td>
 									<td id="enddate_tablediv" class="value"><div id="optional_enddate" class="value"></div></td>
+								</tr>
+								<tr>
+									<td class="lableContent">PO / WO</td>
+									<td class="value"><input id="powo" disabled="disabled" class="inputdisable"></td>
 								</tr>
 								<tr class="">
 									<td class="lableContentSelect">Status</td>
@@ -297,7 +301,7 @@
 									$("#optional_status").html("-");
 								}
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
-								
+								$("#powo").val((result.powo == undefined || result.powo == null || result.powo.length <= 0) ? "-" : result.powo);
 								$("#employeeid").html((result.empid == undefined || result.empid == null || result.empid.length <= 0) ? "-" : result.empid);
 								<c:forEach items="${projectList}" var="projectlist">
 									if("${projectlist.id}" == result.projectid){
@@ -434,21 +438,26 @@
 				if($("#comments").val() == "-"){
 					$("#comments").val("");
 				}
-				
+				if($("#powo").val() == "-"){
+					$("#powo").val("");
+				}
 				$("#assign_id").prop( "disabled", true );
 				$("#startdate").prop( "disabled", false );
 				$("#enddate").prop( "disabled", false );
 				$("#comments").prop( "disabled", false );
+				$("#powo").prop( "disabled", false );
 				
 				$("#assign_id").removeClass("inputdisable");
 				$("#startdate").removeClass("inputdisable");
 				$("#enddate").removeClass("inputdisable");
 				$("#comments").removeClass("inputdisable");
+				$("#powo").removeClass("inputdisable");
 				
 				$("#assign_id").addClass("inputBorder");
 				$("#startdate").addClass("inputBorder");
 				$("#enddate").addClass("inputBorder");
 				$("#comments").addClass("inputBorder");
+				$("#powo").addClass("inputBorder");
 				$("body").css("cursor", "default");
 			});
 			$("#decline").click(function(){
@@ -478,16 +487,19 @@
 				$("#startdate").prop( "disabled", true );
 				$("#enddate").prop( "disabled", true );
 				$("#comments").prop( "disabled", true );
+				$("#powo").prop( "disabled", true )
 				
 				$("#assign_id").removeClass("inputBorder");
 				$("#startdate").removeClass("inputBorder");
 				$("#enddate").removeClass("inputBorder");
 				$("#comments").removeClass("inputBorder");
+				$("#powo").removeClass("inputBorder");
 
 				$("#assign_id").addClass("inputdisable");
 				$("#startdate").addClass("inputdisable");
 				$("#enddate").addClass("inputdisable");
 				$("#comments").addClass("inputdisable");
+				$("#powo").addClass("inputdisable");
 				 $.fancybox.close();
 			});
 			function declineAssingmentDeatils(){
@@ -518,6 +530,7 @@
 									$("#optional_status").html("-");
 								}
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
+								$("#powo").val((result.powo == undefined || result.powo == null || result.powo.length <= 0) ? "-" : result.powo);
 								$("#assignstatus").addClass("hidden");
 								$("#optional_status").removeClass("hidden");
 								$("#startdate_tabledata").addClass("hidden");
@@ -551,6 +564,7 @@
 				var comments = $("#comments").val();
 				var status = $("#assignstatus").val();
 				var employeeid = $("#employeeid").html();
+				var powo = $("#powo").val();
 				var enddatevalidation = "";
 				var pid = "";
 				<c:forEach items="${projectList}" var="projectlist">
@@ -573,8 +587,9 @@
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					if(comments == "" || comments.length == 0 || comments == "-") comments = "null"; 
-					var resourceURL = $("#contextpath").val()+"/assignment/update/"+id+"/"+startdate+"/"+enddate+"/"+status+"/"+employeeid+"/"+pid+"/"+comments;
+					if(comments == "" || comments.length == 0 || comments == "-") comments = "null";
+					if(powo == "" || powo.length == 0 || powo == "-") powo = "null"; 
+					var resourceURL = $("#contextpath").val()+"/assignment/update/"+id+"/"+startdate+"/"+enddate+"/"+powo+"/"+status+"/"+employeeid+"/"+pid+"/"+comments;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -624,6 +639,7 @@
 								$("#startdate").prop( "disabled", true );
 								$("#enddate").prop( "disabled", true );
 								$("#comments").prop( "disabled", true );
+								$("#powo").prop( "disabled", true );
 								$("#employeeid").prop( "disabled", true );
 								$("#pid").prop( "disabled", true );
 								
@@ -631,6 +647,7 @@
 								$("#startdate").removeClass("inputBorder");
 								$("#enddate").removeClass("inputBorder");
 								$("#comments").removeClass("inputBorder");
+								$("#powo").removeClass("inputBorder");
 								$("#employeeid").removeClass("inputBorder");
 								$("#pid").removeClass("inputBorder");
 								
@@ -638,6 +655,7 @@
 								$("#startdate").addClass("inputdisable");
 								$("#enddate").addClass("inputdisable");
 								$("#comments").addClass("inputdisable");
+								$("#powo").addClass("inputdisable");
 								$("#employeeid").addClass("inputdisable");
 								$("#pid").addClass("inputdisable");
 								$("#alertMsgContent").html("Assignment details updated successfully...");
@@ -909,16 +927,18 @@
 				$("#startdate").prop( "disabled", true );
 				$("#enddate").prop( "disabled", true );
 				$("#comments").prop( "disabled", true );
+				$("#powo").prop( "disabled", true );
 				
 				$("#assign_id").removeClass("inputBorder");
 				$("#startdate").removeClass("inputBorder");
 				$("#enddate").removeClass("inputBorder");
 				$("#comments").removeClass("inputBorder");
-
+				$("#powo").removeClass("inputBorder");
 				$("#assign_id").addClass("inputdisable");
 				$("#startdate").addClass("inputdisable");
 				$("#enddate").addClass("inputdisable");
 				$("#comments").addClass("inputdisable");
+				$("#powo").addClass("inputdisable");
 				
 				$("#assignmentDetail").addClass("hidden");
 				

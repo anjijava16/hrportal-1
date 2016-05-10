@@ -188,7 +188,6 @@
 				        	} 
 				        }/* ,
 				        error: function (xhr, ajaxOptions, thrownError) {
-				        	alert("4");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		} */

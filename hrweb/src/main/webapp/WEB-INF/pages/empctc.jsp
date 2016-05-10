@@ -21,13 +21,13 @@
 				<b class="saptaColor"><div id="notify_errors"></div></b>
 				<table id="empCTCTable">
 					<tr>
-						<td align="right"><sup class="saptaColor">*</sup>Employee Id&nbsp;:</td>
+						<td align="right"><sup class="saptaColor">*</sup>Employee&nbsp;Id&nbsp;:</td>
 						<td><input name="empid" id="empid" type="text" onkeypress="return validateNumeric(event)"/></td>
 						<td align="right"><sup class="saptaColor">*</sup>CTC&nbsp;:</td>
 						<td><input name="employeectc" id="employeectc" type="text"  onkeypress="return validateNumericWithPrecision(event)"/></td>								
 					</tr>
 					<tr>
-						<td align="right"><sup class="saptaColor">*</sup>Start Date&nbsp;:</td>
+						<td align="right"><sup class="saptaColor">*</sup>Start&nbsp;Date&nbsp;:</td>
 						<td><b style="float:left"><input  name="startdate" id="startdate" readonly="readonly" type="text" style="height: 20px" class="datePcK"/></b></td>
 						<td align="right">End Date&nbsp;:</td>
 						<td><b style="float:left"><input name="enddate" id="enddate" type="text" style="height: 20px" class="datePcK"/></b></td>
@@ -142,16 +142,16 @@
 				<b class="saptaColor"><div id="notify_error" ></div></b>
 				<table>
 					<tr>
-						<td align="right" class="mMR0PX"><sup class="saptaColor">*</sup>Employee Id&nbsp;:</td>						
+						<td align="right" class="mMR0PX"><sup class="saptaColor">*</sup>Employee&nbsp;Id&nbsp;:</td>						
 						<td><input  id="editempid"  type="text"  style="border:0;background-color: white;" disabled />
 						<!-- <div id="editempid" onkeypress="return validateNumeric(event)" style="padding-left: 10px;"/> --></td> 
-						<td align="right"><sup class="saptaColor">*</sup>Employee CTC&nbsp;:</td>
+						<td align="right"><sup class="saptaColor">*</sup>Employee&nbsp;CTC&nbsp;:</td>
 						<td><input name="editemployeectc" id="editemployeectc" type="text"  onkeypress="return validateNumericWithPrecision(event)" /></td>
 					</tr>
 					<tr>
-						<td align="right"><sup class="saptaColor">*</sup>Start Date&nbsp;:</td>
+						<td align="right"><sup class="saptaColor">*</sup>Start&nbsp;Date&nbsp;:</td>
 						<td><b style="float:left"><input name="editstartdate" readonly="readonly" id="editstartdate" type="text" style="height: 20px" class="datePcK"/></b></td>
-						<td align="right">End Date&nbsp;:</td>
+						<td align="right">End&nbsp;Date&nbsp;:</td>
 						<td class="editenddateclass"><b style="float:left"><input name="editenddate" id="editenddate" type="text" style="height: 20px" class="datePcK"/></b></td>
 						<td><b style="float:left"><input name="ctcid" class="hidden" id="ctcid" type="text"/></b></td>
 					</tr>
@@ -386,13 +386,12 @@
 				  alert(cellData)
 				} ); */
 				
-				$('#ctcviewtable tbody').on('click', 'td.pdfclass',function(){
+				$('#ctcviewtable tbody').on('click', 'td.pdfclass img',function(){
 			        var row = $(this).closest("tr"); 
 			        var tds = row.find("td");
 			        var employeeid = tds.eq(0).text();
 			        var employeectc = tds.eq(1).text();
 			        var startdate = tds.eq(2).text();
-					
 					document.location.href =  $("#contextpath").val()+"/viewctc?employeeid="+employeeid+"&employeectc="+employeectc+"&startdate="+startdate;
 			    });
 				

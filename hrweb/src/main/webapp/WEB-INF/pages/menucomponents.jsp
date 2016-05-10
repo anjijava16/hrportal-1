@@ -60,6 +60,7 @@
 						<li id="menu_payroll"><a href="#" id="menu_payroll"><i class="fa fa-usd"></i>&nbsp;<span>Payroll</span></a> 
 							<ul class="sub_menu">
 								<li><a href="<%=request.getContextPath() %>/empctc"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/employee_ctc.png"/></aside>&nbsp;&nbsp;<span>Cost To Company</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/empbonus"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee Bonus</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/payroll"><i class="fa fa-user"></i><sup><i class="fa fa-usd"></i></sup>&nbsp;<span>Payroll</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/professionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>Professional&nbsp;Tax</span></a></li>								
 								<%-- <li><a href="<%=request.getContextPath() %>/tds/paytds"><aside><img src="<%=request.getContextPath() %>/resources/icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Pay&nbsp;TDS</span></a></li> --%>
@@ -80,6 +81,12 @@
 									<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
 										<li><a href="<%=request.getContextPath() %>/invoice/addinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_add.png"/></aside>&nbsp;&nbsp;<span>New&nbsp;Invoice</span></a></li>
 										<li><a href="<%=request.getContextPath() %>/invoice/viewinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_view.png"/></aside>&nbsp;&nbsp;<span>View&nbsp;Invoices</span></a></li>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
+										<li><a href="<%=request.getContextPath() %>/externalinvoice/addexternalinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_add.png"/></aside>&nbsp;&nbsp;<span>New Ext&nbsp;Invoice</span></a></li>
+										<li><a href="<%=request.getContextPath() %>/externalinvoice/viewexternalinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_view.png"/></aside>&nbsp;&nbsp;<span>View Ext&nbsp;Invoices</span></a></li>
 									</c:when>
 								</c:choose>
 														

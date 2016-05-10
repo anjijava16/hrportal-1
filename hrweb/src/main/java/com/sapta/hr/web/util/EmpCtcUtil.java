@@ -88,9 +88,10 @@ public final class EmpCtcUtil {
 		try {
 			JSONArray resultJSONArray = new JSONArray();
 			if (empctcDO != null) {
-
+				int len = empctcDO.size();
 				for (EmpCTCDO ctcdetail : empctcDO) {
-					resultJSONArray.put(getCustomerDetailDataTableObject(ctcdetail, request));
+					
+					resultJSONArray.put(getCustomerDetailDataTableObject(ctcdetail, request,len,resultJSONArray));
 				}
 			}
 			responseJSON.put(CommonConstants.DATA, resultJSONArray);
@@ -100,7 +101,7 @@ public final class EmpCtcUtil {
 		return responseJSON;
 	}
 
-	private static JSONArray getCustomerDetailDataTableObject(EmpCTCDO ctcdetail, HttpServletRequest request)throws JSONException, AppException, MalformedURLException {
+	private static JSONArray getCustomerDetailDataTableObject(EmpCTCDO ctcdetail, HttpServletRequest request,int len,JSONArray resultJSONArray)throws JSONException, AppException, MalformedURLException {
 		JSONArray result = new JSONArray();
 		result.put(String.valueOf(ctcdetail.getEmpid()));
 		result.put(ctcdetail.getEmpctc());
@@ -111,7 +112,12 @@ public final class EmpCtcUtil {
 		}else{
 			result.put(CommonConstants.ACTIVE);
 		}
-		result.put("<img src='http://" + new URL(request.getRequestURL().toString()).getHost() + ":" + request.getLocalPort() + "" + request.getContextPath() + "/resources/icons/pdf.png' style='cursor : pointer; width: 17%;'/>");
+		if((len-1) == resultJSONArray.length()){
+			result.put("");
+		}else{
+			result.put("<img src='http://" + new URL(request.getRequestURL().toString()).getHost() + ":" + request.getLocalPort() + "" + request.getContextPath() + "/resources/icons/pdf.png' style='cursor : pointer; width: 17%;'/>");
+		}
+		
 		return result;
 	}
 

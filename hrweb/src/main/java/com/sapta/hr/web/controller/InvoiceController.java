@@ -374,6 +374,7 @@ public class InvoiceController {
 		try {
 			List <ProjectDO> proList = new ProjectService().retriveById(id);
 			jsonresp = ProjectUtil.getProjectList(proList).toString();
+			
 		} catch (Exception e) { }
 		return jsonresp != null ? jsonresp.toString() : "";
 	}

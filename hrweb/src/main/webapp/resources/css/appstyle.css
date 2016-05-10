@@ -64,10 +64,10 @@ h5.small-font{
 	-moz-transition: all 1s;  
 	-o-transition: all 1s;  
 	transition: all 1s;
- 	min-height:	85%;  
+ 	min-height:	86%;  
     position: absolute;
     z-index: 9999;
-  	margin-bottom: 50px;
+  	margin-bottom: 44px;
 }
 header {
     display: table;

@@ -117,13 +117,13 @@
 				var id = $(this).attr('id');
 				var recordid = id.substring(8);
 				var monthYearVal = $("#monthYear_"+recordid).html();
-				var resourceURL = $("#contextpath").val()+"/invoice/viewfyinvoice/"+monthYearVal;
+				var resourceURL = $("#contextpath").val()+"/externalinvoice/viewfyinvoice/"+monthYearVal;
 				$(this).attr("href", resourceURL);
 			});
 			
 			function finalYearReportProcess(currentdate, nextYear){
 				var completeTotalAmount = 0;
-				var resourceURL = $("#contextpath").val()+"/fyreports/getinvoicereport/"+currentdate+"/"+nextYear;
+				var resourceURL = $("#contextpath").val()+"/fyreports/getextinvoicereport/"+currentdate+"/"+nextYear;
 				$.ajax({
 					url : resourceURL,
 					type : 'GET',
@@ -155,8 +155,8 @@
 										var fullInvoiceDateFormated = stringToDateConversion(result.invoicedate);
 										if(firstDay <= fullInvoiceDateFormated && fullInvoiceDateFormated <= lastDay){
 											if(result.status === "i"){
-												dueAmount = parseFloat(dueAmount)+parseFloat(result.totalamount);
-												completeTotalAmount = parseFloat(completeTotalAmount)+parseFloat(result.totalamount);
+												dueAmount = parseFloat(dueAmount)+parseFloat(result.received_amount);
+												completeTotalAmount = parseFloat(completeTotalAmount)+parseFloat(result.received_amount);
 												resultCount++;
 											}
 										}

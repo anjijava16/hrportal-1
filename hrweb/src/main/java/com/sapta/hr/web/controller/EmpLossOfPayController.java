@@ -46,6 +46,10 @@ public class EmpLossOfPayController {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				List<EmpLoseOfPayDO> emplopList = new EmpLoseOfPayService().retrive();
+				List<EmployeeDO> empDoList = new EmployeeService().retriveEmployee();
+				if(empDoList != null && empDoList.size() > 0){
+					model.addAttribute(CommonConstants.EMP_DET_LIST, empDoList);
+				}				
 				if (emplopList != null && emplopList.size() > 0) {
 					Collections.reverse(emplopList);
 					model.addAttribute(CommonConstants.EMP_LOP_LIST, emplopList);

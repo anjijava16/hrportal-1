@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sapta.hr.domainobject.CommonConstantsDO;
 import com.sapta.hr.domainobject.EmpAccDetailDO;
 import com.sapta.hr.domainobject.EmpAssignmentDO;
+import com.sapta.hr.domainobject.EmpBonusDO;
 import com.sapta.hr.domainobject.EmpCTCDO;
 import com.sapta.hr.domainobject.EmpDetailDO;
 import com.sapta.hr.domainobject.EmpFamilyBackgroundDO;
@@ -34,6 +35,7 @@ import com.sapta.hr.domainobject.UserDO;
 import com.sapta.hr.service.CommonConstantsService;
 import com.sapta.hr.service.EmpAccDetailService;
 import com.sapta.hr.service.EmpAssignmentService;
+import com.sapta.hr.service.EmpBonusService;
 import com.sapta.hr.service.EmpCTCService;
 import com.sapta.hr.service.EmpDetailService;
 import com.sapta.hr.service.EmpFamilyBackgroundService;
@@ -134,9 +136,9 @@ public class PayrollController {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/add/{empid}/{basic}/{hra}/{personal}/{conveyance}/{bonus}/{pt}/{tds}/{pf}/{lop}/{totalearnings}/{totaldeduction}/{empmonthlyctc}/{netpayableamount}/{payrollmonth}/{dayspayable}/{payrolltype}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{empid}/{basic}/{hra}/{personal}/{conveyance}/{pt}/{tds}/{pf}/{lop}/{totalearnings}/{totaldeduction}/{empmonthlyctc}/{netpayableamount}/{payrollmonth}/{dayspayable}/{payrolltype}", method = RequestMethod.GET)
 	public @ResponseBody String add(@PathVariable long empid,@PathVariable String basic, @PathVariable String hra, @PathVariable String personal, 
-			@PathVariable String conveyance, @PathVariable double bonus, @PathVariable double pt, @PathVariable double tds, @PathVariable double pf, @PathVariable double lop, @PathVariable String totalearnings, 
+			@PathVariable String conveyance, @PathVariable double pt, @PathVariable double tds, @PathVariable double pf, @PathVariable double lop, @PathVariable String totalearnings, 
 			@PathVariable double totaldeduction, @PathVariable String empmonthlyctc, @PathVariable String netpayableamount, @PathVariable String payrollmonth, 
 			@PathVariable long dayspayable, @PathVariable char payrolltype,Model model, HttpServletRequest request) {
 		try {
@@ -176,9 +178,7 @@ public class PayrollController {
                 if(totaldeduction != 0){
                 	payrollDO.setTotaldeduction(totaldeduction);
                 }
-                if(bonus != 0){
-                	payrollDO.setBonus(bonus);
-                }
+               
                 
                 payrollDO.setDayspayable(dayspayable);
                 payrollDO.setPayrollmonth(CommonUtil.convertStringToDate(payrollmonth));
@@ -192,6 +192,12 @@ public class PayrollController {
                 payrollDO.setUpdatedon(new Date());
                 payrollDO.setPayrolltype(payrolltype);
                 new PayrollService().persist(payrollDO);
+                List<EmpBonusDO> empBonusDOList = new EmpBonusService().retriveByEmpIdMonth(empid,CommonUtil.convertStringToDate(payrollmonth));
+                for (EmpBonusDO empBonusDO : empBonusDOList) {
+                    empBonusDO.setPaidon(new Date());
+                    new EmpBonusService().update(empBonusDO);
+				}
+                
                 
                 if(pt > 0){
 	                ProfessionalTaxDO ptdo = new ProfessionalTaxDO();
@@ -800,6 +806,7 @@ public class PayrollController {
 			if (WebManager.authenticateSession(request)) {
 				Calendar c = Calendar.getInstance();
 				String selectemonth = selectedmonth;
+				System.out.println(selectemonth);
 				Date sendingmonth = CommonUtil.convertStringToDate(selectemonth);
 				c.setTime(sendingmonth);
 				c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));

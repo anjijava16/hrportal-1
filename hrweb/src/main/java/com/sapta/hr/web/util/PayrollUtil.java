@@ -173,7 +173,6 @@ public class PayrollUtil {
 		result.put(CommonConstants.PERSONAL_ALLOWANCES, payrollDO.getPersonal());
 		result.put(CommonConstants.CONVEYANCE_ALLOWANCES, payrollDO.getConveyance());
 		result.put(CommonConstants.PROFESSIONAL_TAX, payrollDO.getPt());
-		result.put(CommonConstants.BONUS, payrollDO.getBonus());
 		result.put(CommonConstants.LOSS_OF_PAY, payrollDO.getLop());
 		result.put(CommonConstants.PROVIDENT_FUND, payrollDO.getPf());
 		result.put(CommonConstants.TAX_DEDUCTION_SOURCE, payrollDO.getTds());

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sapta.hr.domainobject.AssetDO;
 import com.sapta.hr.domainobject.BillsDO;
 import com.sapta.hr.domainobject.ExpenseDO;
+import com.sapta.hr.domainobject.ExternalInvoiceDO;
 import com.sapta.hr.domainobject.InvoiceDO;
 import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.ProfessionalTaxDO;
@@ -25,6 +26,7 @@ import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.AssetService;
 import com.sapta.hr.service.BillsService;
 import com.sapta.hr.service.ExpenseService;
+import com.sapta.hr.service.ExternalInvoiceService;
 import com.sapta.hr.service.InvoiceService;
 import com.sapta.hr.service.PayrollService;
 import com.sapta.hr.service.ProfessionalTaxService;
@@ -35,6 +37,7 @@ import com.sapta.hr.web.util.BillsUtil;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
 import com.sapta.hr.web.util.ExpenseUtil;
+import com.sapta.hr.web.util.ExternalInvoiceUtil;
 import com.sapta.hr.web.util.InvoiceUtil;
 import com.sapta.hr.web.util.PayrollUtil;
 import com.sapta.hr.web.util.ProfessionalTaxUtil;
@@ -106,6 +109,24 @@ public class FYReportsController {
 			List<InvoiceDO> invoiceList = new InvoiceService().getFinancialYearInvoiceReport(stdate, eddate, 'i');  // 'i' means paid status, 'a' means pending status
 			if (invoiceList != null && invoiceList.size() > 0) {
 				respJSON = InvoiceUtil.getinvoiceList(invoiceList);
+			}else {
+				respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+			}
+		} catch (Exception e) {
+			respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+		}
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	
+	@RequestMapping(value = "/getextinvoicereport/{firstdate}/{lastdate}", method = RequestMethod.GET)
+	public @ResponseBody String getFinancialYearExternalInvoiceReport(Model model, @PathVariable String firstdate, @PathVariable String lastdate ) {
+		JSONObject respJSON = null;
+		try {
+			Date stdate = CommonUtil.convertStringToDate(firstdate);
+			Date eddate = CommonUtil.convertStringToDate(lastdate);
+			List<ExternalInvoiceDO> invoiceList = new ExternalInvoiceService().getFinancialYearInvoiceReport(stdate, eddate, 'i');  // 'i' means paid status, 'a' means pending status
+			if (invoiceList != null && invoiceList.size() > 0) {
+				respJSON = ExternalInvoiceUtil.getinvoiceList(invoiceList);
 			}else {
 				respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
 			}
