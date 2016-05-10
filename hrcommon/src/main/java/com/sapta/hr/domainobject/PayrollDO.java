@@ -53,8 +53,6 @@ public class PayrollDO implements Serializable {
 	
 	private Double conveyance;
 	
-	private Double bonus;
-	
 	private Double pt;
 	
 	private Double tds;
@@ -150,13 +148,6 @@ public class PayrollDO implements Serializable {
 		this.tds = tds;
 	}
 	
-	public Double getBonus() {
-		return bonus;
-	}
-
-	public void setBonus(Double bonus) {
-		this.bonus = bonus;
-	}
 	
 	public Double getPf() {
 		return pf;

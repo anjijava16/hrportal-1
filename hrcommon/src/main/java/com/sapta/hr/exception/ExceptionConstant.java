@@ -118,4 +118,8 @@ public final class ExceptionConstant {
 	public static final String CTC_AVAILABLE = "Employee already has a active ctc...";
 
 	public static final String PF_AVAILABLE = "Employee already has a active PF...";
+	
+	//bonus
+	
+	public static final String EMP_BOUNS_NOT_AVAILABLE = "Bonus can't be added, Salary already processed for the choosen month";
 }

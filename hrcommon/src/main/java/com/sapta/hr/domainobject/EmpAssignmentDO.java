@@ -47,6 +47,8 @@ public class EmpAssignmentDO implements Serializable {
 	private String comments;
 
 	private char status;
+	
+	private String po_wo;
 
 	private String updatedby;
 
@@ -124,5 +126,12 @@ public class EmpAssignmentDO implements Serializable {
 	public void setUpdatedon(Date updatedon) {
 		this.updatedon = updatedon;
 	}
-
+	public String getPo_wo() {
+		return po_wo;
+	}
+	
+	public void setPo_wo(String po_wo) {
+		this.po_wo = po_wo;
+	}
+	
 }

@@ -520,6 +520,15 @@ public final class CommonConstants {
 	
 	public static final String JSP_EMP_LOSS_OF_PAY = "lossofpay";
 	
+	//Emp Bonus
+	
+	public static final String JSP_EMP_BOUNS = "empbonus";
+	
+	public static final String EMP_BOUNS_LIST_SIZE = "empBonusListsize";
+	
+	public static final String EMP_BOUNS_LIST = "empBonusList";
+	
+	
 	//EmpPF
 	
 	public static final String EMP_PF_LIST = "emppfList";
@@ -666,6 +675,12 @@ public final class CommonConstants {
 	
 	public static final String RECEIVED_COMMENTS = "received_comments";
 	
+	// External Invoice
+	public static final String INVOICE_AMOUNT = "invoiceamount";
+	
+	public static final String JSP_ADD_EXT_INVOICE = "addexternalinvoice";
+	
+	public static final String JSP_VIEW_EXT_INVOICE = "viewexternalinvoice";
 	
 	//tds
 	
@@ -760,6 +775,8 @@ public final class CommonConstants {
 	public static final String EMAIL_SUB = "Payslip for the month of";
 	
 	public static final String BONUS = "bonus";
+	
+	public static final String POWO = "powo";
 	
 	//Payroll File Export
 	

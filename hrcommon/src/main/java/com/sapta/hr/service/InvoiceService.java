@@ -31,7 +31,6 @@ public class InvoiceService {
 		return new InvoiceDAO().retriveByCustAndProjct(projectid, customerid);
 	}
 
-
 	public boolean update(InvoiceDO invoiceDO) throws AppException {
 		return new InvoiceDAO().update(invoiceDO);
 	}
