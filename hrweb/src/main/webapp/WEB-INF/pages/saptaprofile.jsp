@@ -79,6 +79,14 @@
 							<td class="value"><input id="pan" disabled="disabled" class="inputdisable hidden" value="${saptaprofileList.pan}"></input><div id="optional_pan">${saptaprofileList.pan}</div></td>
 						</tr>
 						<tr class = "">
+							<td class="lableContent">CIN<sup class="saptaColor mandatory hidden">*</sup></td>
+							<td class="value"><input id="cin" disabled="disabled" class="inputdisable hidden" value="${saptaprofileList.cin}"></input><div id="optional_cin">${saptaprofileList.cin}</div></td>
+						</tr>
+						<tr class = "">
+							<td class="lableContent">ST<sup class="saptaColor mandatory hidden">*</sup></td>
+							<td class="value"><input id="st" disabled="disabled" class="inputdisable hidden" value="${saptaprofileList.st}"></input><div id="optional_st">${saptaprofileList.st}</div></td>
+						</tr>
+						<tr class = "">
 							<td class="lableContent">Account Name<sup class="saptaColor mandatory hidden">*</sup></td>
 							<td class="value"><input id="accountname" disabled="disabled" class="inputdisable hidden" value="${saptaprofileList.accntname}" onkeypress="return ValidateAlpha(event)"></input><div id="optional_accountname">${saptaprofileList.accntname}</div></td>
 						</tr>
@@ -191,6 +199,12 @@
 				$("#pan").removeClass("hidden");
 				$("#optional_pan").addClass("hidden");
 				
+				$("#cin").removeClass("hidden");
+				$("#optional_cin").addClass("hidden");
+				
+				$("#st").removeClass("hidden");
+				$("#optional_st").addClass("hidden");
+				
 				$("#accountname").removeClass("hidden");
 				$("#optional_accountname").addClass("hidden");
 				
@@ -233,6 +247,8 @@
 				$("#email").prop("disabled",false);
 				$("#tan").prop("disabled",false);
 				$("#pan").prop("disabled",false);
+				$("#cin").prop("disabled",false);
+				$("#st").prop("disabled",false);
 				$("#accountname").prop("disabled",false);
 				$("#accountnum").prop("disabled",false);
 				$("#bankname").prop("disabled",false);
@@ -254,6 +270,8 @@
 				$("#email").removeClass("inputdisable");
 				$("#tan").removeClass("inputdisable");
 				$("#pan").removeClass("inputdisable");
+				$("#cin").removeClass("inputdisable");
+				$("#st").removeClass("inputdisable");
 				$("#accountname").removeClass("inputdisable");
 				$("#accountnum").removeClass("inputdisable");
 				$("#bankname").removeClass("inputdisable");
@@ -274,6 +292,8 @@
 				$("#email").addClass("inputBorder");
 				$("#tan").addClass("inputBorder");
 				$("#pan").addClass("inputBorder");
+				$("#cin").addClass("inputBorder");
+				$("#st").addClass("inputBorder");
 				$("#accountname").addClass("inputBorder");
 				$("#accountnum").addClass("inputBorder");
 				$("#bankname").addClass("inputBorder");
@@ -318,6 +338,12 @@
 				$("#pan").removeClass("hidden");
 				$("#optional_pan").addClass("hidden");
 				
+				$("#cin").removeClass("hidden");
+				$("#optional_cin").addClass("hidden");
+				
+				$("#st").removeClass("hidden");
+				$("#optional_st").addClass("hidden");
+				
 				$("#accountname").removeClass("hidden");
 				$("#optional_accountname").addClass("hidden");
 				
@@ -359,6 +385,8 @@
 				$("#email").prop("disabled",false);
 				$("#tan").prop("disabled",false);
 				$("#pan").prop("disabled",false);
+				$("#cin").prop("disabled",false);
+				$("#st").prop("disabled",false);
 				$("#accountname").prop("disabled",false);
 				$("#accountnum").prop("disabled",false);
 				$("#bankname").prop("disabled",false);
@@ -380,6 +408,8 @@
 				$("#email").removeClass("inputdisable");
 				$("#tan").removeClass("inputdisable");
 				$("#pan").removeClass("inputdisable");
+				$("#cin").removeClass("inputdisable");
+				$("#st").removeClass("inputdisable");
 				$("#accountname").removeClass("inputdisable");
 				$("#accountnum").removeClass("inputdisable");
 				$("#bankname").removeClass("inputdisable");
@@ -400,6 +430,8 @@
 				$("#email").addClass("inputBorder");
 				$("#tan").addClass("inputBorder");
 				$("#pan").addClass("inputBorder");
+				$("#cin").addClass("inputBorder");
+				$("#st").addClass("inputBorder");
 				$("#accountname").addClass("inputBorder");
 				$("#accountnum").addClass("inputBorder");
 				$("#bankname").addClass("inputBorder");
@@ -428,6 +460,8 @@
 				var emailid = $("#email").val();
 				var tan = $("#tan").val();
 				var pan = $("#pan").val();
+				var cin = $("#cin").val();
+				var st = $("#st").val();
 				var accountname = $("#accountname").val();
 				var accntnum = $("#accountnum").val();
 				var bankname = $("#bankname").val();
@@ -449,6 +483,8 @@
 				if(emailid == "" || emailid.length == 0) validation = false;
 				if(tan == "" || tan.length == 0) validation = false;
 				if(pan == "" || pan.length == 0) validation = false;
+				if(cin == "" || cin.length == 0) validation = false;
+				if(st == "" || st.length == 0) validation = false;
 				if(accountname == "" || accountname.length == 0) validation = false;
 				if(accntnum == "" || accntnum.length == 0) validation = false;
 				if(bankname == "" || bankname.length == 0) validation = false;
@@ -466,7 +502,7 @@
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					var resourceURL = $("#contextpath").val()+"/saptaprofile/add/"+tan+"/"+pan+"/"+accountname+"/"+website+"/"+accntnum+"/"+bankname+"/"+bankbranch+"/"+ifsccode+"/"+swiftcode+"/"+branchaddress+"/"+companyname+"/"+address+"/"+city+"/"+pincode+"/"+state+"/"+country+"/"+officephno+"/"+emailid+"/"+mobilenum;
+					var resourceURL = $("#contextpath").val()+"/saptaprofile/add/"+tan+"/"+pan+"/"+accountname+"/"+website+"/"+accntnum+"/"+bankname+"/"+bankbranch+"/"+ifsccode+"/"+swiftcode+"/"+branchaddress+"/"+companyname+"/"+address+"/"+city+"/"+pincode+"/"+state+"/"+country+"/"+officephno+"/"+emailid+"/"+mobilenum+"/"+cin+"/"+st;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -489,6 +525,8 @@
 								$("#email").val("");
 								$("#tan").val("");
 								$("#pan").val("");
+								$("#cin").val("");
+								$("#st").val("");
 								$("#accountname").val("");
 								$("#accountnum").val("");
 								$("#bankname").val("");
@@ -528,6 +566,8 @@
 				var emailid = $("#email").val();
 				var tan = $("#tan").val();
 				var pan = $("#pan").val();
+				var cin = $("#cin").val();
+				var st = $("#st").val();
 				var accntname = $("#accountname").val();
 				var accntnum = $("#accountnum").val();
 				var bankname = $("#bankname").val();
@@ -549,6 +589,8 @@
 				if(emailid == "" || emailid.length == 0) validation = false;
 				if(tan == "" || tan.length == 0) validation = false;
 				if(pan == "" || pan.length == 0) validation = false;
+				if(cin == "" || cin.length == 0) validation = false;
+				if(st == "" || st.length == 0) validation = false;
 				if(accntname == "" || accntname.length == 0) validation = false;
 				if(accntnum == "" || accntnum.length == 0) validation = false;
 				if(bankname == "" || bankname.length == 0) validation = false;
@@ -561,12 +603,11 @@
 				if(state == "" || state.length == 0) validation = false;
 				if(country == "" || country.length == 0) validation = false;
 				if(!validateEmail(emailid)) validation = false;
-				
 				if(validation == false){
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					var resourceURL = $("#contextpath").val()+"/saptaprofile/update/"+id+"/"+tan+"/"+pan+"/"+accntname+"/"+website+"/"+accntnum+"/"+bankname+"/"+bankbranch+"/"+ifsccode+"/"+swiftcode+"/"+branchaddress+"/"+companyname+"/"+address+"/"+city+"/"+pincode+"/"+state+"/"+country+"/"+officephno+"/"+emailid+"/"+mobilenum;
+					var resourceURL = $("#contextpath").val()+"/saptaprofile/update/"+id+"/"+tan+"/"+pan+"/"+accntname+"/"+website+"/"+accntnum+"/"+bankname+"/"+bankbranch+"/"+ifsccode+"/"+swiftcode+"/"+branchaddress+"/"+companyname+"/"+address+"/"+city+"/"+pincode+"/"+state+"/"+country+"/"+officephno+"/"+emailid+"/"+mobilenum+"/"+cin+"/"+st;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -598,6 +639,10 @@
 								$("#optional_tan").prop("disabled",true);
 								$("#pan").prop("disabled",true);
 								$("#optional_pan").prop("disabled",true);
+								$("#cin").prop("disabled",true);
+								$("#optional_cin").prop("disabled",true);
+								$("#st").prop("disabled",true);
+								$("#optional_st").prop("disabled",true);
 								$("#accountname").prop("disabled",true);
 								$("#optional_accountname").prop("disabled",true);
 								$("#accountnum").prop("disabled",true);
@@ -638,6 +683,10 @@
 								$("#optional_tan").removeClass("inputBorder");
 								$("#pan").removeClass("inputBorder");
 								$("#optional_pan").removeClass("inputBorder");
+								$("#cin").removeClass("inputBorder");
+								$("#optional_cin").removeClass("inputBorder");
+								$("#st").removeClass("inputBorder");
+								$("#optional_st").removeClass("inputBorder");
 								$("#accountname").removeClass("inputBorder");
 								$("#optional_accountname").removeClass("inputBorder");
 								$("#accountnum").removeClass("inputBorder");
@@ -677,6 +726,10 @@
 								$("#optional_tan").addClass("inputdisable");
 								$("#pan").addClass("inputdisable");
 								$("#optional_pan").addClass("inputdisable");
+								$("#cin").addClass("inputdisable");
+								$("#optional_cin").addClass("inputdisable");
+								$("#st").addClass("inputdisable");
+								$("#optional_st").addClass("inputdisable");
 								$("#accountname").addClass("inputdisable");
 								$("#optional_accountname").addClass("inputdisable");
 								$("#accountnum").addClass("inputdisable");

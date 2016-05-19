@@ -105,6 +105,7 @@ public final class EmpCtcUtil {
 		JSONArray result = new JSONArray();
 		result.put(String.valueOf(ctcdetail.getEmpid()));
 		result.put(ctcdetail.getEmpctc());
+		result.put(ctcdetail.getDesignation());
 		result.put(CommonUtil.convertDateToStringWithOutTime(ctcdetail.getStartdate()));
 		result.put(CommonUtil.convertDateToStringWithOutTime(ctcdetail.getEnddate()));
 		if(ctcdetail.getStatus() == 'i'){

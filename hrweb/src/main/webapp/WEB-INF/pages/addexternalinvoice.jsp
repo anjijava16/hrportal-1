@@ -498,7 +498,6 @@
 					$.fancybox.open('#errorMsg');
 				}else{
 					var resourceURL = $("#contextpath").val()+"/externalinvoice/add/"+invoicenumber+"/"+invoicedate+"/"+duedate+"/"+customerid+"/"+projectid+"/"+amounttype+"/"+invoiceamount+"/"+status;
-					alert(resourceURL);
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',

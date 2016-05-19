@@ -64,6 +64,8 @@ public class InvoicePDFServlet extends BaseServlet {
 		PdfPTable grandtotal = null;
 		PdfPTable writedetailstbl = null;
 		PdfPTable writedetailscontenttbl = null;
+		PdfPTable companydetailstbl = null;
+		PdfPTable companydetailscontenttbl = null;
 		PdfPTable thankstbl = null;
 		PdfPTable totallinetbl = null;
 		
@@ -107,13 +109,13 @@ public class InvoicePDFServlet extends BaseServlet {
 			tanandpantbl.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tanandpantbl.setWidthPercentage(25);
 		
-			PdfPCell tancell= new PdfPCell(new Paragraph("TAN :", font8));
+			PdfPCell tancell= new PdfPCell(new Paragraph("", font8));
 			tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tancell.setPaddingTop(20);
 			tancell.setBorder(Rectangle.NO_BORDER);
 			tanandpantbl.addCell(tancell);
 			
-			PdfPCell tancellval= new PdfPCell(new Paragraph(saptaDetailsDO.getTan(), fontbold8));
+			PdfPCell tancellval= new PdfPCell(new Paragraph("", fontbold8));
 			tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tancellval.setPaddingTop(20);
 			tancellval.setBorder(Rectangle.NO_BORDER);
@@ -126,12 +128,12 @@ public class InvoicePDFServlet extends BaseServlet {
 			pantbl.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			pantbl.setWidthPercentage(25);
 		
-			PdfPCell pancell= new PdfPCell(new Paragraph("PAN :", font8));
+			PdfPCell pancell= new PdfPCell(new Paragraph("", font8));
 			pancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			pancell.setBorder(Rectangle.NO_BORDER);
 			pantbl.addCell(pancell);
 			
-			PdfPCell pancellval= new PdfPCell(new Paragraph(saptaDetailsDO.getPan(), fontbold8));
+			PdfPCell pancellval= new PdfPCell(new Paragraph("", fontbold8));
 			pancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			pancellval.setBorder(Rectangle.NO_BORDER);
 			pantbl.addCell(pancellval);
@@ -674,6 +676,156 @@ public class InvoicePDFServlet extends BaseServlet {
 				grandtotal.addCell(grandtotalcell_value);
 			}
 		}
+		
+		companydetailstbl = new PdfPTable(1);
+		companydetailstbl.setWidthPercentage(100);
+		companydetailstbl.setSpacingBefore(15f);
+		
+		PdfPCell companydetailstblcell = new PdfPCell(new Paragraph("Company details",font10));
+		companydetailstblcell.setHorizontalAlignment(Element.ALIGN_LEFT);
+		companydetailstblcell.setBorder(0);
+		companydetailstblcell.setPaddingTop(10);
+		companydetailstbl.addCell(companydetailstblcell);
+		
+		float[] columnWidth = {1.5f,0.2f,6f};
+		companydetailscontenttbl = new PdfPTable(columnWidth);
+		companydetailscontenttbl.setHorizontalAlignment(Element.ALIGN_LEFT);
+		companydetailscontenttbl.setWidthPercentage(100);
+		companydetailscontenttbl.setSpacingBefore(25f);
+		
+		
+		for(SaptaProfileDO saptaDetailsDO : saptadetailslist){
+			/*tanandpantbl = new PdfPTable(2);
+			tanandpantbl.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tanandpantbl.setWidthPercentage(25);*/
+		
+			PdfPCell tancell= new PdfPCell(new Paragraph("TAN", font8));
+			tancell.setBorder(0);
+			tancell.setPaddingTop(5);
+			//tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			/*tancell.setPaddingTop(20);
+			tancell.setBorder(Rectangle.NO_BORDER);*/
+			companydetailscontenttbl.addCell(tancell);
+			
+			PdfPCell tancoloncell_1 = new PdfPCell(new Paragraph(":",font8));
+			tancoloncell_1.setBorder(0);
+			tancoloncell_1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			tancoloncell_1.setPaddingTop(5);
+			tancoloncell_1.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(tancoloncell_1);
+			
+			PdfPCell tancellval= new PdfPCell(new Paragraph(saptaDetailsDO.getTan(), font8));
+			/*tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tancellval.setPaddingTop(20);
+			tancellval.setBorder(Rectangle.NO_BORDER);*/
+			tancellval.setBorder(0);
+			tancellval.setHorizontalAlignment(Element.ALIGN_LEFT);
+			tancellval.setPaddingTop(5);
+			tancellval.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(tancellval);
+			
+			
+			PdfPCell pancell= new PdfPCell(new Paragraph("PAN", font8));
+			pancell.setBorder(0);
+			pancell.setPaddingTop(5);
+			//tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			/*tancell.setPaddingTop(20);
+			tancell.setBorder(Rectangle.NO_BORDER);*/
+			companydetailscontenttbl.addCell(pancell);
+			
+			PdfPCell pancoloncell_1 = new PdfPCell(new Paragraph(":",font8));
+			pancoloncell_1.setBorder(0);
+			pancoloncell_1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			pancoloncell_1.setPaddingTop(5);
+			pancoloncell_1.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(pancoloncell_1);
+			
+			PdfPCell pancellval= new PdfPCell(new Paragraph(saptaDetailsDO.getPan(), font8));
+			/*tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tancellval.setPaddingTop(20);
+			tancellval.setBorder(Rectangle.NO_BORDER);*/
+			pancellval.setBorder(0);
+			pancellval.setHorizontalAlignment(Element.ALIGN_LEFT);
+			pancellval.setPaddingTop(5);
+			pancellval.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(pancellval);
+			
+			PdfPCell cincell= new PdfPCell(new Paragraph("CIN", font8));
+			cincell.setBorder(0);
+			cincell.setPaddingTop(5);
+			//tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			/*tancell.setPaddingTop(20);
+			tancell.setBorder(Rectangle.NO_BORDER);*/
+			companydetailscontenttbl.addCell(cincell);
+			
+			PdfPCell cincoloncell_1 = new PdfPCell(new Paragraph(":",font8));
+			cincoloncell_1.setBorder(0);
+			cincoloncell_1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cincoloncell_1.setPaddingTop(5);
+			cincoloncell_1.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(cincoloncell_1);
+			
+			PdfPCell cincellval= new PdfPCell(new Paragraph(saptaDetailsDO.getCin(), font8));
+			/*tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tancellval.setPaddingTop(20);
+			tancellval.setBorder(Rectangle.NO_BORDER);*/
+			cincellval.setBorder(0);
+			cincellval.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cincellval.setPaddingTop(5);
+			cincellval.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(cincellval);
+			
+			PdfPCell stcell= new PdfPCell(new Paragraph("ST", font8));
+			stcell.setBorder(0);
+			stcell.setPaddingTop(5);
+			//tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			/*tancell.setPaddingTop(20);
+			tancell.setBorder(Rectangle.NO_BORDER);*/
+			companydetailscontenttbl.addCell(stcell);
+			
+			PdfPCell stcoloncell_1 = new PdfPCell(new Paragraph(":",font8));
+			stcoloncell_1.setBorder(0);
+			stcoloncell_1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			stcoloncell_1.setPaddingTop(5);
+			stcoloncell_1.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(stcoloncell_1);
+			
+			PdfPCell stcellval= new PdfPCell(new Paragraph(saptaDetailsDO.getSt(), font8));
+			/*tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tancellval.setPaddingTop(20);
+			tancellval.setBorder(Rectangle.NO_BORDER);*/
+			stcellval.setBorder(0);
+			stcellval.setHorizontalAlignment(Element.ALIGN_LEFT);
+			stcellval.setPaddingTop(5);
+			stcellval.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(stcellval);
+			
+			PdfPCell stcell_1= new PdfPCell(new Paragraph("", font8));
+			stcell_1.setBorder(0);
+			stcell_1.setPaddingTop(5);
+			//tancell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			/*tancell.setPaddingTop(20);
+			tancell.setBorder(Rectangle.NO_BORDER);*/
+			companydetailscontenttbl.addCell(stcell_1);
+			
+			PdfPCell stcoloncell_2 = new PdfPCell(new Paragraph("",font8));
+			stcoloncell_2.setBorder(0);
+			stcoloncell_2.setHorizontalAlignment(Element.ALIGN_LEFT);
+			stcoloncell_2.setPaddingTop(5);
+			stcoloncell_2.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(stcoloncell_2);
+			
+			PdfPCell stcellval_1= new PdfPCell(new Paragraph("", font8));
+			/*tancellval.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			tancellval.setPaddingTop(20);
+			tancellval.setBorder(Rectangle.NO_BORDER);*/
+			stcellval_1.setBorder(0);
+			stcellval_1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			stcellval_1.setPaddingTop(5);
+			stcellval_1.setPaddingLeft(0);
+			companydetailscontenttbl.addCell(stcellval_1);
+			
+		}
 			
 		writedetailstbl = new PdfPTable(1);
 		writedetailstbl.setWidthPercentage(100);
@@ -865,8 +1017,10 @@ public class InvoicePDFServlet extends BaseServlet {
 			document.add(grandtotal);
 			document.newPage();
 			document.add(logo);
-			document.add(tanandpantbl);
-			document.add(pantbl);
+			/*document.add(tanandpantbl);
+			document.add(pantbl);*/
+			document.add(companydetailstbl);
+			document.add(companydetailscontenttbl);
 			document.add(writedetailstbl);
 			document.add(writedetailscontenttbl);
 			document.add(thankstbl);

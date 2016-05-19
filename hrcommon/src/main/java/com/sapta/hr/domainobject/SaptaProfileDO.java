@@ -49,6 +49,10 @@ public class SaptaProfileDO implements Serializable {
 	
 	private String pan;
 	
+	private String cin;
+	
+	private String st;
+	
 	private String accntname;
 	
 	private Long accntnum;
@@ -160,6 +164,22 @@ public class SaptaProfileDO implements Serializable {
 		this.pan = pan;
 	}
 
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public String getSt() {
+		return st;
+	}
+
+	public void setSt(String st) {
+		this.st = st;
+	}
+	
 	public String getAccntname() {
 		return accntname;
 	}

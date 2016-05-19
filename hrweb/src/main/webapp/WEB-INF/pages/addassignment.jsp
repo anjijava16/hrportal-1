@@ -95,10 +95,10 @@
 							</tr>
 							
 							<tr class="hidden addassignmentdetailtr">
-								<td align="right" style="float:none">Choose&nbsp;Project&nbsp;Type&nbsp;:</td>
+								<td align="right" style="float:none">Choose&nbsp;Bill&nbsp;Type&nbsp;:</td>
 								<td align="left" style="float:none">						
 									<select id="billtype" >
-										<option value="" style="text-align: center;">--- Project Type ---</option>
+										<option value="" style="text-align: center;">--- Bill Type ---</option>
 										<option value="h" style="text-align: left;">Hourly</option>
 										<option value="d" style="text-align: left;">Daily</option>
 										<option value="w" style="text-align: left;">Weekly</option>

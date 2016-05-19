@@ -307,9 +307,9 @@
 				$("#notify_error").html("");
 				<c:forEach items="${empBonusList}" var="empbonusList">
 					if("${empbonusList.id}"==recordid){
-						<fmt:formatDate value="${empbonusList.bonusmonth}" var="formattedDate" type="date" pattern="dd-MM-yyyy" />
+						<fmt:formatDate value="${empbonusList.bonusmonth}" var="formattedDate" type="date" pattern="MMM yyyy" />
 						$("#editempid").val("${empbonusList.empid}");
-						$("#editbonusmonth").html("${formattedDate}");
+						$("#editbonusmonth").val("${formattedDate}");
 						$("#editbonusamount").val("${empbonusList.bonusamount}");
 						$("#editComment").val("${empbonusList.comments}");
 						$("#bonusid").val("${empbonusList.id}");

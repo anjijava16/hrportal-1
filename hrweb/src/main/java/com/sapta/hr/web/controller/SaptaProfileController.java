@@ -60,15 +60,17 @@ public class SaptaProfileController {
 		return pagename;
 	}
 	
-	@RequestMapping(value = "/add/{tan}/{pan}/{accountname}/{website}/{accntnum}/{bankname}/{bankbranch}/{ifsccode}/{swiftcode}/{branchaddress}/{companyname}/{address}/{city}/{pincode}/{state}/{country}/{officephno}/{emailid}/{mobilenum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{tan}/{pan}/{accountname}/{website}/{accntnum}/{bankname}/{bankbranch}/{ifsccode}/{swiftcode}/{branchaddress}/{companyname}/{address}/{city}/{pincode}/{state}/{country}/{officephno}/{emailid}/{mobilenum}/{cin}/{st}", method = RequestMethod.GET)
 	public @ResponseBody String add(@PathVariable String tan,@PathVariable String pan,@PathVariable String accountname,@PathVariable String website,@PathVariable Long accntnum,@PathVariable String bankname,
 		@PathVariable  String bankbranch, @PathVariable String  ifsccode,@PathVariable String swiftcode,@PathVariable String branchaddress,@PathVariable String companyname,@PathVariable String address,@PathVariable String city,
-		@PathVariable Long pincode,@PathVariable String state,@PathVariable String country,@PathVariable Long officephno, @PathVariable String emailid, @PathVariable Long mobilenum, Model model, HttpServletRequest request) {
+		@PathVariable Long pincode,@PathVariable String state,@PathVariable String country,@PathVariable Long officephno, @PathVariable String emailid, @PathVariable Long mobilenum, String cin, String st, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				SaptaProfileDO saptaprofileDO = new SaptaProfileDO();
 				saptaprofileDO.setTan(tan);
 				saptaprofileDO.setPan(pan);
+				saptaprofileDO.setCin(cin);
+				saptaprofileDO.setSt(st);
 				saptaprofileDO.setAccntname(accountname);
 				saptaprofileDO.setWebsite(website);
 				saptaprofileDO.setAccntnum(accntnum);
@@ -132,16 +134,18 @@ public class SaptaProfileController {
 		return respJSON != null ? respJSON.toString() : "";
 	}
 	
-	@RequestMapping(value = "/update/{id}/{tan}/{pan}/{accntname}/{website}/{accntnum}/{bankname}/{bankbranch}/{ifsccode}/{swiftcode}/{branchaddress}/{companyname}/{address}/{city}/{pincode}/{state}/{country}/{officephno}/{emailid}/{mobilenum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update/{id}/{tan}/{pan}/{accntname}/{website}/{accntnum}/{bankname}/{bankbranch}/{ifsccode}/{swiftcode}/{branchaddress}/{companyname}/{address}/{city}/{pincode}/{state}/{country}/{officephno}/{emailid}/{mobilenum}/{cin}/{st}", method = RequestMethod.GET)
 	public @ResponseBody String update(@PathVariable long id,@PathVariable String tan,@PathVariable String pan,@PathVariable String accntname,@PathVariable String website,@PathVariable Long accntnum,@PathVariable String bankname,
 			@PathVariable  String bankbranch, @PathVariable String  ifsccode,@PathVariable String swiftcode,@PathVariable String branchaddress,@PathVariable String companyname,@PathVariable String address,@PathVariable String city,
-			@PathVariable Long pincode,@PathVariable String state,@PathVariable String country,@PathVariable Long officephno, @PathVariable String emailid, @PathVariable Long mobilenum, Model model, HttpServletRequest request) {
+			@PathVariable Long pincode,@PathVariable String state,@PathVariable String country,@PathVariable Long officephno, @PathVariable String emailid, @PathVariable Long mobilenum, @PathVariable String cin, @PathVariable String st, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				SaptaProfileDO saptaprofileDO = new SaptaProfileDO();
 				saptaprofileDO.setId(id);
 				saptaprofileDO.setTan(tan);
 				saptaprofileDO.setPan(pan);
+				saptaprofileDO.setCin(cin);
+				saptaprofileDO.setSt(st);
 				saptaprofileDO.setAccntname(accntname);
 				saptaprofileDO.setWebsite(website);
 				saptaprofileDO.setAccntnum(accntnum);

@@ -24,7 +24,7 @@
 							<th class="first">Assignment&nbsp;Id</th>
 							<th class="">Employee&nbsp;Name</th>
 							<th class="">Project&nbsp;Name</th>
-							<th class="">Project&nbsp;Type</th>
+							<th class="">Bill&nbsp;Type</th>
 							<th class="">Start&nbsp;Date</th>
 							<th class="">End&nbsp;Date</th>
 							<th class="">Status</th>
@@ -111,10 +111,10 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="lableContentSelect">Project Type</td>
+									<td class="lableContentSelect">Bill Type</td>
 									<td class="valueContent">
 										<select id="billtype" class="selectBox hidden" style="margin:0px; text-align:center" class="inputdisable">
-											<option value="" style="text-align: center;">--- Project Type ---</option>
+											<option value="" style="text-align: center;">--- Bill Type ---</option>
 											<option value="h" style="text-align: left;">Hourly</option>
 											<option value="d" style="text-align: left;">Daily</option>
 											<option value="w" style="text-align: left;">Weekly</option>

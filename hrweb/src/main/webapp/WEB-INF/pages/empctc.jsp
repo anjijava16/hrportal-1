@@ -65,6 +65,7 @@
 								<tr>
 									<th class="first">Employee&nbsp;Id</th>
 									<th class="">Employee&nbsp;Name</th>
+									<th class="">Designation</th>
 									<th class="">CTC</th>
 									<th class="">Start&nbsp;Date</th>
 									<th class="">End&nbsp;Date</th>
@@ -76,6 +77,7 @@
 								<tr>
 									<td id="name_${empctclist.id}" >${empctclist.empid}</td>
 									<td id="empname_${empctclist.id}">${empctclist.empname}</td>
+									<td id="empdesg_${empctclist.id}">${empctclist.designation}</td>
 									<td id="number_${empctclist.id}" class="alignright">${empctclist.empctc}</td>
 									<fmt:formatDate value="${empctclist.startdate}" var="formattedDate" type="date" pattern="dd-MM-yyyy" />
 									<td id="startdate_${empctclist.id}" style="text-align:center">${formattedDate}</td>
@@ -128,6 +130,7 @@
 							<tr>
 								<th class="first">Employee&nbsp;Id</th>
 								<th class="">CTC</th>
+								<th class="">Designation</th>
 								<th class="" style="text-align:center">Start&nbsp;Date</th>
 								<th class="" style="text-align:center">End&nbsp;Date</th>
 								<th class="">Status</th>
@@ -388,6 +391,7 @@
 					"aoColumns": [ 
 				                  {sClass: "alignleft"}, 
 				                  {sClass: "alignright"},
+				                  {sClass: "alignleft"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},
 				                  {sClass: "center"}/* ,
@@ -524,7 +528,6 @@
 						 bandchange = null;
 					}
 					var resourceURL = $("#contextpath").val()+"/empctc/update/"+empid+"/"+employeectc+"/"+editedstartdate+"/"+enddate+"/"+bandchange+"/"+designation;
-					alert(resourceURL)
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
