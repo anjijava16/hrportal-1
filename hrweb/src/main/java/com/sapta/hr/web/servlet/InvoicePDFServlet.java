@@ -30,6 +30,7 @@ import com.sapta.hr.service.CustomerService;
 import com.sapta.hr.service.InvoiceDetailsService;
 import com.sapta.hr.service.InvoiceService;
 import com.sapta.hr.service.SaptaProfileService;
+import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.FooterUtil;
 import com.sapta.hr.web.util.InvoicePDFUtil;
@@ -193,12 +194,12 @@ public class InvoicePDFServlet extends BaseServlet {
 				
 				 invoicenumtbl = new PdfPTable(2);
 				 invoicenumtbl.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				 invoicenumtbl.setWidthPercentage(35);
+				 invoicenumtbl.setWidthPercentage(25);
 			
 				PdfPCell invoicenumcell= new PdfPCell(new Paragraph("Invoice No : ", font8));
 				invoicenumcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				invoicenumcell.setBorder(Rectangle.NO_BORDER);
-				invoicenumcell.setPaddingTop(20);
+				invoicenumcell.setPaddingTop(15);
 				invoicenumcell.setPaddingBottom(15);
 				invoicenumcell.setPaddingRight(0);
 				invoicenumtbl.addCell(invoicenumcell);
@@ -206,7 +207,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				PdfPCell invoicenumber= new PdfPCell(new Paragraph(invoice.getInvoiceno(), fontbold8));
 				invoicenumber.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				invoicenumber.setBorder(Rectangle.NO_BORDER);
-				invoicenumber.setPaddingTop(20);
+				invoicenumber.setPaddingTop(15);
 				invoicenumber.setPaddingBottom(15);
 				invoicenumber.setPaddingRight(0);
 				invoicenumtbl.addCell(invoicenumber);
@@ -273,9 +274,9 @@ public class InvoicePDFServlet extends BaseServlet {
 						billto.addCell(billtocell_2);
 					}
 				}
-				if(String.valueOf(invoice.getInvoicestatus()).equalsIgnoreCase("i")){
-					/*float[] rowcolumn = {16f,4f,16f,100f};
-					receiveddetailstable = new PdfPTable(rowcolumn);*/
+				/*if(String.valueOf(invoice.getInvoicestatus()).equalsIgnoreCase("i")){
+					float[] rowcolumn = {16f,4f,16f,100f};
+					receiveddetailstable = new PdfPTable(rowcolumn);
 					receiveddetailstable = new PdfPTable(4);
 					receiveddetailstable.setHorizontalAlignment(Element.ALIGN_LEFT);
 					receiveddetailstable.setWidthPercentage(100);					
@@ -328,14 +329,14 @@ public class InvoicePDFServlet extends BaseServlet {
 					receiveddetailstable.addCell(receievedamountcellvalue);
 					
 					String amountType = "";
-					if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("i")){
-						amountType = "INR";
-					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("u")){
-						amountType = "USD";
-					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("e")){
-						amountType = "EUR";
-					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("g")){
-						amountType = "GBP";
+					if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("inr")){
+						amountType = CommonConstants.INR;
+					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("usd")){
+						amountType = CommonConstants.USD;
+					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("eur")){
+						amountType = CommonConstants.EUR;
+					}else if(String.valueOf(invoice.getReceivedamounttype()).equalsIgnoreCase("gbp")){
+						amountType = CommonConstants.GBP;
 					}
 					PdfPCell receievedamounttypecellvalue = new PdfPCell(new Paragraph(amountType, font8)); 
 					receievedamounttypecellvalue.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -345,9 +346,9 @@ public class InvoicePDFServlet extends BaseServlet {
 					receiveddetailstable.addCell(receievedamounttypecellvalue);
 					
 					PdfPCell receievedcommentscellvalue = new PdfPCell(new Paragraph(invoice.getReceivedcomments(), font8));
-					/*cell = new PdfPCell(new Paragraph("blah"));
+					cell = new PdfPCell(new Paragraph("blah"));
 				    table.addCell("wrap");
-				    cell.setNoWrap(false);*/
+				    cell.setNoWrap(false);
 					receievedcommentscellvalue.setHorizontalAlignment(Element.ALIGN_LEFT);
 					receievedcommentscellvalue.setBorderColor(BaseColor.GRAY);
 					
@@ -358,7 +359,7 @@ public class InvoicePDFServlet extends BaseServlet {
 					receievedcommentscellvalue.setNoWrap(false);
 					receiveddetailstable.addCell(receievedcommentscellvalue);
 					
-				}
+				}*/
 					
 				duedatetbl = new PdfPTable(3);
 				duedatetbl.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -386,7 +387,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				duedatecell.setBorderColor(BaseColor.GRAY);
 				duedatetbl.addCell(duedatecell);
 				
-				PdfPCell datecell_value = new PdfPCell(new Paragraph((CommonUtil.convertDateToStringWithOutTime(invoice.getInvoicedate())), font8)); 
+				PdfPCell datecell_value = new PdfPCell(new Paragraph((CommonUtil.convertDateToStringWithOutTimeInvoice(invoice.getInvoicedate())), font8)); 
 				datecell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				datecell_value.setBorderColor(BaseColor.GRAY);
 				datecell_value.setFixedHeight(20);
@@ -400,7 +401,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				termscell_value.setPaddingTop(5);
 				duedatetbl.addCell(termscell_value);
 					
-				PdfPCell duedatecell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime((invoice.getDuedate())), font8)); 
+				PdfPCell duedatecell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTimeInvoice((invoice.getDuedate())), font8)); 
 				duedatecell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				duedatecell_value.setBorderColor(BaseColor.GRAY);
 				duedatecell_value.setFixedHeight(20);
@@ -408,7 +409,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				duedatetbl.addCell(duedatecell_value);
 				
 				if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
-					float[] totlcolumnWidths = {74f,75f,74f,75f,85f};
+					float[] totlcolumnWidths = {74f,75f,74f,70f,75f,85f};
 					totaltbl = new PdfPTable(totlcolumnWidths);
 				}else{
 					float[] totlcolumnWidths = {74f,75f,74f,70f,75f,70f,85f};
@@ -430,12 +431,14 @@ public class InvoicePDFServlet extends BaseServlet {
 				fromcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				fromcell.setBackgroundColor(new BaseColor(211,211,211));
 				fromcell.setBorderColor(BaseColor.GRAY);
+				fromcell.setFixedHeight(15);
 				totaltbl.addCell(fromcell);
 				
 				PdfPCell tocell = new PdfPCell(new Paragraph("To", fontbold8));
 				tocell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				tocell.setBackgroundColor(new BaseColor(211,211,211));
 				tocell.setBorderColor(BaseColor.GRAY);
+				tocell.setFixedHeight(15);
 				totaltbl.addCell(tocell);
 					
 				if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
@@ -450,6 +453,15 @@ public class InvoicePDFServlet extends BaseServlet {
 					ratecell.setBackgroundColor(new BaseColor(211,211,211));
 					ratecell.setBorderColor(BaseColor.GRAY);
 					totaltbl.addCell(ratecell);*/
+					String timeperiod = "";
+					timeperiod = "Days";
+					
+					PdfPCell totalhrscell = new PdfPCell(new Paragraph("Total "+timeperiod, fontbold8));
+					totalhrscell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					totalhrscell.setBackgroundColor(new BaseColor(211,211,211));
+					totalhrscell.setBorderColor(BaseColor.GRAY);
+					totalhrscell.setFixedHeight(15);
+					totaltbl.addCell(totalhrscell);
 				}else{
 					String timeperiod = "";
 					String perrateperiod = "";
@@ -471,98 +483,132 @@ public class InvoicePDFServlet extends BaseServlet {
 					totalhrscell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					totalhrscell.setBackgroundColor(new BaseColor(211,211,211));
 					totalhrscell.setBorderColor(BaseColor.GRAY);
+					totalhrscell.setFixedHeight(15);
 					totaltbl.addCell(totalhrscell);
 					
 					PdfPCell ratecell = new PdfPCell(new Paragraph("Rate/"+perrateperiod, fontbold8));
 					ratecell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					ratecell.setBackgroundColor(new BaseColor(211,211,211));
 					ratecell.setBorderColor(BaseColor.GRAY);
+					ratecell.setFixedHeight(15);
 					totaltbl.addCell(ratecell);
 					
 				}
 					
 				String amounttype = "";
-				
-				if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("i")){
-					amounttype = "INR";
-				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("u")){
-					amounttype = "USD";
-				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("e")){
-					amounttype = "EUR";
-				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("g")){
-					amounttype = "GBP";
+				if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("inr")){
+					amounttype = CommonConstants.INR;
+				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("usd")){
+					amounttype = CommonConstants.USD;
+				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("eur")){
+					amounttype = CommonConstants.EUR;
+				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("gbp")){
+					amounttype = CommonConstants.GBP;
 				}
 				PdfPCell totalcell = new PdfPCell(new Paragraph("Total ("+amounttype+")", fontbold8));
 				totalcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				totalcell.setBackgroundColor(new BaseColor(211,211,211));
 				totalcell.setBorderColor(BaseColor.GRAY);
+				totalcell.setFixedHeight(15);
 				totaltbl.addCell(totalcell);
 				
 				PdfPCell netamtcell = new PdfPCell(new Paragraph("Net Amount ("+amounttype+")", fontbold8));
 				netamtcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				netamtcell.setBackgroundColor(new BaseColor(211,211,211));
 				netamtcell.setBorderColor(BaseColor.GRAY);
+				netamtcell.setFixedHeight(15);
 				totaltbl.addCell(netamtcell);
 				
 				invoicedetailslist = new InvoiceDetailsService().retriveByInvoiceNo(invoiceno);
 					
 				for(InvoiceDetailsDO invoiceDetailsDO : invoicedetailslist){
 					PdfPCell refnumcell_value = new PdfPCell(new Paragraph(invoiceDetailsDO.getRefnumbername(), font8));
-					refnumcell_value.setHorizontalAlignment(Element.ALIGN_LEFT);
+					refnumcell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 					refnumcell_value.setBorderColor(BaseColor.GRAY);
 					refnumcell_value.setNoWrap(false);
+					refnumcell.setFixedHeight(20);
+					refnumcell.setPaddingTop(5);
 					totaltbl.addCell(refnumcell_value);
 					
-					PdfPCell fromcell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(invoiceDetailsDO.getServicefrom()), font8));
+					PdfPCell fromcell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTimeInvoice(invoiceDetailsDO.getServicefrom()), font8));
 					fromcell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 					fromcell_value.setBorderColor(BaseColor.GRAY);
+					fromcell_value.setFixedHeight(20);
+					fromcell_value.setPaddingTop(5);
 					totaltbl.addCell(fromcell_value);
 					
-					PdfPCell tocell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(invoiceDetailsDO.getServiceto()), font8));
+					PdfPCell tocell_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTimeInvoice(invoiceDetailsDO.getServiceto()), font8));
 					tocell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 					tocell_value.setBorderColor(BaseColor.GRAY);
+					tocell_value.setFixedHeight(20);
+					tocell_value.setPaddingTop(5);
 					totaltbl.addCell(tocell_value);
 					
 					if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
-						
-					}else{
 						if(invoiceDetailsDO.getTimeperiod() != 0){
 							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getTimeperiod()), font8));
-							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
+							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 							totalhrscell_value.setBorderColor(BaseColor.GRAY);
+							totalhrscell_value.setFixedHeight(20);
+							totalhrscell_value.setPaddingTop(5);
 							totaltbl.addCell(totalhrscell_value);
 						} else{
 							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph("", font8));
-							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
+							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 							totalhrscell_value.setBorderColor(BaseColor.GRAY);
+							totalhrscell_value.setFixedHeight(20);
+							totalhrscell_value.setPaddingTop(5);
+							totaltbl.addCell(totalhrscell_value);
+						}
+					}else{
+						if(invoiceDetailsDO.getTimeperiod() != 0){
+							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getTimeperiod()), font8));
+							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
+							totalhrscell_value.setBorderColor(BaseColor.GRAY);
+							totalhrscell_value.setFixedHeight(20);
+							totalhrscell_value.setPaddingTop(5);
+							totaltbl.addCell(totalhrscell_value);
+						} else{
+							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph("", font8));
+							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
+							totalhrscell_value.setBorderColor(BaseColor.GRAY);
+							totalhrscell_value.setFixedHeight(20);
+							totalhrscell_value.setPaddingTop(5);
 							totaltbl.addCell(totalhrscell_value);
 						}
 					
 						PdfPCell ratecell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getRateofperiod())), font8));
 						ratecell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
 						ratecell_value.setBorderColor(BaseColor.GRAY);
+						ratecell_value.setFixedHeight(20);
+						ratecell_value.setPaddingRight(5);
+						ratecell_value.setPaddingTop(5);
 						totaltbl.addCell(ratecell_value);
 					}
 					PdfPCell totalcell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getDueamount())), font8));
 					totalcell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					totalcell_value.setBorderColor(BaseColor.GRAY);
 					totalcell_value.setPaddingRight(5);
+					totalcell_value.setFixedHeight(20);
+					totalcell_value.setPaddingTop(5);
 					totaltbl.addCell(totalcell_value);
 					
 					PdfPCell netamtcell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getDueamount())), font8));
 					netamtcell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					netamtcell_value.setBorderColor(BaseColor.GRAY);
 					netamtcell_value.setPaddingRight(5);
+					netamtcell_value.setFixedHeight(20);
+					netamtcell_value.setPaddingTop(5);
 					totaltbl.addCell(netamtcell_value);
 				}
-				if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("i")){
+				if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("inr")){
 				//	double subtotalamount = invoice.getTotalamount() - invoice.getServicetax();
 					float[] servicetaxcolumn = {8f,1.5f};
 					servicetaxtable = new PdfPTable(servicetaxcolumn);
 					servicetaxtable.setWidthPercentage(100f);
 					servicetaxtable.setSpacingBefore(10f);
 					
-					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax (14.5%)", fontbold8));
+					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax (15%)", fontbold8));
 					servicetaxcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					servicetaxcell.setBorder(0);
 					servicetaxtable.addCell(servicetaxcell);
@@ -802,16 +848,16 @@ public class InvoicePDFServlet extends BaseServlet {
 			document.add(horizontalrow);
 			document.add(invoicenumtbl);
 			document.add(billto);
-			for(InvoiceDO invoiceDO : invoicelist){
+			/*for(InvoiceDO invoiceDO : invoicelist){
 				if(String.valueOf(invoiceDO.getInvoicestatus()).equalsIgnoreCase("i")){
 					document.add(receiveddetailstable);
 				}
-			}
+			}*/
 			document.add(duedatetbl);
 			document.add(totaltbl);
 			for(InvoiceDO invoiceDO : invoicelist){
 				document.add(subtotaltbl);
-				if(String.valueOf(invoiceDO.getAmounttype()).equalsIgnoreCase("i")){
+				if(String.valueOf(invoiceDO.getAmounttype()).equalsIgnoreCase("inr")){
 					document.add(servicetaxtable);
 				}
 				document.add(totallinetbl);

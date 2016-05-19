@@ -415,7 +415,7 @@
 					 	$("#statusdiv").removeClass("hidden");
 					 	if($("#amounttypeselect").val() == "i"){
 					 		var totalamount = $("#totalamountdivision").html();
-					 		var servicetax = parseFloat(totalamount * 14.5 ) / 100;
+					 		var servicetax = parseFloat(totalamount * 15 ) / 100;
 							var completetotalamount = parseFloat(totalamount) + parseFloat(servicetax);
 							$("#servicetax").html(servicetax.toFixed(2));
 							$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));

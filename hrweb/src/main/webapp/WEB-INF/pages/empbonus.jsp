@@ -165,7 +165,7 @@
 						<a href="#" id="" ><input type="button" value="Yes I'm" id="confirmation" /></a>
 					</div>
 					<div class="rightElement MRGL10PX">
-						<a href ="#" style="text-decoration: none"><input type="button" value="Decline" class="graybtn" id = "decline"/>&nbsp;</a>
+						<a href ="<%=request.getContextPath() %>/empbonus" style="text-decoration: none"><input type="button" value="Decline" class="graybtn" id = "decline"/>&nbsp;</a>
 					</div>
 				</div>
 			</div>

@@ -21,9 +21,9 @@
 						</tr>
 						<tr>
 							<td class="currenttotalamtrupyatd1 mobMART0PX" align="right">Bill&nbsp;Amount&nbsp;:</td>
-							<!-- <td class="currenttotalamtrupyatd" style="margin-left: auto">&#x20B9;</td>
+							<!-- <td class="currenttotalamtrupyatd" style="margin-left: auto" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style=" margin-left: auto"></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px; font-weight:bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px; font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px;" /></td>
 						</tr>
 					</table>
 					<div id = "mandatorycheck" class = "hidden" style="text-align: center;"><br/><b class="saptaColor">*</b>&nbsp;mandatory fields<br/></div>
@@ -32,7 +32,7 @@
 					<table id="totalcount" align ="center">
 						<tr>
 							<td class="currenttotalamtrupyatd1" align="right">Bill&nbsp;Amount&nbsp;:</td>
-							<td class="currenttotalamtrupyatd" style="margin-left: auto">&#x20B9;</td>
+							<td class="currenttotalamtrupyatd" style="margin-left: auto" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style=" margin-left: auto"></td>
 						</tr>
 					</table>
@@ -43,7 +43,7 @@
 							<tr>
 								<th class="first">Bill&nbsp;Id</th>
 								<th class="">Bill&nbsp;No</th>
-								<th class="">Amount&nbsp;(<span class="rupyaINR">&#x20B9;</span>)</th>
+								<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 								<th class="">Due&nbsp;Date</th>
 								<th class="">Comments</th>
 								<th class="">Status</th>

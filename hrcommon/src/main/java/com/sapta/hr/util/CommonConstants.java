@@ -651,6 +651,14 @@ public final class CommonConstants {
 	public static final String SERVICETO = "serviceto";
 	
     public static final String DueAmount = "dueamount";
+    
+    public static final String INR = "INR";
+    
+    public static final String USD = "USD";
+    
+    public static final String EUR = "EUR";
+    
+    public static final String GBP = "GBP";
 	
 	
 	public static final String JSP_ADD_INVOICE = "addinvoice";
@@ -778,6 +786,8 @@ public final class CommonConstants {
 	
 	public static final String POWO = "powo";
 	
+	public static final String BILL_TYPE = "billtype";
+	
 	//Payroll File Export
 	
 	public static final String APPLICATION_CSV = "text/csv";
@@ -851,6 +861,18 @@ public final class CommonConstants {
 	public static final String HR_EMAIL = "HR_EMAIL";
 	
 	public static final String SALT = "SALT";
+	
+	//Project Type
+	
+	public static final String FIXED = "Fixed";
+	
+	public static final String DAILY = "Daily";
+	
+	public static final String WEEKLY = "Weekly";
+	
+	public static final String MONTHLY = "Monthly";
+	
+	public static final String HOURLY = "Hourly";
 	
 	//Paid and closed
 	

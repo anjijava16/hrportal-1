@@ -46,6 +46,7 @@ static Logger logger = Logger.getLogger(EmpCTCDAO.class.getName());
 			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
 			if (em != null && emppf != null) {
 				logger.info("Entity Manager is not null");
+				System.out.println("Came Inside");
 				TransactionManager.beginTransaction(em);
 				em.persist(emppf);
 				TransactionManager.commitTransaction();

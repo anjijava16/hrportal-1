@@ -131,7 +131,7 @@
 								<th class="" style="text-align:center">Start&nbsp;Date</th>
 								<th class="" style="text-align:center">End&nbsp;Date</th>
 								<th class="">Status</th>
-								<th class="">Details</th>
+								<!-- <th class="">Details</th> -->
 							</tr>
 						</thead>					
 					</table>
@@ -154,6 +154,12 @@
 						<td align="right">End&nbsp;Date&nbsp;:</td>
 						<td class="editenddateclass"><b style="float:left"><input name="editenddate" id="editenddate" type="text" style="height: 20px" class="datePcK"/></b></td>
 						<td><b style="float:left"><input name="ctcid" class="hidden" id="ctcid" type="text"/></b></td>
+					</tr>
+					<tr>
+						<td align="right">Band&nbsp;Change&nbsp;:</td>
+						<td><b style="float:left"><input name="editbandchange"  id="editbandchange" type="checkbox" style="margin: 13px;height:22px;width:20px;"/></b></td>
+						<td align="right">Designation&nbsp;:</td>
+						<td class=""><input name="editdesignation" id="editdesignation" type="text"  disabled/></td>
 					</tr>
 					<tr>
 						<td class="trClass"></td>
@@ -316,6 +322,15 @@
 							$("#editemployeectc").val("${empctclist.empctc}");
 							$("#editstartdate").val("${formattedDate}");
 							$("#ctcid").val("${empctclist.id}");
+							if("${empctclist.bandchange}"=="y"){
+								$("input[id='editbandchange']").attr("checked","checked");
+								//$("#editdesignation").removeAttr("disabled");
+								$("input[id='editdesignation']").removeAttr("disabled").val("${empctclist.designation}");								
+							}else {
+								$("input[id='editbandchange']").removeAttr("checked","checked");
+								$("input[id='editdesignation']").attr("disabled","disabled");
+								$("input[id='editdesignation']").val("");
+							}
 							var formatedate = "";
 							if("${empctclist.enddate}" != ""){
 								<fmt:formatDate value="${empctclist.enddate}" var="formattedEndDate" type="date" pattern="dd-MM-yyyy" />
@@ -327,6 +342,8 @@
 								$("#editemployeectc").css("border","1");
 								$("#editstartdate").prop("readonly", false);
 								$("#editenddate").prop("readonly", false);
+								
+								$("#editemployeectc").css("border","1");
 								$(".ui-datepicker-trigger").css("pointer-events","auto");
 								$("#updateDetails").show();
 							}else{
@@ -339,6 +356,11 @@
 								}else{
 									$("#editenddate").prop("readonly", true);
 									$(".ui-datepicker-trigger").css("pointer-events","none");
+								}
+								if($("#editbandchanged").is(":checked")){
+									$("#editdesignation").removeAttr("disabled");
+								}else{
+									$("#editdesignation").attr("disabled","disabled");
 								}
 								
 								$("#notify_error").html("Employee is Closed");
@@ -368,8 +390,8 @@
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},
-				                  {sClass: "center"},
-				                  {sClass: "center pdfclass"}
+				                  {sClass: "center"}/* ,
+				                  {sClass: "center pdfclass"} */
 				                ]
 				});
 				
@@ -424,7 +446,14 @@
 				shrinkToFit:false, 
 			});
 			jQuery("#empctcgridtable").jqGrid('navGrid','#empctcgridpager',{edit:false, add:false, del:false, search:false});
-			
+			$("input[id='editbandchange']").on("change", function(){
+				if($("input[id='editbandchange']").is(":checked")){
+					$("#editdesignation").removeAttr("disabled");
+				}else{
+					$("#editdesignation").attr("disabled","disabled");
+					$("#editdesignation").val("");
+				}
+			});
 			$('#updateDetails').click(function() {
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
@@ -445,6 +474,15 @@
 					}
 				</c:forEach>
 				var enddate = $("#editenddate").datepicker().val();
+				var bandchange = $("input[id='editbandchange']").is(":checked");
+				var designation = "";
+				if(bandchange == true){
+					bandchange = "y";
+					designation = $("#editdesignation").val();
+				}else{
+					designation = "";
+				}
+					
 				if(enddate != "" && enddate.length != 0 && enddate != null){
 					/* enddate = monthConversion(enddate); */
 					enddate = enddate.split('/').join('-');
@@ -461,6 +499,9 @@
 					if (startdatevalidation > enddatevalidation)  validation = false; 
 				
 				} 
+				if(bandchange == "y"){
+					 if(designation == "" || designation.length == 0) validation = false;
+				}
 				var startvalidation = $.datepicker.parseDate('dd-mm-yy',editedstartdate);
 				var startdateval = $.datepicker.parseDate('dd-mm-yy',startdate);
 				if(startvalidation < startdateval) { 
@@ -478,7 +519,12 @@
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(enddate == "" || enddate.length == 0) enddate = "null";
-					var resourceURL = $("#contextpath").val()+"/empctc/update/"+empid+"/"+employeectc+"/"+editedstartdate+"/"+enddate;
+					if(bandchange == false){
+						 if(designation == "" || designation.length == 0) designation="null";
+						 bandchange = null;
+					}
+					var resourceURL = $("#contextpath").val()+"/empctc/update/"+empid+"/"+employeectc+"/"+editedstartdate+"/"+enddate+"/"+bandchange+"/"+designation;
+					alert(resourceURL)
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -523,6 +569,8 @@
 							$("#editemployeectc").val('');
 							$("#editstartdate").val('');
 							$("#editenddate").val('');
+							$("input[id='editdesignation']").val('');
+							$("input[id='editbandchange']").removeAttr("checked");							
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#errorMsgContent").html(thrownError);

@@ -19,9 +19,9 @@
 					<table  align ="center" class="optionTable">
 						<tr>
 							<td align="right" style="margin-left:auto; margin-top:0;">Amount&nbsp;Paid&nbsp;:</td>
-						<!-- 	<td class="WebRupee PADDRGT1PX BLD rupyaINR" width="2px" style="padding-top: 9px; margin-left: 0px;">&#x20B9;</td> -->
+						<!-- 	<td class="WebRupee PADDRGT1PX BLD rupyaINR" width="2px" style="padding-top: 9px; margin-left: 0px;" class="rupyaINR WebRupee">&#x20B9;</td> -->
 							<!-- <td id="currenttotalamttd" class="PADDLFT1PX BLD" style="margin-left: 0px;"></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight: bold; width: 109px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight: bold; width: 109px;" /></td>
 						</tr>
 					</table>
 				</div>
@@ -44,7 +44,7 @@
 									<th class="">Asset&nbsp;Name</th>
 									<th class="">Asset&nbsp;Type</th>
 									<th class="">Vendor&nbsp;Name</th>
-									<th class="">Price&nbsp;(<span class="rupyaINR">&#x20B9;</span>)</th>
+									<th class="">Price&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 								</tr>	
 							</thead>
 							<tbody></tbody>

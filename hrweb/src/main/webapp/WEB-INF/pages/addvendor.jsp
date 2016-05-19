@@ -37,7 +37,7 @@
 						<tr>
 							<td align="right">Email&nbsp;:</td>
 							<td><input name="emailid" id="emailid" type="text" /></td>
-							<td align="right"><sup class="saptaColor">*</sup>Pincode&nbsp;:</td>
+							<td align="right"><!-- <sup class="saptaColor">* --></sup>Pincode&nbsp;:</td>
 							<td><input name="pin" id="pin" type="text" /></td>
 						</tr>
 						<tr>
@@ -100,7 +100,7 @@
 				if(name == "" || name.length == 0) validation = false;
 				if(vendorcode == "" || vendorcode.length == 0) validation = false;
 				if(address == "" || address.length == 0) validation = false;
-				if(pincode == "" || pincode.length == 0) validation = false;
+				/* if(pincode == "" || pincode.length == 0) validation = false; */
 				if(email != "" || email.length > 0){
 					if(!validateEmail(email)) validation = false;
 				}
@@ -112,6 +112,7 @@
 				}else{
 					if(fax == "" || fax.length == 0) fax = "null";
 					if(phoneno == "" || phoneno.length == 0) phoneno = "null";
+					if(pincode == "" || pincode == "-" || pincode.length == 0) pincode = null;
 					if(mobileno == "" || mobileno.length == 0) mobileno = "null";
 					if(email == "" || email.length == 0) email = "null";
 					var resourceURL = $("#contextpath").val()+"/vendordetails/add/"+name+"/"+address+"/"+phoneno+"/"+mobileno+"/"+email+"/"+pincode+"/"+fax+"/"+vendorcode;

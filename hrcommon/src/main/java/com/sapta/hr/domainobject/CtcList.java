@@ -17,6 +17,26 @@ public class CtcList {
 	
 	private Long empctc;
 	
+	private String bandchange;
+	
+	private String designation;
+	
+	public String getBandchange() {
+		return bandchange;
+	}
+
+	public void setBandchange(String bandchange) {
+		this.bandchange = bandchange;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
 	@Temporal(TemporalType.DATE)
 	private Date startdate;
 

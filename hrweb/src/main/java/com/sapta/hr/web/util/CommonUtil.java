@@ -3,9 +3,11 @@ package com.sapta.hr.web.util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Base64;
@@ -34,6 +36,15 @@ public final class CommonUtil {
 		}
 	}
 	
+	public static String convertDateToStringWithOutTimeInvoice(Date date){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+		if(date != null){
+			return formatter.format(date);
+		}else{
+			return null;
+		}
+	}
+	
 	public static String convertDateToStringWithdatetime(Date date){
 		SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
 		if(date != null){
@@ -42,6 +53,8 @@ public final class CommonUtil {
 			return null;
 		}
 	}
+	
+	
 	
 	public static Date convertStringToDate(String date){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -57,6 +70,33 @@ public final class CommonUtil {
 		}
 		return dateResp;
 	}
+	
+	public static Date convertStringToDateValue(String dateStr){
+		DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+		String formatedDate = null;
+		Date date = null;
+		try{
+			date = (Date)formatter.parse(dateStr);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			formatedDate = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" +  cal.get(Calendar.YEAR);
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
+		SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy");
+		Date dateResp = null;
+		if(date != null){
+			try{
+				dateResp = formatter1.parse(formatedDate);
+			}catch(ParseException e){
+				e.printStackTrace();
+			}
+		}else{
+			dateResp =  null;
+		}
+		return dateResp;
+	}
+	
 	
 	public static Date convertStringToDateTime(String date){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

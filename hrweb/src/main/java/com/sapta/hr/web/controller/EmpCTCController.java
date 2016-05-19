@@ -71,6 +71,9 @@ public class EmpCTCController {
 							ctclist.setStatus(empctcList.get(0).getStatus());
 							ctclist.setStartdate(empctcList.get(0).getStartdate());
 							ctclist.setEnddate(empctcList.get(0).getEnddate());
+							ctclist.setBandchange(empctcList.get(0).getBandchange());
+							ctclist.setDesignation(empctcList.get(0).getDesignation());
+							ctclist.setEnddate(empctcList.get(0).getEnddate());
 							if(employeeDO.getStatus() == 'i'){
 								ctclist.setEmpstatus("Closed");
 							}else{
@@ -94,8 +97,9 @@ public class EmpCTCController {
 		return pagename;
 	}
 	
-	@RequestMapping(value = "/update/{empid}/{empctc}/{startdate}/{enddate}", method = RequestMethod.GET)
-	public @ResponseBody String update(@PathVariable long empid,@PathVariable long empctc, @PathVariable String startdate, @PathVariable String enddate, Model model, HttpServletRequest request){
+	@RequestMapping(value = "/update/{empid}/{empctc}/{startdate}/{enddate}/{bandchange}/{designation}", method = RequestMethod.GET)
+	public @ResponseBody String update(@PathVariable long empid,@PathVariable long empctc, @PathVariable String startdate, @PathVariable String enddate, 
+									   @PathVariable String bandchange, @PathVariable String designation, Model model, HttpServletRequest request){
 		JSONObject respJSON = null;
 		try {
 			if (WebManager.authenticateSession(request)) {
@@ -121,6 +125,7 @@ public class EmpCTCController {
 						status = new EmpCTCService().update(empctcDO);
 						respJSON = CommonWebUtil.buildSuccessResponse();
 					}
+					System.out.println("Status   "+ respJSON);
 					if(status && empdetail.get(0).getStatus() == 'a'){
 						EmpCTCDO ctcDO = new EmpCTCDO();
 						ctcDO.setEmpctc(empctc);
@@ -134,10 +139,45 @@ public class EmpCTCController {
 						    Date ctcEndngDate= c.getTime();
 							ctcDO.setEnddate(ctcEndngDate);
 						}
+						if(bandchange.equalsIgnoreCase("y")){
+							ctcDO.setBandchange(bandchange);
+							ctcDO.setDesignation(designation);
+						}
 						UserDO userDO = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 						ctcDO.setUpdatedby(userDO.getUsername());
 						ctcDO.setUpdatedon(new Date());
 						new EmpCTCService().persist(ctcDO);
+						
+						//Update Employee Designation
+						List<EmpDetailDO> empdetails= new EmpDetailService().retriveByEmpId(empid);
+						EmpDetailDO employeedetail = new EmpDetailDO();
+						employeedetail.setId(empdetails.get(0).getId());
+						employeedetail.setEmpid(empdetails.get(0).getEmpid());
+						employeedetail.setDob(empdetails.get(0).getDob());
+						employeedetail.setAge(empdetails.get(0).getAge());
+						employeedetail.setGender(empdetails.get(0).getGender());
+						employeedetail.setDept(empdetails.get(0).getDept());
+						employeedetail.setJdate(empdetails.get(0).getJdate());
+						employeedetail.setEmergencyno(empdetails.get(0).getEmergencyno());
+						employeedetail.setMarital(empdetails.get(0).getMarital());
+						employeedetail.setPossessvehicle(empdetails.get(0).getPossessvehicle());
+						employeedetail.setIllnessaccident(empdetails.get(0).getIllnessaccident());
+						employeedetail.setJoininglocation(empdetails.get(0).getJoininglocation());
+						if(designation!=null){
+							employeedetail.setPostapplied(designation);
+						}else {
+							employeedetail.setPostapplied(empdetails.get(0).getPostapplied());
+						}
+						employeedetail.setRdate(empdetails.get(0).getRdate());
+						employeedetail.setDoa(empdetails.get(0).getDoa());
+						employeedetail.setBloodgroup(empdetails.get(0).getBloodgroup());
+						employeedetail.setDescription(empdetails.get(0).getDescription());
+						
+						UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
+						employeedetail.setUpdatedby(user.getUsername());
+						employeedetail.setUpdatedon(new Date());
+						
+						new EmpDetailService().update(employeedetail);
 						
 						respJSON = CommonWebUtil.buildSuccessResponse();
 					}

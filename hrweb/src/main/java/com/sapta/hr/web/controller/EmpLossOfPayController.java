@@ -258,4 +258,36 @@ public class EmpLossOfPayController {
 		return jsonresp != null ? jsonresp.toString() : "";
 	}
 	
+	public String retriveByBetweenDate(long empid, String selecteddatevalue) {
+		String jsonresp = null;
+		try {
+			Calendar c = Calendar.getInstance();
+			String selectemonth = selecteddatevalue;
+			Date startdate = CommonUtil.convertStringToDateValue(selectemonth);
+			c.setTime(startdate);
+			c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+			
+			Date enddate = c.getTime();
+			long loseofpay = 0;
+			List<EmpLoseOfPayDO> payrolldata = new EmpLoseOfPayService().retriveByEmpIdAndStartdateEnddate(empid, startdate, enddate);
+			if(payrolldata.size() > 0){
+				for (EmpLoseOfPayDO empLoseOfPayDO : payrolldata) {
+					if((empLoseOfPayDO.getStartdate()).equals(empLoseOfPayDO.getEnddate())){
+						loseofpay = loseofpay + 1;
+					}else{
+						long diff =  empLoseOfPayDO.getEnddate().getTime() - empLoseOfPayDO.getStartdate().getTime();
+						long diffDays = diff / (24 * 60 * 60 * 1000);
+						loseofpay = loseofpay + diffDays + 1;
+					}
+				}
+				
+				
+			}
+			
+			jsonresp = String.valueOf(loseofpay);
+		} catch (Exception e) { }
+
+		return jsonresp != null ? jsonresp.toString() : "";
+	}
+	
 }

@@ -85,6 +85,31 @@ public class EmpAssignmentDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<EmpAssignmentDO> retriveByProjectId(long id) throws AppException {
+		@SuppressWarnings("unused")
+		EmpAssignmentDO empassigndo = null;
+		List<EmpAssignmentDO> empAssignmentList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null && id > 0) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpAssignmentDO.FIND_BY_PROJ_ID);
+				q.setParameter(CommonConstants.PROJECT_ID, id);
+				empAssignmentList = (List<EmpAssignmentDO>) q.getResultList();
+				if (empAssignmentList != null && empAssignmentList.size() > 0) {
+					empassigndo = empAssignmentList.get(0);
+				}
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010, CustomPropertyManager.getProperty(ExceptionConstant._91010), eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return empAssignmentList;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<EmpAssignmentDO> retriveByEmpId(long id) throws AppException {
 		@SuppressWarnings("unused")
 		EmpAssignmentDO empassigndo = null;

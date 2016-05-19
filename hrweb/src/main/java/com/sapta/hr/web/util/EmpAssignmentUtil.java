@@ -96,6 +96,9 @@ public class EmpAssignmentUtil {
 		result.put(CommonConstants.STATUS, String.valueOf(assigndo.getStatus()));
 		result.put(CommonConstants.COMMENTS, assigndo.getComments());
 		result.put(CommonConstants.POWO, assigndo.getPo_wo());
+		result.put(CommonConstants.AMOUNT, assigndo.getAmount());
+		result.put(CommonConstants.AMOUNT_TYPE, assigndo.getAmounttype());
+		result.put(CommonConstants.BILL_TYPE, String.valueOf(assigndo.getBilltype()));
 		return result;
 	}
 
@@ -130,6 +133,21 @@ public class EmpAssignmentUtil {
 				result.put(project.getDispname());
 			}
 		}
+		
+		String billType = assigndo.getBilltype();
+		if(String.valueOf(billType).equalsIgnoreCase("f")){
+			result.put(CommonConstants.FIXED);
+		} else if(String.valueOf(billType).equalsIgnoreCase("d")){
+			result.put(CommonConstants.DAILY);
+		} else if(String.valueOf(billType).equalsIgnoreCase("w")){
+			result.put(CommonConstants.WEEKLY);
+		} else if(String.valueOf(billType).equalsIgnoreCase("m")){
+			result.put(CommonConstants.MONTHLY);
+		} else if(String.valueOf(billType).equalsIgnoreCase("h")){
+			result.put(CommonConstants.HOURLY);
+		} else {
+			result.put("-");
+		}
 		result.put(CommonUtil.convertDateToStringWithOutTime(assigndo.getStartdate()));
 		if(assigndo.getEnddate() != null){
 			result.put(CommonUtil.convertDateToStringWithOutTime(assigndo.getEnddate()));
@@ -141,7 +159,6 @@ public class EmpAssignmentUtil {
 		} else if(String.valueOf(assigndo.getStatus()).equalsIgnoreCase("i")){
 			result.put(CommonConstants.CLOSED);
 		}
-		
 		return result;
 	}
 }

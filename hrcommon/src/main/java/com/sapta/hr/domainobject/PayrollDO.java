@@ -59,8 +59,6 @@ public class PayrollDO implements Serializable {
 	
 	private Double pf;
 	
-	private Double lop;
-	
 	private Double empmonthlyctc;
 	
 	private Long dayspayable;
@@ -155,15 +153,6 @@ public class PayrollDO implements Serializable {
 
 	public void setPf(Double pf) {
 		this.pf = pf;
-	}
-
-	
-	public Double getLop() {
-		return lop;
-	}
-
-	public void setLop(Double lop) {
-		this.lop = lop;
 	}
 
 	public Double getEmpmonthlyctc() {

@@ -348,13 +348,13 @@ public class InvoiceReportServlet extends BaseServlet {
 					receiveddetailstable.addCell(receievedamountcellvalue);
 					
 					String amountType = "";
-					if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("i")){
+					if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("inr")){
 						amountType = "INR";
-					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("u")){
+					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("usd")){
 						amountType = "USD";
-					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("e")){
+					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("eur")){
 						amountType = "EUR";
-					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("g")){
+					}else if(String.valueOf(invoicelists.getReceivedamounttype()).equalsIgnoreCase("gbp")){
 						amountType = "GBP";
 					}
 					PdfPCell receievedamounttypecellvalue = new PdfPCell(new Paragraph(amountType, font8)); 
@@ -496,13 +496,13 @@ public class InvoiceReportServlet extends BaseServlet {
 					
 				String amounttype = "";
 				
-				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("i")){
+				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("inr")){
 					amounttype = "INR";
-				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("u")){
+				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("usd")){
 					amounttype = "USD";
-				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("e")){
+				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("eur")){
 					amounttype = "EUR";
-				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("g")){
+				}else if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("gbp")){
 					amounttype = "GBP";
 				}
 				PdfPCell totalcell = new PdfPCell(new Paragraph("Total ("+amounttype+")", fontbold8));
@@ -568,14 +568,14 @@ public class InvoiceReportServlet extends BaseServlet {
 					netamtcell_value.setPaddingRight(5);
 					totaltbl.addCell(netamtcell_value);
 				}
-				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("i")){
+				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("inr")){
 					double subtotalamount = invoicelists.getTotalamount() ;
 					float[] servicetaxcolumn = {8f,1.5f};
 					servicetaxtable = new PdfPTable(servicetaxcolumn);
 					servicetaxtable.setWidthPercentage(100f);
 					servicetaxtable.setSpacingBefore(10f);
 					
-					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax (14.5%)", fontbold8));
+					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax (15%)", fontbold8));
 					servicetaxcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					servicetaxcell.setBorder(0);
 					servicetaxtable.addCell(servicetaxcell);
@@ -651,7 +651,7 @@ public class InvoiceReportServlet extends BaseServlet {
 		
 				document.add(duedatetbl);
 				document.add(totaltbl);
-				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("i")){
+				if(String.valueOf(invoicelists.getAmounttype()).equalsIgnoreCase("inr")){
 					
 					document.add(subtotaltbl);
 					document.add(servicetaxtable);

@@ -24,7 +24,7 @@
 							<td align="right" style="margin-left:auto; margin-top:0;">Amount&nbsp;Paid&nbsp;:</td>
 						<!-- 	<td class="WebRupee PADDRGT1PX BLD rupyaINR" width="2px !important" style="padding-top: 9px;" style="margin-left:0px;margin-top: 6px !important;">&#x20B9;</td> -->
 						<!-- 	<td id="currenttotalamttd" class="PADDLFT1PX BLD" width="auto"style="margin-left:0px;margin-top: 6px !important;"></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px; font-weight: bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white; width: 109px; font-weight: bold;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px; font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white; width: 109px; font-weight: bold;" /></td>
 						</tr>
 					</table>
 				</div>
@@ -37,7 +37,7 @@
 							<th class="">Category</th>
 							<th class="">Expense&nbsp;Type</th>
 							<th class="">Description</th>
-							<th class="">Amount&nbsp;(<span class="rupyaINR">&#x20B9;</span>)</th>
+							<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -2,6 +2,7 @@ package com.sapta.hr.domainobject;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 		@NamedQuery(name = "EmpAssignmentDO.findAll", query = "SELECT e FROM EmpAssignmentDO e"),
 		@NamedQuery(name = "EmpAssignmentDO.findbyId", query = "SELECT e FROM EmpAssignmentDO e where e.id =:empid"),
-		@NamedQuery(name = "EmpAssignmentDO.findbyEmpId", query = "SELECT e FROM EmpAssignmentDO e where e.empid =:empid")
+		@NamedQuery(name = "EmpAssignmentDO.findbyEmpId", query = "SELECT e FROM EmpAssignmentDO e where e.empid =:empid"),
+		@NamedQuery(name = "EmpAssignmentDO.findbyProjId", query = "SELECT e FROM EmpAssignmentDO e where e.projectid =:projectid")
 
 })
 public class EmpAssignmentDO implements Serializable {
@@ -29,6 +31,7 @@ public class EmpAssignmentDO implements Serializable {
 
 	public static final String FIND_BY_ID = "EmpAssignmentDO.findbyId";
 	public static final String FIND_BY_EMP_ID = "EmpAssignmentDO.findbyEmpId";
+	public static final String FIND_BY_PROJ_ID = "EmpAssignmentDO.findbyProjId";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "empassignment")
@@ -49,6 +52,12 @@ public class EmpAssignmentDO implements Serializable {
 	private char status;
 	
 	private String po_wo;
+	
+	private String amounttype;
+	
+	private String billtype;
+	
+	private Double amount;
 
 	private String updatedby;
 
@@ -111,6 +120,38 @@ public class EmpAssignmentDO implements Serializable {
 		this.status = status;
 	}
 
+	public String getPo_wo() {
+		return po_wo;
+	}
+
+	public void setPo_wo(String po_wo) {
+		this.po_wo = po_wo;
+	}
+
+	public String getAmounttype() {
+		return amounttype;
+	}
+
+	public void setAmounttype(String amounttype) {
+		this.amounttype = amounttype;
+	}
+
+	public String getBilltype() {
+		return billtype;
+	}
+
+	public void setBilltype(String billtype) {
+		this.billtype = billtype;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
 	public String getUpdatedby() {
 		return updatedby;
 	}
@@ -126,12 +167,4 @@ public class EmpAssignmentDO implements Serializable {
 	public void setUpdatedon(Date updatedon) {
 		this.updatedon = updatedon;
 	}
-	public String getPo_wo() {
-		return po_wo;
-	}
-	
-	public void setPo_wo(String po_wo) {
-		this.po_wo = po_wo;
-	}
-	
 }

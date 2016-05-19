@@ -34,17 +34,28 @@
 									</select> --%>
 								</td>
 							</tr>
-							<tr id = "projselect" >
+							<tr>
+								<td align="right" class="resChooser"><sup class="saptaColor">*</sup>Choose&nbsp;Customer&nbsp;:</td>
+								<td align="left" class="resChooser" >						
+									<select id="customerid" class="leftElement" tabindex="2" onmousedown="if(this.options.size>3){this.size=3};">
+									   	<option value="" style="text-align:center">--- Select  Customer ---</option> 
+									  	<c:forEach items="${customerList}" var="customer">
+					 						<option value="${customer.id}" style="text-align:left">${customer.id} - ${customer.name}</option>
+										</c:forEach>
+									</select>
+								</td>
+							</tr>
+							<tr id = "projselect"  class="hidden">
 								<td align="right" ><sup class="saptaColor">*</sup>Choose Project&nbsp;:</td>
 								<td align="left">						
 									<select id="sprojid">
 									
 									<!-- old width value of select is width: 200px; -->
 									
-									<option value="" style="text-align:center">--- Select  Project ---</option> 
+									<%-- <option value="" style="text-align:center">--- Select  Project ---</option> 
 										<c:forEach items="${projectList}" var="project">
 											<option value="${project.id}" style="text-align:left">${project.id} - ${project.name}</option>
-										</c:forEach>
+										</c:forEach> --%>
 									</select>
 								</td>
 							</tr>
@@ -63,6 +74,38 @@
 							<tr  class="hidden addassignmentdetailtr">
 								<td align="right">PO / WO&nbsp;:</td>
 								<td><input name="powo" id="powo" type="text"  /></td>
+							</tr>
+							
+							<tr  class="hidden addassignmentdetailtr">
+								<td align="right">Amount&nbsp;:</td>
+								<td><input name="amount" id="amount" type="text"  /></td>
+							</tr>
+							
+							<tr  class="hidden addassignmentdetailtr">
+								<td align="right" style="float:none" >Choose&nbsp;Amount&nbsp;Type&nbsp;:</td>
+								<td align="left" style="float:none">						
+									<select id="amounttype" >
+										<option value="" style="text-align: center;">--- Amount Type ---</option>
+										<option value="inr" style="text-align: left;">INR</option>
+										<option value="usd" style="text-align: left;">USD</option>
+										<option value="eur" style="text-align: left;">EUR</option>
+										<option value="gbp" style="text-align: left;">GBP</option> 
+									</select>
+								</td>
+							</tr>
+							
+							<tr class="hidden addassignmentdetailtr">
+								<td align="right" style="float:none">Choose&nbsp;Project&nbsp;Type&nbsp;:</td>
+								<td align="left" style="float:none">						
+									<select id="billtype" >
+										<option value="" style="text-align: center;">--- Project Type ---</option>
+										<option value="h" style="text-align: left;">Hourly</option>
+										<option value="d" style="text-align: left;">Daily</option>
+										<option value="w" style="text-align: left;">Weekly</option>
+										<option value="m" style="text-align: left;">Monthly</option>
+										<option value="f" style="text-align: left;">Fixed</option> 
+									</select>
+								</td>
 							</tr>
 							
 							<tr  class="hidden addassignmentdetailtr">
@@ -185,14 +228,52 @@
 				}
 			});
 			
-			$('#sempid').on('change', function (e){
+			/* $('#sempid').on('change', function (e){
 				if($("#sempid").val() != "")
 					 $("#projselect").removeClass("hidden");
 				else{
 					 $("#projselect").addClass("hidden");
 					  $(".addassignmentdetailtr").addClass("hidden");
 				}
-			});
+			}); */
+			
+			$('#customerid').on('change', function (e){
+				if($("#customerid").val() != ""){
+					 $("#projselect").removeClass("hidden");
+					var resourceURL = $("#contextpath").val()+"/project/retrivebycustid/"+$("#customerid").val();
+					 $.ajax({
+					        url : resourceURL,
+					        type : 'GET',
+					        dataType : 'json',
+					        success: function(data) {
+					        	var successflag = data.response.successflag;
+					        	var errors = data.response.errors;
+					        	var results = data.response.result;
+					        	
+					        	if(successflag == "true"){
+					        		$('#sprojid').find('option').remove();
+					        		var optionTag = "<option value='null' style='text-align: center;'>--- Select Project ---</option>";
+					        		$('#sprojid').append(optionTag);
+					        		 for(var i = 0; i < results.length; i++){
+					        			$('#sprojid').append($('<option>', { 
+								            value: results[i].id,
+								            text : results[i].dispname,
+								            style: "text-align: left;"
+								        }));
+					        		}
+					        	}else{
+					        		$("#projselect").addClass("hidden");
+					        	} 
+					        },
+					        error: function (xhr, ajaxOptions, thrownError) {
+					        	$("#errorMsgContent").html(thrownError);
+					    		$.fancybox.open('#errorMsg');
+					   		}
+					   });
+				} else {
+					$("#projselect").addClass("hidden");
+				}
+		    });
 			
 			$('#addassignment').click(function(){
 				$("body").css("cursor", "progress");
@@ -206,7 +287,9 @@
 				var eid = $("#sempid").val();
 				var projid = $("#sprojid").val();
 				var powo = $("#powo").val();
-				
+				var amount = $("#amount").val();
+				var amounttype = $("#amounttype").val();
+				var billtype = $("#billtype").val();
 				if(sdate == "" || sdate.length == 0) validation = false;
 				//if(edate == "" || edate.length == 0) validation = false;
 				if(status == "" || status.length == 0) validation = false;
@@ -222,8 +305,12 @@
 				}else{
 					if(comment == "" || comment.length == 0) comment = "null";
 					if(edate == "" || edate.length == 0) edate = "null";
+					/* if(eid == "" || eid.length == 0) eid = "null"; */
 					if(powo == "" || powo.length == 0) powo = "null";
-					var resourceURL = $("#contextpath").val()+"/assignment/add/"+sdate+"/"+edate+"/"+powo+"/"+comment+"/"+status+"/"+eid+"/"+projid;
+					if(amount == "" || amount.length == 0) amount = "null";
+					if(amounttype == "" || amounttype.length == 0) amounttype = "null";
+					if(billtype == "" || billtype.length == 0) billtype = "null";
+					var resourceURL = $("#contextpath").val()+"/assignment/add/"+sdate+"/"+edate+"/"+powo+"/"+comment+"/"+status+"/"+eid+"/"+projid+"/"+amount+"/"+amounttype+"/"+billtype;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -237,6 +324,9 @@
 							$("#sempid").val("");
 							$("#sprojid").val("");
 							$("#powo").val("");
+							$("#amount").val("");
+							$("#amounttype").val("");
+							$("#billtype").val("");
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;

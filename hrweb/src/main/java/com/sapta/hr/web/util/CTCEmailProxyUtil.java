@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -25,7 +23,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,7 +75,6 @@ public class CTCEmailProxyUtil {
 	
 			// creates a new e-mail message
 			Message msg = new MimeMessage(session);
-	
 			msg.setFrom(new InternetAddress(request.getServletContext().getInitParameter(CommonConstants.PAYROLL_EMAIL)));
 			if (employeeList != null && employeeList.size() > 0 ) {
 				InternetAddress[] toAddresses = { new InternetAddress(employeeList.get(0).getEmail()) };
@@ -115,12 +111,12 @@ public class CTCEmailProxyUtil {
 	        multipart.addBodyPart(messageBodyPart);
 	        
 	        // Part two is attachment
-	        messageBodyPart = new MimeBodyPart();
+	        /*messageBodyPart = new MimeBodyPart();
 	        
 	        DataSource source = new ByteArrayDataSource(baos.toByteArray(), CommonConstants.APPLICATION_PDF);
 	        messageBodyPart.setDataHandler(new DataHandler(source));
 	        messageBodyPart.setFileName(employeeid+"_"+startdate + CommonConstants.DOT_PDF);
-	        multipart.addBodyPart(messageBodyPart);
+	        multipart.addBodyPart(messageBodyPart);*/
 	        
 	        // Send the complete message parts
 	        msg.setContent(multipart);

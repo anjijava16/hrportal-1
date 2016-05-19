@@ -28,9 +28,9 @@
 					<table id="pttable"  align ="center" class="optionTable" >
 						<tr >
 							<td  align="right" id="totalcounttd1"   style="margin-left:auto;margin-top:0px;">PT&nbsp;Amount&nbsp;Paid&nbsp;:</td>
-						    <!-- <td class="WebRupee BLD rupyaINR" >&#x20B9;</td>   -->
+						    <!-- <td class="WebRupee BLD rupyaINR" class="rupyaINR WebRupee" >&#x20B9;</td>   -->
 							<%-- <td id="currenttotalamttd" class="PADDLFT1PX BLD"  >${totalamount}</td> --%>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px; padding: 0px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px; padding: 0px;" /></td>
 							<!-- <td id="choosentotalamttd"  class="PADDLFT1PX hidden BLD"></td> -->
 						</tr>
 					</table>
@@ -41,7 +41,7 @@
 							<tr>
 								<th class="first">Employee&nbsp;Id  &nbsp</th>
 								<th class="">PT&nbsp;Month</th>
-								<th class="">Amount(<span class="rupyaINR">&#x20B9;</span>) &nbsp</th>
+								<th class="">Amount(<span class="rupyaINR WebRupee">&#x20B9;</span>) &nbsp</th>
 							</tr>
 						</thead>	
 						 			

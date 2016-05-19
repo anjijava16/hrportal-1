@@ -10,6 +10,7 @@ import com.sapta.hr.domainobject.PayrollData;
 import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.exception.AppException;
 import com.sapta.hr.util.CommonConstants;
+import com.sapta.hr.web.controller.EmpLossOfPayController;
 
 
 public class PayrollUtil {
@@ -166,6 +167,7 @@ public class PayrollUtil {
 	
 	private static JSONObject getPayrollListDetailsObject(PayrollDO payrollDO) throws JSONException, AppException {
 		JSONObject result = new JSONObject();
+		EmpLossOfPayController empLop = new EmpLossOfPayController();
 		result.put(CommonConstants.ID, payrollDO.getId());
 		result.put(CommonConstants.EMP_ID, payrollDO.getEmpid());
 		result.put(CommonConstants.BASIC_PAY, payrollDO.getBasic());
@@ -173,7 +175,12 @@ public class PayrollUtil {
 		result.put(CommonConstants.PERSONAL_ALLOWANCES, payrollDO.getPersonal());
 		result.put(CommonConstants.CONVEYANCE_ALLOWANCES, payrollDO.getConveyance());
 		result.put(CommonConstants.PROFESSIONAL_TAX, payrollDO.getPt());
-		result.put(CommonConstants.LOSS_OF_PAY, payrollDO.getLop());
+		String lop = empLop.retriveByBetweenDate(payrollDO.getEmpid(), String.valueOf(payrollDO.getPayrollmonth()));
+		if(lop!=null){
+			result.put(CommonConstants.LOSS_OF_PAY, lop);
+		}else{
+			result.put(CommonConstants.LOSS_OF_PAY, "");
+		}
 		result.put(CommonConstants.PROVIDENT_FUND, payrollDO.getPf());
 		result.put(CommonConstants.TAX_DEDUCTION_SOURCE, payrollDO.getTds());
 		result.put(CommonConstants.TDMONTH, payrollDO.getPt());
@@ -184,6 +191,7 @@ public class PayrollUtil {
 		result.put(CommonConstants.DAYS_PAYABLE, payrollDO.getDayspayable());
 		return result;
 	}
+	
 	
 	
 }

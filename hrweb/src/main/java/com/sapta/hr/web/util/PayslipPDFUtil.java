@@ -576,7 +576,6 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 			for (EmpBonusDO empBonusDO : empBonusList) {
 				bonusamount = bonusamount + empBonusDO.getBonusamount();
 			}
-			
 			Rectangle rectangle = new Rectangle(523, 770);
 			payroll.setWidthPercentage(new float[] { 175, 86.5f, 175, 86.5f }, rectangle);
 
@@ -650,7 +649,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrolldescamtcell_1.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_1);
 				} else {
-					PdfPCell payrolldescamtcell_1 = new PdfPCell(new Paragraph(String.valueOf(""), font8));
+					PdfPCell payrolldescamtcell_1 = new PdfPCell(new Paragraph(String.valueOf("0.00"), font8));
 					payrolldescamtcell_1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_1.setPaddingTop(5);
 					payrolldescamtcell_1.setPaddingBottom(5);
@@ -667,8 +666,8 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 				payrollcell_4.setBorderColor(BaseColor.GRAY);
 				payrollcell_4.setBorder(Rectangle.LEFT);
 				payroll.addCell(payrollcell_4);
-
-				PdfPCell payrollamountcell_4 = new PdfPCell(new Paragraph(twodigitconversion.format(pay.getHra()), font8));
+				
+				PdfPCell payrollamountcell_4 = new PdfPCell(new Paragraph((pay.getHra()!=null?twodigitconversion.format(pay.getHra()):"0.00"), font8));
 				payrollamountcell_4.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				payrollamountcell_4.setPaddingTop(5);
 				payrollamountcell_4.setPaddingBottom(5);
@@ -686,7 +685,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 				payroll.addCell(payrolldPTcell_2);
 
 				if (pay.getPt() != null) {
-					PdfPCell payrolldescamtcell_2 = new PdfPCell(new Paragraph(String.valueOf(twodigitconversion.format(pay.getPt())), font8));
+					PdfPCell payrolldescamtcell_2 = new PdfPCell(new Paragraph((pay.getPt()!=null?String.valueOf(twodigitconversion.format(pay.getPt())):"0.00"), font8));
 					payrolldescamtcell_2.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_2.setPaddingTop(5);
 					payrolldescamtcell_2.setPaddingBottom(5);
@@ -694,7 +693,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrolldescamtcell_2.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_2);
 				} else {
-					PdfPCell payrolldescamtcell_2 = new PdfPCell(new Paragraph("", font8));
+					PdfPCell payrolldescamtcell_2 = new PdfPCell(new Paragraph("0.00", font8));
 					payrolldescamtcell_2.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_2.setPaddingTop(5);
 					payrolldescamtcell_2.setPaddingBottom(5);
@@ -738,7 +737,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrolldescamtcell_3.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_3);
 				} else {
-					PdfPCell payrolldescamtcell_3 = new PdfPCell(new Paragraph("", font8));
+					PdfPCell payrolldescamtcell_3 = new PdfPCell(new Paragraph("0.00", font8));
 					payrolldescamtcell_3.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_3.setPaddingTop(5);
 					payrolldescamtcell_3.setPaddingBottom(5);
@@ -770,7 +769,9 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 				payrolldtdscell_4.setBorderColor(BaseColor.GRAY);
 				payrolldtdscell_4.setBorder(Rectangle.LEFT);
 				payroll.addCell(payrolldtdscell_4);
-				Double lopvalue  = pay.getLop();
+				/*EmpLossOfPayController empLop = new EmpLossOfPayController();
+				//Double lopvalue  = pay.getLop();
+				String lopvalue = empLop.retriveByBetweenDate(pay.getEmpid(), String.valueOf(pay.getPayrollmonth()));
 				if(lopvalue == null){
 					PdfPCell payrolldescamtcell_4 = new PdfPCell(new Paragraph("", font8));
 					payrolldescamtcell_4.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -779,17 +780,15 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrolldescamtcell_4.setBorderColor(BaseColor.GRAY);
 					payrolldescamtcell_4.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_4);
-				}else if(lopvalue != 0 || pay.getLop() != 0.00 ){
-					PdfPCell payrolldescamtcell_4 = new PdfPCell(new Paragraph(/*String.valueOf(twodigitconversion.format(pay.getLop()))*/"", font8));
+				} else if(Double.valueOf(lopvalue) != 0 || Double.valueOf(lopvalue) != 0.00 ){
+					PdfPCell payrolldescamtcell_4 = new PdfPCell(new Paragraph(String.valueOf(twodigitconversion.format(lopvalue)), font8));
 					payrolldescamtcell_4.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_4.setPaddingTop(5);
 					payrolldescamtcell_4.setPaddingBottom(5);
 					payrolldescamtcell_4.setBorderColor(BaseColor.GRAY);
 					payrolldescamtcell_4.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_4);
-				}
-				
-				else {
+				} else {
 					PdfPCell payrolldescamtcell_4 = new PdfPCell(new Paragraph("", font8));
 					payrolldescamtcell_4.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrolldescamtcell_4.setPaddingTop(5);
@@ -797,7 +796,14 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrolldescamtcell_4.setBorderColor(BaseColor.GRAY);
 					payrolldescamtcell_4.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
 					payroll.addCell(payrolldescamtcell_4);
-				}
+				}*/
+				PdfPCell payrolldescamtcell_4 = new PdfPCell(new Paragraph("", font8));
+				payrolldescamtcell_4.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				payrolldescamtcell_4.setPaddingTop(5);
+				payrolldescamtcell_4.setPaddingBottom(5);
+				payrolldescamtcell_4.setBorderColor(BaseColor.GRAY);
+				payrolldescamtcell_4.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
+				payroll.addCell(payrolldescamtcell_4);
 				
 				if(bonusamount != 0){
 					PdfPCell payrollcell_bonus = new PdfPCell(new Paragraph("Bonus", font8));
@@ -809,7 +815,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 					payrollcell_bonus.setBorder(Rectangle.LEFT);
 					payroll.addCell(payrollcell_bonus);
 					
-					PdfPCell payrollamountcell_bonus = new PdfPCell(new Paragraph(String.valueOf(twodigitconversion.format(bonusamount)), font8));
+					PdfPCell payrollamountcell_bonus = new PdfPCell(new Paragraph((bonusamount!=0?String.valueOf(twodigitconversion.format(bonusamount)):"0.00"), font8));
 					payrollamountcell_bonus.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					payrollamountcell_bonus.setPaddingTop(5);
 					payrollamountcell_bonus.setPaddingBottom(5);
@@ -860,7 +866,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 				payrolldeductioncell_5.setBorder(Rectangle.TOP | Rectangle.BOTTOM | Rectangle.RIGHT | Rectangle.LEFT);
 				payroll.addCell(payrolldeductioncell_5);
 	
-				String totaldeduct = "";
+				String totaldeduct = "0.00";
 				if(pay.getTotaldeduction() != null){
 					totaldeduct = twodigitconversion.format(pay.getTotaldeduction());
 				}

@@ -61,6 +61,26 @@ public class EmpCTCDO implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date enddate;
 	
+	private String bandchange;
+	
+	private String designation;
+	
+	public String getBandchange() {
+		return bandchange;
+	}
+
+	public void setBandchange(String bandchange) {
+		this.bandchange = bandchange;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
 	private String updatedby;
 	
 	@Temporal(TemporalType.TIMESTAMP)

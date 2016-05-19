@@ -34,7 +34,7 @@
 						</tr>
 						<tr>
 							<td class="currenttotalamtrupyatd1 mobMART0PX" align=right id="totalcounttd1">Total&nbsp;Amount&nbsp;:</td>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;">&#x20B9;</span><span id="currenttotalamttd"  style="border: 0;background-color: white; width: 109px;font-weight:bold;" >${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="border: 0;background-color: white; width: 109px;font-weight:bold;" >${totalamount}</span></td>
 						</tr>
 						
 					</table>
@@ -43,9 +43,9 @@
 					<table id="totalcount" align ="center">
 						<tr>
 							<td align=right id="totalcounttd1">Total&nbsp;Amount&nbsp;:</td>
-							<!-- <td c4lass="currenttotalamtrupyatd" style="margin-left:auto;">&#x20B9;</td> -->
+							<!-- <td c4lass="currenttotalamtrupyatd" style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td> -->
 							<td align="left"  id="currenttotalamttd" class="PADDLFT1PX BLD" >${totalamount}</td>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;">&#x20B9;</span><span id="currenttotalamttd"  style="border: 0;background-color: white;">${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="border: 0;background-color: white;">${totalamount}</span></td>
 						</tr>
 						
 					</table>
@@ -108,7 +108,7 @@
 							 	<table  align ="center" style="left:0; float: left;" class="WDTH50PER MOBWID275PX">
 									<tr>
 										<td align="right" style="margin-top: 0px; width:51%; ">Annual&nbsp;CTC&nbsp;:</td>
-										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD"  ><span style="margin-left: 10px;font-weight: bold;">&#x20B9;</span><input id="annualctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
+										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD"  ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="annualctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
 							
 									</tr>
 								</table>
@@ -118,9 +118,9 @@
 									<tr>
 										<td align="right" style="margin-top: 0px; width:51%; " >Monthly&nbsp;CTC&nbsp;:</td>
 										<!-- <td class="middlecellcol" style="width: 24px;">:</td> -->
-										<!--  <td class="WebRupee PADDRGT1PX BLD rupyaINR" width="11px" style="padding-top: 2px;">&#x20B9;</td> -->
+										<!--  <td class="WebRupee PADDRGT1PX BLD rupyaINR" width="11px" style="padding-top: 2px;" class="rupyaINR WebRupee">&#x20B9;</td> -->
 										<!-- <td id="monthlyctctd" class="PADDLFT1PX BLD"  width="192px"><input id="monthlyctc" disabled="disabled" class="inputdisable" style="font-weight: bold";></input></td> -->
-										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;">&#x20B9;</span><input id="monthlyctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
+										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="monthlyctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
 							
 									</tr>
 								</table>
@@ -233,7 +233,7 @@
 									</tr>
 									<tr>
 										<td class="bottomcell2 MOBWIDTH">Bonus</td>
-										<td class="bottomcell6 MOBWIDTH"><div id="mbonus" class="sal_details_table_div"  style="width: 100px;  float: right; padding: 2px;" ></div></td>
+										<td class="bottomcell6 MOBWIDTH"><div id="mbonus" class="sal_details_table_div"  style="width: 100px; float: right; padding: 2px;"></div></td>
 										<td class="bottomcell2 MOBWIDTH"><div id="" class="sal_details_table_div"></div></td>
 										<td class="bottomcell3 MOBWIDTH"><div id="" class="sal_details_table_div"></div></td>
 									</tr>
@@ -918,11 +918,11 @@
 				
 				montlySalCalculator(monthlyctc);
 			}else{
-				$("#tds").html(0);
+				$("#tds").html("0.00");
 			}
 		});
 		
-		$("#mbonus").bind('keyup mouseup', function () {
+		/* $("#mbonus").bind('keyup mouseup', function () {
 			
 			if($("#mbonus").html() != ""){
 				var bonus = $("#mbonus").html();
@@ -931,9 +931,9 @@
 				
 				montlySalCalculator(monthlyctc);
 			}else{
-				$("#mbonus").html("");
+				$("#mbonus").html(0);
 			}
-		});
+		}); */
 		function paysalarynow(payrolltype){
 			$("body").css("cursor", "progress");
 			var basic = $("#mbasic").html();
@@ -941,6 +941,7 @@
 			var misc = $("#mmisc").html();
 			var personal = $("#mpersonal").html();
 			var conveyance = $("#mconvay").html();
+			var bonus = $("#mbonus").html();
 			var pt = $("#mpt").html();
 			var tds = $("#tds").html();
 			var pf = $("#mpf").html();
@@ -967,7 +968,9 @@
 			if(lop == null || lop == undefined || lop == "" || lop == 0.00 || lop == "0.00"){
 				lop = 0;
 			}
-		
+			if(bonus == null || bonus == undefined || bonus == "" || bonus == 0.00 || bonus == "0.00"){
+				bonus = 0;
+			}
 			if(totaldeduction == null || totaldeduction == undefined || totaldeduction == "" || totaldeduction == 0.00 || totaldeduction == "0.00"){
 				totaldeduction = 0;
 			}
@@ -977,7 +980,7 @@
 				payrollmonth = payrollmonth.split('/').join('-');
 			}
 			
-			var resourceURL = $("#contextpath").val()+"/payroll/add/"+empid+"/"+basic+"/"+hra+"/"+personal+"/"+conveyance+"/"+pt+"/"+tds+"/"+pf+"/"+lop+"/"+totalearnings+"/"+totaldeduction+"/"+empmonthlyctc+"/"+netpayableamount+"/"+payrollmonth+"/"+dayspayable+"/"+payrolltype;
+			var resourceURL = $("#contextpath").val()+"/payroll/add/"+empid+"/"+basic+"/"+hra+"/"+personal+"/"+conveyance+"/"+bonus+"/"+pt+"/"+tds+"/"+pf+"/"+lop+"/"+totalearnings+"/"+totaldeduction+"/"+empmonthlyctc+"/"+netpayableamount+"/"+payrollmonth+"/"+dayspayable+"/"+payrolltype;
 			$.ajax({
 		        url : resourceURL,
 		        type : 'GET',
@@ -1204,36 +1207,34 @@
 							}
 						});
 						
-						
-						// ajax call for bonus start
-						var bonusMonth = monthConversion(date);
-							bonusMonth = bonusMonth.split('/').join('-');
-						var resourceURL = $("#contextpath").val()+"/empbonus/getempbonus/"+empid+"/"+bonusMonth;
-						$.ajax({
-							url : resourceURL,
-							type : 'GET',
-							async : false,
-							dataType : 'text',
-							success: function(data) {
-								if(data != 0){
-									$("#mbonus").html(data);
-								}else{
-									$("#mbonus").html("");
-								}
-									
-							},
-							error: function (xhr, ajaxOptions, thrownError) {
-								$("#errorMsgContent").html(thrownError);
-								$.fancybox.open('#errorMsg');
-							}
-						});
+						 // ajax call for bonus start			
+						var bonusMonth = monthConversion(date);			
+								bonusMonth = bonusMonth.split('/').join('-');			
+						var resourceURL = $("#contextpath").val()+"/empbonus/getempbonus/"+empid+"/"+bonusMonth;			
+						$.ajax({			
+								url : resourceURL,			
+								type : 'GET',			
+								async : false,			
+								dataType : 'text',			
+								success: function(data) {			
+										if(data != 0){			
+												$("#mbonus").html(parseFloat(data).toFixed(2));
+												$("#mbonus").parent("td").parent("tr").show();
+										}else{			
+												$("#mbonus").html("0.00");	
+												$("#mbonus").parent("td").parent("tr").hide();
+										}			
+															
+								},			
+								error: function (xhr, ajaxOptions, thrownError) {			
+										$("#errorMsgContent").html(thrownError);			
+										$.fancybox.open('#errorMsg');			
+								}			
+						});			
 						// ajax call for bonus end
-						
-						
 						var currentmonth  = date;
 						currentmonth = monthConversion(currentmonth);
 						currentmonth = currentmonth.split('/').join('-');
-						
 						var resourceURL = $("#contextpath").val()+"/payroll/retrivebyempidandcurrentmonth/"+empid+"/"+currentmonth;
 						
 						$.ajax({
@@ -1250,21 +1251,21 @@
 									$("#dayspayable").addClass("hidden");
 									$.each(results, function (i, result){
 										$("#mbasic").html((result.basicpay == undefined || result.basicpay == null || result.basicpay.length <= 0) ? "" : (result.basicpay).toFixed(2));
-										$("#mhra").html((result.hra == undefined || result.hra == null || result.hra.length <= 0) ? "" : (result.hra).toFixed(2));
-										$("#mconvay").html((result.conveyanceallowances == undefined || result.conveyanceallowances == null || result.conveyanceallowances.length <= 0) ? "" : (result.conveyanceallowances).toFixed(2));
-										$("#mpersonal").html((result.personalallowances == undefined || result.personalallowances == null || result.personalallowances.length <= 0) ? "" : (result.personalallowances).toFixed(2));
-										$("#mpf").html((result.providentfund == undefined || result.providentfund == null || result.providentfund.length <= 0 || result.providentfund == 0) ? "" : (result.providentfund).toFixed(2));
-										$("#mpt").html((result.professionaltax == undefined || result.professionaltax == null || result.professionaltax.length <= 0 || result.professionaltax == 0) ? "" : (result.professionaltax).toFixed(2));
+										$("#mhra").html((result.hra == undefined || result.hra == null || result.hra.length <= 0) ? "0.00" : (result.hra).toFixed(2));
+										$("#mconvay").html((result.conveyanceallowances == undefined || result.conveyanceallowances == null || result.conveyanceallowances.length <= 0) ? "0.00" : (result.conveyanceallowances).toFixed(2));
+										$("#mpersonal").html((result.personalallowances == undefined || result.personalallowances == null || result.personalallowances.length <= 0) ? "0.00" : (result.personalallowances).toFixed(2));
+										$("#mpf").html((result.providentfund == undefined || result.providentfund == null || result.providentfund.length <= 0 || result.providentfund == 0) ? "0.00" : (result.providentfund).toFixed(2));
+										$("#mpt").html((result.professionaltax == undefined || result.professionaltax == null || result.professionaltax.length <= 0 || result.professionaltax == 0) ? "0.00" : (result.professionaltax).toFixed(2));
 										$("#mlop").html((result.lossofpay == undefined || result.loseofpay == null || result.loseofpay.length <= 0 || result.loseofpay == 0) ? "" : result.loseofpay);
 										if(result.lossofpay > 0){
 											$("#lop_table").show();
 											$("#lossofpay").html(result.lossofpay);
 										}
-										//$("#mbonus").html((result.bonus == undefined || result.bonus == null || result.bonus.length <= 0 || result.bonus == 0) ? "" : (result.bonus).toFixed(2));
-										$("#tds").html((result.taxdeductionsource == undefined || result.taxdeductionsource == null || result.taxdeductionsource.length <= 0 || result.taxdeductionsource == 0) ? "" : (result.taxdeductionsource).toFixed(2));
-										$("#totalearnings").html((result.totalearnings == undefined || result.totalearnings == null || result.totalearnings.length <= 0) ? "" : (result.totalearnings).toFixed(2));
-										$("#totaldeduction").html((result.totaldeduction == undefined || result.totaldeduction == null || result.totaldeduction.length <= 0) ? "" : (result.totaldeduction).toFixed(2));
-										$("#netpayableamount").html((result.netpayableamount == undefined || result.netpayableamount == null || result.netpayableamount.length <= 0) ? "" : (result.netpayableamount).toFixed(2));
+										/* $("#mbonus").html((result.bonus == undefined || result.bonus == null || result.bonus.length <= 0 || result.bonus == 0) ? "0.00" : (result.bonus).toFixed(2)); */ 
+										$("#tds").html((result.taxdeductionsource == undefined || result.taxdeductionsource == null || result.taxdeductionsource.length <= 0 || result.taxdeductionsource == 0) ? "0.00" : (result.taxdeductionsource).toFixed(2));
+										$("#totalearnings").html((result.totalearnings == undefined || result.totalearnings == null || result.totalearnings.length <= 0) ? "0.00" : (result.totalearnings).toFixed(2));
+										$("#totaldeduction").html((result.totaldeduction == undefined || result.totaldeduction == null || result.totaldeduction.length <= 0) ? "0.00" : (result.totaldeduction).toFixed(2));
+										$("#netpayableamount").html((result.netpayableamount == undefined || result.netpayableamount == null || result.netpayableamount.length <= 0) ? "0.00" : (result.netpayableamount).toFixed(2));
 										$("#monthlyctc").val((result.empmonthlyctc == undefined || result.empmonthlyctc == null || result.empmonthlyctc.length <= 0) ? "" : (result.empmonthlyctc).toFixed(2));
 										$("#days").html((result.dayspayable == undefined || result.dayspayable == null || result.dayspayable.length <= 0) ? "" : result.dayspayable);
 										$("#tds").prop("contenteditable", false).css("border","none");
@@ -1467,7 +1468,7 @@
 									pt = 200; 
 									$("#mpt").html(parseFloat(pt).toFixed(2));
 								}else{
-									$("#mpt").html("");
+									$("#mpt").html("0.00");
 								}
 								var tds =0.00;
 								var pf = 0.00;
@@ -1501,14 +1502,19 @@
 								if(tds != 0 && tds != 0.00){
 									$("#tds").html(parseFloat(tds).toFixed(2));
 								}else{
-									$("#tds").html(0);
+									$("#tds").html("0.00");
 								}
-								
+								/* var bonus = 0.00;
+								if(bonus != 0 && bonus != 0.00){
+									$("#mbonus").html(parseFloat(bonus).toFixed(2));
+								}else{
+									$("#mbonus").html(0);
+								} */
 								
 								if(pf != 0 && pf != 0.00){
 									$("#mpf").html(parseFloat(pf).toFixed(2));
 								}else{
-									$("#mpf").html("");
+									$("#mpf").html("0.00");
 								}
 								if(mlop != 0 && pf != 0.00){
 									$("#mpf").html(parseFloat(pf).toFixed(2));
@@ -1578,14 +1584,14 @@
 			var bonus = $("#mbonus").html();
 			var totalearnings = 0;
 			if(conveyallowances <= 0){
-			$("#mconvay").html("");
+			$("#mconvay").html("0.00");
 			conveyallowances = 0;
 			personalallowances = monltlyamount - (basicsalary + hraallowances); 
 			}else{
 			$("#mconvay").html((conveyallowances).toFixed(2));
 			}
 			if(bonus == "") bonus = 0;
-			if(parseFloat(bonus) > 0){
+			if(bonus > 0){
 				totalearnings = (basicsalary + hraallowances + conveyallowances + personalallowances + parseFloat(bonus));
 			}else{
 				totalearnings = (basicsalary + hraallowances + conveyallowances + personalallowances);
@@ -1603,7 +1609,7 @@
 			if(Math.round(totaldeduction).toFixed(2) != 0.00){
 				$("#totaldeduction").html(Math.round(totaldeduction).toFixed(2));
 			}else{
-				$("#totaldeduction").html("");
+				$("#totaldeduction").html("0.00");
 			}
 			$("#mbasic").html((basicsalary).toFixed(2));
 			$("#mhra").html((hraallowances).toFixed(2));

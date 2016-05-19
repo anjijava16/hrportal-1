@@ -71,9 +71,9 @@
 						</tr>
 						<tr>
 							<td class="currenttotalamtrupyatd1 mobMART0PX"  align="right" id="totalcounttd1">Total&nbsp;Amount&nbsp;Paid&nbsp;:</td>
-							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;">&#x20B9;</td>
+							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto;"></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold; width: 109px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold; font-family: DejaVu Sans;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold; width: 109px;" /></td>
 						</tr>
 					</table>
 				</div>
@@ -91,7 +91,7 @@
 									<th class="">Employee&nbsp;Id</th>
 									 <th class="">References</th>
 									<th class="">TDS&nbsp;Month</th>
-									<th class="">Amount&nbsp;(<span class="rupyaINR">&#x20B9;</span>)</th>
+									<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 								</tr>
 							</thead>
 							

@@ -29,9 +29,9 @@
 						</tr>
 						<tr>
 							<td class="currenttotalamtrupyatd1 mobMART0PX" align="right"  style="margin-left:auto" >Invoice&nbsp;Amount&nbsp;:</td>
-							<%-- <td class="currenttotalamtrupyatd " style="margin-left:auto;">&#x20B9;</td>
+							<%-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto">${totalamount}</td>  --%>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;">&#x20B9;</span><span id="currenttotalamttd"  style="width: 109px;font-weight:bold;">${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="width: 109px;font-weight:bold;">${totalamount}</span></td>
 						</tr>
 					</table>
 					<div id = "mandatorycheck" class = "hidden" style="text-align: center;"><br/><b class="saptaColor">*</b>&nbsp;mandatory fields<br/></div>
@@ -40,9 +40,9 @@
 					<table id="totalcount" align ="center">
 						<tr>
 							<td class="currenttotalamtrupyatd1" align="right"  style="margin-left:auto" >Invoice&nbsp;Amount&nbsp;:</td>
-							<td class="currenttotalamtrupyatd " style="margin-left:auto;">&#x20B9;</td>
+							<td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto">${totalamount}</td> 
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;">&#x20B9;</span><span id="currenttotalamttd"  style="width: 100px;">${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="width: 100px;">${totalamount}</span></td>
 						</tr>
 					</table>
 				</div> --%>
@@ -100,10 +100,10 @@
 							<td class="lableContent">Amount Type</td>
 							<td class="value">
 								<select id="amounttype" class="leftElement selectBox hidden" tabindex="2" style=" margin:0; text-align: center;">
-									<option value="i" style="text-align: left;">INR</option>
-									<option value="u" style="text-align: left;">USD</option>
-									<option value="e" style="text-align: left;">EUR</option>
-									<option value="g" style="text-align: left;">GBP</option> 
+									<option value="inr" style="text-align: left;">INR</option>
+									<option value="usd" style="text-align: left;">USD</option>
+									<option value="eur" style="text-align: left;">EUR</option>
+									<option value="gbp" style="text-align: left;">GBP</option> 
 								</select>
 								<div id="optional_amounttype" style="height: 25px; margin:0; text-align: left; font-weight: bold;" class="value"></div>
 							</td>
@@ -136,10 +136,10 @@
 								<td align="right"><sup class="saptaColor">*</sup>Received&nbsp;Amount&nbsp;Type&nbsp;:</td>
 								<td>
 									<select id="receivedamounttype" name = "receivedamounttype" style="text-align: center;">
-										<option value="i" style="text-align: left;">INR</option>
-										<option value="u" style="text-align: left;">USD</option>
-										<option value="e" style="text-align: left;">EUR</option>
-										<option value="g" style="text-align: left;">GBP</option>
+										<option value="inr" style="text-align: left;">INR</option>
+										<option value="usd" style="text-align: left;">USD</option>
+										<option value="eur" style="text-align: left;">EUR</option>
+										<option value="gbp" style="text-align: left;">GBP</option>
 									</select>
 									<div id="optional_received_amounttype" class="value"></div>
 								</td>
@@ -206,7 +206,7 @@
 					</div>
 					<div class="clearWidth hidden " id="service_tax" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGR5PX  div_Width_view">
-							<div class="leftElement BLDTEXT12PX" >Service Tax(14.5%)</div>
+							<div class="leftElement BLDTEXT12PX" >Service Tax(15%)</div>
 							<div id="servicetax" class="rightElement BLDTEXT12PX"></div>
 						</div>
 					</div>
@@ -520,7 +520,7 @@
 								$("#optional_duedate").html((result.duedate == undefined || result.duedate == null || result.duedate.length <= 0) ? "-" : result.duedate);
 								$("#dueamount").val((result.dueamount == undefined || result.dueamount == null || result.dueamount.length <= 0) ? "-" : result.dueamount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
-								if(result.amounttype == "i"){
+								if(result.amounttype == "inr"){
 									$("#optional_amounttype").html("INR");
 									$(".headamounttype").html("&#x20B9;");
 									$("#totalamount").removeClass("hidden");
@@ -532,7 +532,7 @@
 									$("#totalamountunderline").removeClass("hidden");
 									$(".headamounttype").addClass("WebRupee");
 					 				$(".headamounttype").addClass("rupyaINR");
-								}else if(result.amounttype == "u"){
+								}else if(result.amounttype == "usd"){
 									$("#optional_amounttype").html("USD");
 									$(".headamounttype").html("&#36;");
 									$("#sub_total").removeClass("hidden");
@@ -541,7 +541,7 @@
 									$("#totalamountunderline").addClass("hidden");
 									$(".headamounttype").removeClass("WebRupee");
 					 				$(".headamounttype").removeClass("rupyaINR");
-								}else if(result.amounttype == "e"){
+								}else if(result.amounttype == "eur"){
 									$("#optional_amounttype").html("EUR");
 									$(".headamounttype").html("&#8364;");
 									$("#sub_total").removeClass("hidden");
@@ -550,7 +550,7 @@
 									$("#totalamountunderline").addClass("hidden");
 									$(".headamounttype").removeClass("WebRupee");
 					 				$(".headamounttype").removeClass("rupyaINR");
-								}else if(result.amounttype == "g"){
+								}else if(result.amounttype == "gbp"){
 									$("#optional_amounttype").html("GBP");
 									$(".headamounttype").html("&#163;");
 									$("#subtotalamount").html(result.totalamount);
@@ -567,37 +567,36 @@
 								$(".rate_value").removeClass("hidden");
 								if(result.invoicetype == "h"){
 									$("#optional_typeofinvoice").html("Hourly");
-									$("#typeofperiod").html("Hour");
+									$("#typeofperiod").html("Hours");
 									$("#typeofperiodrate").html("Hour");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "d"){
 									$("#optional_typeofinvoice").html("Daily");
-									$("#typeofperiod").html("Day");
+									$("#typeofperiod").html("Days");
 									$("#typeofperiodrate").html("Day");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "w"){
 									$("#optional_typeofinvoice").html("Weekly");
-									$("#typeofperiod").html("Week");
+									$("#typeofperiod").html("Weeks");
 									$("#typeofperiodrate").html("Week");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "m"){
 									$("#optional_typeofinvoice").html("Monthly");
-									$("#typeofperiod").html("Month");
+									$("#typeofperiod").html("Months");
 									$("#typeofperiodrate").html("Month");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "f"){
-									
 									$("#rate_header").addClass("hidden");
 									$(".rate_value").addClass("hidden");
 									$("#optional_typeofinvoice").html("Fixed");
-									$("#typeofperiod").html("Time");
+									$("#typeofperiod").html("Days");
 									$("#fixedtypeofperiodrate").html("Fixed");
 									$("#slashspan").addClass("hidden");
 								}else if(result.invoicetype == undefined || result.invoicetype == null || result.invoicetype.length <= 0){
 									$("#optional_typeofinvoice").html("-");
 								}
 								
-								if(result.amounttype == "i"){
+								if(result.amounttype == "inr"){
 									var totalamount = parseFloat(result.totalamount) + parseFloat(result.servicetax); 
 								}else{
 									var totalamount = parseFloat(result.totalamount); 
@@ -623,13 +622,13 @@
 									var receievedamount = parseFloat(result.received_amount);
 									$("#receievedamount").val((result.received_amount == undefined || result.received_amount == null || result.received_amount.length <= 0) ? "-" : receievedamount.toFixed(2));
 									$("#receievedcomments").html((result.received_comments == undefined || result.received_comments == null || result.received_comments.length <= 0) ? "-" : result.received_comments);
-									if(result.received_amounttype == "i"){
+									if(result.received_amounttype == "inr"){
 										$("#receievedamounttype").val("INR");
-									}else if(result.received_amounttype == "u"){
+									}else if(result.received_amounttype == "usd"){
 										$("#receievedamounttype").val("USD");
-									}else if(result.received_amounttype == "e"){
+									}else if(result.received_amounttype == "eur"){
 										$("#receievedamounttype").val("EUR");
-									}else if(result.received_amounttype == "g"){
+									}else if(result.received_amounttype == "gbp"){
 										$("#receievedamounttype").val("GBP");
 									}else if(result.received_amounttype == undefined || result.received_amounttype == null || result.received_amounttype.length <= 0){
 										$("#receievedamounttype").val("-");
@@ -847,11 +846,11 @@
 						if($("#time_period_"+i).val() == "-"){
 							$("#time_period_"+i).val("");
 						}
-						if($("#typeofinvoice").val() != "f"){
-							$("#time_period_"+i).prop( "disabled", false );
-							$("#time_period_"+i).removeClass("inputdisable");
-							$("#time_period_"+i).addClass("inputBorder");
-						}
+						//if($("#typeofinvoice").val() != "f"){
+						$("#time_period_"+i).prop( "disabled", false );
+						$("#time_period_"+i).removeClass("inputdisable");
+						$("#time_period_"+i).addClass("inputBorder");
+						//}
 						$("#reference_"+i).prop( "disabled", false );
 						$("#rate_period_"+i).prop( "disabled", false );
 						
@@ -984,11 +983,11 @@
 				 }
 			});
 			 $('#amounttype').on('change', function (e){
-				 	if($("#amounttype").val() == "i"){
+				 	if($("#amounttype").val() == "inr"){
 				 		$(".headamounttype").html("&#x20B9;");
 				 		var totalamount = $("#totalamount").html();
 				 		$("#subtotalamount").html(totalamount);
-				 		var servicetax = (parseFloat(totalamount)*14.5)/100;
+				 		var servicetax = (parseFloat(totalamount)*15)/100;
 				 		
 				 		var completetotalamount = parseFloat(totalamount) + parseFloat(servicetax.toFixed(2));
 				 		$("#servicetax").html(servicetax.toFixed(2));
@@ -999,7 +998,7 @@
 				 		$(".headamounttype").addClass("WebRupee");
 				 		$(".headamounttype").addClass("rupyaINR");
 				 	}
-				 	if($("#amounttype").val() == "u"){
+				 	if($("#amounttype").val() == "usd"){
 				 		var servicetax = 0;
 				 		$(".headamounttype").html("&#36;");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
@@ -1016,7 +1015,7 @@
 				 		$(".headamounttype").removeClass("WebRupee");
 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
-				 	if($("#amounttype").val() == "e"){
+				 	if($("#amounttype").val() == "eur"){
 				 		var servicetax = 0;
 				 		$(".headamounttype").html("&#8364;");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
@@ -1033,7 +1032,7 @@
 				 		$(".headamounttype").removeClass("WebRupee");
 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
-				 	if($("#amounttype").val() == "g"){
+				 	if($("#amounttype").val() == "gbp"){
 				 		var servicetax = 0;
 				 		$(".headamounttype").html("&#163;");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
@@ -1195,7 +1194,7 @@
 								$("#optional_duedate").html((result.duedate == undefined || result.duedate == null || result.duedate.length <= 0) ? "-" : result.duedate);
 								$("#dueamount").val((result.dueamount == undefined || result.dueamount == null || result.dueamount.length <= 0) ? "-" : result.dueamount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
-								if(result.amounttype == "i"){
+								if(result.amounttype == "inr"){
 									$("#optional_amounttype").html("INR");
 									$(".headamounttype").html("&#x20B9;");
 									$("#totalamount").removeClass("hidden");
@@ -1205,21 +1204,21 @@
 									$("#servicetax").html((result.servicetax == undefined || result.servicetax == null || result.servicetax.length <= 0) ? "-" : result.servicetax);
 									$("#service_tax").removeClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
-								}else if(result.amounttype == "u"){
+								}else if(result.amounttype == "usd"){
 									$("#optional_amounttype").html("USD");
 									$(".headamounttype").html("&#36;");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
-								}else if(result.amounttype == "e"){
+								}else if(result.amounttype == "eur"){
 									$("#optional_amounttype").html("EUR");
 									$(".headamounttype").html("&#8364;");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
-								}else if(result.amounttype == "g"){
+								}else if(result.amounttype == "gbp"){
 									$("#optional_amounttype").html("GBP");
 									$(".headamounttype").html("&#163;");
 									$("#subtotalamount").html(result.totalamount);
@@ -1234,36 +1233,36 @@
 								$(".rate_value").removeClass("hidden");
 								if(result.invoicetype == "h"){
 									$("#optional_typeofinvoice").html("Hourly");
-									$("#typeofperiod").html("Hour");
+									$("#typeofperiod").html("Hours");
 									$("#typeofperiodrate").html("Hour");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "d"){
 									$("#optional_typeofinvoice").html("Daily");
-									$("#typeofperiod").html("Day");
+									$("#typeofperiod").html("Days");
 									$("#typeofperiodrate").html("Day");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "w"){
 									$("#optional_typeofinvoice").html("Weekly");
-									$("#typeofperiod").html("Week");
+									$("#typeofperiod").html("Weeks");
 									$("#typeofperiodrate").html("Week");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "m"){
 									$("#optional_typeofinvoice").html("Monthly");
-									$("#typeofperiod").html("Month");
+									$("#typeofperiod").html("Months");
 									$("#typeofperiodrate").html("Month");
 									$("#slashspan").removeClass("hidden");
 								}else if(result.invoicetype == "f"){
 									$("#rate_header").addClass("hidden");
 									$(".rate_value").addClass("hidden");
 									$("#optional_typeofinvoice").html("Fixed");
-									$("#typeofperiod").html("Time");
+									$("#typeofperiod").html("Days");
 									$("#fixedtypeofperiodrate").html("Fixed");
 									$("#slashspan").addClass("hidden");
 								}else if(result.invoicetype == undefined || result.invoicetype == null || result.invoicetype.length <= 0){
 									$("#optional_typeofinvoice").html("-");
 								}
 								
-								if(result.amounttype == "i"){
+								if(result.amounttype == "inr"){
 									var totalinramt = parseFloat(result.totalamount) + parseFloat(result.servicetax);
 									$("#totalamount").html((result.totalamount == undefined || result.totalamount == null || result.totalamount.length <= 0) ? "-" : totalinramt.toFixed(2));
 								}else{
@@ -1288,13 +1287,13 @@
 									var receievedamount = parseFloat(result.received_amount);
 									$("#receievedamount").val((result.received_amount == undefined || result.received_amount == null || result.received_amount.length <= 0) ? "-" : receievedamount.toFixed(2));
 									$("#receievedcomments").html((result.received_comments == undefined || result.received_comments == null || result.received_comments.length <= 0) ? "-" : result.received_comments);
-									if(result.received_amounttype == "i"){
+									if(result.received_amounttype == "inr"){
 										$("#receievedamounttype").val("INR");
-									}else if(result.received_amounttype == "u"){
+									}else if(result.received_amounttype == "usd"){
 										$("#receievedamounttype").val("USD");
-									}else if(result.received_amounttype == "e"){
+									}else if(result.received_amounttype == "eur"){
 										$("#receievedamounttype").val("EUR");
-									}else if(result.received_amounttype == "g"){
+									}else if(result.received_amounttype == "gbp"){
 										$("#receievedamounttype").val("GBP");
 									}else if(result.received_amounttype == undefined || result.received_amounttype == null || result.received_amounttype.length <= 0){
 										$("#receievedamounttype").val("-");
@@ -1332,7 +1331,7 @@
 				var invoicedate = $("#invoicedate").datepicker().val();
 				var duedate = $("#duedate").datepicker().val();
 				var invoicetype = $("#typeofinvoice").val();
-				if($("#amounttype").val() == "i"){
+				if($("#amounttype").val() == "inr"){
 					var totalamount = $("#totalamount").html() - $("#servicetax").html() ;
 				}else{
 					var totalamount = $("#totalamount").html()  ;
@@ -1341,7 +1340,7 @@
 				var status = $("#status").val();
 				var servicetax = 0;
 
-				if($("#amounttype").val() == "i"){
+				if($("#amounttype").val() == "inr"){
 					servicetax = $("#servicetax").html();
 				}
 				var customerid = "";
@@ -1399,9 +1398,9 @@
 					if(reference == "" || reference.length == 0) validation = false;
 					if(servicefrom == "" || servicefrom.length == 0) validation = false;
 					if(serviceto == "" || serviceto.length == 0) validation = false;
-					if($("#typeofinvoice").val() != "f"){
-						if(timeperiod == "" || timeperiod.length == 0) validation = false;
-					}
+					//if($("#typeofinvoice").val() != "f"){
+					if(timeperiod == "" || timeperiod.length == 0) validation = false;
+					//}
 					if(rateperiod == "" || rateperiod.length == 0) validation = false;
 					if(dueamount == "" || dueamount.length == 0) validation = false;
 					
@@ -1444,25 +1443,25 @@
 									receievedamount = parseFloat(received_amount);
 									receievedamount = receievedamount.toFixed(2);
 									$("#receievedamount").val(receievedamount);
-									if(received_amounttype = "i"){
+									if(received_amounttype = "inr"){
 										$("#receievedamounttype").val("INR");
-									} else if(received_amounttype = "u"){
+									} else if(received_amounttype = "usd"){
 										$("#receievedamounttype").val("USD");
-									} else if(received_amounttype = "e"){
+									} else if(received_amounttype = "eur"){
 										$("#receievedamounttype").val("EUR");
-									} else if(received_amounttype = "g"){
+									} else if(received_amounttype = "gbp"){
 										$("#receievedamounttype").val("GBP");
 									}
 									$("#receievedcomments").html(received_comments);
 								}
 								$(".ui-datepicker-trigger").addClass("hidden");
-								if(amounttype == "i"){
+								if(amounttype == "inr"){
 									$("#optional_amounttype").html("INR");
-								}else if(amounttype == "u"){
+								}else if(amounttype == "usd"){
 									$("#optional_amounttype").html("USD");
-								}else if(amounttype == "e"){
+								}else if(amounttype == "eur"){
 									$("#optional_amounttype").html("EUR");
-								}else if(amounttype == "g"){
+								}else if(amounttype == "gbp"){
 									$("#optional_amounttype").html("GBP");
 								}
 								
@@ -1502,13 +1501,13 @@
 									$("#optional_received_date").html(received_date);
 								}
 								
-								if(received_amounttype == "i"){
+								if(received_amounttype == "inr"){
 									$("#optional_received_amounttype").html("INR");
-								}else if(received_amounttype == "u"){
+								}else if(received_amounttype == "usd"){
 									$("#optional_received_amounttype").html("USD");
-								}else if(received_amounttype == "e"){
+								}else if(received_amounttype == "eur"){
 									$("#optional_received_amounttype").html("EUR");
-								}else if(received_amounttype == "g"){
+								}else if(received_amounttype == "gbp"){
 									$("#optional_received_amounttype").html("GBP");
 								}
 								if($("#received_amount").val() == "" || $("#received_amount").val() == "-"){
@@ -1631,9 +1630,9 @@
 					var reference = $("#reference_"+i).val();
 					var servicefrom = $("#service_from_"+i).val();
 					var serviceto = $("#service_to_"+i).val();
-					if($("#typeofinvoice").val() != "f"){
+					//if($("#typeofinvoice").val() != "f"){
 						timeperiod = $("#time_period_"+i).val();
-					}
+					//}
 					var rateperiod = $("#rate_period_"+i).val();
 					var dueamount = $("#netamt_"+i).val();
 					
@@ -1960,8 +1959,8 @@
 						if(netamount != "" && netamount != null && netamount != 0){
 							lastTotal = parseFloat(lastTotal) + parseFloat(netamount);
 							var completeLastTotal1 = lastTotal;
-							if($("#amounttype").val() == "i"){
-								var servicetax = (parseFloat(completeLastTotal1)*14.5)/100;
+							if($("#amounttype").val() == "inr"){
+								var servicetax = (parseFloat(completeLastTotal1)*15)/100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								
 								completeLastTotal = parseFloat(completeLastTotal1) + parseFloat(servicetax);
@@ -1982,7 +1981,7 @@
 			    	if(netamount != "" && netamount != 0 && netamount != null){
 			    		totalamount = $("#subtotalamount").html();
 				    	var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
-				    	if($("#amounttype").val() == "i"){
+				    	if($("#amounttype").val() == "inr"){
 							var servicetax = (parseFloat(lasttotal)*14)/100;
 							$("#servicetax").html(servicetax.toFixed(2));
 							$("#subtotalamount").html(lasttotal.toFixed(2));
@@ -2026,8 +2025,8 @@
 						if(netamount != "" && netamount != null && netamount != 0){
 							lastTotal = parseFloat(lastTotal) + parseFloat($("#netamt_"+i).val());
 							var completeLastTotal = lastTotal.toFixed(2);
-							if($("#amounttype").val() == "i"){
-								var servicetax = (parseFloat(completeLastTotal)*14.5)/100;
+							if($("#amounttype").val() == "inr"){
+								var servicetax = (parseFloat(completeLastTotal)*15)/100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								$("#subtotalamount").html(completeLastTotal);
 								completeLastTotal = parseFloat(completeLastTotal) + parseFloat(servicetax);
@@ -2045,7 +2044,7 @@
 			    	var completeLastTotal = 0;
 			    	netamount = $("#netamt_"+i).val();
 			    	if(netamount != "" && netamount != 0 && netamount != null){
-			    		if($("#amounttype").val() == "i"){
+			    		if($("#amounttype").val() == "inr"){
 			    			totalamount = $("#subtotalamount").html();
 			    			var servicetax = 0;
 					    	var lasttotal = parseFloat(totalamount) - parseFloat(netamount);

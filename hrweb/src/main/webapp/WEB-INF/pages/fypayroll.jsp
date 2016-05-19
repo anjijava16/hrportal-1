@@ -30,9 +30,9 @@
 					<table  class="optionTable" >
 						<tr>
 							<td class="currenttotalamtrupyatd1 "  align="right" style="margin-left:auto;  margin-top:0;" >Total&nbsp;Amount&nbsp;:</td>
-							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;"  >&#x20B9;</td>
+							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;"  class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD " style="margin-left:auto;"  ></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight: bold;width: 109px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight: bold;width: 109px;" /></td>
 						</tr>
 					</table>
 			</div>
@@ -173,7 +173,7 @@
 									financialYearDynamic.html('<div class="cellB"><div class="information"><a href="javascript:void(0);" class="fymonthlist" id="fymonth_' + count +'"><h4 id="monthYear_' + count +'" align="center"></h4><h5 class="small-font" align="center"><b id="dueamount_' + count +'"></b></h5></a></div></div>');
 									financialYearDynamic.appendTo("#fiancialdashboard");
 									$("#monthYear_"+count).html(dueMonthYear);
-									$("#dueamount_"+count).html("<p  id='fyPtag'><span class='rupyaINR FONFA35PX'>&#x20B9;</span></p><p class='FYDIVP'><span class='FONTW'>"+numberWithCommas(dueAmount.toFixed(2))+"</span></p>");
+									$("#dueamount_"+count).html("<p  id='fyPtag'><span class='rupyaINR FONFA35PX WebRupee'>&#x20B9;</span></p><p class='FYDIVP'><span class='FONTW'>"+numberWithCommas(dueAmount.toFixed(2))+"</span></p>");
 									
 									dashboardCount++;
 									count++;

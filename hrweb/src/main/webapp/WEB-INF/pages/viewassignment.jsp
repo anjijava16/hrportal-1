@@ -24,6 +24,7 @@
 							<th class="first">Assignment&nbsp;Id</th>
 							<th class="">Employee&nbsp;Name</th>
 							<th class="">Project&nbsp;Name</th>
+							<th class="">Project&nbsp;Type</th>
 							<th class="">Start&nbsp;Date</th>
 							<th class="">End&nbsp;Date</th>
 							<th class="">Status</th>
@@ -91,6 +92,37 @@
 								<tr>
 									<td class="lableContent">PO / WO</td>
 									<td class="value"><input id="powo" disabled="disabled" class="inputdisable"></td>
+								</tr>
+								<tr>
+									<td class="lableContent">Amount</td>
+									<td class="value"><input id="amount" disabled="disabled" class="inputdisable"></td>
+								</tr>
+								<tr>
+									<td class="lableContentSelect">Amount Type</td>
+									<td class="valueContent">
+										<select id="amounttype" class="selectBox hidden" style="margin:0px; text-align:center" class="inputdisable">
+											<option value="" style="text-align: center;">--- Amount Type ---</option>
+											<option value="inr" style="text-align: left;">INR</option>
+											<option value="usd" style="text-align: left;">USD</option>
+											<option value="eur" style="text-align: left;">EUR</option>
+											<option value="gbp" style="text-align: left;">GBP</option> 
+										</select>
+										<div id="optional_amounttype" class="value"></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="lableContentSelect">Project Type</td>
+									<td class="valueContent">
+										<select id="billtype" class="selectBox hidden" style="margin:0px; text-align:center" class="inputdisable">
+											<option value="" style="text-align: center;">--- Project Type ---</option>
+											<option value="h" style="text-align: left;">Hourly</option>
+											<option value="d" style="text-align: left;">Daily</option>
+											<option value="w" style="text-align: left;">Weekly</option>
+											<option value="m" style="text-align: left;">Monthly</option>
+											<option value="f" style="text-align: left;">Fixed</option> 
+										</select>
+										<div id="optional_billtype" class="value"></div>
+									</td>
 								</tr>
 								<tr class="">
 									<td class="lableContentSelect">Status</td>
@@ -222,7 +254,8 @@
 				"aoColumns": [ 
 			                  {sClass: "alignleft"}, 
 			                  {sClass: "alignleft"}, 
-			                  {sClass: "alignleft"}, 
+			                  {sClass: "alignleft"},
+			                  {sClass: "center"},
 			                  {sClass: "center"},
 			                  {sClass: "center"},
 			                  {sClass: "center"}
@@ -286,7 +319,6 @@
 							$.each(results, function (i, result) {
 								empid = result.empid;
 								projectid = result.projectid;
-								
 								$("#assign_id").val((result.id == undefined || result.id == null || result.id.length <= 0) ? "-" : result.id);
 								$("#startdate").val((result.startdate == undefined || result.startdate == null || result.startdate.length <= 0) ? "-" : result.startdate);
 								$("#optional_startdate").html((result.startdate == undefined || result.startdate == null || result.startdate.length <= 0) ? "-" : result.startdate);
@@ -302,6 +334,33 @@
 								}
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#powo").val((result.powo == undefined || result.powo == null || result.powo.length <= 0) ? "-" : result.powo);
+								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
+								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
+								if(result.amounttype == "inr"){
+									$("#optional_amounttype").html("INR");
+								}else if(result.amounttype == "usd"){
+									$("#optional_amounttype").html("USD");
+								}else if(result.amounttype == "gbp"){
+									$("#optional_amounttype").html("GBP");
+								}else if(result.amounttype == "eur"){
+									$("#optional_amounttype").html("EUR");
+								}else if(result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0){
+									$("#optional_amounttype").html("-");
+								} 
+								$("#billtype").val((result.billtype == undefined || result.billtype == null || result.billtype.length <= 0) ? "-" : result.billtype);
+								if(result.billtype == "h"){
+									$("#optional_billtype").html("Hourly");
+								}else if(result.billtype == "d"){
+									$("#optional_billtype").html("Daily");
+								}else if(result.billtype == "w"){
+									$("#optional_billtype").html("Weekly");
+								}else if(result.billtype == "m"){
+									$("#optional_billtype").html("Monthly");
+								}else if(result.billtype == "f"){
+									$("#optional_billtype").html("Fixed");
+								}else if(result.billtype == undefined || result.billtype == "null" || result.billtype == null || result.billtype.length <= 0){
+									$("#optional_billtype").html("-");
+								}
 								$("#employeeid").html((result.empid == undefined || result.empid == null || result.empid.length <= 0) ? "-" : result.empid);
 								<c:forEach items="${projectList}" var="projectlist">
 									if("${projectlist.id}" == result.projectid){
@@ -421,6 +480,10 @@
 					//Select box Properties
 				$("#assignstatus").removeClass("hidden");
 				$("#optional_status").addClass("hidden");
+				$("#amounttype").removeClass("hidden");
+				$("#optional_amounttype").addClass("hidden");
+				$("#billtype").removeClass("hidden");
+				$("#optional_billtype").addClass("hidden");
 				
 				$("#updatebutton").removeClass("hidden");
 				$("#findoption").prop( 'disabled', true );
@@ -441,23 +504,29 @@
 				if($("#powo").val() == "-"){
 					$("#powo").val("");
 				}
+				if($("#amount").val() == "-"){
+					$("#amount").val("");
+				}
 				$("#assign_id").prop( "disabled", true );
 				$("#startdate").prop( "disabled", false );
 				$("#enddate").prop( "disabled", false );
 				$("#comments").prop( "disabled", false );
 				$("#powo").prop( "disabled", false );
+				$("#amount").prop( "disabled", false );
 				
 				$("#assign_id").removeClass("inputdisable");
 				$("#startdate").removeClass("inputdisable");
 				$("#enddate").removeClass("inputdisable");
 				$("#comments").removeClass("inputdisable");
 				$("#powo").removeClass("inputdisable");
+				$("#amount").removeClass("inputdisable");
 				
 				$("#assign_id").addClass("inputBorder");
 				$("#startdate").addClass("inputBorder");
 				$("#enddate").addClass("inputBorder");
 				$("#comments").addClass("inputBorder");
 				$("#powo").addClass("inputBorder");
+				$("#amount").addClass("inputBorder");
 				$("body").css("cursor", "default");
 			});
 			$("#decline").click(function(){
@@ -475,6 +544,10 @@
 				//Select box Properties
 				$("#assignstatus").removeClass("hidden");
 				$("#optional_status").addClass("hidden");
+				$("#amounttype").removeClass("hidden");
+				$("#optional_amounttype").addClass("hidden");
+				$("#billtype").removeClass("hidden");
+				$("#optional_billtype").addClass("hidden");
 				
 				$("#edit").removeClass("hidden");
 				$("#delete").removeClass("hidden");
@@ -487,19 +560,22 @@
 				$("#startdate").prop( "disabled", true );
 				$("#enddate").prop( "disabled", true );
 				$("#comments").prop( "disabled", true );
-				$("#powo").prop( "disabled", true )
+				$("#powo").prop( "disabled", true );
+				$("#amount").prop( "disabled", true )
 				
 				$("#assign_id").removeClass("inputBorder");
 				$("#startdate").removeClass("inputBorder");
 				$("#enddate").removeClass("inputBorder");
 				$("#comments").removeClass("inputBorder");
 				$("#powo").removeClass("inputBorder");
+				$("#amount").removeClass("inputBorder");
 
 				$("#assign_id").addClass("inputdisable");
 				$("#startdate").addClass("inputdisable");
 				$("#enddate").addClass("inputdisable");
 				$("#comments").addClass("inputdisable");
 				$("#powo").addClass("inputdisable");
+				$("#amount").addClass("inputdisable");
 				 $.fancybox.close();
 			});
 			function declineAssingmentDeatils(){
@@ -531,8 +607,39 @@
 								}
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#powo").val((result.powo == undefined || result.powo == null || result.powo.length <= 0) ? "-" : result.powo);
+								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
+								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
+								 if(result.amounttype == "inr"){
+									$("#optional_amounttype").html("INR");
+								}else if(result.amounttype == "usd"){
+									$("#optional_amounttype").html("USD");
+								}else if(result.amounttype == "gbp"){
+									$("#optional_amounttype").html("GBP");
+								}else if(result.amounttype == "eur"){
+									$("#optional_amounttype").html("EUR");
+								}else if(result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0){
+									$("#optional_amounttype").html("-");
+								} 
+								$("#billtype").val((result.billtype == undefined || result.billtype == null || result.billtype.length <= 0) ? "-" : result.billtype);
+								if(result.billtype == "h"){
+									$("#optional_billtype").html("Hourly");
+								}else if(result.billtype == "d"){
+									$("#optional_billtype").html("Daily");
+								}else if(result.billtype == "w"){
+									$("#optional_billtype").html("Weekly");
+								}else if(result.billtype == "m"){
+									$("#optional_billtype").html("Monthly");
+								}else if(result.billtype == "f"){
+									$("#optional_billtype").html("Fixed");
+								}else if(result.billtype == undefined || result.billtype == null || result.billtype.length <= 0){
+									$("#optional_billtype").html("-");
+								} 
 								$("#assignstatus").addClass("hidden");
+								$("#amounttype").addClass("hidden");
+								$("#billtype").addClass("hidden");
 								$("#optional_status").removeClass("hidden");
+								$("#optional_amounttype").removeClass("hidden");
+								$("#optional_billtype").removeClass("hidden");
 								$("#startdate_tabledata").addClass("hidden");
 								$("#startdate_tablediv").removeClass("hidden");
 								$("#enddate_tabledata").addClass("hidden");
@@ -565,6 +672,9 @@
 				var status = $("#assignstatus").val();
 				var employeeid = $("#employeeid").html();
 				var powo = $("#powo").val();
+				var amount = $("#amount").val();
+				var amounttype = $("#amounttype").val();
+				var billtype = $("#billtype").val();
 				var enddatevalidation = "";
 				var pid = "";
 				<c:forEach items="${projectList}" var="projectlist">
@@ -589,7 +699,10 @@
 				}else{
 					if(comments == "" || comments.length == 0 || comments == "-") comments = "null";
 					if(powo == "" || powo.length == 0 || powo == "-") powo = "null"; 
-					var resourceURL = $("#contextpath").val()+"/assignment/update/"+id+"/"+startdate+"/"+enddate+"/"+powo+"/"+status+"/"+employeeid+"/"+pid+"/"+comments;
+					if(amount == "" || amount.length == 0 || amount == "-") amount = "null"; 
+					if(amounttype == "" || amounttype.length == 0 || amounttype == "-") amounttype = "null"; 
+					if(billtype == "" || billtype.length == 0 || billtype == "-") billtype = "null"; 
+					var resourceURL = $("#contextpath").val()+"/assignment/update/"+id+"/"+startdate+"/"+enddate+"/"+powo+"/"+status+"/"+employeeid+"/"+pid+"/"+comments+"/"+amount+"/"+amounttype+"/"+billtype;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -606,6 +719,32 @@
 								}
 								$("#assignstatus").addClass("hidden");
 								$("#optional_status").removeClass("hidden");
+								
+								if(amounttype == "inr"){
+									$("#optional_amounttype").html("INR");
+								}else if(amounttype == "usd"){
+									$("#optional_amounttype").html("USD");
+								}else if(amounttype == "gbp"){
+									$("#optional_amounttype").html("GBP");
+								}else if(amounttype == "eur"){
+									$("#optional_amounttype").html("EUR");
+								}
+								$("#amounttype").addClass("hidden");
+								$("#optional_amounttype").removeClass("hidden");
+								
+								if(billtype == "h"){
+									$("#optional_billtype").html("Hourly");
+								}else if(billtype == "d"){
+									$("#optional_billtype").html("Daily");
+								}else if(billtype == "w"){
+									$("#optional_billtype").html("Weekly");
+								}else if(billtype == "m"){
+									$("#optional_billtype").html("Monthly");
+								}else if(billtype == "f"){
+									$("#optional_billtype").html("Fixed");
+								}
+								$("#billtype").addClass("hidden");
+								$("#optional_billtype").removeClass("hidden");
 								
 								$("#edit").removeClass("hidden");
 								$("#delete").removeClass("hidden");
@@ -634,12 +773,19 @@
 								if($("#comments").val() == "" || $("#comments").val() == "-"){
 									$("#comments").val("-");
 								}
+								if($("#amount").val() == "" || $("#amount").val() == "-"){
+									$("#amount").val("-");
+								}
+								if($("#powo").val() == "" || $("#powo").val() == "-"){
+									$("#powo").val("-");
+								}
 								
 								$("#assign_id").prop( "disabled", true );
 								$("#startdate").prop( "disabled", true );
 								$("#enddate").prop( "disabled", true );
 								$("#comments").prop( "disabled", true );
 								$("#powo").prop( "disabled", true );
+								$("#amount").prop( "disabled", true );
 								$("#employeeid").prop( "disabled", true );
 								$("#pid").prop( "disabled", true );
 								
@@ -648,6 +794,7 @@
 								$("#enddate").removeClass("inputBorder");
 								$("#comments").removeClass("inputBorder");
 								$("#powo").removeClass("inputBorder");
+								$("#amount").removeClass("inputBorder");
 								$("#employeeid").removeClass("inputBorder");
 								$("#pid").removeClass("inputBorder");
 								
@@ -656,6 +803,7 @@
 								$("#enddate").addClass("inputdisable");
 								$("#comments").addClass("inputdisable");
 								$("#powo").addClass("inputdisable");
+								$("#amount").addClass("inputdisable");
 								$("#employeeid").addClass("inputdisable");
 								$("#pid").addClass("inputdisable");
 								$("#alertMsgContent").html("Assignment details updated successfully...");
@@ -914,10 +1062,18 @@
 				$("#optional_status").addClass("hidden");
 				$("#assignstatus").removeClass("hidden");
 				$("#optional_status").addClass("hidden");
+				$("#amounttype").removeClass("hidden");
+				$("#optional_amounttype").addClass("hidden");
+				$("#billtype").removeClass("hidden");
+				$("#optional_billtype").addClass("hidden");
 				$("#assignsearch").addClass("hidden");
 				$("#empsearch").addClass("hidden");
 				$("#assignstatus").addClass("hidden");
 				$("#optional_status").removeClass("hidden");
+				$("#amounttype").addClass("hidden");
+				$("#optional_amounttype").removeClass("hidden");
+				$("#billtype").addClass("hidden");
+				$("#optional_billtype").removeClass("hidden");
 				$("#edit").removeClass("hidden");
 				$("#delete").removeClass("hidden");
 				$("#updatebutton").addClass("hidden");
@@ -928,17 +1084,20 @@
 				$("#enddate").prop( "disabled", true );
 				$("#comments").prop( "disabled", true );
 				$("#powo").prop( "disabled", true );
+				$("#amount").prop( "disabled", true );
 				
 				$("#assign_id").removeClass("inputBorder");
 				$("#startdate").removeClass("inputBorder");
 				$("#enddate").removeClass("inputBorder");
 				$("#comments").removeClass("inputBorder");
 				$("#powo").removeClass("inputBorder");
+				$("#amount").removeClass("inputBorder");
 				$("#assign_id").addClass("inputdisable");
 				$("#startdate").addClass("inputdisable");
 				$("#enddate").addClass("inputdisable");
 				$("#comments").addClass("inputdisable");
 				$("#powo").addClass("inputdisable");
+				$("#amount").addClass("inputdisable");
 				
 				$("#assignmentDetail").addClass("hidden");
 				

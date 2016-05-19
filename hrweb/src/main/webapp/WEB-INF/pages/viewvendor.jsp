@@ -246,7 +246,7 @@
 				if($("#addr").val() == "-"){
 					$("#addr").val("");
 				}
-				if($("#pincode").val() == "-"){
+				if($("#pincode").val() == "-" || $("#pincode").val() == null){
 					$("#pincode").val("");
 				}
 				if($("#phoneno").val() == "-"){
@@ -386,7 +386,7 @@
 				var emailid = $("#emailid").val();
 				if(name == "" || name.length == 0) validation = false;
 				if(address == "" || address.length == 0) validation = false;
-				if(pincode == "" || pincode.length == 0) validation = false;
+				/* if(pincode == "" || pincode.length == 0) validation = false; */
 				/* if(emailid == "" || emailid.length == 0) validation = false; */
 				if(vendorcode == "" || vendorcode.length == 0) validation = false;
 				if(emailid != "" || emailid.length > 0){
@@ -401,6 +401,7 @@
 					$.fancybox.open('#errorMsg');
 				}else{
 					if(phoneno == "" || phoneno == "-" || phoneno.length == 0) phoneno = "null";
+					if(pincode == "" || pincode == "-" || pincode.length == 0) pincode = "null";
 					if(fax == "" || fax == "-" || fax.length == 0) fax = "null";
 					if(mobileno == "" || mobileno == "-" || mobileno.length == 0) mobileno = "null";
 					if(emailid == "" || emailid == "-" || emailid.length == 0) emailid = "null";

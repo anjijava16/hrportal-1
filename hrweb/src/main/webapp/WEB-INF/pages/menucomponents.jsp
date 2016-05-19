@@ -83,12 +83,12 @@
 										<li><a href="<%=request.getContextPath() %>/invoice/viewinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_view.png"/></aside>&nbsp;&nbsp;<span>View&nbsp;Invoices</span></a></li>
 									</c:when>
 								</c:choose>
-								<c:choose>
+								<%-- <c:choose>
 									<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
 										<li><a href="<%=request.getContextPath() %>/externalinvoice/addexternalinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_add.png"/></aside>&nbsp;&nbsp;<span>New Ext&nbsp;Invoice</span></a></li>
 										<li><a href="<%=request.getContextPath() %>/externalinvoice/viewexternalinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_view.png"/></aside>&nbsp;&nbsp;<span>View Ext&nbsp;Invoices</span></a></li>
 									</c:when>
-								</c:choose>
+								</c:choose> --%>
 														
 								<li><a href="<%=request.getContextPath() %>/bills/addbill"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/pay-bill.png"/></aside>&nbsp;&nbsp;<span>New&nbsp;Bill</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/bills/viewbills"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/view_bill.png"/></aside>&nbsp;&nbsp;<span>View&nbsp;Bills</span></a></li>

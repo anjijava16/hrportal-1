@@ -55,7 +55,7 @@ public class InvoiceDO implements Serializable {
 	
 	private Double totalamount;
 
-	private char amounttype;
+	private String amounttype;
 	
 	private char invoicestatus;
 	
@@ -123,11 +123,11 @@ public class InvoiceDO implements Serializable {
 		this.totalamount = totalamount;
 	}
 
-	public char getAmounttype() {
+	public String getAmounttype() {
 		return amounttype;
 	}
 
-	public void setAmounttype(char amounttype) {
+	public void setAmounttype(String amounttype) {
 		this.amounttype = amounttype;
 	}
 

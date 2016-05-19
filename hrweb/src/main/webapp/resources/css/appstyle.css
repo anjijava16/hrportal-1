@@ -871,7 +871,7 @@ body:first-of-type .TXTLabelWDTH {
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br, .ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl, .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr, .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
     border-radius: 0 !important;
 }
-.ui-datepicker.ui-widget-content{ border: 1px solid #AAAAAA !important; }
+.ui-datepicker.ui-widget-content{ border: 1px solid #AAAAAA !important; border-radius: 5px !Important; padding: 10px;}
 .ui-timepicker-div dl{ color: #000; }
 .ui-tabs .ui-tabs-nav li a:hover {color: #777777; border: 1px solid #999999; border-bottom:none; border-bottom-color: none;}
 .ui-tabs .ui-state-hover, 
@@ -884,6 +884,14 @@ body:first-of-type .TXTLabelWDTH {
 .ui-jqgrid tr.ui-row-ltr td{ padding: 4px !important; }
 .ui-jqgrid tr.jqgrow{ border: 1px solid #F1F1F1; }
 .ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column{border-right: 1px solid #d3d3d3; }
+.ui-datepicker select.ui-datepicker-month {
+	width: 45%;
+    margin-right: 12px !Important;
+}
+.ui-datepicker select.ui-datepicker-year {
+	width: 45%;
+    margin-right: 0px !Important;
+}
 
 
 /* 

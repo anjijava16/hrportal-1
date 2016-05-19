@@ -69,6 +69,12 @@ public class EmpAssignmentController {
 				if (employeeList != null && employeeList.size() > 0) {
 					model.addAttribute(CommonConstants.EMPLOYEE_LIST, employeeList);
 				}
+				
+				List<CustomerDO> CustomerList = new CustomerService().retrive();
+				if (CustomerList != null && CustomerList.size() > 0) {
+					model.addAttribute(CommonConstants.CUSTOMER_LIST, CustomerList);
+				}
+				
 				List<ProjectDO> projectList = new ProjectService().retriveActiveProject();
 
 				if (projectList != null && projectList.size() > 0) {
@@ -80,10 +86,11 @@ public class EmpAssignmentController {
 		return pagename;
 	}
 	
-	@RequestMapping(value = "/add/{sdate}/{edate}/{powo}/{comment}/{status}/{eid}/{projid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{sdate}/{edate}/{powo}/{comment}/{status}/{eid}/{projid}/{amount}/{amounttype}/{billtype}", method = RequestMethod.GET)
 	public @ResponseBody String add(@PathVariable String sdate, @PathVariable String edate, @PathVariable String powo,
 			@PathVariable String comment, @PathVariable String status,  @PathVariable String eid, 
-			@PathVariable String projid, Model model, HttpServletRequest request) {
+			@PathVariable String projid, @PathVariable String amount, @PathVariable String amounttype, @PathVariable String billtype,
+			Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				long empid, pid;
@@ -123,8 +130,12 @@ public class EmpAssignmentController {
 					assigndo.setEnddate(CommonUtil.convertStringToDate(edate));
 				}
 				assigndo.setStatus(status.charAt(0));
-				if (!powo.equalsIgnoreCase("null"))  assigndo.setPo_wo(powo);
+				if (!powo.equalsIgnoreCase("null"))  assigndo.setPo_wo(powo);				
 				if (!comment.equalsIgnoreCase("null")) assigndo.setComments(comment);
+				if (!amounttype.equalsIgnoreCase("null"))assigndo.setAmounttype(amounttype);
+				if(!amount.equalsIgnoreCase("null"))assigndo.setAmount(Double.valueOf(amount));
+				if (!billtype.equalsIgnoreCase("null"))
+					assigndo.setBilltype(billtype);
 
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				assigndo.setUpdatedby(user.getUsername());
@@ -204,11 +215,28 @@ public class EmpAssignmentController {
 	
 	@RequestMapping(value = "/get/{aid}", method = RequestMethod.GET)
 	public @ResponseBody String getByIdForGrid(@PathVariable long aid, Model model) {
+		System.out.println(aid);
 		JSONObject respJSON = null;
 		try {
 			List<EmpAssignmentDO> assgList = new EmpAssignmentService().retriveById(aid);
 			if (assgList != null) {
 				respJSON = EmpAssignmentUtil.getAssignDataTableList(assgList);
+				System.out.println(respJSON);
+			}
+		} catch (Exception e) { }
+
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	
+	@RequestMapping(value = "/getempassign/{pid}", method = RequestMethod.GET)
+	public @ResponseBody String getByIdForAssignDetails(@PathVariable long pid, Model model) {
+		System.out.println(pid);
+		JSONObject respJSON = null;
+		try {
+			List<EmpAssignmentDO> assgList = new EmpAssignmentService().retriveByProjectId(pid);
+			if (assgList != null) {
+				respJSON = EmpAssignmentUtil.getAssignDataTableList(assgList);
+				System.out.println(respJSON);
 			}
 		} catch (Exception e) { }
 
@@ -261,9 +289,10 @@ public class EmpAssignmentController {
 		return jsonresp != null ? jsonresp.toString() : "";
 	}
 	
-	@RequestMapping(value = "/update/{id}/{startdate}/{enddate}/{powo}/{status}/{eid}/{projid}/{comments}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update/{id}/{startdate}/{enddate}/{powo}/{status}/{eid}/{projid}/{comments}/{amount}/{amounttype}/{billtype}", method = RequestMethod.GET)
 	public @ResponseBody String update(@PathVariable long id, @PathVariable String startdate, @PathVariable String enddate, @PathVariable String powo, @PathVariable char status,
-			  @PathVariable long eid, @PathVariable long projid, @PathVariable String comments, Model model, HttpServletRequest request) {
+			  @PathVariable long eid, @PathVariable long projid, @PathVariable String comments, @PathVariable String amount, @PathVariable String amounttype, @PathVariable String billtype,
+			  Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				EmpAssignmentDO assigndo = new EmpAssignmentDO();
@@ -282,6 +311,10 @@ public class EmpAssignmentController {
 				
 				if (!powo.equalsIgnoreCase("null"))
 					assigndo.setPo_wo(powo);
+				
+				if (!amounttype.equalsIgnoreCase("null"))assigndo.setAmounttype(amounttype);
+				if(!amount.equalsIgnoreCase("null"))assigndo.setAmount(Double.valueOf(amount));
+				if (!billtype.equalsIgnoreCase("null"))assigndo.setBilltype(billtype);
 				
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				assigndo.setUpdatedby(user.getUsername());

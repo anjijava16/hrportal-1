@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.sapta.hr.domainobject.EmpBonusDO;
-import com.sapta.hr.domainobject.EmpLoseOfPayDO;
 import com.sapta.hr.exception.AppException;
 import com.sapta.hr.exception.CustomPropertyManager;
 import com.sapta.hr.exception.ExceptionConstant;

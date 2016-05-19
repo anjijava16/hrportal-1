@@ -34,9 +34,9 @@
 						</tr>
 						<tr>
 							<td class="currenttotalamtrupyatd1 mobMART0PX" align="right"  style="margin-left:auto" >Invoice&nbsp;Amount&nbsp;:</td>
-							<%-- <td class="currenttotalamtrupyatd " style="margin-left:auto;">&#x20B9;</td>
+							<%-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto">${totalamount}</td>  --%>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;">&#x20B9;</span><span id="currenttotalamttd"  style="width: 109px;font-weight:bold;">${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="width: 109px;font-weight:bold;">${totalamount}</span></td>
 						</tr>
 					</table>
 					<div id = "mandatorycheck" class = "hidden" style="text-align: center;"><br/><b class="saptaColor">*</b>&nbsp;mandatory fields<br/></div>
@@ -45,9 +45,9 @@
 					<table id="totalcount" align ="center">
 						<tr>
 							<td class="currenttotalamtrupyatd1" align="right"  style="margin-left:auto" >Invoice&nbsp;Amount&nbsp;:</td>
-							<td class="currenttotalamtrupyatd " style="margin-left:auto;">&#x20B9;</td>
+							<td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto">${totalamount}</td> 
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;">&#x20B9;</span><span id="currenttotalamttd"  style="width: 100px;">${totalamount}</span></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;" class="rupyaINR WebRupee">&#x20B9;</span><span id="currenttotalamttd"  style="width: 100px;">${totalamount}</span></td>
 						</tr>
 					</table>
 				</div> --%>
@@ -243,7 +243,7 @@
 					</div>
 					<div class="clearWidth hidden " id="service_tax" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGR5PX  div_Width_view">
-							<div class="leftElement BLDTEXT12PX" >Service Tax(14.5%)</div>
+							<div class="leftElement BLDTEXT12PX" >Service Tax(15%)</div>
 							<div id="servicetax" class="rightElement BLDTEXT12PX"></div>
 						</div>
 					</div>
@@ -1035,7 +1035,7 @@
 				 		$(".headamounttype").html("&#x20B9;");
 				 		var totalamount = $("#totalamount").html();
 				 		$("#subtotalamount").html(totalamount);
-				 		var servicetax = (parseFloat(totalamount)*14.5)/100;
+				 		var servicetax = (parseFloat(totalamount)*15)/100;
 				 		
 				 		var completetotalamount = parseFloat(totalamount) + parseFloat(servicetax.toFixed(2));
 				 		$("#servicetax").html(servicetax.toFixed(2));
@@ -1869,7 +1869,7 @@
 							lastTotal = parseFloat(lastTotal) + parseFloat(netamount);
 							var completeLastTotal1 = lastTotal;
 							if($("#amounttype").val() == "i"){
-								var servicetax = (parseFloat(completeLastTotal1)*14.5)/100;
+								var servicetax = (parseFloat(completeLastTotal1)*15)/100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								
 								completeLastTotal = parseFloat(completeLastTotal1) + parseFloat(servicetax);
@@ -1935,7 +1935,7 @@
 							lastTotal = parseFloat(lastTotal) + parseFloat($("#netamt_"+i).val());
 							var completeLastTotal = lastTotal.toFixed(2);
 							if($("#amounttype").val() == "i"){
-								var servicetax = (parseFloat(completeLastTotal)*14.5)/100;
+								var servicetax = (parseFloat(completeLastTotal)*15)/100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								$("#subtotalamount").html(completeLastTotal);
 								completeLastTotal = parseFloat(completeLastTotal) + parseFloat(servicetax);
