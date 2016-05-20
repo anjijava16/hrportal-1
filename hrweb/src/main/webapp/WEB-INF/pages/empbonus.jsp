@@ -8,6 +8,9 @@
 			    margin-left: 11px;
 			    margin-top: 13px;
 			}
+			.hide-calendar .ui-datepicker-calendar {
+			  display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -182,14 +185,22 @@
 		$(document).ready(function(){
 			$("#pageTitle").html("Employee <b class='saptaColor'>Bonus</b>");
 			$("body").css("cursor", "progress");
-			
+			$( "#editbonusmonth" ).focus(function() {
+				 if(!$("#ui-datepicker-div").hasClass("hide-calendar")){
+					 $('#ui-datepicker-div').toggleClass('hide-calendar');
+				 }
+			 });
 			$(function(){
 				$("#bonustable").dataTable({
 					"aaSorting": []
 				});
 			})
 			$("#menu_payroll").addClass("active");
-			
+			 
+			 
+			 /* $( "#bonusmonth" ).focus(function() {
+				$("#ui-datepicker-div").removeClass("hide-calendar")
+			 }); */
 			$(function() {
 				 /*  $("#bonusmonth,#editbonusmonth").datepicker({
 					 yearRange: '1950:2100',

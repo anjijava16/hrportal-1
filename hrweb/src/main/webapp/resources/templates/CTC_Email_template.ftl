@@ -20,7 +20,7 @@
 						<p>We are pleased to revise the compensation and benefits program applicable to you with effect from <b>${from}</b>
 							and your revised salary would be Rs.<b>${ctc}</b>
 						<p>The other terms and conditions of your service continue to remain unchanged</p>
-						<p>Kindly find the revised compensation details in the attachment</p>
+						<p>Kindly collect the revised compensation document from your HR</p>
 						<p>If you have any payroll related queries, kindly revert to payroll@sapatalabs.com</p>
 						<p style="text-align: left;">***   confidential    ***</p><br/>
 					</span>

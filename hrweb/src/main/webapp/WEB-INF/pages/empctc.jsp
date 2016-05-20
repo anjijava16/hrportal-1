@@ -8,7 +8,9 @@
 			    margin-left: 11px;
 			    margin-top: 13px;
 			}
-			
+			/* .hide-calendar .ui-datepicker-calendar {
+			  display: none;
+			} */			
 		</style>
 	</head>
 	<body>
@@ -402,7 +404,6 @@
 				/* $('#ctcviewtable tbody').on('click', '.pdfclass',function(){
 					var employee = $('td', this).eq(5).text();
 					var pdfid = $(this).attr("id");
-					alert(employee+" ::::class"+pdfid);
 				}); */
 				/* var table20 = $('#ctcviewtable').DataTable();
  
@@ -537,6 +538,7 @@
 							var errors = data.response.errors;
 							var empctc = numberWithCommas(employeectc);
 							if(successflag == "true"){
+								$.fancybox.close('#editdetail');
 								var base = $("#contextpath").val()+"/sendctc?employee="+empid+"&startdate="+editedstartdate+"&employeectc="+empctc;
 								$("body").css("cursor", "progress");
 								$.ajax({

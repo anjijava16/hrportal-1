@@ -47,7 +47,7 @@ public class EmpCTCController {
 			if (WebManager.authenticateSession(request)) {
 				List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
 				List<CtcList> employectclist = new ArrayList<CtcList>();
-				List<EmpDetailDO> empdetails= null;
+				//List<EmpDetailDO> empdetails= null;
 				for (EmployeeDO employeeDO : employeeList) {
 					List<EmpCTCDO> empctcList = null;
 					if(employeeDO.getStatus() == 'a'){
@@ -60,7 +60,7 @@ public class EmpCTCController {
 					}
 					if(empctcList.size()  > 0 ){
 							CtcList ctclist = new CtcList();
-							empdetails= new EmpDetailService().retriveByEmpId(empctcList.get(0).getEmpid());
+							//empdetails= new EmpDetailService().retriveByEmpId(empctcList.get(0).getEmpid());
 							ctclist.setEmpid(empctcList.get(0).getEmpid());
 							ctclist.setId(empctcList.get(0).getEmpid());
 							if(employeeDO.getMname() != null && employeeDO.getMname().length() > 0){
@@ -75,7 +75,7 @@ public class EmpCTCController {
 							ctclist.setEnddate(empctcList.get(0).getEnddate());
 							ctclist.setBandchange(empctcList.get(0).getBandchange());
 							
-							ctclist.setDesignation(empdetails.get(0).getPostapplied());
+							ctclist.setDesignation(empctcList.get(0).getDesignation());
 							ctclist.setEnddate(empctcList.get(0).getEnddate());
 							if(employeeDO.getStatus() == 'i'){
 								ctclist.setEmpstatus("Closed");
@@ -261,6 +261,7 @@ public class EmpCTCController {
 								empctcDO.setEmpid(empid);
 								empctcDO.setStatus('a');
 								empctcDO.setStartdate(ctcStartDate);
+								empctcDO.setDesignation(empdetail.get(0).getPostapplied());
 								if(!enddate.equalsIgnoreCase("null")){
 							    	Date ctcEndDate = CommonUtil.convertStringToDate(enddate);
 								    c.setTime(ctcEndDate);
