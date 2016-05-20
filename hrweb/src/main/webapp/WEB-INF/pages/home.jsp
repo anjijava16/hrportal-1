@@ -13,7 +13,7 @@
 				<div class="dashboard">
 					<article>
 						<c:choose>
-							<c:when test="${ session.groupname == 'ad' || session.groupname == 'hr'}">
+							<c:when test="${ session.groupname == 'ad' || session.groupname == 'hr' || session.groupname == 'fi' }">
 								<div>
 									<h1>Employees</h1>
 									<a href="<%=request.getContextPath() %>/employee/viewemployee" style="text-decoration: none">
@@ -88,7 +88,7 @@
 							</c:when>
 						</c:choose>
 						<c:choose>
-							<c:when test="${ session.groupname == 'ad' || session.groupname == 'hr' || session.groupname == 'fi'}">
+							<c:when test="${ session.groupname == 'ad'  || session.groupname == 'fi'}">
 								<div>
 									<h1>Payroll</h1>
 									<a href="<%=request.getContextPath() %>/payroll" style="text-decoration: none">
