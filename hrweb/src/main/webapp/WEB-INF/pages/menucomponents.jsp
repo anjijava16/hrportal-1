@@ -34,11 +34,15 @@
 			<ul class="dropdown">
 				<li id="menu_Dashboard"><a href="<%=request.getContextPath() %>/home" id="menu_Dashboard"><i class="fa fa-home"></i>&nbsp;<span>Dashboard</span></a></li>
 				<c:choose>
-					<c:when test="${ session.groupname == 'ad' || session.groupname == 'hr'}">
+					<c:when test="${ session.groupname == 'ad' || session.groupname == 'hr' || session.groupname == 'fi'}">
 						<li id="menu_employee"><a href="#" id="menu_employee"><i class="fa fa-users"></i>&nbsp;<span>Employee</span></a>
-							<ul class="sub_menu">																	
+							<ul class="sub_menu">		
+								<c:if test="${ session.groupname == 'ad' || session.groupname == 'hr' }">															
 								<li><a href="<%=request.getContextPath() %>/employee/addemployee"><i class="fa fa-user-plus"></i>&nbsp;<span>New&nbsp;Employee</span></a></li>
-								<li><a href="<%=request.getContextPath() %>/employee/viewemployee"><i class="fa fa-users"></i>&nbsp;<span>View&nbsp;Employee</span></a></li>											
+								</c:if>
+								<c:if test="${ session.groupname == 'ad' || session.groupname == 'hr' || session.groupname == 'fi'}">
+									<li><a href="<%=request.getContextPath() %>/employee/viewemployee"><i class="fa fa-users"></i>&nbsp;<span>View&nbsp;Employee</span></a></li>											
+								</c:if>
 							</ul>
 						</li>
 					</c:when>
@@ -59,17 +63,20 @@
 					<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi' || session.groupname == 'hr'}">
 						<li id="menu_payroll"><a href="#" id="menu_payroll"><i class="fa fa-usd"></i>&nbsp;<span>Payroll</span></a> 
 							<ul class="sub_menu">
-								<li><a href="<%=request.getContextPath() %>/empctc"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/employee_ctc.png"/></aside>&nbsp;&nbsp;<span>Cost To Company</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/empctc"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/employee_ctc.png"/></aside>&nbsp;&nbsp;<span>Employee CTC</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/empbonus"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee Bonus</span></a></li>
+								
 								<c:if test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
+									<li><a href="<%=request.getContextPath() %>/empctc"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/employee_ctc.png"/></aside>&nbsp;&nbsp;<span>Cost To Company</span></a></li>
 									<li><a href="<%=request.getContextPath() %>/payroll"><i class="fa fa-user"></i><sup><i class="fa fa-usd"></i></sup>&nbsp;<span>Payroll</span></a></li>
 								</c:if>
+								
 								<li><a href="<%=request.getContextPath() %>/professionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>Professional&nbsp;Tax</span></a></li>								
 								<%-- <li><a href="<%=request.getContextPath() %>/tds/paytds"><aside><img src="<%=request.getContextPath() %>/resources/icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Pay&nbsp;TDS</span></a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/tds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>TDS</span></a></li>
 									
 								<li><a href="<%=request.getContextPath() %>/emppf"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/pf.png"/></aside>&nbsp;&nbsp;<span>Provident&nbsp;Fund</span></a></li>
-								<li><a href="<%=request.getContextPath() %>/emplop"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Loss Of Pay</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/emplop"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee LOP</span></a></li>
 							</ul>
 						</li>
 					</c:when>
@@ -119,7 +126,7 @@
 								<li><a href="<%=request.getContextPath() %>/vendordetails/viewvendor"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/customer_view.png"/></aside>&nbsp;&nbsp;<span>View&nbsp;Vendors</span></a></li>
 								<c:choose>
 									<c:when test="${ session.groupname == 'ad'}">
-										<li><a href="<%=request.getContextPath() %>/saptaprofile/viewsaptaprofile"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/favicon.png"/></aside>&nbsp;&nbsp;<span>Sapta&nbsp;Profile</span></a></li>
+										<li><a href="<%=request.getContextPath() %>/saptaprofile/viewsaptaprofile"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/favicon.png"/></aside>&nbsp;&nbsp;<span>Saptalabs&nbsp;Profile</span></a></li>
 									</c:when>
 								</c:choose>
 							</ul>
