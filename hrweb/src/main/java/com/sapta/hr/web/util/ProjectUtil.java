@@ -6,8 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sapta.hr.domainobject.CustomerDO;
 import com.sapta.hr.domainobject.ProjectDO;
 import com.sapta.hr.exception.AppException;
+import com.sapta.hr.service.CustomerService;
 import com.sapta.hr.util.CommonConstants;
 
 public final class ProjectUtil {
@@ -106,6 +108,12 @@ public final class ProjectUtil {
 		result.put(String.valueOf(projdo.getId()));
 		result.put(projdo.getProjectcode());
 		result.put(projdo.getDispname());
+		List<CustomerDO> customerList = new CustomerService().retrive();
+		for(CustomerDO cust : customerList){
+			if(String.valueOf(cust.getId()).equalsIgnoreCase(String.valueOf(projdo.getCustomerid()))){
+				result.put(cust.getName());
+			}
+		}
 		if(String.valueOf(projdo.getStatus()).equalsIgnoreCase("a")){
 			result.put(CommonConstants.ACTIVE);
 		} else if(String.valueOf(projdo.getStatus()).equalsIgnoreCase("i")){

@@ -126,8 +126,8 @@
 					    <div id="tab1" class="tab active">
 						    <c:choose>
 								<c:when test="${ session.groupname == 'ad'}">
-									<td align = "right"><input type="button" value="Show Invoice" class="leftElement MRGL10PX" id="showinvoice"/></td>
-									<td align = "right"><input type="button" value="Back" class="rightElement graybtn" id="back"/></td>	
+									<!-- <td align = "right"><input type="button" value="Show Invoice" class="leftElement MRGL10PX" id="showinvoice"/></td>
+									<td align = "right"><input type="button" value="Back" class="rightElement graybtn" id="back"/></td>	 -->
 								</c:when>
 							</c:choose>	
 							<!-- <div id="updatebutton" class="hidden" align="left">
@@ -1197,7 +1197,7 @@
 				$("#invoicedate").val("");
 				$("#duedate").val("");
 			});
-			$("#showinvoice").on("click", function(){
+			$("#viewAssignmentTbl").on("click", function(){
 				$("#viewAssignment").addClass("hidden");
 				$("#viewAssignmentTbl").addClass("hidden");
 				$("#empselect").addClass("hidden");

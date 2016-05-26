@@ -104,7 +104,12 @@ public final class BillsUtil {
 		result.put(String.valueOf(billdo.getBillno()));
 		result.put(CommonUtil.convertnumberValueWithcomma(billdo.getDueamount()));
 		result.put(CommonUtil.convertDateToStringWithOutTime(billdo.getDuedate()));
-		result.put(String.valueOf(billdo.getComments()));
+		if(!String.valueOf(billdo.getComments()).equalsIgnoreCase("null")){System.out.println(String.valueOf(billdo.getComments()));
+			result.put(String.valueOf(billdo.getComments()));
+		}else{
+			result.put("-");
+		}
+			
 		if(billdo.getStatus() == 'i' ){
 			status = CommonConstants.PAID;
 		}else{

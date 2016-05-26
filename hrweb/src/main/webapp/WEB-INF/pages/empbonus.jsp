@@ -25,7 +25,7 @@
 						<td align="right"><sup class="saptaColor">*</sup>Employee&nbsp;Id&nbsp;:</td>
 						<td><input name="empid" id="empid" type="text"  onkeypress="return validateNumeric(event)"/></td>
 						
-						<td align="right"><sup class="saptaColor">*</sup>Bonus&nbsp;:</td>
+						<td align="right"><sup class="saptaColor">*</sup>Bonus&nbsp;Amount:</td>
 						<td><input name="bonusamount" id="bonusamount" type="text"  onkeypress="return validateNumeric(event)"/></td>
 												
 					</tr>
@@ -117,7 +117,7 @@
 						<td align="right"><sup class="saptaColor " >*</sup>Employee&nbsp;Id&nbsp;:</td>						
 						<td><input name="editempid" id="editempid" type="text" style="border:0;background-color: white;" disabled/></td> 
 						
-						<td align="right"  style="margin-top:9px"> <sup class="saptaColor">*</sup>Bonus :</td>
+						<td align="right"  style="margin-top:9px"> <sup class="saptaColor">*</sup>Bonus&nbsp;Amount:</td>
 						<td><input name="editbonusamount" id="editbonusamount" type="text"  onkeypress="return validateNumeric(event)"/></td>
 					</tr>
 					<tr>
@@ -186,6 +186,11 @@
 			$("#pageTitle").html("Employee <b class='saptaColor'>Bonus</b>");
 			$("body").css("cursor", "progress");
 			$( "#editbonusmonth" ).focus(function() {
+				 if(!$("#ui-datepicker-div").hasClass("hide-calendar")){
+					 $('#ui-datepicker-div').toggleClass('hide-calendar');
+				 }
+			 });
+			$( "#bonusmonth" ).focus(function() {
 				 if(!$("#ui-datepicker-div").hasClass("hide-calendar")){
 					 $('#ui-datepicker-div').toggleClass('hide-calendar');
 				 }

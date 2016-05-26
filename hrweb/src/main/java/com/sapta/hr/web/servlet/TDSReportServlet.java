@@ -171,17 +171,17 @@ public class TDSReportServlet extends BaseServlet {
 				id_value.setFixedHeight(15);
 				tdsvalues.addCell(id_value);
 				
-				if(TDSDO.getEmpid() != null && TDSDO.getEmpid() > 0){
+				/*if(TDSDO.getEmpid() != null && TDSDO.getEmpid() > 0){
 					PdfPCell empId_value = new PdfPCell(new Paragraph(TDSDO.getEmpid().toString(), font8));
 					empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 					empId_value.setBorderColor(BaseColor.GRAY);
 					tdsvalues.addCell(empId_value);
-				}else{
+				}else{*/
 					PdfPCell empId_value = new PdfPCell(new Paragraph("", font8));
 					empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 					empId_value.setBorderColor(BaseColor.GRAY);
 					tdsvalues.addCell(empId_value);
-				}
+				/*}*/
 				
 				PdfPCell reference = new PdfPCell(new Paragraph(TDSDO.getRefer(), font8));
 				reference.setHorizontalAlignment(Element.ALIGN_LEFT);

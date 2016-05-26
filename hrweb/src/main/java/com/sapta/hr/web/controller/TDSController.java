@@ -113,8 +113,10 @@ public class TDSController {
 				tdsdo.setTdsmonth(CommonUtil.convertStringToDate(tdsmonth));
 				tdsdo.setAmount(amount);
 				tdsdo.setRefer(refer);
-				tdsdo.setComments(comments);
-				
+				/*tdsdo.setComments(comments);*/
+				if (!comments.equalsIgnoreCase("null")){
+					tdsdo.setComments(comments);
+				}
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				tdsdo.setUpdatedby(user.getUsername());
 				tdsdo.setUpdatedon(new Date());
@@ -214,8 +216,8 @@ public class TDSController {
 	}
 	
 	
-	@RequestMapping(value = "/update/{id}/{empid}/{tdsmonth}/{amount}/{refrence}/{comment}", method = RequestMethod.GET)
-	public @ResponseBody String update(@PathVariable long id, @PathVariable long empid, @PathVariable String tdsmonth,  @PathVariable Double amount, @PathVariable String refrence, 
+	@RequestMapping(value = "/update/{id}/{tdsmonth}/{amount}/{refrence}/{comment}", method = RequestMethod.GET)
+	public @ResponseBody String update(@PathVariable long id, @PathVariable String tdsmonth,  @PathVariable Double amount, @PathVariable String refrence, 
 		@PathVariable String comment, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
@@ -226,14 +228,18 @@ public class TDSController {
 						TDSDO tdsdatalist = tdsList.get(0);
 						if(tdsdatalist != null){
 							
-							if(empid != 0)tdsdatalist.setEmpid((empid));
+							/*if(empid != 0)tdsdatalist.setEmpid((empid));*/
 							if(!tdsmonth.equalsIgnoreCase("null"))
 								tdsdatalist.setTdsmonth(CommonUtil.convertStringToDate(tdsmonth));	
 							if(amount !=null)
 								tdsdatalist.setAmount(amount);
 							if (!refrence.equalsIgnoreCase("null"))
 								tdsdatalist.setRefer(refrence);
-							if (!comment.equalsIgnoreCase("null"))
+							if (!comment.equalsIgnoreCase("null")){
+								tdsdatalist.setComments(comment);
+							}else{
+								tdsdatalist.setComments(null);
+							}
 							
 							tdsdatalist.setUpdatedby(user.getUsername());
 							tdsdatalist.setUpdatedon(new Date());
