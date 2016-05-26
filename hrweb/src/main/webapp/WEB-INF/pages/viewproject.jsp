@@ -24,7 +24,8 @@
 							<tr>
 								<th class="first">Project&nbsp;Id</th>
 								<th class="">Project&nbsp;Code</th>
-								<th class="">Display&nbsp;Name</th>
+								<th class="">Project&nbsp;Name</th>
+								<th class="">Customer&nbsp;Name</th>
 								<th class="">Status</th>
 							</tr>
 						</thead>					
@@ -60,7 +61,7 @@
 							<td class="value"><input id="name" disabled="disabled" class="inputdisable" ></td>
 						</tr>
 						<tr class="">
-							<td class="lableContent">Display Name</td>
+							<td class="lableContent">Project Name</td>
 							<td class="value"><input id="dispname" disabled="disabled" class="inputdisable" ></td>
 						</tr>
 						<tr class="">

@@ -35,7 +35,7 @@
 						<tr>
 							<td align="right"><sup class="saptaColor">*</sup>References&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="add_references" name="add_references"></textarea></td>
-							<td align="right"><sup class="saptaColor">*</sup>Comments&nbsp;:</td>
+							<td align="right"><!-- <sup class="saptaColor">*</sup> -->Comments&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="add_comments" name="add_comments"></textarea></td>
 						</tr>
 					</table>
@@ -73,7 +73,7 @@
 							<td class="currenttotalamtrupyatd1 mobMART0PX"  align="right" id="totalcounttd1">Total&nbsp;Amount&nbsp;Paid&nbsp;:</td>
 							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
 							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto;"></td> -->
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold; font-family: DejaVu Sans;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold; width: 109px;" /></td>
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold; width: 109px;" /></td>
 						</tr>
 					</table>
 				</div>
@@ -88,7 +88,7 @@
 							<thead>
 								<tr>
 									<th class="first">Id</th>
-									<th class="">Employee&nbsp;Id</th>
+									<!-- <th class="">Employee&nbsp;Id</th> -->
 									 <th class="">References</th>
 									<th class="">TDS&nbsp;Month</th>
 									<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
@@ -115,10 +115,10 @@
 									<td class="lableContent">Id</td>
 									<td class="value"><input id="id" disabled="disabled" class="inputdisable"></td>
 								</tr>
-								<tr class="">
+								<!-- <tr class="">
 									<td class="lableContent">Employee Id</td>
 									<td class="value"><a href="#" id="show_employee" style="cursor: pointer;"><input id="empid"   class="inputdisable" style="cursor: pointer;"></a></td>
-								</tr>
+								</tr> -->
 								<tr class="">
 									<td class="lableContent">TDS Month</td>
 									<td id="date_tabledata" class="value hidden">
@@ -249,10 +249,11 @@
 				if(tdsmonth == "" || tdsmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
 				if(refer == "" || refer.length == 0) validation = false;
-				if(comments == "" || comments.length == 0) validation = false;
+				/* if(comments == "" || comments.length == 0) validation = false; */
 				if(validation == false){
 					$("#tds_mandatory").html("All necessary information has not been provided or it may be invalid data");
 				}else{
+					if(comments == "" || comments == null || comments.length == 0) comments = null;
 					var resourceURL = $("#contextpath").val()+"/tds/add/"+tdsmonth+"/"+amount+"/"+refer+"/"+comments;
 					$.ajax({
 						url : resourceURL,
@@ -376,7 +377,7 @@
 			 
 			            // Total over all pages
 			            total = api
-			                .column( 4 )
+			                .column( 3 )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -384,7 +385,7 @@
 			 
 			            // Total over this page
 			            pageTotal = api
-			                .column( 4, { "filter": "applied"} )
+			                .column( 3, { "filter": "applied"} )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -396,7 +397,7 @@
 			        },
 			        "aoColumns": [ 
                       {sClass: "alignleft"}, 
-                      {sClass: "alignleft"}, 
+                     /*  {sClass: "alignleft"},  */
                       {sClass: "alignleft"}, 
                       {sClass: "center"},
                       {sClass: "alignright"}
@@ -485,7 +486,7 @@
 			            };
 			            // Total over all pages
 			            total = api
-			                .column( 4 )
+			                .column( 3 )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -493,7 +494,7 @@
 			 
 			            // Total over this page
 			            pageTotal = api
-			                .column( 4, { "filter": "applied"} )
+			                .column( 3, { "filter": "applied"} )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -504,7 +505,7 @@
 			        },
 			        "aoColumns": [ 
                       {sClass: "alignleft"}, 
-                      {sClass: "alignleft"}, 
+                      /* {sClass: "alignleft"}, */ 
                       {sClass: "alignleft"}, 
                       {sClass: "alignleft"},
                       {sClass: "alignright"}
@@ -557,7 +558,7 @@
 				 
 				            // Total over all pages
 				            total = api
-				                .column( 4 )
+				                .column( 3 )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
@@ -565,7 +566,7 @@
 				 
 				            // Total over this page
 				            pageTotal = api
-				                .column( 4, { "filter": "applied"} )
+				                .column( 3, { "filter": "applied"} )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
@@ -576,7 +577,7 @@
 				        },
 				        "aoColumns": [ 
 	                      {sClass: "alignleft"}, 
-	                      {sClass: "alignleft"}, 
+	                      /* {sClass: "alignleft"},  */
 	                      {sClass: "alignleft"}, 
 	                      {sClass: "alignleft"},
 	                      {sClass: "alignright"}
@@ -610,7 +611,7 @@
 							
 							$.each(results, function (i, result) {
 								$("#id").val((result.id == undefined || result.id == null || result.id.length <= 0) ? "-" : result.id);
-								if(result.empid == 0 || result.empid == null || result.empid == "null"){
+								/* if(result.empid == 0 || result.empid == null || result.empid == "null"){
 									$("#empid").val("-");
 									$("#empid").css( ' color' ,'rgb(84, 84, 84)');
 									 $("#empid").css('text-decoration', 'none');
@@ -618,7 +619,7 @@
 									$("#empid").val(result.empid);
 									$("#empid").css( ' color' ,'#000000');
 								    $("#empid").css('text-decoration', 'underline');
-								}
+								} */
 								$("#tdsmonth").val((result.tdsmonth == undefined || result.tdsmonth == null || result.tdsmonth.length <= 0) ? "-" : result.tdsmonth);
 								$("#optional_date").html((result.tdsmonth == undefined || result.tdsmonth == null || result.tdsmonth.length <= 0) ? "-" : result.tdsmonth);
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
@@ -783,7 +784,7 @@
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
-				var empid = $("#empid").val();
+				/* var empid = $("#empid").val(); */
 				var date = $("#tdsmonth").datepicker().val();
 				if(date != ""){
 					date = monthConversion(date);
@@ -795,14 +796,14 @@
 				if(tdsmonth == "" || tdsmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
 				if(refrence == "" || refrence.length == 0) validation = false;
-				if(comment == "" || comment.length == 0) validation = false;
-				
+				/* if(comment == "" || comment.length == 0) validation = false; */
 				if(validation == false){
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					if(empid == "" || empid.length == 0 || empid == "-") empid = 0;
-				var resourceURL = $("#contextpath").val()+"/tds/update/"+id+"/"+empid+"/"+tdsmonth+"/"+amount+"/"+refrence+"/"+comment;
+					/* if(empid == "" || empid.length == 0 || empid == "-") empid = 0; *//* +empid+"/" */
+					if(comment == null || comment == "" || comment.length == 0 || comment == "-") comment = null;
+				var resourceURL = $("#contextpath").val()+"/tds/update/"+id+"/"+tdsmonth+"/"+amount+"/"+refrence+"/"+comment;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -811,9 +812,9 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							if(successflag == "true"){
-								   if($("#empid").val() == "" || $("#empid").val() == "-"){
+								   /* if($("#empid").val() == "" || $("#empid").val() == "-"){
 										$("#empid").val("-");
-									}
+									} */
 								$("#empid").prop( "disabled", true );
 								$("#tdsmonth").prop( "disabled", true );
 								$("#refers").prop( "disabled", true );

@@ -187,7 +187,7 @@ public class BillsController {
 			@PathVariable long vendorid, @PathVariable String billno, @PathVariable String comments,Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
-								
+				
 				BillsDO billsdo = new BillsDO();
 				billsdo.setBillno(billno);
 				billsdo.setBilldate(CommonUtil.convertStringToDate(billdate));
@@ -198,7 +198,9 @@ public class BillsController {
 				billsdo.setAmounttype(amounttype);
 				billsdo.setStatus('a');
 				billsdo.setVendorid(vendorid);
-				billsdo.setComments(comments);
+				if(!comments.equalsIgnoreCase("null")){
+					billsdo.setComments(comments);
+				}
 				
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				billsdo.setUpdatedby(user.getUsername());
@@ -296,8 +298,11 @@ public class BillsController {
 					}
 					billsDO.setDueamount(dueamount);
 					billsDO.setStatus(status);
-					if(!comments.equalsIgnoreCase("null"))
-					billsDO.setComments(comments);
+					if(!comments.equalsIgnoreCase("null")){
+						billsDO.setComments(comments);
+					} else {
+						billsDO.setComments(null);
+					}
 					if(!String.valueOf(amounttype).equalsIgnoreCase("null"))
 					billsDO.setAmounttype(amounttype);
 					billsDO.setPaidon(CommonUtil.convertStringToDate(paidOn));

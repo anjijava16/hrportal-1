@@ -57,7 +57,7 @@
 				<div id="billsdetails" class="hidden MRGT10PX">
 					<div align="left" id="back_billsList" class=""><a href="#" id="show_showbillsList">Bills List </a>/ Bill</div><br/>
 					<c:choose>
-						<c:when test="${ session.groupname == 'ad'}">
+						<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
 							<td align = "right"><input type="button" value="Edit" class="leftElement MRGL10PX" id="edit"/></td>
 							<td align = "right"><input type="button" value="Delete" class="rightElement graybtn" id="delete"/></td>	
 						</c:when>
