@@ -107,7 +107,7 @@ public final class BillsUtil {
 		if(!String.valueOf(billdo.getComments()).equalsIgnoreCase("null")){System.out.println(String.valueOf(billdo.getComments()));
 			result.put(String.valueOf(billdo.getComments()));
 		}else{
-			result.put("-");
+			result.put("");
 		}
 			
 		if(billdo.getStatus() == 'i' ){

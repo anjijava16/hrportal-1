@@ -72,7 +72,7 @@
 							<thead>
 								<tr>
 									<th class="first">Employee&nbsp;Id</th>
-									<th class="">Bonus</th>
+									<th class="">Bonus Amount</th>
 									<th class="">Bonus&nbsp;Month</th>
 									<th class="">Paid&nbsp;On</th>
 									<th class="">Comments</th>
