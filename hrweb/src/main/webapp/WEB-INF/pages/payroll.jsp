@@ -107,8 +107,8 @@
 						 	<!-- <div class="WDTH50PER" align ="center"> -->
 							 	<table  align ="center" style="left:0; float: left;" class="WDTH50PER MOBWID275PX">
 									<tr>
-										<td align="right" style="margin-top: 0px; width:51%; ">Annual&nbsp;CTC&nbsp;:&nbsp;</td>
-										<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD"  ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR">&#x20B9;&nbsp;</span><input id="annualctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
+										<td align="right" style="margin-top: 0px; width:51%; ">Annual&nbsp;CTC&nbsp;:</td>
+										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD"  ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="annualctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
 							
 									</tr>
 								</table>
@@ -116,11 +116,11 @@
 							 <!-- <div class="WDTH50PER"> -->
 							 	<table  align ="center" style="left:50%; " class="WDTH50PER MOBWID275PX">
 									<tr>
-										<td align="right" style="margin-top: 0px; width:51%; " >Monthly&nbsp;CTC&nbsp;:&nbsp;</td>
+										<td align="right" style="margin-top: 0px; width:51%; " >Monthly&nbsp;CTC&nbsp;:</td>
 										<!-- <td class="middlecellcol" style="width: 24px;">:</td> -->
 										<!--  <td class="WebRupee PADDRGT1PX BLD rupyaINR" width="11px" style="padding-top: 2px;" class="rupyaINR WebRupee">&#x20B9;</td> -->
 										<!-- <td id="monthlyctctd" class="PADDLFT1PX BLD"  width="192px"><input id="monthlyctc" disabled="disabled" class="inputdisable" style="font-weight: bold";></input></td> -->
-										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR">&#x20B9;&nbsp;</span><input id="monthlyctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
+										 <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight: bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="monthlyctc" disabled style="border: 0;background-color: white;font-weight: bold; width: 100px;" /></td>
 							
 									</tr>
 								</table>

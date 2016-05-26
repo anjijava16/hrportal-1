@@ -20,10 +20,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 		@NamedQuery(name = "TdsDO.find", query = "SELECT u FROM TDSDO u"),
 		@NamedQuery(name = "TdsDO.findbyId", query = "SELECT u FROM TDSDO u where u.id =:id"), 
-		/*@NamedQuery(name = "TdsDO.findbyEmpId", query = "SELECT u FROM TDSDO u where u.empid =:empid"),*/
+		@NamedQuery(name = "TdsDO.findbyEmpId", query = "SELECT u FROM TDSDO u where u.empid =:empid"),
 		@NamedQuery(name = "TdsDO.findbyTdmonth", query = "SELECT u FROM TDSDO u where u.tdsmonth =:tdsmonth"),
 		@NamedQuery(name = "TDSDO.findbysteddate", query = "SELECT e FROM TDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate"),
-		/*@NamedQuery(name = "TDSDO.findbyempidtdsdate", query = "SELECT e FROM TDSDO e WHERE e.empid =:empid AND e.tdsmonth =:tdsdate"),*/
+		@NamedQuery(name = "TDSDO.findbyempidtdsdate", query = "SELECT e FROM TDSDO e WHERE e.empid =:empid AND e.tdsmonth =:tdsdate"),
 		@NamedQuery(name = "TDSDO.findbysteddatebyorder", query = "SELECT e FROM TDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate order by e.tdsmonth")
 	})
 
@@ -49,7 +49,7 @@ import javax.persistence.TemporalType;
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "tds")
 	private Long id;
 
-	/*private Long empid;*/
+	private Long empid;
 	
 	@Temporal(TemporalType.DATE)
 	private Date tdsmonth;
@@ -73,13 +73,13 @@ import javax.persistence.TemporalType;
 		this.id = id;
 	}
 
-	/*public Long getEmpid() {
+	public Long getEmpid() {
 		return empid;
 	}
 
 	public void setEmpid(Long empid) {
 		this.empid = empid;
-	}*/
+	}
 
 	public Date getTdsmonth() {
 		return tdsmonth;

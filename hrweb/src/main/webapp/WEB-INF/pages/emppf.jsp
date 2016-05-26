@@ -60,7 +60,7 @@
 						<table   align ="center" class="optionTable">
 							<tr>
 								<td  align="right"  id="totalcounttd1" style="margin-top:0px;" >PF&nbsp;Amount&nbsp;Paid&nbsp;:</td>
-								<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td> -->
+								<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto; font-family: DejaVu Sans;" class="rupyaINR WebRupee">&#x20B9;</td> -->
 								<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px; font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0; background-color: white; width:109px; font-weight:bold;" /></td>
 							</tr>
 						</table>

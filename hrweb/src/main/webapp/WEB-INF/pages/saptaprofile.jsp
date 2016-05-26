@@ -153,7 +153,7 @@
 	</body>
 	<script>
 		$(document).ready(function(){
-			$("#pageTitle").html("Saptalabs <b class='saptaColor'>Profile</b>");
+			$("#pageTitle").html("Sapta <b class='saptaColor'>Profile</b>");
 			$("body").css("cursor", "progress");
 			$("#menu_misc").addClass("active");
 			var saptaprofilelistSize = "${saptaprofileList}";

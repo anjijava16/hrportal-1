@@ -844,11 +844,10 @@ public class EmployeeController {
 				EmpReferencesDO empReferencesDO = new EmpReferencesDO();
 				empReferencesDO.setEmpid(Long.parseLong(empid));		
 				empReferencesDO.setName(name);
-				if (!address.equalsIgnoreCase("null")){
+				if (!address.equalsIgnoreCase("null"))
 					address = address.replace("=", "#");
-					address = address.replace("*", "/");
+				address = address.replace("*", "/");
 					empReferencesDO.setAddress(address);
-				}
 				if (!phone.equalsIgnoreCase("null"))
 				empReferencesDO.setPhone(Long.parseLong(phone));
 				empReferencesDO.setMobile(Long.parseLong(mobile));
@@ -1267,12 +1266,10 @@ public class EmployeeController {
 				empReferencesDO.setEmpid(Long.parseLong(empid));
 				if (!name.equalsIgnoreCase("null"))
 				empReferencesDO.setName(name);
-				if (!address.equalsIgnoreCase("null")){
-					address = address.replace("=", "#");
-					address = address.replace("*", "/");
-					empReferencesDO.setAddress(address);
-				}else
-					empReferencesDO.setAddress(null);
+				if (!address.equalsIgnoreCase("null"))
+				address = address.replace("=", "#");
+				address = address.replace("*", "/");
+				empReferencesDO.setAddress(address);
 				if (!phone.equalsIgnoreCase("null"))
 				empReferencesDO.setPhone(Long.parseLong(phone));
 				if (!mobile.equalsIgnoreCase("null"))

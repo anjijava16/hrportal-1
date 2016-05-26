@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sapta.hr.domainobject.CommonConstantsDO;
 import com.sapta.hr.domainobject.EmpAccDetailDO;
 import com.sapta.hr.domainobject.EmpAssignmentDO;
 import com.sapta.hr.domainobject.EmpCTCDO;
@@ -24,12 +25,13 @@ import com.sapta.hr.domainobject.EmpDetailDO;
 import com.sapta.hr.domainobject.EmpFamilyBackgroundDO;
 import com.sapta.hr.domainobject.EmpPFDO;
 import com.sapta.hr.domainobject.EmployeeDO;
-import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.PayrollData;
+import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.ProfessionalTaxDO;
 import com.sapta.hr.domainobject.ProjectDO;
 import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.domainobject.UserDO;
+import com.sapta.hr.service.CommonConstantsService;
 import com.sapta.hr.service.EmpAccDetailService;
 import com.sapta.hr.service.EmpAssignmentService;
 import com.sapta.hr.service.EmpCTCService;
@@ -42,6 +44,7 @@ import com.sapta.hr.service.ProfessionalTaxService;
 import com.sapta.hr.service.ProjectService;
 import com.sapta.hr.service.TDSService;
 import com.sapta.hr.util.CommonConstants;
+import com.sapta.hr.web.util.CommonConstantsUtil;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
 import com.sapta.hr.web.util.EmpAccDetailUtil;
@@ -197,7 +200,7 @@ public class PayrollController {
                 
                 if(tds > 0){
 	                TDSDO tdsdo = new TDSDO();
-					/*tdsdo.setEmpid(empid);*/
+					tdsdo.setEmpid(empid);
 					tdsdo.setAmount(tds);
 					tdsdo.setTdsmonth(CommonUtil.convertStringToDate(payrollmonth));
 					tdsdo.setComments("TDS for the month of"+" "+payrollmonth);
@@ -721,7 +724,7 @@ public class PayrollController {
 		return respJSON != null ? respJSON.toString() : "";
 	}
 	
-	/*@RequestMapping(value = "/getconstnt", method = RequestMethod.GET)
+	@RequestMapping(value = "/getconstnt", method = RequestMethod.GET)
 	public @ResponseBody String getconst(Model model) {
 		JSONObject respJSON = null;
 		try {
@@ -733,7 +736,7 @@ public class PayrollController {
 		}
 		return respJSON != null ? respJSON.toString() : "";
 		
-	}*/
+	}
 
 	@RequestMapping(value = "/getempctc/{empid}/{selectedmonth}", method = RequestMethod.GET)
 	public @ResponseBody String retriveEmpCtcMonth(@PathVariable long empid, @PathVariable String selectedmonth, Model model, HttpServletRequest request) {

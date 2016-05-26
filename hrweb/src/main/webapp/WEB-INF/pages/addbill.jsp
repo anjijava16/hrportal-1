@@ -77,7 +77,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right"><!-- <sup class="saptaColor">*</sup> -->Comments&nbsp;:</td>
+								<td align="right"><sup class="saptaColor">*</sup>Comments&nbsp;:</td>
 								<td><textarea style="height: 100px; resize:none;" id="comments" name="comments"></textarea></td>
 							</tr>
 						</table>
@@ -231,7 +231,7 @@
 				if(vendid == "" || vendid.length == 0) validation = false;
 				//if(status == "" || status.length == 0) validation = false;
 				if(amounttype == "" || amounttype.length == 0) validation = false;
-				/* if(comments == "" || comments.length == 0) validation = false; */
+				if(comments == "" || comments.length == 0) validation = false;
 				var billdatevalidation = $.datepicker.parseDate('dd-mm-yy',billdate);
 				if(duedate != ""){
 					duedatevalidation = $.datepicker.parseDate('dd-mm-yy',duedate);
@@ -243,7 +243,6 @@
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					if(comments == "" || comments == null || comments.length == 0) comments = null;
 					var resourceURL = $("#contextpath").val()+"/bills/add/"+billdate+"/"+duedate+"/"+dueamount+"/"+amounttype+"/"+vendid+"/"+billno+"/"+comments;
 					$.ajax({
 						url : resourceURL,

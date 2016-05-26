@@ -31,11 +31,11 @@ public final class TDSUtill {
 	}
 	private static JSONObject gettdsObjectgrid(TDSDO tdsdo)throws JSONException, AppException {
 		JSONArray result = new JSONArray();
-		/*String empid = "-";
+		String empid = "-";
 		if(tdsdo.getEmpid() != 0){
 			empid = String.valueOf(tdsdo.getEmpid());
-		}*/
-		/*result.put(empid);*/
+		}
+		result.put(empid);
 		result.put(tdsdo.getRefer());
 		result.put(CommonUtil.convertDateToStringWithdatetime(tdsdo.getTdsmonth()));
 		result.put(tdsdo.getAmount());
@@ -69,7 +69,7 @@ public final class TDSUtill {
 	private static JSONObject gettdsObject(TDSDO tdsdo)throws JSONException, AppException {
 		JSONObject result = new JSONObject();
 		result.put(CommonConstants.ID, String.valueOf(tdsdo.getId()));
-		/*result.put(CommonConstants.EMP_ID, String.valueOf(tdsdo.getEmpid()));*/
+		result.put(CommonConstants.EMP_ID, String.valueOf(tdsdo.getEmpid()));
 		result.put(CommonConstants.TDMONTH, CommonUtil.convertDateToStringWithdatetime(tdsdo.getTdsmonth()));
 		result.put(CommonConstants.TDS_DATE_MONTH, CommonUtil.convertDateToStringWithOutTime(tdsdo.getTdsmonth()));
 		result.put(CommonConstants.AMOUNT, tdsdo.getAmount());
@@ -97,11 +97,11 @@ public final class TDSUtill {
 	private static JSONArray gettdsDataTableObject(TDSDO tdsdo)throws JSONException, AppException {
 		JSONArray result = new JSONArray();
 		result.put(String.valueOf(tdsdo.getId()));
-		/*if(tdsdo.getEmpid() != null){
+		if(tdsdo.getEmpid() != null){
 			result.put(String.valueOf(tdsdo.getEmpid()));
 		}else{
 			result.put(String.valueOf("-"));
-		}*/
+		}
 		if(tdsdo.getRefer() != null){
 			result.put(String.valueOf(tdsdo.getRefer()));
 		}else{

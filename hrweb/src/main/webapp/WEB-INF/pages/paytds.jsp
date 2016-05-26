@@ -31,7 +31,7 @@
 						<tr>
 							<td align="right"><sup class="saptaColor">*</sup>References&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="references" name="references"></textarea></td>
-							<td align="right"><!-- <sup class="saptaColor">*</sup> -->Comments&nbsp;:</td>
+							<td align="right"><sup class="saptaColor">*</sup>Comments&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="comments" name="comments"></textarea></td>
 						</tr>
 					</table>
@@ -106,13 +106,12 @@
 				if(tdsmonth == "" || tdsmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
 				if(refer == "" || refer.length == 0) validation = false;
-				/* if(comments == "" || comments.length == 0) validation = false; */
+				if(comments == "" || comments.length == 0) validation = false;
 				 
 				if(validation == false){
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					if(comments == "" || comments.length == 0) comments == "null";
 					var resourceURL = $("#contextpath").val()+"/tds/add/"+tdsmonth+"/"+amount+"/"+refer+"/"+comments;
 					$.ajax({
 						url : resourceURL,

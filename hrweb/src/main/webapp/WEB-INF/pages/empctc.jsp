@@ -410,6 +410,7 @@
 				$('#ctcviewtable tbody').on( 'click', 'td', function () {
 				  var cellData = table20.cell( this ).data();
 				  // ... do something with `cellData`
+				  alert(cellData)
 				} ); */
 				
 				$('#ctcviewtable tbody').on('click', 'td.pdfclass img',function(){
