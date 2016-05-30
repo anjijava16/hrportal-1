@@ -67,7 +67,7 @@
 								<li><a href="<%=request.getContextPath() %>/empbonus"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee Bonus</span></a></li>
 								
 								<c:if test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
-									<li><a href="<%=request.getContextPath() %>/empctc"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/employee_ctc.png"/></aside>&nbsp;&nbsp;<span>Cost To Company</span></a></li>
+								<%-- <li><a href="<%=request.getContextPath() %>/emptds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Employee TDS</span></a></li> --%>
 									<li><a href="<%=request.getContextPath() %>/payroll"><i class="fa fa-user"></i><sup><i class="fa fa-usd"></i></sup>&nbsp;<span>Payroll</span></a></li>
 								</c:if>
 								

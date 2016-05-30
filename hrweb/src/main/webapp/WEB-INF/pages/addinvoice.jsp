@@ -534,7 +534,7 @@
 					 		increment = "0"+increment;
 					 	}
 					 	
-					 	$("#invoiceno").val(invoiceNumber.substr(0, 9)+increment);
+					 	$("#invoiceno").val(invoiceNumber.substr(0, 8)+increment);
 				 	}else{
 				 		$("#invoiceno").val("");
 				 	}
