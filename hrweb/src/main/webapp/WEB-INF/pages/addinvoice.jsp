@@ -247,24 +247,8 @@
 							<!-- Project Assignment Details Starts -->
 					    </div>
 				   </div>
-				</div>
-			
-			</div>
-			<%-- <div id="confirmMsg" class="hidden" >
-				<h1><b class="saptaColor">Confirmation</b></h1>
-				<div id="confirmationMsgContent"></div>
-				<input type="button" id="delete_no" class="rightElement graybtn" value="Cancel" style=" margin-top: 10px; ">
-				<input type="button" id="delete_yes" class="leftElement  MRGR10PX" value="Yes I'm" style="margin-top: 10px">
-			</div>
-			
-			<div id ="deletedsuccessful_fancybox" class="hidden">
-				<h1><b class="saptaColor">Notification</b></h1>
-				<div id = "successful_msg_content"></div>
-				<a href="<%=request.getContextPath() %>/assignment/viewassignment" style="text-decoration: none">
-				<input id="familydetails_ok" type="button" value="Done" class="MRGT10PX"/>&nbsp;</a>
-			</div> --%>
-			<!-- Assignment Details End-->
-					<div id="invoiceterms" class="hidden" style="padding: 2px;">
+				   
+				   <div id="invoiceterms" class="" style="padding: 2px;">
 					<div class="responsive">
 					   <div class="data">
 				   			<div id = "" style="width:30%;margin:0 auto; padding: 25px 0px 5px 0px;">
@@ -288,9 +272,9 @@
 							   </tr>		   
 					   </table>
 					   </div>
-					</div>
+				</div>
 					
-					<div id="invoiceitemcontent" class="hidden" style="padding: 2px;">
+				<div id="invoiceitemcontent" class="" style="padding: 2px;">
 					<div class="responsive">
 					   <table id="invoicetablecontent" class="data">
 							   <tr>
@@ -320,29 +304,47 @@
 					   </table>
 					   </div>
 					</div>
-					<div class="clearWidth hidden" id="sub_total" style="margin: 10px 0;">
+					<div class="clearWidth" id="sub_total" style="margin: 10px 0;">
 						<div class="clearTable rightElement MRGRINVDIV sub_tot_div">
 							<div class="leftElement BLDTEXT12PX ">Sub Total</div>
 							<div id="subtotalamountdivision" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
-					<div class="clearWidth hidden" id="service_tax" style="margin-bottom: 10px;">
+					<div class="clearWidth" id="service_tax" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGRINVDIV div_Width">
 							<div class="leftElement BLDTEXT12PX ">Service Tax(15%)</div>
 							<div id="servicetax" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
 					
-					<div id="totalamountunderline" class="clearWidth hidden" id="">
+					<div id="totalamountunderline" class="clearWidth" id="">
 						<div class="clearTable rightElement WDTH25PER underlinediv">
 						</div>
 					</div>
-					<div class="clearWidth hidden" id="total_amount" style="margin-bottom: 10px;">
+					<div class="clearWidth" id="total_amount" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGRINVDIV tot_div">
 							<div class="leftElement BLDTEXT12PX ">Total	</div>
 							<div id="totalamountdivision" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
-					</div>					
+					</div>
+				</div>
+			
+			</div>
+			<%-- <div id="confirmMsg" class="hidden" >
+				<h1><b class="saptaColor">Confirmation</b></h1>
+				<div id="confirmationMsgContent"></div>
+				<input type="button" id="delete_no" class="rightElement graybtn" value="Cancel" style=" margin-top: 10px; ">
+				<input type="button" id="delete_yes" class="leftElement  MRGR10PX" value="Yes I'm" style="margin-top: 10px">
+			</div>
+			
+			<div id ="deletedsuccessful_fancybox" class="hidden">
+				<h1><b class="saptaColor">Notification</b></h1>
+				<div id = "successful_msg_content"></div>
+				<a href="<%=request.getContextPath() %>/assignment/viewassignment" style="text-decoration: none">
+				<input id="familydetails_ok" type="button" value="Done" class="MRGT10PX"/>&nbsp;</a>
+			</div> --%>
+			<!-- Assignment Details End-->
+									
 					<div class="clearWidth hidden" id="buttons">
 						<div class="clearTable rightElement">
 							<div class="leftElement MRGL10PX">
@@ -528,12 +530,11 @@
 				 		var invoiceNumber = invoicenum;
 				 		invoicenum = invoicenum.split("-");
 					 	var increment = 0;
-					 	var invoicearray = invoicenum[3]; 
+					 	var invoicearray = invoicenum[2]; 
 					 	increment = parseInt(invoicearray)+1;
 					 	if(increment <= 9){
 					 		increment = "0"+increment;
 					 	}
-					 	
 					 	$("#invoiceno").val(invoiceNumber.substr(0, 8)+increment);
 				 	}else{
 				 		$("#invoiceno").val("");
@@ -673,10 +674,10 @@
 			$('#custselect').on('change', function (e){
 				$("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden");
-			 	$("#invoice").addClass("hidden");
+			 	/* $("#invoice").addClass("hidden"); */
 			 	$("#viewAssignment").addClass("hidden");
 			 	$("#projselect").addClass("hidden");
-			 	$("#invoicenodiv").addClass("hidden");
+			 	/* $("#invoicenodiv").addClass("hidden"); */
 			 	if($("#custselect").val() != ""){
 			 		var resourceURL = $("#contextpath").val()+"/project/retrivebycustid/"+$("#custselect").val();
 					 $.ajax({
@@ -712,17 +713,17 @@
 					   $("#typeofinvoiceselect").val("");
 				 		$("#typeofinvoicediv").addClass("hidden");
 				 		$("#amounttypeselect").val("");
-				 		$("#amounttypediv").addClass("hidden");
+				 		/* $("#amounttypediv").addClass("hidden");
 				 		$("#invoicenodiv").addClass("hidden");
-				 		$("#invoiceterms").addClass("hidden");
+				 		$("#invoiceterms").addClass("hidden"); */
 				 		$("#invoicedate").val("");
 				 		$("#duedate").val("");
-				 		$("#invoiceitemcontent").addClass("hidden");
+				 		/* $("#invoiceitemcontent").addClass("hidden");
 				 		$("#addinvoice").addClass("hidden");
 				 		$("#sub_total").addClass("hidden");
 				 		$("#service_tax").addClass("hidden");
 				 		$("#totalamountunderline").addClass("hidden");
-				 		$("#total_amount").addClass("hidden");
+				 		$("#total_amount").addClass("hidden"); */
 				 		$("#servicetax").html("0.00");
 				 		$("#subtotalamountdivision").html("0.00");
 						$("#totalamountdivision").html("0.00");
@@ -1155,7 +1156,7 @@
 				$("#viewAssignment").removeClass("hidden");
 				$("#viewAssignmentTbl").removeClass("hidden");
 				$("#empselect").removeClass("hidden");
-				$("#assignmentDetail").addClass("hidden");
+				/*$("#assignmentDetail").addClass("hidden");
 				$("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden");
 			 	$("#total_amount").addClass("hidden");
@@ -1164,7 +1165,7 @@
 			 	$("#invoiceterms").addClass("hidden");
 			 	$("#sub_total").addClass("hidden");
 			 	$("#addinvoice").addClass("hidden");
-			 	$("#invoiceitemcontent").addClass("hidden");
+			 	$("#invoiceitemcontent").addClass("hidden"); */
 				var table = $("#viewAssignmentTbl").DataTable().destroy();
 				var resourceURL = $("#contextpath").val()+"/assignment/getempassign/"+$("#selectproject").val();
 				
@@ -1174,12 +1175,12 @@
 				});
 				$("#invoicedate").val("");
 		 		$("#duedate").val("");
-		 		$("#invoiceitemcontent").addClass("hidden");
+		 		/* $("#invoiceitemcontent").addClass("hidden");
 		 		$("#addinvoice").addClass("hidden");
 		 		$("#sub_total").addClass("hidden");
 		 		$("#service_tax").addClass("hidden");
 		 		$("#totalamountunderline").addClass("hidden");
-		 		$("#total_amount").addClass("hidden");
+		 		$("#total_amount").addClass("hidden"); */
 		 		$("#servicetax").html("0.00");
 		 		$("#subtotalamountdivision").html("0.00");
 				$("#totalamountdivision").html("0.00");
@@ -1202,7 +1203,7 @@
 				$("#viewAssignmentTbl").addClass("hidden");
 				$("#empselect").addClass("hidden");
 				//$("#assignmentDetail").addClass("hidden");
-				$("#mandatory").removeClass("hidden");
+				/* $("#mandatory").removeClass("hidden");
 			 	$("#buttons").removeClass("hidden");
 			 	$("#sub_total").removeClass("hidden");
 			 	$("#total_amount").removeClass("hidden");
@@ -1210,7 +1211,7 @@
 			 	$("#invoicenodiv").removeClass("hidden");
 			 	$("#invoiceterms").removeClass("hidden");
 			 	$("#addinvoice").removeClass("hidden");
-			 	$("#invoiceitemcontent").removeClass("hidden");
+			 	$("#invoiceitemcontent").removeClass("hidden"); */
 			 	$("#invoicedate").datepicker('setDate', 'today');
 				
 			 	/* if($("#powo").val()!=""){
