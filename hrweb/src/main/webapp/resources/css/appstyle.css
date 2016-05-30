@@ -163,7 +163,12 @@ h1.login {
 .floatRight{
 	float: right;
 }
-
+.WDTH650PX{
+	width: 650px !Important;
+}
+.dsply{
+	display: inline;
+}
 .WDTH50PER{
 	width: 50%;
 }

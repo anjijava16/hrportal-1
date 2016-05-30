@@ -31,7 +31,7 @@
 					<tr>
 						<td align="right"><sup class="saptaColor">*</sup>Start&nbsp;Date&nbsp;:</td>
 						<td><b style="float:left"><input  name="startdate" id="startdate" readonly="readonly" type="text" style="height: 20px" class="datePcK"/></b></td>
-						<td align="right">End Date&nbsp;:</td>
+						<td align="right">End&nbsp;Date&nbsp;:</td>
 						<td><b style="float:left"><input name="enddate" id="enddate" type="text" style="height: 20px" class="datePcK"/></b></td>
 					</tr>	
 					<tr>
@@ -601,6 +601,8 @@
 				$("#employeectc").val("");
 				$("#startdate").val("");
 				$.fancybox.open('#empCTCDetails');
+				$("#empCTCDetails").parents(".fancybox-desktop").addClass("WDTH650PX");
+				$("#empCTCDetails").parents(".fancybox-inner").addClass("dsply");
 				$("body").css("cursor", "default");
 			});
 			

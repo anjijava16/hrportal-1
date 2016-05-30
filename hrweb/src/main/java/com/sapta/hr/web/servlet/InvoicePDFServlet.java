@@ -610,7 +610,7 @@ public class InvoicePDFServlet extends BaseServlet {
 					servicetaxtable.setWidthPercentage(100f);
 					servicetaxtable.setSpacingBefore(10f);
 					
-					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax (15%)", fontbold8));
+					PdfPCell servicetaxcell = new PdfPCell(new Paragraph("Service Tax ("+invoice.getServicetaxper()+"%)", fontbold8));
 					servicetaxcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					servicetaxcell.setBorder(0);
 					servicetaxtable.addCell(servicetaxcell);

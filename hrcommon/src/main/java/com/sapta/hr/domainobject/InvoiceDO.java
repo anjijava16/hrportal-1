@@ -67,6 +67,8 @@ public class InvoiceDO implements Serializable {
 	
 	private Double amountininr;
 	
+	private String servicetaxper;
+	
 	private Long customerid;
 	
 	@Temporal(TemporalType.DATE)
@@ -171,6 +173,14 @@ public class InvoiceDO implements Serializable {
 		this.amountininr = amountininr;
 	}
 
+	public String getServicetaxper() {
+		return servicetaxper;
+	}
+
+	public void setServicetaxper(String servicetaxper) {
+		this.servicetaxper = servicetaxper;
+	}
+	
 	public Long getCustomerid() {
 		return customerid;
 	}

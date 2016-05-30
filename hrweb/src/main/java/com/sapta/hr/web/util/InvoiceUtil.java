@@ -73,9 +73,15 @@ public final class InvoiceUtil {
 		result.put(CommonConstants.CUSTOMER_ID, String.valueOf(invodo.getCustomerid()));
 		result.put(CommonConstants.TOTAL_AMOUNT, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invodo.getTotalamount()));
 		if(String.valueOf(invodo.getServicetax()).equalsIgnoreCase("null")){
-			result.put(CommonConstants.SERVICE_TAX, "");
+			result.put(CommonConstants.SERVICE_TAX, "0.00");
 		}else{
 			result.put(CommonConstants.SERVICE_TAX, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invodo.getServicetax()));
+		}
+		
+		if(String.valueOf(invodo.getServicetaxper()).equalsIgnoreCase("null")){
+			result.put(CommonConstants.SERVICE_TAX_PER, "");
+		}else{
+			result.put(CommonConstants.SERVICE_TAX_PER, invodo.getServicetaxper());
 		}
 		result.put(CommonConstants.DUE_DATE, CommonUtil.convertDateToStringWithOutTime(invodo.getDuedate()));
 		result.put(CommonConstants.INVOICE_DATE, CommonUtil.convertDateToStringWithOutTime(invodo.getInvoicedate()));

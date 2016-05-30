@@ -53,16 +53,6 @@
 						<tr>
 							<td align="right"><sup class="saptaColor">*</sup>Amount&nbsp;:</td>
 							<td><input name="amount" id="amount" type="text"  onkeypress="return validateNumericWithPrecision(event)"/></td>
-							<td align="right">Bill No&nbsp;:</td>
-							<td><input name="billno" id="billno" type="text" /></td>
-						</tr>
-						<tr id = "payDetails" class="hidden MRGT10PX">
-							<td align="right" ><sup class="saptaColor">*</sup>Bank Name&nbsp;:</td>
-							<td><input name="bankname" id="bankname" type="text"  onkeypress="return ValidateAlpha(event)"/></td>
-							<td align="right"><sup class="saptaColor">*</sup>Card/Cheque No&nbsp;:</td>
-							<td><input class ="card" name="cardno" id="cardno" type="text"  onkeypress="return validateNumeric(event)"/></td>
-						</tr>
-						<tr>
 							<td align="right"><sup class="saptaColor">*</sup>Mode of Payment&nbsp;:</td>
 							<td>
 								<select id="paymode" name = "paymode" style="text-align: center;">
@@ -73,6 +63,16 @@
 									<option value="o" style="text-align: left;">Online Payment</option>
 								</select>
 							</td>
+						</tr>
+						<tr id = "payDetails" class="hidden MRGT10PX">
+							<td align="right" ><sup class="saptaColor">*</sup>Bank Name&nbsp;:</td>
+							<td><input name="bankname" id="bankname" type="text"  onkeypress="return ValidateAlpha(event)"/></td>
+							<td align="right"><sup class="saptaColor">*</sup>Card/Cheque No&nbsp;:</td>
+							<td><input class ="card" name="cardno" id="cardno" type="text"  onkeypress="return validateNumeric(event)"/></td>
+						</tr>
+						<tr>
+							<td align="right">Bill No&nbsp;:</td>
+							<td><input name="billno" id="billno" type="text" /></td>
 							<td align="right"><sup class="saptaColor">*</sup>Description&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="desc" name="desc"></textarea></td>
 						</tr>

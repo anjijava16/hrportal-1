@@ -226,10 +226,10 @@ public class InvoiceController {
 		
 	}
 	
-	@RequestMapping(value = "/add/{invoicenumber}/{invoicedate}/{duedate}/{customerid}/{projectid}/{totalamount}/{servicetax}/{invoicetype}/{amounttype}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{invoicenumber}/{invoicedate}/{duedate}/{customerid}/{projectid}/{totalamount}/{servicetax}/{invoicetype}/{servicetaxper}/{amounttype}", method = RequestMethod.GET)
 	public @ResponseBody String add(@PathVariable String invoicenumber, @PathVariable String invoicedate, @PathVariable String duedate, 
 		   @PathVariable long customerid, @PathVariable long projectid, @PathVariable double totalamount, @PathVariable double servicetax, 
-		   @PathVariable char invoicetype, @PathVariable String amounttype, Model model, HttpServletRequest request) {
+		   @PathVariable char invoicetype, @PathVariable String amounttype, @PathVariable String servicetaxper, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 								
@@ -246,7 +246,9 @@ public class InvoiceController {
                 if(servicetax != 0){
                 	invoiceDO.setServicetax(servicetax);
                 }
+                System.out.println("totalamount===== "+servicetaxper);
                 invoiceDO.setTotalamount(totalamount);
+                invoiceDO.setServicetaxper(servicetaxper);
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				invoiceDO.setUpdatedby(user.getUsername());
 				invoiceDO.setUpdatedon(new Date());
@@ -319,9 +321,9 @@ public class InvoiceController {
 		return jsonresp != null ? jsonresp.toString() : "";
 	}
 	
-	@RequestMapping(value = "/update/{id}/{invoiceno}/{invoicedate}/{duedate}/{totalamount}/{servicetax}/{projectid}/{customerid}/{amounttype}/{invoicetype}/{status}/{receiveddate}/{receivedamount}/{receivedamounttype}/{receivedcomments}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update/{id}/{invoiceno}/{invoicedate}/{duedate}/{totalamount}/{servicetax}/{projectid}/{customerid}/{servicetaxper}/{amounttype}/{invoicetype}/{status}/{receiveddate}/{receivedamount}/{receivedamounttype}/{receivedcomments}", method = RequestMethod.GET)
 	public @ResponseBody String update(@PathVariable long id, @PathVariable String invoiceno, @PathVariable String invoicedate, @PathVariable String duedate, 
-			@PathVariable double totalamount, @PathVariable double servicetax, @PathVariable long projectid, @PathVariable long customerid, @PathVariable String amounttype, @PathVariable char invoicetype, 
+			@PathVariable double totalamount, @PathVariable double servicetax, @PathVariable long projectid, @PathVariable long customerid, @PathVariable String servicetaxper, @PathVariable String amounttype, @PathVariable char invoicetype, 
 			@PathVariable char status, @PathVariable String receiveddate, @PathVariable double receivedamount, @PathVariable String receivedamounttype, 
 			@PathVariable String receivedcomments, Model model, HttpServletRequest request) {
 		try {
@@ -335,6 +337,7 @@ public class InvoiceController {
 					invoiceDO.setCustomerid(customerid);
 					invoiceDO.setProjectid(projectid);
 					invoiceDO.setTotalamount(totalamount);
+					invoiceDO.setServicetaxper(servicetaxper);
 					invoiceDO.setAmounttype(amounttype);
 					invoiceDO.setTypeofinvoice(invoicetype);
 					invoiceDO.setInvoicestatus(status);

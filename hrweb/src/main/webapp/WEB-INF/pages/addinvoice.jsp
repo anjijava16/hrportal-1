@@ -312,7 +312,7 @@
 					</div>
 					<div class="clearWidth" id="service_tax" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGRINVDIV div_Width">
-							<div class="leftElement BLDTEXT12PX ">Service Tax(15%)</div>
+							<div class="leftElement BLDTEXT12PX ">Service Tax(<span id="serviceTaxPer"></span>%)</div>
 							<div id="servicetax" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
@@ -378,13 +378,16 @@
 	<%@include file="footer.jsp"%>
 	</body>
 	  <script type="text/javascript">
+	  var serviceTaxPercentage = 0;
 	  $(document).ready(function(){
+		  
 			$("body").css("cursor", "progress");
+			
 			$("#menu_payments").addClass("active");
 			$("#pageTitle").html("<b class='saptaColor'>New</b> Invoice");
 			$(function() {
 				
-				 $( "#invoicedate, #duedate, #servicefrom_1, #serviceto_1" ).datepicker({
+				 $( "#duedate, #servicefrom_1, #serviceto_1" ).datepicker({
 					 yearRange: '1950:2100',
 					 defaultDate: new Date(),
 					 changeMonth: true,
@@ -394,7 +397,18 @@
 	                 buttonImageOnly: true,
 					 dateFormat :"dd-mm-yy"
 				 });
-				 //$( "#invoicedate").datepicker("setDate", new Date());
+				 
+				 $( "#invoicedate" ).datepicker({
+					 yearRange: '1950:2100',
+					 defaultDate: new Date(),
+					 changeMonth: true,
+					 changeYear: true,
+					 showOn: "button",
+	               	 buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
+	                 buttonImageOnly: true,
+					 dateFormat :"dd-mm-yy",
+					 onSelect:  serviceTaxPercentage
+				 });
 			 });
 			
 			$('#viewAssignmentTbl tbody').on('click', 'tr',function(){
@@ -658,7 +672,7 @@
 			    	var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
 					var completeLastTotal1 = lasttotal.toFixed(2);
 					if($("#amounttype").val() == "inr"){
-						var servicetax = (parseFloat(completeLastTotal1) * 15) / 100;
+						var servicetax = (parseFloat(completeLastTotal1) * serviceTaxPercentage) / 100;
 						$("#servicetax").html(servicetax.toFixed(2));
 						$("#subtotalamountdivision").html(completeLastTotal1);
 						var completeLastTotal = parseFloat(completeLastTotal1) + parseFloat(servicetax);
@@ -929,7 +943,7 @@
 					 	$("#invoiceitemcontent").removeClass("hidden");
 					 	if($("#amounttypeselect").val() == "i"){
 					 		var totalamount = $("#totalamountdivision").html();
-					 		var servicetax = parseFloat(totalamount * 15 ) / 100;
+					 		var servicetax = parseFloat(totalamount * serviceTaxPercentage ) / 100;
 							var completetotalamount = parseFloat(totalamount) + parseFloat(servicetax);
 							$("#servicetax").html(servicetax.toFixed(2));
 							$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
@@ -1064,16 +1078,17 @@
 					var invoicetype = $("#billtype").val();
 					var amounttype = $("#amounttype").val();
 					
+					var servicetaxper = 0;
 					var servicetax = 0;
 					var totalamount = 0;
 					if(amounttype == "inr"){
 						totalamount = $("#subtotalamountdivision").html();
 						servicetax = $("#servicetax").html();
+						servicetaxper = parseFloat($("#serviceTaxPer").html());
 					}else{
 						totalamount = $("#totalamountdivision").html();
 					}
-						
-					var resourceURL = $("#contextpath").val()+"/invoice/add/"+invoicenumber+"/"+invoicedate+"/"+duedate+"/"+customerid+"/"+projectid+"/"+totalamount+"/"+servicetax+"/"+invoicetype+"/"+amounttype;
+					var resourceURL = $("#contextpath").val()+"/invoice/add/"+invoicenumber+"/"+invoicedate+"/"+duedate+"/"+customerid+"/"+projectid+"/"+totalamount+"/"+servicetax+"/"+invoicetype+"/"+servicetaxper+"/"+amounttype;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -1198,6 +1213,7 @@
 				$("#invoicedate").val("");
 				$("#duedate").val("");
 			});
+			
 			$("#viewAssignmentTbl").on("click", function(){
 				$("#viewAssignment").addClass("hidden");
 				$("#viewAssignmentTbl").addClass("hidden");
@@ -1213,7 +1229,9 @@
 			 	$("#addinvoice").removeClass("hidden");
 			 	$("#invoiceitemcontent").removeClass("hidden"); */
 			 	$("#invoicedate").datepicker('setDate', 'today');
-				
+			 	
+			 	var invoiceDate = $("#invoicedate").val();
+				serviceTaxPercentage(invoiceDate);
 			 	/* if($("#powo").val()!=""){
 			 		$("#refnumbername_1").val($("#powo").val());
 			 	} else {
@@ -1337,7 +1355,7 @@
 				 	$("#invoiceitemcontent").removeClass("hidden"); */
 				 	if($("#amounttype").val() == "inr"){
 				 		var totalamount = $("#totalamountdivision").html();
-				 		var servicetax = parseFloat(totalamount * 15 ) / 100;
+				 		var servicetax = parseFloat(totalamount * serviceTaxPercentage ) / 100;
 						var completetotalamount = parseFloat(totalamount) + parseFloat(servicetax);
 						$("#servicetax").html(servicetax.toFixed(2));
 						$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
@@ -1414,6 +1432,26 @@
 				 });
 			 	}
 			});
+			
+			// Service TAX Date calculation - START
+			  function serviceTaxPercentage(invoiceDate){
+					var invDate = "";
+					var june2016 = "";
+					
+					invoiceDate = invoiceDate.split("-");
+					invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
+					invDate = new Date(invoiceDate);
+					june2016 = new Date("Jun 01 2016");
+					if(invDate >= june2016){
+						serviceTaxPercentage = 15;
+					}else{
+						serviceTaxPercentage = 14.5;
+					}
+					$("#serviceTaxPer").html(serviceTaxPercentage);
+			  }
+			// Service TAX Effective Date calculation - END
+			
+			
 			function assignmentDetails(id) {
 				$("body").css("cursor", "progress");
 				var empid = null;
@@ -1575,6 +1613,17 @@
 		}).on('focusout', '.perrateperiod', function() {
 			var id = $(this).attr("id");
 			var i = id.substring(10, id.length);
+			//service tax percentage calculation STARTS
+			var invoiceDate = $("#invoicedate").val().split("-");
+			invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
+			var invDate = new Date(invoiceDate);
+			var june2016 = new Date("Jun 01 2016");
+			if(invDate >= june2016){
+				serviceTaxPercentage = 15;
+			}else{
+				serviceTaxPercentage = 14.5;
+			}
+			//service tax percentage calculation ENDS
 			if($("#billtype").val() != "f"){
 				var totalperiod = $("#totalhrss_"+i).val();
 				var periodperrate = $("#rateperhr_"+i).val();
@@ -1583,6 +1632,7 @@
 					var completetotalamount = totalamount.toFixed(2);
 					$("#total_"+i).val(completetotalamount);
 					$("#netamt_"+i).val(completetotalamount);
+					
 					var lastTotal = 0;
 					var netamount = 0;
 					$('[id^="netamt_"]').each(function(i, item) {
@@ -1593,7 +1643,7 @@
 							lastTotal = parseFloat(lastTotal) + parseFloat($("#netamt_"+i).val());
 							var completeLastTotal1 = lastTotal.toFixed(2);
 							if($("#amounttype").val() == "inr"){
-								var servicetax = (parseFloat(completeLastTotal1) * 15 ) / 100;
+								var servicetax = (parseFloat(completeLastTotal1) * serviceTaxPercentage ) / 100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								completeLastTotal = parseFloat(completeLastTotal1) + parseFloat(servicetax);
 								completeLastTotal = completeLastTotal.toFixed(2);
@@ -1618,7 +1668,7 @@
 			    			totalamount = $("#subtotalamountdivision").html();
 			    			var servicetax = 0;
 					    	var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
-					    	servicetax = (lasttotal * 15) / 100;
+					    	servicetax = (lasttotal * serviceTaxPercentage) / 100;
 					    	var totalamount = lasttotal + servicetax;
 							$("#subtotalamountdivision").html(lasttotal.toFixed(2));
 							$("#totalamountdivision").html(totalamount.toFixed(2));
@@ -1658,7 +1708,7 @@
 							lastTotal = parseFloat(lastTotal) + parseFloat(netamount);
 							completeLastTotal1 = lastTotal.toFixed(2);
 							if($("#amounttype").val() == "inr"){
-								var servicetax = (parseFloat(completeLastTotal1) * 15) / 100;
+								var servicetax = (parseFloat(completeLastTotal1) * serviceTaxPercentage) / 100;
 								$("#servicetax").html(servicetax.toFixed(2));
 								$("#subtotalamountdivision").html(completeLastTotal1);
 								completeLastTotal = parseFloat(completeLastTotal1) + parseFloat(servicetax.toFixed(2));
@@ -1681,7 +1731,7 @@
 			    			totalamount = $("#subtotalamountdivision").html();
 			    			var servicetax = 0;
 					    	var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
-					    	servicetax = (lasttotal * 15) / 100;
+					    	servicetax = (lasttotal * serviceTaxPercentage) / 100;
 					    	var totalamount = lasttotal + servicetax;
 							$("#subtotalamountdivision").html(lasttotal.toFixed(2));
 							$("#totalamountdivision").html(totalamount.toFixed(2));
@@ -1701,6 +1751,9 @@
 			    	}
 				}
 			}
+			
 	    });
+		
 	</script>
 </html>
+
