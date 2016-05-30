@@ -549,15 +549,15 @@
 			 		$("#amounttypeselect").val("");
 			 		$("#amounttypediv").addClass("hidden");
 			 		$("#invoicenodiv").addClass("hidden");
-			 		$("#invoiceterms").addClass("hidden");
+			 		/* $("#invoiceterms").addClass("hidden"); */
 			 		$("#invoicedate").val("");
 			 		$("#duedate").val("");
-			 		$("#invoiceitemcontent").addClass("hidden");
-			 		$("#addinvoice").addClass("hidden");
+			 		//$("#invoiceitemcontent").addClass("hidden");
+			 		/* $("#addinvoice").addClass("hidden");
 			 		$("#sub_total").addClass("hidden");
 			 		$("#service_tax").addClass("hidden");
 			 		$("#totalamountunderline").addClass("hidden");
-			 		$("#total_amount").addClass("hidden");
+			 		$("#total_amount").addClass("hidden"); */
 			 		$("#servicetax").html("0.00");
 			 		$("#subtotalamountdivision").html("0.00");
 					$("#totalamountdivision").html("0.00");
@@ -748,15 +748,15 @@
 				 		$("#amounttypeselect").val("");
 				 		$("#amounttypediv").addClass("hidden");
 				 		$("#invoicenodiv").addClass("hidden");
-				 		$("#invoiceterms").addClass("hidden");
+				 		//$("#invoiceterms").addClass("hidden");
 				 		$("#invoicedate").val("");
 				 		$("#duedate").val("");
-				 		$("#invoiceitemcontent").addClass("hidden");
-				 		$("#addinvoice").addClass("hidden");
+				 		//$("#invoiceitemcontent").addClass("hidden");
+				 		/* $("#addinvoice").addClass("hidden");
 				 		$("#sub_total").addClass("hidden");
 				 		$("#service_tax").addClass("hidden");
 				 		$("#totalamountunderline").addClass("hidden");
-				 		$("#total_amount").addClass("hidden");
+				 		$("#total_amount").addClass("hidden"); */
 				 		$("#servicetax").html("0.00");
 				 		$("#subtotalamountdivision").html("0.00");
 						$("#totalamountdivision").html("0.00");
@@ -1327,14 +1327,14 @@
 				
 				// amount type
 				if($("#amounttype").val() != ""){
-			 		$("#mandatory").removeClass("hidden");
+			 		/* $("#mandatory").removeClass("hidden");
 				 	$("#buttons").removeClass("hidden");
 				 	$("#total_amount").removeClass("hidden");
 				 	$("#invoice").removeClass("hidden");
-				 	$("#invoicenodiv").removeClass("hidden");
-				 	$("#invoiceterms").removeClass("hidden");
-				 	$("#addinvoice").removeClass("hidden");
-				 	$("#invoiceitemcontent").removeClass("hidden");
+				 	$("#invoicenodiv").removeClass("hidden"); */
+				 	//$("#invoiceterms").removeClass("hidden");
+				 	/* $("#addinvoice").removeClass("hidden");
+				 	$("#invoiceitemcontent").removeClass("hidden"); */
 				 	if($("#amounttype").val() == "inr"){
 				 		var totalamount = $("#totalamountdivision").html();
 				 		var servicetax = parseFloat(totalamount * 15 ) / 100;
@@ -1342,41 +1342,41 @@
 						$("#servicetax").html(servicetax.toFixed(2));
 						$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
 						$("#totalamountdivision").html(completetotalamount.toFixed(2));
-				 		$("#sub_total").removeClass("hidden");
+				 		/* $("#sub_total").removeClass("hidden");
 					 	$("#service_tax").removeClass("hidden");
-					 	$("#totalamountunderline").removeClass("hidden");
+					 	$("#totalamountunderline").removeClass("hidden"); */
 				 		$(".headamounttype").html("&#x20B9;");
 				 		$(".headamounttype").addClass("WebRupee");
 				 		$(".headamounttype").addClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "usd"){
-				 		$("#sub_total").removeClass("hidden");
-					 	$("#service_tax").addClass("hidden");
+				 		/* $("#sub_total").removeClass("hidden");
+					 	$("#service_tax").addClass("hidden"); */
 					 	var totalamount = parseFloat($("#totalamountdivision").html()) - parseFloat($("#servicetax").html());
 					 	$("#servicetax").html(0.00);
 				 		$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
 					 	$("#totalamountdivision").html(totalamount.toFixed(2));
-					 	$("#totalamountunderline").addClass("hidden");
+					 	/* $("#totalamountunderline").addClass("hidden"); */
 				 		$(".headamounttype").html("&#36;");
 				 		$(".headamounttype").removeClass("WebRupee");
 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "eur"){
-				 		$("#sub_total").removeClass("hidden");
-					 	$("#service_tax").addClass("hidden");
+				 		/* $("#sub_total").removeClass("hidden");
+					 	$("#service_tax").addClass("hidden"); */
 					 	var totalamount = parseFloat($("#totalamountdivision").html()) - parseFloat($("#servicetax").html());
 					 	$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
 					 	$("#servicetax").html(0.00);
 					 	$("#totalamountdivision").html(totalamount.toFixed(2));
-					 	$("#totalamountunderline").addClass("hidden");
+					 	//$("#totalamountunderline").addClass("hidden");
 				 		$(".headamounttype").html("&#8364;");
 				 		$(".headamounttype").removeClass("WebRupee");
 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "gbp"){
-				 		$("#sub_total").removeClass("hidden");
+				 		/* $("#sub_total").removeClass("hidden");
 					 	$("#service_tax").addClass("hidden");
-					 	$("#totalamountunderline").addClass("hidden");
+					 	$("#totalamountunderline").addClass("hidden"); */
 					 	var totalamount = parseFloat($("#totalamountdivision").html()) - parseFloat($("#servicetax").html());
 					 	$("#servicetax").html(0.00);
 					 	$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
@@ -1388,16 +1388,16 @@
 				 	$("#buttons").removeClass("hidden");
 			 	}else{
 			 		$("#mandatory").addClass("hidden");
-				 	$("#buttons").addClass("hidden");
+				 	/* $("#buttons").addClass("hidden");
 				 	$("#total_amount").addClass("hidden");
 				 	$("#invoice").addClass("hidden");
-				 	$("#invoicenodiv").addClass("hidden");
-				 	$("#invoiceterms").addClass("hidden");
-				 	$("#addinvoice").addClass("hidden");
+				 	$("#invoicenodiv").addClass("hidden"); */
+				 	//$("#invoiceterms").addClass("hidden");
+				 	/* $("#addinvoice").addClass("hidden");
 				 	$("#sub_total").addClass("hidden");
 				 	$("#service_tax").addClass("hidden");
 				 	
-				 	$("#invoiceitemcontent").addClass("hidden");
+				 	$("#invoiceitemcontent").addClass("hidden"); */
 				 	$("#subtotalamountdivision").html("0.00");
 					$("#totalamountdivision").html("0.00");
 				 	$("#servicetax").html("0.00");
