@@ -328,6 +328,16 @@
 						</div>
 					</div>
 				</div>
+				<div class="clearWidth hidden" id="buttons">
+						<div class="clearTable rightElement">
+							<div class="leftElement MRGL10PX">
+								<a href ="#" style="text-decoration: none"><input id="decline" type="button" value="Decline" class="graybtn" />&nbsp;</a>
+							</div>
+							<div class="rightElement MRGL10PX">
+								<input type="button" value="Submit" id="addInvoice"/>
+							</div>
+						 </div>
+					</div>
 			
 			</div>
 			<%-- <div id="confirmMsg" class="hidden" >
@@ -1435,10 +1445,10 @@
 					june2016 = new Date("Jun 01 2016");
 					if(invDate >= june2016){
 						serviceTaxPercentage = 15;
-						$(".perrateperiod").trigger('focusout');
+						$(".perrateperiod").trigger("focusout");
 					}else{
 						serviceTaxPercentage = 14.5;
-						$(".perrateperiod").trigger('focusout');
+						$(".perrateperiod").trigger("focusout");
 					}
 					$("#serviceTaxPer").html(serviceTaxPercentage);
 			  }
