@@ -285,7 +285,7 @@
 								   <th id="rate_header" class=""><sup class="saptaColor">*</sup>Rate<span id="slashspan">/</span><span id="fixedtypeofperiodrate"></span><span id="typeofperiodrate"></th>
 								   <th class=""><sup class="saptaColor">*</sup>Total&nbsp;(<span class="headamounttype"></span>)</th>
 								   <th class="last"><sup class="saptaColor">*</sup>Net&nbsp;Amount&nbsp;(<span class="headamounttype"></span>)</th>
-								   <th style="background-color: white; border:0; padding:0;"><div id="addinvoice" style="cursor: pointer" class="rightElement MRGR10PX MRGT10PX MRGB10PX hidden"><img src="<%=request.getContextPath() %>/resources/images/add.png" alt="Add More"/></div></th>
+								   <th style="background-color: white; border:0; padding:0;"><div id="addinvoice" style="cursor: pointer" class="rightElement MRGR10PX MRGT10PX MRGB10PX"><img src="<%=request.getContextPath() %>/resources/images/add.png" alt="Add More"/></div></th>
 							   </tr>                                        
 							   <tr id="invoicecontenttablerow_1">
 							   	   <td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_1" id="refnumbername_1" type="text" /></div></td>
@@ -345,16 +345,7 @@
 			</div> --%>
 			<!-- Assignment Details End-->
 									
-					<div class="clearWidth hidden" id="buttons">
-						<div class="clearTable rightElement">
-							<div class="leftElement MRGL10PX">
-								<a href ="#" style="text-decoration: none"><input id="decline" type="button" value="Decline" class="graybtn" />&nbsp;</a>
-							</div>
-							<div class="rightElement MRGL10PX">
-								<input type="button" value="Submit" id="addInvoice"/>
-							</div>
-						 </div>
-					</div>
+					
 					<div id="confirmMsg" class="hidden" >
 						<h1><b class="saptaColor">Confirmation</b></h1>
 						<div id="confirmationMsgContent"></div>
@@ -1444,8 +1435,10 @@
 					june2016 = new Date("Jun 01 2016");
 					if(invDate >= june2016){
 						serviceTaxPercentage = 15;
+						$(".perrateperiod").trigger('focusout');
 					}else{
 						serviceTaxPercentage = 14.5;
+						$(".perrateperiod").trigger('focusout');
 					}
 					$("#serviceTaxPer").html(serviceTaxPercentage);
 			  }
