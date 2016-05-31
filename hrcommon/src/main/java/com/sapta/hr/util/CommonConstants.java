@@ -528,6 +528,14 @@ public final class CommonConstants {
 	
 	public static final String EMP_BOUNS_LIST = "empBonusList";
 	
+	//Emp TDS
+	
+	public static final String JSP_EMP_TDS = "emptds";
+	
+	public static final String EMP_TDS_LIST_SIZE = "empTDSListsize";
+	
+	public static final String EMP_TDS_LIST = "empTDSList";
+	
 	
 	//EmpPF
 	
@@ -637,6 +645,8 @@ public final class CommonConstants {
     public static final String TOTAL_AMOUNT = "totalamount";
     
     public static final String SERVICE_TAX = "servicetax";
+    
+    public static final String SERVICE_TAX_PER = "servicetaxper";
     
     public static final String INVOICE_DATE = "invoicedate";
 	
@@ -862,7 +872,7 @@ public final class CommonConstants {
 	
 	public static final String SALT = "SALT";
 	
-	//Project Type
+	//Bill Type
 	
 	public static final String FIXED = "Fixed";
 	
