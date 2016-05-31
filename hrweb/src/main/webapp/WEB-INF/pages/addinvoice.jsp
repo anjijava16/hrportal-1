@@ -327,8 +327,7 @@
 							<div id="totalamountdivision" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
-				</div>
-				<div class="clearWidth hidden" id="buttons">
+					<div class="clearWidth" id="buttons">
 						<div class="clearTable rightElement">
 							<div class="leftElement MRGL10PX">
 								<a href ="#" style="text-decoration: none"><input id="decline" type="button" value="Decline" class="graybtn" />&nbsp;</a>
@@ -338,6 +337,10 @@
 							</div>
 						 </div>
 					</div>
+					
+					<div style="text-align: center;" id="mandatory" class=""><b class="saptaColor">*</b>mandatory fields</div>
+				</div>
+				
 			
 			</div>
 			<%-- <div id="confirmMsg" class="hidden" >
@@ -373,7 +376,7 @@
 				
 			</div>
 	<!--Content Area END-->
-			<div style="text-align: center;" id="mandatory" class="hidden"><b class="saptaColor">*</b>mandatory fields</div>
+			
 		</div>   
 	</div>
 	<%@include file="footer.jsp"%>
@@ -445,10 +448,10 @@
 				                  {sClass: "center"}
 				                ]
 				});
-			 	$("#invoice").addClass("hidden");
-			 	$("#invoicenodiv").addClass("hidden");
+			 	/* $("#invoice").addClass("hidden");
+			 	$("#invoicenodiv").addClass("hidden"); */
 			 	if($("#selectproject").val() != "null"){
-			 		if(!$("#buttons").hasClass("hidden") && !$("#mandatory").hasClass("hidden")){
+			 		/* if(!$("#buttons").hasClass("hidden") && !$("#mandatory").hasClass("hidden")){
 			 			$("#buttons").removeClass("hidden");
 			 			$("#mandatory").removeClass("hidden");
 			 			$("#invoicenodiv").removeClass("hidden");
@@ -457,7 +460,7 @@
 			 			$("#mandatory").addClass("hidden");
 			 			$("#invoicenodiv").addClass("hidden");
 			 		}
-			 		$("#typeofinvoicediv").removeClass("hidden");
+			 		$("#typeofinvoicediv").removeClass("hidden"); */
 				 	var projectcode = null;
 				 	var customercode = null;
 				 	var invoicenum = 0;
@@ -557,13 +560,13 @@
 				 	//"SL-"+(currentYear.toString().substr(1,3))+"-"+(parseInt(currentYear.toString().substr(1,3))+1)+"-"+((increment <=9) ? ("0"+ increment) : increment)
 				 	
 			 	}else{
-			 		$("#buttons").addClass("hidden");
-		 			$("#mandatory").addClass("hidden");
+			 		/* $("#buttons").addClass("hidden");
+		 			$("#mandatory").addClass("hidden"); */
 			 		$("#typeofinvoiceselect").val("");
 			 		$("#typeofinvoicediv").addClass("hidden");
 			 		$("#amounttypeselect").val("");
 			 		$("#amounttypediv").addClass("hidden");
-			 		$("#invoicenodiv").addClass("hidden");
+			 		/* $("#invoicenodiv").addClass("hidden"); */
 			 		/* $("#invoiceterms").addClass("hidden"); */
 			 		$("#invoicedate").val("");
 			 		$("#duedate").val("");
@@ -687,8 +690,8 @@
 			    }   
 			 });
 			$('#custselect').on('change', function (e){
-				$("#mandatory").addClass("hidden");
-			 	$("#buttons").addClass("hidden");
+				/* $("#mandatory").addClass("hidden");
+			 	$("#buttons").addClass("hidden"); */
 			 	/* $("#invoice").addClass("hidden"); */
 			 	$("#viewAssignment").addClass("hidden");
 			 	$("#projselect").addClass("hidden");
@@ -762,7 +765,7 @@
 				 		$("#typeofinvoicediv").addClass("hidden");
 				 		$("#amounttypeselect").val("");
 				 		$("#amounttypediv").addClass("hidden");
-				 		$("#invoicenodiv").addClass("hidden");
+				 		/* $("#invoicenodiv").addClass("hidden"); */
 				 		//$("#invoiceterms").addClass("hidden");
 				 		$("#invoicedate").val("");
 				 		$("#duedate").val("");
