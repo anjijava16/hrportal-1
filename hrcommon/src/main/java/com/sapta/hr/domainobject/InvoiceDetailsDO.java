@@ -49,6 +49,8 @@ public class InvoiceDetailsDO implements Serializable {
 	
 	private Double rateofperiod;
 	
+	private Long noofdays;
+	
 	private String updatedby;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -108,6 +110,14 @@ public class InvoiceDetailsDO implements Serializable {
 
 	public void setTimeperiod(Long timeperiod) {
 		this.timeperiod = timeperiod;
+	}
+	
+	public Long getNoofdays() {
+		return noofdays;
+	}
+
+	public void setNoofdays(Long noofdays) {
+		this.noofdays = noofdays;
 	}
 
 	public Double getRateofperiod() {

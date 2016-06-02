@@ -636,6 +636,8 @@ public final class CommonConstants {
     
     public static final String TIME_PERIOD = "timeperiod";
     
+    public static final String NO_OF_DAYS = "noofdays";
+    
     public static final String RATE_OF_PERIOD = "rateofperiod";
     
     public static final String AMOUNT_TYPE = "amounttype";
