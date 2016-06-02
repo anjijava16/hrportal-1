@@ -191,7 +191,7 @@
 								   <th class="">From</th>
 								   <th class="">To</th>
 								   <th id="totalhours" class="">Total&nbsp;<span id="typeofperiod"></span></th>
-								   <th id="rate_header" class=""><span id="fixedtypeofperiodrate"></span>Rate<span id="slashspan">/</span><span id="typeofperiodrate"></span></th>
+								   <th id="rate_header" class=""><!-- <span id="fixedtypeofperiodrate"></span> -->Rate<span id="slashspan">/</span><span id="typeofperiodrate"></span></th>
 								   <th class="">Total&nbsp;(<span class="headamounttype rupyaINR WebRupee"></span>)</th>
 								   <th class="last">Net&nbsp;Amount&nbsp;(<span class="headamounttype WebRupee rupyaINR"></span>)</th>
 							   </tr>                                        
@@ -260,6 +260,7 @@
 		<%@include file="footer.jsp"%>
 	</body>
 	  <script>
+	    var serviceTaxPercentage = 0;
 		$(document).ready(function(){
 			$("#pageTitle").html("Invoice<b class='saptaColor'> List</b>");
 			$( "#invoicemonth" ).focus(function() {
@@ -290,7 +291,7 @@
 			$("#menu_payments").addClass("active");
 			//$("#menu_paym").addClass("active");
 			$(function() {
-			 	$( "#invoicedate, #duedate, #received_date, #receiveddate" ).datepicker({
+			 	$( "#duedate, #received_date, #receiveddate" ).datepicker({
 					 yearRange: '1950:2100',
 					 defaultDate: new Date(),
 					 changeMonth: true,
@@ -299,6 +300,19 @@
 	               	 buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
 	                 buttonImageOnly: true,
 					 dateFormat :"dd-mm-yy"
+				 });
+			 	$( "#invoicedate" ).datepicker({
+					 yearRange: '1950:2100',
+					 defaultDate: new Date(),
+					 changeMonth: true,
+					 changeYear: true,
+					 showOn: "button",
+	               	 buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
+	                 buttonImageOnly: true,
+					 dateFormat :"dd-mm-yy",
+					 onSelect: serviceTaxPercentage/* function(){
+						 $(".perrateperiod").trigger("focusout");
+					} */
 				 });
 			 });
 			var url = "";
@@ -1112,6 +1126,26 @@
 				$("#receivedamount").val('');
 				$("#receivedcomments").val('');
 			});
+			
+			// Service TAX Date calculation - START
+			  function serviceTaxPercentage(invoiceDate){
+					var invDate = "";
+					var june2016 = "";
+					
+					invoiceDate = invoiceDate.split("-");
+					invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
+					invDate = new Date(invoiceDate);
+					june2016 = new Date("Jun 01 2016");
+					if(invDate >= june2016){
+						serviceTaxPercentage = 15;
+						$(".perrateperiod").trigger("focusout");
+					}else{
+						serviceTaxPercentage = 14.5;
+						$(".perrateperiod").trigger("focusout");
+					}
+					$("#serviceTaxPer").html(serviceTaxPercentage);
+			  }
+			// Service TAX Effective Date calculation - END
 			
 			function declineInvoice(){
 				$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
@@ -1948,6 +1982,19 @@
 			var i = id.substring(12, id.length);
 			var invoicetypestatus = $("#typeofinvoice").val();
 			var servicetaxper = $("#serviceTaxPer").html();
+			//service tax effective date calculation STARTS
+			var invoiceDate = $("#invoicedate").val().split("-");
+			invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
+			var invDate = new Date(invoiceDate);
+			var june2016 = new Date("Jun 01 2016");
+			if(invDate >= june2016){
+				serviceTaxPercentage = 15;
+				servicetaxper = serviceTaxPercentage;
+			}else{
+				serviceTaxPercentage = 14.5;
+				servicetaxper = serviceTaxPercentage;
+			}
+			//service tax effective date percentage calculation ENDS
 			if(invoicetypestatus != "f"){
 				var totalperiod = $("#time_period_"+i).val();
 				var periodperrate = $("#rate_period_"+i).val();

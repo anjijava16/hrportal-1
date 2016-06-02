@@ -7,3 +7,5 @@ DROP TABLE hrportal.sequence;
 DROP TABLE hrportal.commonconstants;
 
 ALTER TABLE hrportal.invoice ADD COLUMN SERVICETAXPER VARCHAR(255) DEFAULT NULL;
+
+ALTER TABLE hrportal.invoicedetails ADD COLUMN NOOFDAYS BIGINT(20) DEFAULT NULL;

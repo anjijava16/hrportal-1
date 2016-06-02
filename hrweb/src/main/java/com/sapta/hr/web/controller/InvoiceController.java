@@ -246,7 +246,6 @@ public class InvoiceController {
                 if(servicetax != 0){
                 	invoiceDO.setServicetax(servicetax);
                 }
-                System.out.println("totalamount===== "+servicetaxper);
                 invoiceDO.setTotalamount(totalamount);
                 invoiceDO.setServicetaxper(servicetaxper);
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
@@ -260,21 +259,30 @@ public class InvoiceController {
 		return CommonWebUtil.buildSuccessResponse().toString();
 	}
 	
-	@RequestMapping(value = "/addinvoicedetails/{invoicenumber}/{reference}/{servicefrom}/{serviceto}/{totalhrs}/{rateperhr}/{dueamount}", method = RequestMethod.GET)
+	@RequestMapping(value = "/addinvoicedetails/{invoicenumber}/{reference}/{servicefrom}/{serviceto}/{totalhrs}/{rateperhr}/{dueamount}/{noofdays}", method = RequestMethod.GET)
 	public @ResponseBody String addInvoiceDetails(@PathVariable String invoicenumber, @PathVariable String reference, @PathVariable String servicefrom, 
-		   @PathVariable String serviceto, @PathVariable long totalhrs, @PathVariable double rateperhr, @PathVariable double dueamount, Model model, HttpServletRequest request) {
+		   @PathVariable String serviceto, @PathVariable long totalhrs, @PathVariable double rateperhr, @PathVariable double dueamount, @PathVariable long noofdays, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 								
 				InvoiceDetailsDO invoiceDetailsDO = new InvoiceDetailsDO();
-				
 				invoiceDetailsDO.setInvoiceno(invoicenumber);
 				invoiceDetailsDO.setRefnumbername(reference);
 				invoiceDetailsDO.setServicefrom(CommonUtil.convertStringToDate(servicefrom));
 				invoiceDetailsDO.setServiceto(CommonUtil.convertStringToDate(serviceto));
 				invoiceDetailsDO.setDueamount(dueamount);
-				invoiceDetailsDO.setTimeperiod(totalhrs);
+				System.out.println(totalhrs);
+				if(totalhrs != 0){
+					invoiceDetailsDO.setTimeperiod(totalhrs);
+				}else{
+					invoiceDetailsDO.setTimeperiod(null);
+				}
 				invoiceDetailsDO.setRateofperiod(rateperhr);
+				if(noofdays != 0){
+					invoiceDetailsDO.setNoofdays(noofdays);
+				}else{
+					invoiceDetailsDO.setNoofdays(null);
+				}
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				invoiceDetailsDO.setUpdatedby(user.getUsername());
 				invoiceDetailsDO.setUpdatedon(new Date());

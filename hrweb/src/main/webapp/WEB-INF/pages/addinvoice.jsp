@@ -281,9 +281,10 @@
 								   <th class="first"><sup class="saptaColor">*</sup>Reference</th>
 								   <th class=""><sup class="saptaColor">*</sup>From</th>
 								   <th class=""><sup class="saptaColor">*</sup>To</th>
+								   <th id="totaldays" class="hidden"><sup class="saptaColor">*</sup>Total&nbsp;Days</th>
 								   <th id="totalhours" class=""><sup class="saptaColor">*</sup>Total&nbsp;<span id="typeofperiod">Days</th>
-								   <th id="rate_header" class=""><sup class="saptaColor">*</sup>Rate<span id="slashspan">/</span><span id="fixedtypeofperiodrate"></span><span id="typeofperiodrate"></th>
-								   <th class=""><sup class="saptaColor">*</sup>Total&nbsp;(<span class="headamounttype"></span>)</th>
+								   <th id="rate_header" class=""><sup class="saptaColor">*</sup>Rate<span id="slashspan">/</span><span id="fixedtypeofperiodrate hidden"></span><span id="typeofperiodrate"></span></th>
+								   <th class="total_amt"><sup class="saptaColor">*</sup>Total&nbsp;(<span class="headamounttype"></span>)</th>
 								   <th class="last"><sup class="saptaColor">*</sup>Net&nbsp;Amount&nbsp;(<span class="headamounttype"></span>)</th>
 								   <th style="background-color: white; border:0; padding:0;"><div id="addinvoice" style="cursor: pointer" class="rightElement MRGR10PX MRGT10PX MRGB10PX"><img src="<%=request.getContextPath() %>/resources/images/add.png" alt="Add More"/></div></th>
 							   </tr>                                        
@@ -291,6 +292,7 @@
 							   	   <td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_1" id="refnumbername_1" type="text" /></div></td>
 							   	   <td><div  style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_1" id="servicefrom_1" readonly="readonly" type="text" class="datePcK datePicMob" style="float:left"/></b></div></td>
 							   	   <td><div  style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_1" id="serviceto_1" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td>
+							   	   <td class = "totaldaysrow hidden"><div style="width: 95%; margin: 0 auto;"><input name="totaldays_1"  class="" id="totaldays_1" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_1"  class="perrateperiod" id="totalhrss_1" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_1" id="rateperhr_1" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td id="rate_value"><div style="width: 95%; margin: 0 auto;"><input name="total_1" id="total_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
@@ -587,7 +589,7 @@
 						$("#serviceto_"+i).val(" ");
 						$("#totalhrss_"+i).val(" ");
 						$("#rateperhr_"+i).val(" ");
-						$("#total_"+i).val(" "); 
+						/* $("#total_"+i).val(" ");  */
 						$("#netamt_"+i).val(" ");
 					});
 					$("#invoicedate").val("");
@@ -600,7 +602,12 @@
 			$("#addinvoice").click(function () {
 				var newemp_dynamic = $(document.createElement('tr')).attr("id", 'invoicecontenttablerow_' + counter);
 				if($("#billtype").val() != "f"){
-					newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="total_' + counter +'" id="total_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+					/* <td><div style="width: 95%; margin: 0 auto;"><input name="total_' + counter +'" id="total_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td> */
+					if($("#billtype").val() == "d"){
+						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+					}else{
+						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysrow"><div style="width: 95%; margin: 0 auto;"><input name="totaldays_' + counter +'" id="totaldays_' + counter +'" class="" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+					}
 				}
 				if($("#billtype").val() == "f"){
 					newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
@@ -753,7 +760,7 @@
 							$("#serviceto_"+i).val("");
 							$("#totalhrss_"+i).val("");
 							$("#rateperhr_"+i).val("");
-							$("#total_"+i).val("");
+							$("#totaldays_"+i).val("");
 							$("#netamt_"+i).val("");
 						});
 						$("#invoicedate").val("");
@@ -786,7 +793,7 @@
 							$("#serviceto_"+i).val("");
 							$("#totalhrss_"+i).val("");
 							$("#rateperhr_"+i).val("");
-							$("#total_"+i).val("");
+							$("#totaldays_"+i).val("");
 							$("#netamt_"+i).val("");
 						});
 						$("#invoicedate").val("");
@@ -1056,13 +1063,20 @@
 						var serviceto = $("#serviceto_"+i).val();
 						var totalhrs = $("#totalhrss_"+i).val();
 						var rateperhr = $("#rateperhr_"+i).val();
-						var dueamount = $("#total_"+i).val();
+						/* var dueamount = $("#total_"+i).val(); */
+						var dueamount = $("#netamt_"+i).val();
+						var noofdays = $("#totaldays_"+i).val();
 						if(reference == "" || reference.length == 0) validation = false;
 						if(servicefrom == "" || servicefrom.length == 0) validation = false;
 						if(serviceto == "" || serviceto.length == 0) validation = false;
 						//if($("#billtype").val() != "f"){
 						if(totalhrs == "" || totalhrs.length == 0) validation = false;
 						//}
+						if($("#billtype").val() != "f"){
+							if( $("#billtype").val() != "d"){
+								if(noofdays == "" || noofdays.length == 0) validation = false;
+							}
+						}
 						if(rateperhr == "" || rateperhr.length == 0) validation = false;
 						if(dueamount == "" || dueamount.length == 0) validation = false;
 						
@@ -1125,14 +1139,18 @@
 					var servicefrom = $("#servicefrom_"+i).val();
 					var serviceto = $("#serviceto_"+i).val();
 					var dueamount = $("#netamt_"+i).val();
-					//if($("#billtype").val() != "f"){
+					var noofdays = $("#totaldays_"+i).val();
 					var totalhrs = $("#totalhrss_"+i).val();
-					/* } else{
-						var totalhrs = 0;
-					} */
+					if($("#billtype").val() == "f"){
+						noofdays = totalhrs
+						totalhrs = 0;
+					}
+					if(noofdays == "" || noofdays == undefined){
+						noofdays = 0;
+					}
 					var rateperhr = $("#rateperhr_"+i).val();
-					var dueamount = $("#total_"+i).val();
-					var resourceURL = $("#contextpath").val()+"/invoice/addinvoicedetails/"+invoicenumber+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+totalhrs+"/"+rateperhr+"/"+dueamount;
+					//var dueamount = $("#total_"+i).val();
+					var resourceURL = $("#contextpath").val()+"/invoice/addinvoicedetails/"+invoicenumber+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+totalhrs+"/"+rateperhr+"/"+dueamount+"/"+noofdays;
 					$.ajax({
 							url : resourceURL,
 							type : 'GET',
@@ -1148,7 +1166,7 @@
 									$("#serviceto_"+i).val("");
 									$("#totalhrss_"+i).val("");
 									$("#rateperhr_"+i).val("");
-									$("#total_"+i).val("");
+									$("#totaldays_"+i).val("");
 									$("#netamt_"+i).val("");
 									//clear Variables As Null
 									reference = null;
@@ -1157,6 +1175,7 @@
 									totalhrs = null;
 									rateperhr = null;
 									dueamount = null;
+									totaldays = null;
 								}else{
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
@@ -1211,7 +1230,7 @@
 					$("#serviceto_"+i).val(" ");
 					$("#totalhrss_"+i).val(" ");
 					$("#rateperhr_"+i).val(" ");
-					$("#total_"+i).val(" "); 
+					/* $("#total_"+i).val(" ");  */
 					$("#netamt_"+i).val(" ");
 				});
 				$("#invoicedate").val("");
@@ -1244,9 +1263,13 @@
 				//type of invoice
 			 	if($("#billtype").val() == "h"){
 					$("#typeofperiod").html("Hours");
+					$(".total_amt").addClass("hidden");
+					$(".totaldaysrow").removeClass("hidden");
+					$("#totaldays").removeClass("hidden");
+					$("#rate_value").addClass("hidden");
 					$("#slashspan").removeClass("hidden");
 					$("#rate_header").removeClass("hidden");
-					$("#rate_value").removeClass("hidden");
+					//$("#rate_value").removeClass("hidden");
 					$("#typeofperiodrate").html("Hour");
 					$("#fixedtypeofperiodrate").html("");
 					$("#totalhours").removeClass("hidden");
@@ -1256,7 +1279,8 @@
 						var i = id.substring(23, id.length);
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#total_"+i).val(""); */
+						$("#totaldays_"+i).val("");
 						$("#netamt_"+i).val("");
 					});
 					$("#servicetax").html("0.00");
@@ -1266,9 +1290,11 @@
 				if($("#billtype").val() == "d"){
 					$("#typeofperiod").html("Days");
 					$("#slashspan").removeClass("hidden");
+					$(".total_amt").addClass("hidden");
+					$("#rate_value").addClass("hidden");
 					$("#typeofperiodrate").html("Day");
 					$("#rate_header").removeClass("hidden");
-					$("#rate_value").removeClass("hidden");
+					//$("#rate_value").removeClass("hidden");
 					$("#fixedtypeofperiodrate").html("");
 					$("#totalhours").removeClass("hidden");
 					$(".totalhrsrow").removeClass("hidden");
@@ -1277,7 +1303,7 @@
 						var i = id.substring(23, id.length);
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#total_"+i).val(""); */
 						$("#netamt_"+i).val("");
 					});
 					$("#servicetax").html("0.00");
@@ -1287,9 +1313,13 @@
 				if($("#billtype").val() == "w"){
 					$("#typeofperiod").html("Weeks");
 					$("#slashspan").removeClass("hidden");
+					$(".totaldaysrow").removeClass("hidden");
+					$("#totaldays").removeClass("hidden");
+					$(".total_amt").addClass("hidden");
+					$("#rate_value").addClass("hidden");
 					$("#typeofperiodrate").html("Week");
 					$("#rate_header").removeClass("hidden");
-					$("#rate_value").removeClass("hidden");
+					//$("#rate_value").removeClass("hidden");
 					$("#fixedtypeofperiodrate").html("");
 					$("#totalhours").removeClass("hidden");
 					$(".totalhrsrow").removeClass("hidden");
@@ -1298,7 +1328,8 @@
 						var i = id.substring(23, id.length);
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#totaldays_"+i).val(""); */
+						$("#totaldays_"+i).val("");
 						$("#netamt_"+i).val("");
 					});
 					$("#servicetax").html("0.00");
@@ -1308,9 +1339,13 @@
 				if($("#billtype").val() == "m"){
 					$("#typeofperiod").html("Months");
 					$("#slashspan").removeClass("hidden");
+					$(".total_amt").addClass("hidden");
+					$("#rate_value").addClass("hidden");
+					$(".totaldaysrow").removeClass("hidden");
+					$("#totaldays").removeClass("hidden");
 					$("#typeofperiodrate").html("Month");
 					$("#rate_header").removeClass("hidden");
-					$("#rate_value").removeClass("hidden");
+					//$("#rate_value").removeClass("hidden");
 					$("#fixedtypeofperiodrate").html("");
 					$("#totalhours").removeClass("hidden");
 					$(".totalhrsrow").removeClass("hidden");
@@ -1319,7 +1354,8 @@
 						var i = id.substring(23, id.length);
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#total_"+i).val(""); */
+						$("#totaldays_"+i).val("");
 						$("#netamt_"+i).val("");
 					});
 					$("#servicetax").html("0.00");
@@ -1332,14 +1368,15 @@
 					$("#rate_value").addClass("hidden");
 					$("#slashspan").addClass("hidden");
 					$(".totalhrsrow").removeClass("hidden");
-					$("#fixedtypeofperiodrate").html("Fixed");
+					/* $("#fixedtypeofperiodrate").html("Fixed"); */
 					$("#totalhours").removeClass("hidden");
+					//$(".total_amt,#rate_value").removeClass("hidden");
 					$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 						var id = $(this).attr("id");
 						var i = id.substring(23, id.length);
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#total_"+i).val(""); */
 						$("#netamt_"+i).val("");
 					});
 					$("#servicetax").html("0.00");
@@ -1431,7 +1468,7 @@
 						$("#serviceto_"+i).val("");
 						$("#totalhrss_"+i).val("");
 						$("#rateperhr_"+i).val("");
-						$("#total_"+i).val("");
+						/* $("#total_"+i).val(""); */
 						$("#netamt_"+i).val("");
 				 });
 			 	}
@@ -1619,7 +1656,7 @@
 		}).on('focusout', '.perrateperiod', function() {
 			var id = $(this).attr("id");
 			var i = id.substring(10, id.length);
-			//service tax percentage calculation STARTS
+			//service tax effective date calculation STARTS
 			var invoiceDate = $("#invoicedate").val().split("-");
 			invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
 			var invDate = new Date(invoiceDate);
@@ -1629,14 +1666,14 @@
 			}else{
 				serviceTaxPercentage = 14.5;
 			}
-			//service tax percentage calculation ENDS
+			//service tax effective date percentage calculation ENDS
 			if($("#billtype").val() != "f"){
 				var totalperiod = $("#totalhrss_"+i).val();
 				var periodperrate = $("#rateperhr_"+i).val();
 				if(totalperiod != "" && periodperrate != ""){
 					totalamount = parseFloat(totalperiod) * parseFloat(periodperrate);
 					var completetotalamount = totalamount.toFixed(2);
-					$("#total_"+i).val(completetotalamount);
+					/* $("#total_"+i).val(completetotalamount); */
 					$("#netamt_"+i).val(completetotalamount);
 					
 					var lastTotal = 0;
@@ -1679,7 +1716,7 @@
 							$("#subtotalamountdivision").html(lasttotal.toFixed(2));
 							$("#totalamountdivision").html(totalamount.toFixed(2));
 							$("#servicetax").html(servicetax.toFixed(2));
-							$("#total_"+i).val("");
+							/* $("#total_"+i).val(""); */
 							$("#netamt_"+i).val("");
 			    		}else{
 			    			var netamount = 0;
@@ -1689,7 +1726,7 @@
 			    			var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
 			    			$("#subtotalamountdivision").html(lasttotal.toFixed(2));
 			    			$("#totalamountdivision").html(lasttotal.toFixed(2));
-			    			$("#total_"+i).val("");
+			    			/* $("#total_"+i).val(""); */
 							$("#netamt_"+i).val("");
 			    		}
 			    		
@@ -1701,7 +1738,7 @@
 				if(periodperrate != ""){
 					totalamount = parseFloat(periodperrate);
 					var completetotalamount = totalamount.toFixed(2);
-					$("#total_"+i).val(completetotalamount);
+					/* $("#total_"+i).val(completetotalamount); */
 					$("#netamt_"+i).val(completetotalamount);
 					var lastTotal = 0;
 					var netamount = 0;
@@ -1742,7 +1779,7 @@
 							$("#subtotalamountdivision").html(lasttotal.toFixed(2));
 							$("#totalamountdivision").html(totalamount.toFixed(2));
 							$("#servicetax").html(servicetax.toFixed(2));
-							$("#total_"+i).val("");
+							/* $("#total_"+i).val(""); */
 							$("#netamt_"+i).val("");
 			    		}else{
 			    			var totalamount = 0;
@@ -1750,7 +1787,7 @@
 			    			var lasttotal = parseFloat(totalamount) - parseFloat(netamount);
 			    			$("#totalamountdivision").html(lasttotal.toFixed(2));
 			    			$("#subtotalamountdivision").html(lasttotal.toFixed(2));
-			    			$("#total_"+i).val("");
+			    			/* $("#total_"+i).val(""); */
 							$("#netamt_"+i).val("");
 			    		}
 			    		

@@ -40,6 +40,7 @@ public final class InvoiceDetailsUtil {
 		result.put(CommonConstants.SERVICE_FROM, CommonUtil.convertDateToStringWithOutTime(invoiceDetailsDO.getServicefrom()));
 		result.put(CommonConstants.SERVICE_TO, CommonUtil.convertDateToStringWithOutTime(invoiceDetailsDO.getServiceto()));
 		result.put(CommonConstants.DUE_AMOUNT, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invoiceDetailsDO.getDueamount()));
+		result.put(CommonConstants.NO_OF_DAYS, String.valueOf(invoiceDetailsDO.getNoofdays()));
 		result.put(CommonConstants.TIME_PERIOD, String.valueOf(invoiceDetailsDO.getTimeperiod()));
 		result.put(CommonConstants.RATE_OF_PERIOD, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invoiceDetailsDO.getRateofperiod()));
 		return result;
