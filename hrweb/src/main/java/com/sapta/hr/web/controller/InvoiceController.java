@@ -271,17 +271,12 @@ public class InvoiceController {
 				invoiceDetailsDO.setServicefrom(CommonUtil.convertStringToDate(servicefrom));
 				invoiceDetailsDO.setServiceto(CommonUtil.convertStringToDate(serviceto));
 				invoiceDetailsDO.setDueamount(dueamount);
-				System.out.println(totalhrs);
 				if(totalhrs != 0){
 					invoiceDetailsDO.setTimeperiod(totalhrs);
-				}else{
-					invoiceDetailsDO.setTimeperiod(null);
 				}
 				invoiceDetailsDO.setRateofperiod(rateperhr);
 				if(noofdays != 0){
 					invoiceDetailsDO.setNoofdays(noofdays);
-				}else{
-					invoiceDetailsDO.setNoofdays(null);
 				}
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				invoiceDetailsDO.setUpdatedby(user.getUsername());

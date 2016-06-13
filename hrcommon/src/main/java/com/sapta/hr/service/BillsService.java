@@ -53,6 +53,10 @@ public class BillsService {
 		return new BillsDAO().retrivebystatus(status);
 	}
 	
+	public List<BillsDO> lastbill( ) throws AppException {
+		return new BillsDAO().lastbill();
+	}
+	
 	public List<InvoiceDO> retrive() {
 		// TODO Auto-generated method stub
 		return null;

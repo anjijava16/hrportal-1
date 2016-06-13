@@ -36,9 +36,9 @@
 								</td>
 							</tr>
 							<tr id = "BillNo" class ="hidden">
-								<td align="right" >Bill&nbsp;Number&nbsp;:</sup></td>
+								<td align="right" ><sup class="saptaColor">*</sup>Bill&nbsp;Number&nbsp;:</sup></td>
 								<td align="left">						
-										<input id="billno" disabled="disabled" class="MRGL10PX MARTOP13PX inputdisabletxtbold"  />
+										<input id="billno"  class="MRGL10PX MARTOP13PX "  />
 								</td>
 							</tr>
 						</table>
@@ -68,7 +68,7 @@
 								<td align="right"><sup class="saptaColor">*</sup>Amount Type&nbsp;:</td>
 								<td>
 									<select id="type" name = "type" style="text-align: center;">
-									    <option value="" style="text-align: center;">--- Select ---</option>
+									   <!--  <option value="" style="text-align: center;">--- Select ---</option> -->
 										<option value="i" style="text-align: left;">INR</option>
 										<option value="u" style="text-align: left;">USD</option>
 										<option value="e" style="text-align: left;">EUR</option>
@@ -131,22 +131,43 @@
 				 });
 			 });
 			
+			var resourceURL = $("#contextpath").val()+"/bills/lastbill"
+		 	$.ajax({
+		        url : resourceURL,
+		        type : 'GET',
+		        dataType : 'text',
+		        async : false,
+		        success: function(data) {
+		        	if(data != null || data != ""){
+		        		$("#billno").val(data);
+		        	}else{
+		        		$("#billno").val("");
+		        	}
+		        },
+		        error: function (xhr, ajaxOptions, thrownError) {
+		        	$("#errorMsgContent").html(thrownError);
+		    		$.fancybox.open('#errorMsg');
+		   		}
+		   });
+			 
 			$('#vendselect').on('change', function (e){
 				$("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden");
 			 	$("#bills").removeClass("hidden");
-			 	$("#BillNo").addClass("hidden");
+			 	$("#BillNo").removeClass("hidden");
+			 	$("#buttons").removeClass("hidden");
+			});
 			 	if($("#vendselect").val() != "null"){
 			 		$("#mandatory").removeClass("hidden");
 				 	$("#buttons").removeClass("hidden");
 				 	$("#bills").removeClass("hidden");
 				 	//var projectcode = null;
-				 	var vendorcode = null;
+				    var vendorcode = null;
 				 	var billnum = 0;
 				 	var id = null;
 				 	
-				 	var resourceURL = $("#contextpath").val()+"/vendordetails/retrivebyid/"+$("#vendselect").val();
-				 	$.ajax({
+				 	/*var resourceURL = $("#contextpath").val()+"/vendordetails/retrivebyid/"+$("#vendselect").val();
+				 		 $.ajax({
 				        url : resourceURL,
 				        type : 'GET',
 				        dataType : 'json',
@@ -167,9 +188,9 @@
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
-				   });
+				   }); */
 				 	
-				 	 var url = $("#contextpath").val()+"/bills/retrivebyVendor/"+$("#vendselect").val();
+				 	/*  var url = $("#contextpath").val()+"/bills/retrivebyVendor/"+$("#vendselect").val();
 				 	$.ajax({
 				        url : url,
 				        type : 'GET',
@@ -186,13 +207,13 @@
 				        	}else{
 				        		billnum = 0;
 				        	} 
-				        }/* ,
+				        } ,
 				        error: function (xhr, ajaxOptions, thrownError) {
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
-				   		} */
-				   });
-				 	if(billnum != 0){
+				   		}
+				   }); */
+				 	/* if(billnum != 0){
 				 	 billnum = billnum.split("-");
 				 	var increment = 0;
 				 	var billarray = billnum[3]; 
@@ -200,15 +221,15 @@
 				 	}else{
 				 		increment = billnum+1;
 				 	}
-				 	$("#billno").val("SL-BILL-"+vendorcode+"-"+((increment <=9) ? ("0"+ increment) : increment));
+				 	$("#billno").val("SL-BILL-"+vendorcode+"-"+((increment <=9) ? ("0"+ increment) : increment)); */
 				 	$("#BillNo").removeClass("hidden");  
 			 	}else{
 			 		$("#mandatory").addClass("hidden");
 				 	$("#buttons").addClass("hidden");
 				 	$("#bills").addClass("hidden");
 			 	}
-			});
-				 	
+			
+				 	 
 				 	
 			$('#addBill').click(function(){
 				$("body").css("cursor", "progress");

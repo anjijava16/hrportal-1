@@ -190,9 +190,10 @@
 								   <th class="first">Reference</th>
 								   <th class="">From</th>
 								   <th class="">To</th>
+								   <th id="totaldays" class="">Total&nbsp;Days</th>
 								   <th id="totalhours" class="">Total&nbsp;<span id="typeofperiod"></span></th>
 								   <th id="rate_header" class=""><!-- <span id="fixedtypeofperiodrate"></span> -->Rate<span id="slashspan">/</span><span id="typeofperiodrate"></span></th>
-								   <th class="">Total&nbsp;(<span class="headamounttype rupyaINR WebRupee"></span>)</th>
+								   <th class="total_amt">Total&nbsp;(<span class="headamounttype rupyaINR WebRupee"></span>)</th>
 								   <th class="last">Net&nbsp;Amount&nbsp;(<span class="headamounttype WebRupee rupyaINR"></span>)</th>
 							   </tr>                                        
 					   </table>
@@ -467,25 +468,48 @@
 					dataType : 'json',
 					async : false,
 					success: function(data) {
+						
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
 						var result = data.response.result;
 						if(successflag == "true"){
 							for(var i=0;i<result.length;i++){
+								$(".total_amt").removeClass("hidden");
+								$(".rate_td").removeClass("hidden");
 								count=i+1;
 								var invoicedynamic = $(document.createElement('tr')).attr({"id":'invoicecontenttablerow_' + count});
-								invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" /></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+								if(result[i].noofdays != "null" && result[i].timeperiod == "null") {
+									$("#totaldays").hide();
+									$(".total_amt").show();
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" /></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+								}
+								if(result[i].noofdays == "null" && result[i].timeperiod != "null") {
+									$("#totaldays").hide();
+									$(".total_amt").hide();
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="netamt_td"><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+								}
+								if(result[i].noofdays != "null" && result[i].timeperiod != "null") {
+									$(".total_amt").hide();
+									$("#totaldays").show();
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysdata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="total_days_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+								}
 								invoicedynamic.appendTo("#invoicetablecontent");
 								$("#reference_"+count).val((result[i].reference == undefined || result[i].reference == null || result[i].reference == "null" || result[i].reference == 0 || result[i].reference.length <= 0) ? "-" : result[i].reference);
 								$("#service_from_"+count).val((result[i].servicefrom == undefined || result[i].servicefrom == null || result[i].servicefrom == "null" || result[i].servicefrom == 0 || result[i].servicefrom.length <= 0) ? "-" : result[i].servicefrom);
 								$("#optional_service_from_"+count).html((result[i].servicefrom == undefined || result[i].servicefrom == null || result[i].servicefrom == "null" || result[i].servicefrom == 0 || result[i].servicefrom.length <= 0) ? "-" : result[i].servicefrom);
 								$("#service_to_"+count).val((result[i].serviceto == undefined || result[i].serviceto == null || result[i].serviceto == "null" || result[i].serviceto == 0 || result[i].serviceto.length <= 0) ? "-" : result[i].serviceto);
 								$("#optional_service_to_"+count).html((result[i].serviceto == undefined || result[i].serviceto == null || result[i].serviceto == "null" || result[i].serviceto == 0 || result[i].serviceto.length <= 0) ? "-" : result[i].serviceto);
-								$("#time_period_"+count).val((result[i].timeperiod == undefined || result[i].timeperiod == null || result[i].timeperiod == "null" || result[i].timeperiod == 0  || result[i].timeperiod.length <= 0) ? "-" : result[i].timeperiod);
+								$("#time_period_"+count).val((result[i].timeperiod == undefined || result[i].timeperiod == null || result[i].timeperiod == "null" || result[i].timeperiod == 0  || result[i].timeperiod.length <= 0) ? result[i].noofdays : result[i].timeperiod);
+								$("#total_days_"+count).val((result[i].noofdays == undefined || result[i].noofdays == null || result[i].noofdays == "null" || result[i].noofdays == 0  || result[i].noofdays.length <= 0) ? "-" : result[i].noofdays);
 								$("#rate_period_"+count).val((result[i].rateofperiod == undefined || result[i].rateofperiod == null || result[i].rateofperiod == "null" || result[i].rateofperiod == 0  || result[i].rateofperiod.length <= 0) ? "-" : result[i].rateofperiod);
 								$("#invoice_details_id_"+count).val((result[i].id == undefined || result[i].id == null || result[i].id == "null" || result[i].id == 0  || result[i].id.length <= 0) ? "-" : result[i].id);
 								$("#invoice_due_amount_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
 								$("#netamt_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
+								if((result[i].timeperiod == undefined || result[i].timeperiod == null || result[i].timeperiod == "null" || result[i].timeperiod == 0  || result[i].timeperiod.length <= 0)){
+									$(".total_amt").addClass("hidden");
+									$(".total_amt").css("display",'none');
+									$(".rate_td").addClass("hidden");
+								}
 								
 								$(function() {
 									 $( "#service_from_" + count + ", #service_to_" + count).datepicker({
@@ -580,26 +604,28 @@
 								$("#typeofinvoice").val((result.invoicetype == undefined || result.invoicetype == null || result.invoicetype.length <= 0) ? "-" : result.invoicetype);
 								$("#rate_header").removeClass("hidden");
 								$(".rate_value").removeClass("hidden");
+								$("#totalhours,.timeperiodtabledata").removeClass("hidden");
 								if(result.invoicetype == "h"){
 									$("#optional_typeofinvoice").html("Hourly");
 									$("#typeofperiod").html("Hours");
 									$("#typeofperiodrate").html("Hour");
-									$("#slashspan").removeClass("hidden");
+									$("#slashspan,.netamt_td").removeClass("hidden");
 								}else if(result.invoicetype == "d"){
 									$("#optional_typeofinvoice").html("Daily");
 									$("#typeofperiod").html("Days");
 									$("#typeofperiodrate").html("Day");
-									$("#slashspan").removeClass("hidden");
+									$("#slashspan,.netamt_td").removeClass("hidden");
+									$("#totalhours,.timeperiodtabledata").addClass("hidden");
 								}else if(result.invoicetype == "w"){
 									$("#optional_typeofinvoice").html("Weekly");
 									$("#typeofperiod").html("Weeks");
 									$("#typeofperiodrate").html("Week");
-									$("#slashspan").removeClass("hidden");
+									$("#slashspan,.netamt_td").removeClass("hidden");
 								}else if(result.invoicetype == "m"){
 									$("#optional_typeofinvoice").html("Monthly");
 									$("#typeofperiod").html("Months");
 									$("#typeofperiodrate").html("Month");
-									$("#slashspan").removeClass("hidden");
+									$("#slashspan,.netamt_td").removeClass("hidden");
 								}else if(result.invoicetype == "f"){
 									$("#rate_header").addClass("hidden");
 									$(".rate_value").addClass("hidden");
@@ -607,6 +633,7 @@
 									$("#typeofperiod").html("Days");
 									$("#fixedtypeofperiodrate").html("Fixed");
 									$("#slashspan").addClass("hidden");
+									$(".netamt_td").addClass("hidden");
 								}else if(result.invoicetype == undefined || result.invoicetype == null || result.invoicetype.length <= 0){
 									$("#optional_typeofinvoice").html("-");
 								}
@@ -885,7 +912,7 @@
 					$(".rate_value").removeClass("hidden");
 					if($("#typeofinvoice").val() == "h"){
 						$("#typeofperiod").html("Hours");
-						$("#slashspan").removeClass("hidden");
+						$("#slashspan,.netamt_td").removeClass("hidden");
 						$("#typeofperiodrate").html("Hour");
 						$("#fixedtypeofperiodrate").html("");
 						$("#totalhours").removeClass("hidden");
@@ -907,7 +934,7 @@
 					}
 					if($("#typeofinvoice").val() == "d"){
 						$("#typeofperiod").html("Days");
-						$("#slashspan").removeClass("hidden");
+						$("#slashspan,.netamt_td").removeClass("hidden");
 						$("#typeofperiodrate").html("Day");
 						$("#fixedtypeofperiodrate").html("");
 						$("#totalhours").removeClass("hidden");
@@ -929,7 +956,7 @@
 					}
 					if($("#typeofinvoice").val() == "w"){
 						$("#typeofperiod").html("Weeks");
-						$("#slashspan").removeClass("hidden");
+						$("#slashspan,.netamt_td").removeClass("hidden");
 						$("#typeofperiodrate").html("Week");
 						$("#fixedtypeofperiodrate").html("");
 						$("#totalhours").removeClass("hidden");
@@ -951,7 +978,7 @@
 					}
 					if($("#typeofinvoice").val() == "m"){
 						$("#typeofperiod").html("Months");
-						$("#slashspan").removeClass("hidden");
+						$("#slashspan,.netamt_td").removeClass("hidden");
 						$("#typeofperiodrate").html("Month");
 						$("#fixedtypeofperiodrate").html("");
 						$("#totalhours").removeClass("hidden");
@@ -973,13 +1000,13 @@
 					}
 					if($("#typeofinvoice").val() == "f"){
 						$("#typeofperiodrate").html("");
-						$("#rate_header").addClass("hidden");
+						$("#rate_header,.netamt_td").addClass("hidden");
 						$(".rate_value").addClass("hidden");
 						$("#slashspan").addClass("hidden");
 						$(".totalhrsrow").addClass("hidden");
 						$("#fixedtypeofperiodrate").html("Fixed");
-						$("#totalhours").addClass("hidden");
-						$(".timeperiodtabledata").addClass("hidden");
+						$("#totalhours").removeClass("hidden");
+						$(".timeperiodtabledata").removeClass("hidden");
 						$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(23, id.length);
@@ -987,9 +1014,9 @@
 							$("#rate_period_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
-							$("#time_period_"+i).prop( "disabled", true );
+							/* $("#time_period_"+i).prop( "disabled", true );
 							$("#time_period_"+i).addClass("inputdisable");
-							$("#time_period_"+i).removeClass("inputBorder");
+							$("#time_period_"+i).removeClass("inputBorder"); */
 						});
 						$("#servicetax").html("0.00");
 						$("#subtotalamount").html("0.00");

@@ -218,4 +218,22 @@ public class BillsDAO {
 		}
 		return billsList;
 	}
+	@SuppressWarnings("unchecked")
+	public List<BillsDO> lastbill() throws AppException {
+		List<BillsDO> billList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(BillsDO.FIND_BY_LAST_RECORD);
+				billList = (List<BillsDO>) q.getResultList();
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010,CustomPropertyManager.getProperty(ExceptionConstant._91010),eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return billList;
+	}
 }

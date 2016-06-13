@@ -35,6 +35,7 @@
 		<class>com.sapta.hr.domainobject.VendorDO</class>
 		<class>com.sapta.hr.domainobject.BillsDO</class>
 		<class>com.sapta.hr.domainobject.EmpLoseOfPayDO</class>
+		<class>com.sapta.hr.domainobject.EmpTDSDO</class>
 		
 		<!-- shouldn't be valid for java SE per specification, but it works for 
 			EclipseLink ... -->

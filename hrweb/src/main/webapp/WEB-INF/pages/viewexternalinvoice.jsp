@@ -592,7 +592,7 @@
 								} 
 								
 								
-								/*alert(result.invoicetype)
+								/*
 								$("#typeofinvoice").val((result.invoicetype == undefined || result.invoicetype == null || result.invoicetype.length <= 0) ? "-" : result.invoicetype);
 								$("#rate_header").removeClass("hidden");
 								$(".rate_value").removeClass("hidden");

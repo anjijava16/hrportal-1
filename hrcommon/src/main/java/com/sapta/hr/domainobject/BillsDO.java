@@ -25,7 +25,9 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "BillsDO.findbysteddatebyorder", query = "SELECT e FROM BillsDO e where e.billdate BETWEEN :stdate AND :eddate order by e.billdate"),
 		@NamedQuery(name = "BillsDO.findbysteddatebystatus", query = "SELECT e FROM BillsDO e where e.billdate BETWEEN :stdate AND :eddate AND e.status =:status order by e.billdate"),
 		@NamedQuery(name = "BillsDO.findbystatus", query = "SELECT e FROM BillsDO e where e.status =:status"),
-		@NamedQuery(name = "BillsDO.findbyVendorId", query = "SELECT u FROM BillsDO u where u.vendorid =:vendorid")})
+		@NamedQuery(name = "BillsDO.findbyVendorId", query = "SELECT u FROM BillsDO u where u.vendorid =:vendorid"),
+		@NamedQuery(name = "BillsDO.findlastupdatedrecord", query = "SELECT u FROM BillsDO u ORDER BY u.id DESC")
+		})
 public class BillsDO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class BillsDO implements Serializable {
 	public static final String FIND_BY_ST_ET_DATE_BY_ORDER = "BillsDO.findbysteddatebyorder";
 	public static final String FIND_BY_ST_ET_DATE_BY_STATUS = "BillsDO.findbysteddatebystatus";
 	public static final String FIND_BY_STATUS = "BillsDO.findbystatus";
+	public static final String FIND_BY_LAST_RECORD = "BillsDO.findlastupdatedrecord";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "bills")

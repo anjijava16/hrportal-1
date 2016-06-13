@@ -186,17 +186,12 @@ public class InvoicePDFServlet extends BaseServlet {
 		invoicenumtbl.setWidthPercentage(100);
 		invoicenumtbl.setSpacingBefore(0f);
 			
-			
-			
 		if(invoicelist.size() != 0){
 			
 			for(InvoiceDO invoice : invoicelist){
-				
-				
-				
 				 invoicenumtbl = new PdfPTable(2);
 				 invoicenumtbl.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				 invoicenumtbl.setWidthPercentage(25);
+				 invoicenumtbl.setWidthPercentage(30);
 			
 				PdfPCell invoicenumcell= new PdfPCell(new Paragraph("Invoice No : ", font8));
 				invoicenumcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -411,10 +406,13 @@ public class InvoicePDFServlet extends BaseServlet {
 				duedatetbl.addCell(duedatecell_value);
 				
 				if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
+					float[] totlcolumnWidths = {74f,75f,74f,70f,85f};
+					totaltbl = new PdfPTable(totlcolumnWidths);
+				}else if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("d")){
 					float[] totlcolumnWidths = {74f,75f,74f,70f,75f,85f};
 					totaltbl = new PdfPTable(totlcolumnWidths);
 				}else{
-					float[] totlcolumnWidths = {74f,75f,74f,70f,75f,70f,85f};
+					float[] totlcolumnWidths = {74f,75f,74f,70f,75f,75f,85f};
 					totaltbl = new PdfPTable(totlcolumnWidths);
 				}
 				//totaltbl = new PdfPTable(totlcolumnWidths);
@@ -465,6 +463,14 @@ public class InvoicePDFServlet extends BaseServlet {
 					totalhrscell.setFixedHeight(15);
 					totaltbl.addCell(totalhrscell);
 				}else{
+					
+					PdfPCell numberofdays = new PdfPCell(new Paragraph("Total Days", fontbold8));
+					numberofdays.setHorizontalAlignment(Element.ALIGN_CENTER);
+					numberofdays.setBackgroundColor(new BaseColor(211,211,211));
+					numberofdays.setBorderColor(BaseColor.GRAY);
+					numberofdays.setFixedHeight(15);
+					totaltbl.addCell(numberofdays);
+					
 					String timeperiod = "";
 					String perrateperiod = "";
 					if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("h")){
@@ -480,14 +486,14 @@ public class InvoicePDFServlet extends BaseServlet {
 						timeperiod = "Months";
 						perrateperiod = "Month";
 					}
-					
-					PdfPCell totalhrscell = new PdfPCell(new Paragraph("Total "+timeperiod, fontbold8));
-					totalhrscell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					totalhrscell.setBackgroundColor(new BaseColor(211,211,211));
-					totalhrscell.setBorderColor(BaseColor.GRAY);
-					totalhrscell.setFixedHeight(15);
-					totaltbl.addCell(totalhrscell);
-					
+					if(!String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("d")){
+						PdfPCell totalhrscell = new PdfPCell(new Paragraph("Total "+timeperiod, fontbold8));
+						totalhrscell.setHorizontalAlignment(Element.ALIGN_CENTER);
+						totalhrscell.setBackgroundColor(new BaseColor(211,211,211));
+						totalhrscell.setBorderColor(BaseColor.GRAY);
+						totalhrscell.setFixedHeight(15);
+						totaltbl.addCell(totalhrscell);
+					}
 					PdfPCell ratecell = new PdfPCell(new Paragraph("Rate/"+perrateperiod, fontbold8));
 					ratecell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					ratecell.setBackgroundColor(new BaseColor(211,211,211));
@@ -507,12 +513,12 @@ public class InvoicePDFServlet extends BaseServlet {
 				}else if(String.valueOf(invoice.getAmounttype()).equalsIgnoreCase("gbp")){
 					amounttype = CommonConstants.GBP;
 				}
-				PdfPCell totalcell = new PdfPCell(new Paragraph("Total ("+amounttype+")", fontbold8));
+				/*PdfPCell totalcell = new PdfPCell(new Paragraph("Total ("+amounttype+")", fontbold8));
 				totalcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				totalcell.setBackgroundColor(new BaseColor(211,211,211));
 				totalcell.setBorderColor(BaseColor.GRAY);
 				totalcell.setFixedHeight(15);
-				totaltbl.addCell(totalcell);
+				totaltbl.addCell(totalcell);*/
 				
 				PdfPCell netamtcell = new PdfPCell(new Paragraph("Net Amount ("+amounttype+")", fontbold8));
 				netamtcell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -547,8 +553,8 @@ public class InvoicePDFServlet extends BaseServlet {
 					totaltbl.addCell(tocell_value);
 					
 					if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
-						if(invoiceDetailsDO.getTimeperiod() != 0){
-							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getTimeperiod()), font8));
+						if(invoiceDetailsDO.getNoofdays() != 0){
+							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getNoofdays()), font8));
 							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 							totalhrscell_value.setBorderColor(BaseColor.GRAY);
 							totalhrscell_value.setFixedHeight(20);
@@ -563,6 +569,14 @@ public class InvoicePDFServlet extends BaseServlet {
 							totaltbl.addCell(totalhrscell_value);
 						}
 					}else{
+						if(!String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("d")){
+							PdfPCell noofdays_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getNoofdays()), font8));
+							noofdays_value.setHorizontalAlignment(Element.ALIGN_CENTER);
+							noofdays_value.setBorderColor(BaseColor.GRAY);
+							noofdays_value.setFixedHeight(20);
+							noofdays_value.setPaddingTop(5);
+							totaltbl.addCell(noofdays_value);
+						}
 						if(invoiceDetailsDO.getTimeperiod() != 0){
 							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getTimeperiod()), font8));
 							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -587,13 +601,13 @@ public class InvoicePDFServlet extends BaseServlet {
 						ratecell_value.setPaddingTop(5);
 						totaltbl.addCell(ratecell_value);
 					}
-					PdfPCell totalcell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getDueamount())), font8));
+				/*	PdfPCell totalcell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getDueamount())), font8));
 					totalcell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);
 					totalcell_value.setBorderColor(BaseColor.GRAY);
 					totalcell_value.setPaddingRight(5);
 					totalcell_value.setFixedHeight(20);
 					totalcell_value.setPaddingTop(5);
-					totaltbl.addCell(totalcell_value);
+					totaltbl.addCell(totalcell_value);*/
 					
 					PdfPCell netamtcell_value = new PdfPCell(new Paragraph(String.valueOf(decimalformat.format(invoiceDetailsDO.getDueamount())), font8));
 					netamtcell_value.setHorizontalAlignment(Element.ALIGN_RIGHT);

@@ -122,4 +122,9 @@ public final class ExceptionConstant {
 	//bonus
 	
 	public static final String EMP_BOUNS_NOT_AVAILABLE = "Bonus can't be added, Salary already processed for the choosen month";
+	
+	
+	//tds
+	
+	public static final String EMP_TDS_NOT_AVAILABLE = "TDS can't be added, Salary already processed for the choosen month";
 }

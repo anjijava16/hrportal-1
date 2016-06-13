@@ -205,7 +205,6 @@ public class BillsController {
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				billsdo.setUpdatedby(user.getUsername());
 				billsdo.setUpdatedon(new Date());
-				
 				new BillsService().persistbills(billsdo);
 			}
 		} catch (Exception e) {
@@ -343,8 +342,29 @@ public class BillsController {
 		}
 		return respJSON != null ? respJSON.toString() : "";
 	}
+	
+	@RequestMapping(value = "/lastbill", method = RequestMethod.GET)
+	public @ResponseBody String lastbill(Model model,HttpServletRequest request) {
+		String billnumber = null;
+		try {
+			List<BillsDO> billsList = new BillsService().lastbill();
+			if(billsList != null){
+				 billnumber = billsList.get(0).getBillno().substring(0, 12);
+				int  count = Integer.parseInt(billsList.get(0).getBillno().substring(13));
+				if(count < 9){
+					billnumber = billnumber +"-"+"0"+(count+1);
+				}else{
+					billnumber = billnumber +"-"+(count+1);
+				}
+				
+			}
+		} catch (Exception e) {}
+		
+		return billnumber != null ? billnumber.toString() : "";
+		
+	}	
 }
 	
-	
+
 	
 	

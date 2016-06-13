@@ -61,14 +61,14 @@
 		</context-param>
 		<context-param>
 		    	<param-name>HR_EMAIL</param-name>
-		    	<param-value>yrahulkumar@saptalabs.com</param-value>
+		    	<param-value>skarthikkannan@saptalabs.com</param-value>
 		</context-param>
 		<context-param>
 		    	<param-name>PAYROLL_EMAIL</param-name>
-		    	<param-value>yrahulkumar@saptalabs.com</param-value>
+		    	<param-value>skarthikkannan@saptalabs.com</param-value>
 		</context-param>
   		<context-param>
 		    	<param-name>PAYROLL_PASSWORD</param-name>
-		    	<param-value>c2FwdGFyZWRkeVlBRERVTEE=</param-value>
+		    	<param-value>c2FwdGFrYXJ0aGlrMTk4OA==</param-value>
 		</context-param>
 </web-app>

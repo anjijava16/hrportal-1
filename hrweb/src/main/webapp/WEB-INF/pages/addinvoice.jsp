@@ -296,7 +296,7 @@
 							   	   <td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_1"  class="perrateperiod" id="totalhrss_1" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_1" id="rateperhr_1" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td id="rate_value"><div style="width: 95%; margin: 0 auto;"><input name="total_1" id="total_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
-							   	   <td><div style="width: 100%; margin: 0 auto;"><input name="netamt_1" id="netamt_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
+							   	   <td id="netamt_td"><div style="width: 100%; margin: 0 auto;"><input name="netamt_1" id="netamt_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td class="noborder">
 										<div id="invoice_remove_1" style="cursor: pointer" class="rightElement MRGR10PX">
 											&nbsp;<%-- <img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/> --%>
@@ -1107,6 +1107,7 @@
 						totalamount = $("#totalamountdivision").html();
 					}
 					var resourceURL = $("#contextpath").val()+"/invoice/add/"+invoicenumber+"/"+invoicedate+"/"+duedate+"/"+customerid+"/"+projectid+"/"+totalamount+"/"+servicetax+"/"+invoicetype+"/"+servicetaxper+"/"+amounttype;
+					
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -1144,7 +1145,10 @@
 					if($("#billtype").val() == "f"){
 						noofdays = totalhrs
 						totalhrs = 0;
+					}else if ($("#billtype").val() == "d"){
+						 noofdays = totalhrs;
 					}
+					
 					if(noofdays == "" || noofdays == undefined){
 						noofdays = 0;
 					}
@@ -1364,7 +1368,7 @@
 				}
 				if($("#billtype").val() == "f"){
 					$("#typeofperiodrate").html("");
-					$("#rate_header").addClass("hidden");
+					$("#rate_header,.total_amt, #netamt_td").addClass("hidden");
 					$("#rate_value").addClass("hidden");
 					$("#slashspan").addClass("hidden");
 					$(".totalhrsrow").removeClass("hidden");

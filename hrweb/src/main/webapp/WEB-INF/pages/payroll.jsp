@@ -19,6 +19,7 @@
 	<body>
 		<%@include file="menucomponents.jsp"%>
 		<div id="innerContainer">
+			<div>
 			<div id="contentArea" style="overflow: hidden;">
 				<div align = "center" id="headdetail1" class="hidden MRGT10PX"> <h1> <b class="saptaColor"> Payroll</b> for the month of&nbsp;<span id="dynamicmonth"></span></h1></div>
 				<img id="exportData" class="MRGL10PX" src="<%=request.getContextPath() %>/resources/icons/csv.png" style="margin: 4px 0px 6px 0px; float: right; cursor: pointer;"/>
@@ -308,6 +309,7 @@
 				<div id="confirmationMsgContentDate" style= "margin-bottom: 6px;"></div>
 				<input type="button" id="date_select" class="rightElement " value="Done" style = "margin-right: 7px;">&nbsp;
 			</div>
+		</div>
 		</div>
 	</div>	
 	<%@include file="footer.jsp"%>
@@ -1232,6 +1234,32 @@
 								}			
 						});			
 						// ajax call for bonus end
+						
+						 // ajax call for TDS start			
+						var tdsMonth = monthConversion(date);			
+						tdsMonth = tdsMonth.split('/').join('-');			
+						var resourceURL = $("#contextpath").val()+"/emptds/getemptds/"+empid+"/"+tdsMonth;			
+						$.ajax({			
+								url : resourceURL,			
+								type : 'GET',			
+								async : false,			
+								dataType : 'text',			
+								success: function(data) {			
+										if(data != 0){			
+												$("#tds").html(parseFloat(data).toFixed(2));
+											//	$("#tds").parent("td").parent("tr").show();
+										}else{			
+												$("#tds").html("0.00");	
+												//$("#tds").parent("td").parent("tr").hide();
+										}			
+															
+								},			
+								error: function (xhr, ajaxOptions, thrownError) {			
+										$("#errorMsgContent").html(thrownError);			
+										$.fancybox.open('#errorMsg');			
+								}			
+						});			
+						// ajax call for TDS end
 						var currentmonth  = date;
 						currentmonth = monthConversion(currentmonth);
 						currentmonth = currentmonth.split('/').join('-');
@@ -1262,7 +1290,7 @@
 											$("#lossofpay").html(result.lossofpay);
 										}
 										/* $("#mbonus").html((result.bonus == undefined || result.bonus == null || result.bonus.length <= 0 || result.bonus == 0) ? "0.00" : (result.bonus).toFixed(2)); */ 
-										$("#tds").html((result.taxdeductionsource == undefined || result.taxdeductionsource == null || result.taxdeductionsource.length <= 0 || result.taxdeductionsource == 0) ? "0.00" : (result.taxdeductionsource).toFixed(2));
+										/* $("#tds").html((result.taxdeductionsource == undefined || result.taxdeductionsource == null || result.taxdeductionsource.length <= 0 || result.taxdeductionsource == 0) ? "0.00" : (result.taxdeductionsource).toFixed(2)); */
 										$("#totalearnings").html((result.totalearnings == undefined || result.totalearnings == null || result.totalearnings.length <= 0) ? "0.00" : (result.totalearnings).toFixed(2));
 										$("#totaldeduction").html((result.totaldeduction == undefined || result.totaldeduction == null || result.totaldeduction.length <= 0) ? "0.00" : (result.totaldeduction).toFixed(2));
 										$("#netpayableamount").html((result.netpayableamount == undefined || result.netpayableamount == null || result.netpayableamount.length <= 0) ? "0.00" : (result.netpayableamount).toFixed(2));
@@ -1499,11 +1527,11 @@
 									$("#tds").html("");
 								} */
 								
-								if(tds != 0 && tds != 0.00){
+								/* if(tds != 0 && tds != 0.00){
 									$("#tds").html(parseFloat(tds).toFixed(2));
 								}else{
 									$("#tds").html("0.00");
-								}
+								} */
 								/* var bonus = 0.00;
 								if(bonus != 0 && bonus != 0.00){
 									$("#mbonus").html(parseFloat(bonus).toFixed(2));
