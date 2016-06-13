@@ -79,6 +79,8 @@ h5.small-font{
   font-size: 10px;
 }
 
+.block_overlay .spinner > div {	
+  background-color: white !important;
   height: 100%;
   width: 6px;
   display: inline-block;
