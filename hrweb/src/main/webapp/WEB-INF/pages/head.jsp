@@ -36,6 +36,16 @@
 </head>
 
 <div>
+	<div class="block_overlay hidden" id="block_overlay">
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+	</div>
+	
 	<input type="hidden" id="response_content"/>
 	<div id="visitorsListJSON" class="hidden">${visitorsListJSON}</div>
 	<div id="customersListJSON" class="hidden">${customersListJSON}</div>

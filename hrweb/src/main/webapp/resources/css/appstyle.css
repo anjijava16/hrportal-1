@@ -51,6 +51,77 @@ h5.small-font{
     width: 960px;
 }
 
+.block_overlay{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 99999999;
+	transition: all .5s ease-in;
+	left: 0px;
+	top: 0px;
+}
+
+.block_overlay .spinner{
+	position: fixed;
+	width: 35px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	margin: auto;
+}
+
+.block_overlay .spinner {
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.block_overlay .spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.block_overlay .spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.block_overlay .spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.block_overlay .spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
 
 #innerContainer {
     background-color: #FFFFFF;
@@ -64,10 +135,12 @@ h5.small-font{
 	-moz-transition: all 1s;  
 	-o-transition: all 1s;  
 	transition: all 1s;
- 	min-height:	86%;  
-    position: absolute;
+ 	min-height:	80%;  
+    position: fixed;
     z-index: 9999;
   	margin-bottom: 44px;
+	overflow: auto;
+	height: 84%;
 }
 
 header {
@@ -92,8 +165,8 @@ footer, footer a {
     color: #969696;
     font: 12px Verdana,Arial,Helvetica,sans-serif;
    /*  margin-top: 8px; */
-    padding-bottom: 8px;
-     padding-top: 8px;
+    padding-bottom: 0px;
+    padding-top: 10px;
     text-align: center;
     background: white;
     height: 27px;
