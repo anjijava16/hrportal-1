@@ -152,6 +152,7 @@
 			
 			
 			$('#selectproject').on('change', function (e){
+				$("#block_overlay").removeClass("hidden");
 			 	$("#invoice").addClass("hidden");
 			 	$("#invoicenodiv").addClass("hidden");
 			 	$("#invoiceamountdiv").addClass("hidden");
@@ -187,8 +188,10 @@
 				        		});
 				        	}else{
 				        	} 
+				        	
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
@@ -213,6 +216,7 @@
 				        	} 
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
@@ -241,12 +245,15 @@
 				        	}else{
 				        		invoicenum = 0;
 				        	} 
+				        	$("#block_overlay").addClass("hidden");
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
 				   });
+				 	
 				 	if(invoicenum != 0){
 				 		invoicenum = invoicenum.split("-");
 					 	var increment = 0;
@@ -272,6 +279,7 @@
 					
 					$("#invoicedate").val("");
 					$("#duedate").val("");
+					$("#block_overlay").addClass("hidden");
 			 	}
 			 	
 			});
@@ -297,6 +305,7 @@
 			}); */
 		
 			$('#custselect').on('change', function (e){
+				$("#block_overlay").removeClass("hidden");
 				$("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden");
 			 	$("#invoice").addClass("hidden");
@@ -336,8 +345,10 @@
 					        	}else{
 					        		$("#projselect").addClass("hidden");
 					        	} 
+					        	$("#block_overlay").addClass("hidden");
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
+					        	$("#block_overlay").addClass("hidden");
 					        	$("#errorMsgContent").html(thrownError);
 					    		$.fancybox.open('#errorMsg');
 					   		}
@@ -355,6 +366,7 @@
 						
 						$("#invoicedate").val("");
 						$("#duedate").val("");
+						
 				 	} else{
 				 		$("#selectproject").val("");
 				 		$("#projselect").addClass("hidden");
@@ -371,6 +383,7 @@
 						
 						$("#invoicedate").val("");
 						$("#duedate").val("");
+						$("#block_overlay").addClass("hidden");
 				 	}
 				});
 			/* 
@@ -469,6 +482,7 @@
 				});
 			
 			 $('#addInvoice').click(function(){
+						 $("#block_overlay").removeClass("hidden");
 				 		var validation = true;
 				 		var customerid = $("#custselect").val();
 				 		var projectid = $("#selectproject").val();
@@ -494,6 +508,7 @@
 						
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -529,8 +544,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

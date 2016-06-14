@@ -100,6 +100,7 @@
 			finalYearReportProcess(currentdate, nextdate);
 			
 			$("#findByFinancialYear").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("[id^='fiancialdashboardrow_']").each(function() {
 					var id = $(this).attr('id');
 					$("#"+id).remove();
@@ -112,7 +113,7 @@
 				var findNextDate = $("#endyear").datepicker().val();
 				
 				finalYearReportProcess(findCurrentDate, findNextDate);
-				
+				$("#block_overlay").addClass("hidden");
 			});
 			
 			$(document).on('click', '.fymonthlist' ,function(){
@@ -124,6 +125,7 @@
 			});
 			
 			function finalYearReportProcess(currentdate, nextYear){
+				$("#block_overlay").removeClass("hidden");
 				var completeTotalAmount = 0;
 				var resourceURL = $("#contextpath").val()+"/fyreports/getassetreport/"+currentdate+"/"+nextYear;
 				$.ajax({
@@ -190,12 +192,15 @@
 							$("#fy_details").addClass("hidden");
 							$("#totaldiv1").addClass("hidden");
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
+				
 			}
 			$("#assetpdfreport").click(function() {
 				var startdate = $("#startyear").val();

@@ -236,6 +236,7 @@
 	        });
 	        
 	        $('#payTds').click(function(){
+	        	$("#block_overlay").removeClass("hidden");
 				var validation = true;
 				//tds
 				var tdsmonth = $("#add_tdm").datepicker().val();
@@ -251,6 +252,7 @@
 				if(refer == "" || refer.length == 0) validation = false;
 				/* if(comments == "" || comments.length == 0) validation = false; */
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#tds_mandatory").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(comments == "" || comments == null || comments.length == 0) comments = null;
@@ -268,6 +270,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("TDS added successfully ...");
 								$.fancybox.open('#userMsg');
@@ -278,6 +281,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -316,6 +320,7 @@
 				fymonthYear = fymonthYear.split('/').join('-');
 				url = $("#contextpath").val()+"/tds/getbytdsmonth/"+fymonthYear;
 				var resourceurl = $("#contextpath").val()+"/tds/getbytdsmonthajax/"+fymonthYear;
+				$("#block_overlay").removeClass("hidden");
 					$.ajax({
 			        url : resourceurl,
 			        type : 'GET',
@@ -329,7 +334,7 @@
 							$.each(results, function (i, result) {
 								amount = parseFloat(amount) + parseFloat(result.amount);	
 							});
-							
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -444,6 +449,7 @@
 			} 
 			
 			$("#findByMonth").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				var month = $("#tdsid").datepicker().val();
 				if(month != "" && month != null){
 					month =  monthConversion(month);
@@ -464,6 +470,7 @@
 								amount = parseFloat(amount) + parseFloat(result.amount);	
 								
 							});
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -513,6 +520,7 @@
 			    });
 				$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
 				}else{
+					$("#block_overlay").addClass("hidden");
 					$("#confirmationMsgContentDate").html("Please select valid month ...");
 					$.fancybox.open('#confirmMsgdate');
 				}
@@ -587,6 +595,7 @@
 		});
 	
 			function tds(id){ 
+				$("#block_overlay").removeClass("hidden");
 				$("#data display").addClass("hidden");
 				$("#optiondiv").addClass("hidden");
 				$("#tdstable_wrapper").addClass("hidden");
@@ -633,11 +642,14 @@
 								$("#optional_comments").removeClass("hidden");
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -671,6 +683,7 @@
 				$.fancybox.open('#deletconfirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/tds/delete/"+id;	
@@ -682,11 +695,13 @@
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
 						if(successflag == "true"){
+							$("#block_overlay").addClass("hidden");
 							$("#successful_msg_content").html("Deleted successfully...");
 							$.fancybox.open('#deletedsuccessful_fancybox');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -781,6 +796,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#update").click(function(){ 
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
@@ -798,6 +814,7 @@
 				if(refrence == "" || refrence.length == 0) validation = false;
 				/* if(comment == "" || comment.length == 0) validation = false; */
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -839,10 +856,11 @@
 								$("#Edit_decline").addClass("hidden");
 								$("#date_tabledata").addClass("hidden");
 								$("#date_tablediv").removeClass("hidden");
-								
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("TDS details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{ 
+								$("#block_overlay").addClass("hidden");
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
@@ -851,6 +869,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

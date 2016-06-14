@@ -69,7 +69,7 @@
 			$("#pageTitle").html("Professional Tax<b class='saptaColor'> List</b>");
 			$("#menu_payroll").addClass("active");
 			$("body").css("cursor", "default");
-			
+			$("#block_overlay").removeClass("hidden");
 			var fymonthYear = "${fymonth}";
 			if(fymonthYear != "" && fymonthYear != null){
 				$(function() {
@@ -113,7 +113,7 @@
 							$.each(results, function (i, result) {
 								amount = parseInt(amount) + parseInt(result.amount);	
 							});
-							
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -121,6 +121,7 @@
 			   }); 
 				$("#norecords").addClass("hidden");
 			}else {
+				$("#block_overlay").addClass("hidden");
 				url = $("#contextpath").val()+"/professionaltax/get";
 				$(function() {     
 		            $( "#month_tax" ).datepicker({
@@ -198,6 +199,7 @@
 				}
 			});
 			 function findByMonth(){
+				 $("#block_overlay").removeClass("hidden");
 				var month = $("#month_tax").datepicker().val();
 				month =  monthConversion(month);
 				month = month.split('/').join('-');
@@ -217,7 +219,7 @@
 								amount = parseInt(amount) + parseInt(result.amount);	
 								
 							});
-							
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -238,6 +240,7 @@
 			    });
 				
 			} 
+			 
 		});
 		 $("#date_select").click(function(){
 			 $.fancybox.close();

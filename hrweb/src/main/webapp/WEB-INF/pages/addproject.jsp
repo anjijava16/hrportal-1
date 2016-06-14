@@ -131,6 +131,7 @@
 		    });
 			
 			$('#addProject').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				//project
@@ -186,7 +187,7 @@
 				        	var successflag = data.response.successflag;
 				        	var errors = data.response.errors;
 				        	var results = data.response.result;
-				        	
+				        	$("#block_overlay").addClass("hidden");
 				        	if(successflag == "true"){
 							    $("#userMsgContent").html("Project added successfully ...");
 					    		$.fancybox.open('#userMsg');
@@ -196,6 +197,7 @@
 				        	} 
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}

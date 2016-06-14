@@ -238,6 +238,7 @@
 			}); */
 			
 			$('#customerid').on('change', function (e){
+				$("#block_overlay").removeClass("hidden");
 				if($("#customerid").val() != ""){
 					 $("#projselect").removeClass("hidden");
 					var resourceURL = $("#contextpath").val()+"/project/retrivebycustid/"+$("#customerid").val();
@@ -264,18 +265,22 @@
 					        	}else{
 					        		$("#projselect").addClass("hidden");
 					        	} 
+					        	$("#block_overlay").addClass("hidden");
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
+					        	$("#block_overlay").addClass("hidden");
 					        	$("#errorMsgContent").html(thrownError);
 					    		$.fancybox.open('#errorMsg');
 					   		}
 					   });
 				} else {
 					$("#projselect").addClass("hidden");
+					$("#block_overlay").addClass("hidden")
 				}
 		    });
 			
 			$('#addassignment').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var sdate = $("#sdate").datepicker().val();
@@ -300,6 +305,7 @@
 				}
 						
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -338,8 +344,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

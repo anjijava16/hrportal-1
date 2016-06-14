@@ -269,6 +269,7 @@
 			} 
 			
 			$('#addempBonusDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var empid = $("#empid").val();
@@ -283,9 +284,9 @@
 				if(bonusMonth == "" || bonusMonth.length == 0 || bonusMonth == "undefined-undefined-undefined") validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				}else{
-				
 					if(comment == "" || comment.length == 0) comment = "null";
 					var resourceURL = $("#contextpath").val()+"/empbonus/add/"+empid+"/"+bonus+"/"+bonusMonth+"/"+comment;
 					$.ajax({
@@ -299,6 +300,7 @@
 							$("#bonusamount").val('');
 							$("#bonusmonth").val('');
 							$("#bonusComment").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#ctcMsgContent").html("Employee Bonus  added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
@@ -308,6 +310,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -338,6 +341,7 @@
 			$("a[id^='delete_']").click(function() {
 				$("#confirmMsgContent").html("Are you sure want to delete...?");
 				$.fancybox.open('#confirmMsg', {hideOnOverlayClick : false});
+				$("#block_overlay").removeClass("hidden");
 				var id = $(this).attr('id');
 				var recordid = id.substring(7);
 				$("#confirmation").click(function() {
@@ -349,18 +353,21 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Bonus deleted successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 						}
 					});
 				});
 			});
 			
 			$('#updateDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
 				var validation = true;
@@ -374,6 +381,7 @@
 				if(empid == "" || empid.length == 0) validation = false;
 				if(editbonusmonth == "" || editbonusmonth.length == 0) validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(editcomment == "" || editcomment.length == 0) editcomment = "null";
@@ -389,6 +397,7 @@
 							$("#editbonusmonth").val('');
 							$("#editcomment").html('');
 							$("#editbonusamount").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Employee Bonus details updated successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
@@ -398,6 +407,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

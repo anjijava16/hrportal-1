@@ -169,9 +169,7 @@
 	<%@include file="footer.jsp"%>
 </body>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						$("body").css("cursor", "progress");
 						$("#pageTitle").html(
 								"Expense Type <b class='saptaColor'>List</b> ");
@@ -198,9 +196,8 @@
 							$("body").css("cursor", "default");
 						});
 
-						$('#updateDetails')
-								.click(
-										function() {
+						$('#updateDetails').click(function() {
+							$("#block_overlay").removeClass("hidden");
 											$("body").css("cursor", "progress");
 											var validation = true;
 											var name = $("#editname").val();
@@ -215,9 +212,8 @@
 											if (id == "none" || id.length == 0)
 												validation = false;
 											if (validation == false) {
-												$("#notify_error")
-														.html(
-																"All necessary information has not been provided or it may be invalid data");
+												$("#block_overlay").addClass("hidden");
+												$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 											} else {
 												var resourceURL = $(
 														"#contextpath").val()
@@ -227,8 +223,7 @@
 														+ name
 														+ "/"
 														+ dispname;
-												$
-														.ajax({
+												$.ajax({
 															url : resourceURL,
 															type : 'GET',
 															dataType : 'json',
@@ -236,6 +231,7 @@
 																	data) {
 																var successflag = data.response.successflag;
 																var errors = data.response.errors;
+																$("#block_overlay").addClass("hidden");
 																if (successflag == "true") {
 																	$(
 																			"#editname")
@@ -273,6 +269,7 @@
 																	xhr,
 																	ajaxOptions,
 																	thrownError) {
+																$("#block_overlay").addClass("hidden");
 																$(
 																		"#errorMsgContent")
 																		.html(
@@ -285,9 +282,7 @@
 											$("body").css("cursor", "default");
 										});
 
-						$("a[id^='delete_']")
-								.click(
-										function() {
+						$("a[id^='delete_']").click(function() {
 											$("body").css("cursor", "progress");
 											$("#confirmMsgContent")
 													.html(
@@ -295,18 +290,16 @@
 											$.fancybox.open('#confirmMsg', {
 												hideOnOverlayClick : false
 											});
+											$("#block_overlay").removeClass("hidden");
 											var id = $(this).attr('id');
 											var recordid = id.substring(7);
-											$("#confirmation")
-													.click(
-															function() {
+											$("#confirmation").click(function() {
 																var resourceURL = $(
 																		"#contextpath")
 																		.val()
 																		+ "/expensetype/delete/"
 																		+ recordid;
-																$
-																		.ajax({
+																$.ajax({
 																			url : resourceURL,
 																			type : 'GET',
 																			dataType : 'json',
@@ -314,6 +307,7 @@
 																					data) {
 																				var successflag = data.response.successflag;
 																				var errors = data.response.errors;
+																				$("#block_overlay").addClass("hidden");
 																				if (successflag == "true") {
 																					$(
 																							"#userMsgContent")
@@ -347,9 +341,8 @@
 											$("body").css("cursor", "default");
 										});
 
-						$('#addExpenseTypeDetails')
-								.click(
-										function() {
+						$('#addExpenseTypeDetails').click(function() {
+										$("#block_overlay").removeClass("hidden");
 											$("body").css("cursor", "progress");
 											var validation = true;
 											var name = $("#name").val();
@@ -360,6 +353,7 @@
 													|| dispname.length == 0)
 												validation = false;
 											if (validation == false) {
+												$("#block_overlay").addClass("hidden");
 												$("#notify_error1")
 														.html(
 																"All necessary information has not been provided or it may be invalid data");
@@ -369,8 +363,7 @@
 														+ "/expensetype/add/"
 														+ name + "/" + dispname;
 
-												$
-														.ajax({
+												$.ajax({
 															url : resourceURL,
 															type : 'GET',
 															dataType : 'json',
@@ -378,6 +371,7 @@
 																	data) {
 																var successflag = data.response.successflag;
 																var errors = data.response.errors;
+																$("#block_overlay").addClass("hidden");
 																if (successflag == "true") {
 																	$("#name")
 																			.val(
@@ -409,6 +403,7 @@
 																	xhr,
 																	ajaxOptions,
 																	thrownError) {
+																$("#block_overlay").addClass("hidden");
 																$(
 																		"#errorMsgContent")
 																		.html(
@@ -421,9 +416,7 @@
 											$("body").css("cursor", "default");
 										});
 
-						$("#decline")
-								.click(
-										function() {
+						$("#decline").click(function() {
 											$("#confirmationMsgContentDecline")
 													.html(
 															"Are you sure want to decline...?");

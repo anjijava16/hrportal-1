@@ -153,6 +153,7 @@
 				$("#optiondiv").removeClass("hidden");
 			} 
 			function vendorDetails(custid){
+				$("#block_overlay").removeClass("hidden");
 				$("#vendorList").addClass("hidden");
 				$("#vendorDetail").removeClass("hidden");
 				$("#headlist").addClass("hidden");
@@ -183,11 +184,14 @@
 								$("#emailid").val((result.email == undefined || result.email == null || result.email.length <= 0) ? "-" : result.email);
 								}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -333,6 +337,7 @@
 				$.fancybox.close();
 			});
 			function declineVendorDeatils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/vendordetails/retrivebyid/"+id;
 				$.ajax({
@@ -360,17 +365,21 @@
 								$("#emailid").val((result.email == undefined || result.email == null || result.email.length <= 0) ? "-" : result.email);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
@@ -397,6 +406,7 @@
 				}
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -486,22 +496,26 @@
 								$("#fax").addClass("inputdisable");
 								$("#mobileno").addClass("inputdisable");
 								$("#emailid").addClass("inputdisable"); 
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("Vendor details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
 					});
-				}		
+				}	
 				$("body").css("cursor", "default");
 			});
 			$("#delete").click(function(){
@@ -509,6 +523,7 @@
 				$.fancybox.open('#confirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/vendordetails/delete/"+id;	
@@ -519,6 +534,7 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 						if(successflag == "true"){
 								$("#successful_msg_content").html("Vendor deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
@@ -529,6 +545,7 @@
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}

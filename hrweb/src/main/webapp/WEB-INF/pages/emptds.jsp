@@ -269,6 +269,7 @@
 			} 
 			
 			$('#addempTDSDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var empid = $("#empid").val();
@@ -283,6 +284,7 @@
 				if(tdsMonth == "" || tdsMonth.length == 0 || tdsMonth == "undefined-undefined-undefined") validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 				
@@ -299,6 +301,7 @@
 							$("#tdsamount").val('');
 							$("#tdsmonth").val('');
 							$("#tdsComment").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#ctcMsgContent").html("Employee TDS  added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
@@ -308,6 +311,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -361,6 +365,7 @@
 			});
 			
 			$('#updateDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
 				var validation = true;
@@ -374,6 +379,7 @@
 				if(empid == "" || empid.length == 0) validation = false;
 				if(edittdsmonth == "" || edittdsmonth.length == 0) validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(editcomment == "" || editcomment.length == 0) editcomment = "null";
@@ -389,6 +395,7 @@
 							$("#edittdsmonth").val('');
 							$("#editcomment").html('');
 							$("#edittdsamount").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Employee TDS details updated successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});

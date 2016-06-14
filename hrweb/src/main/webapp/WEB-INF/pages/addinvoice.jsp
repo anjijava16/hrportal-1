@@ -431,6 +431,7 @@
 		    });
 			
 			$('#selectproject').on('change', function (e){
+				$("#block_overlay").removeClass("hidden")
 				$("#viewAssignment").removeClass("hidden");
 				var url = "";
 				url = $("#contextpath").val()+"/assignment/getempassign/"+$("#selectproject").val();
@@ -487,6 +488,7 @@
 				        	} 
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden")
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
@@ -511,6 +513,7 @@
 				        	} 
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden")
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
@@ -536,12 +539,13 @@
 				        		}else{
 				        			invoicenum = 0;
 				        		}
-				        		
+				        		$("#block_overlay").addClass("hidden")
 				        	}else{
 				        		invoicenum = 0;
 				        	} 
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden")
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
@@ -595,7 +599,6 @@
 					$("#invoicedate").val("");
 					$("#duedate").val("");
 			 	}
-			 	
 			});
 			var counter = 2;
 			var removeCount = 2;
@@ -697,6 +700,7 @@
 			    }   
 			 });
 			$('#custselect').on('change', function (e){
+				$("#block_overlay").removeClass("hidden")
 				/* $("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden"); */
 			 	/* $("#invoice").addClass("hidden"); */
@@ -726,11 +730,14 @@
 								        }));
 					        		}
 					        		$("#projselect").removeClass("hidden");
+					        		$("#block_overlay").addClass("hidden")
 					        	}else{
+					        		$("#block_overlay").addClass("hidden")
 					        		$("#projselect").addClass("hidden");
 					        	} 
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
+					        	$("#block_overlay").addClass("hidden")
 					        	$("#errorMsgContent").html(thrownError);
 					    		$.fancybox.open('#errorMsg');
 					   		}
@@ -1031,8 +1038,9 @@
 					 });
 				 	}
 				}); */
-			
+				
 			 $('#addInvoice').click(function(){
+						$("#block_overlay").removeClass("hidden");
 				 		var validation = true;
 						var invoicenumber = $("#invoiceno").val();
 						var invoicedate = $("#invoicedate").datepicker().val();
@@ -1085,6 +1093,7 @@
 						if ((servicefromvalidation) > (servicetovalidation))  validation = false; 
 				 });
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -1123,8 +1132,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -1180,12 +1191,15 @@
 									rateperhr = null;
 									dueamount = null;
 									totaldays = null;
+									$("#block_overlay").addClass("hidden")
 								}else{
+									$("#block_overlay").addClass("hidden")
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden")
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -1500,6 +1514,7 @@
 			
 			
 			function assignmentDetails(id) {
+				$("#block_overlay").removeClass("hidden")
 				$("body").css("cursor", "progress");
 				var empid = null;
 				var projectid = null;
@@ -1576,11 +1591,13 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden")
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden")
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1604,11 +1621,13 @@
 								$("#emobile").html((result.mobile == undefined || result.mobile == null || result.mobile.length <= 0) ? "-" : result.mobile);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden")
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden")
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1634,16 +1653,20 @@
 									}
 								</c:forEach>
 							}); 
+							$("#block_overlay").addClass("hidden")
 						}else{
+							$("#block_overlay").addClass("hidden")
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden")
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 			   });	
+				
 				$("body").css("cursor", "default");
 			}
 			$('#decline').click(function() {

@@ -93,6 +93,7 @@
 	        });
 			
 			$('#payTds').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				var validation = true;
 				//tds
 				var tdsmonth = $("#tdm").datepicker().val();
@@ -109,6 +110,7 @@
 				/* if(comments == "" || comments.length == 0) validation = false; */
 				 
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -127,6 +129,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("TDS added successfully ...");
 								$.fancybox.open('#userMsg');
@@ -136,6 +139,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

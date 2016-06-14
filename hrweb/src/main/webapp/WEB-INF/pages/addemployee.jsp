@@ -2034,6 +2034,7 @@
 						});
 					
 					$('#emp_bank_skip').click(function() {
+						$("#block_overlay").removeClass("hidden");
 						$("body").css("cursor", "default");
 							var validation = true;
 							//Employee
@@ -2231,8 +2232,10 @@
 									if(successflag = "true"){
 										addFamilyBackgroundDetails();
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2240,6 +2243,7 @@
 						$("body").css("cursor", "default");
 					});
 					$('#add_employee').click(function(){
+						$("#block_overlay").removeClass("hidden");
 						$("body").css("cursor", "default");
 							var validation = true;
 							//Employee
@@ -2351,6 +2355,7 @@
 							if(isNaN(bank_pincode)  || bank_pincode.length != 6) validation = false;
 							
 							if(validation == false){
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
 							}else{
@@ -2454,8 +2459,10 @@
 										if(successflag == "true"){
 											addFamilyBackgroundDetails();
 										}
+										$("#block_overlay").addClass("hidden");
 									},
 									error: function (xhr, ajaxOptions, thrownError) {
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(thrownError);
 										$.fancybox.open('#errorMsg');
 									}
@@ -2517,6 +2524,7 @@
 					}
 				// Add Employee Education Details Function
 					 function addEducationDetails(){
+						 $("#block_overlay").removeClass("hidden");
 						 $('[id^="education_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2555,8 +2563,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2565,6 +2575,7 @@
 						addSkillSetDetails();
 					} 
 					function addSkillSetDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="skillset_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(19, id.length);
@@ -2591,8 +2602,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2601,6 +2614,7 @@
 						addReferenceDetails();
 					}
 					function addReferenceDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="reference_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2649,8 +2663,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2659,6 +2675,7 @@
 						addLanguageKnownDetails();
 					}
 					function addLanguageKnownDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="languageknown_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(24, id.length);
@@ -2692,8 +2709,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2702,6 +2721,7 @@
 						addEmploymentHistoryDetails();
 					}
 					function addEmploymentHistoryDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="employmenthistory_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(28, id.length);
@@ -2758,8 +2778,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2769,6 +2791,7 @@
 					}
 					
 					function addEmpAchievementsDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="achievements_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(23, id.length);
@@ -2799,8 +2822,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2810,6 +2835,7 @@
 					}
 					
 					function addEmpCulturalsDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="culturals_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2840,8 +2866,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2851,6 +2879,7 @@
 					}
 					
 					function addEmpSportsDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="sports_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(17, id.length);
@@ -2881,8 +2910,10 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
+									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}

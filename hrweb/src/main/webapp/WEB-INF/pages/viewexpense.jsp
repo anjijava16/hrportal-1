@@ -250,7 +250,9 @@
                    {sClass: "alignright"}
                  ]
 			});
+			
 			if(resourceurl != null && resourceurl != ""){
+				$("#block_overlay").removeClass("hidden");
 				$.ajax({
 			        url : resourceurl,
 			        type : 'GET',
@@ -265,13 +267,17 @@
 								amount = parseFloat(amount) + parseFloat(result.amount);	
 							});
 							$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
 			   		}
 			   });
+				
 			}
 			function expenseDetails(id){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#expenseList").addClass("hidden");
 				$("#headlist").addClass("hidden");
@@ -339,8 +345,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -364,6 +372,7 @@
 					$("#expenseDetail").addClass("hidden");
 					
 				}else if(optionval.val() != "" || optionval.val() != null){
+					$("#block_overlay").removeClass("hidden");
 					var URL = $("#contextpath").val()+"/expense/getforajax/"+optionval.val();	
 					$.ajax({
 						url : URL,
@@ -389,8 +398,10 @@
 								document.getElementById("alertMsgContent").innerHTML =  optionval.val().substr(0,1).toUpperCase().bold()+ optionval.val().substr(1).bold() + " expense details not found" ;
 								$.fancybox.open('#alertMsg');
 							}
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -537,6 +548,7 @@
 				$.fancybox.close();
 			}); 
 			function declineExpenseDeatils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#expid").val();
 				var resourceURL = $("#contextpath").val()+"/expense/retrivebyid/"+id;
 				$.ajax({
@@ -601,14 +613,17 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#expid").val();
@@ -633,6 +648,7 @@
 				}
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -640,7 +656,7 @@
 					if (mode == "c" || mode == "o"){
 						if(cardno != "" || cardno.length != 0 || cardno == "" || cardno.length == 0) cardno = "null";
 						if(bankname != "" || bankname.length != 0 || bankname == "" || bankname.length == 0) bankname = "null";
-				}
+					}
 				var resourceURL = $("#contextpath").val()+"/expense/update/"+id+"/"+category+"/"+date+"/"+exptypeid+"/"+desc+"/"+billno+"/"+mode+"/"+cardno+"/"+amount+"/"+bankname;
 					$.ajax({
 						url : resourceURL,
@@ -770,8 +786,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -785,6 +803,7 @@
 				$.fancybox.open('#confirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#expid").val();
 				var resourceURL = $("#contextpath").val()+"/expense/delete/"+id;	
@@ -795,12 +814,14 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 						if(successflag == "true"){
 							$("#successful_msg_content").html("Deleted successfully...");
 							$.fancybox.open('#deletedsuccessful_fancybox');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -864,6 +885,7 @@
 				
 				var totalamount = 0;
 				var URL = $("#contextpath").val()+"/expense/gettotalamount";
+				$("#block_overlay").removeClass("hidden");
 				$.ajax({
 					url : URL,
 					type : 'GET',
@@ -875,15 +897,16 @@
 						var results = data.response.result;
 						if(successflag == "true"){
 							$.each(results, function (i, result) {
-								
 								totalamount = parseFloat(totalamount) + parseFloat(result.amount);
 							}); 
 						}else{
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}

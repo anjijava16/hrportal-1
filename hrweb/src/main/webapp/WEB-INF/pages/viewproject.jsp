@@ -230,6 +230,7 @@
 			});	
 
 			function projectDetails(id) {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#viewProjectTbl_wrapper").addClass("hidden");
 				$("#projectDetail").removeClass("hidden");
@@ -279,11 +280,14 @@
 								$("#optional_enddate").html((result.enddate == undefined || result.enddate == null || result.enddate.length <= 0) ? "-" : result.enddate);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -411,6 +415,7 @@
 				$.fancybox.close();
 			});
 			function declineProjectDeatils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/project/retrivebyid/"+id;
 				$.ajax({
@@ -453,11 +458,14 @@
 								$("#optional_enddate").html((result.enddate == undefined || result.enddate == null || result.enddate.length <= 0) ? "-" : result.enddate);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -465,6 +473,7 @@
 			}
 
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
@@ -498,6 +507,7 @@
 					enddate = "null";
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -593,11 +603,12 @@
 									$("#type").addClass("inputdisable");
 									$("#startdate").addClass("inputdisable");
 									$("#enddate").addClass("inputdisable"); 
-									 
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Project details updated successfully ...");
 									$.fancybox.open('#alertMsg');
 										
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#edit").addClass("hidden");
 									$("#delete").addClass("hidden");
 									$("#decline").addClass("hidden");
@@ -607,11 +618,12 @@
 								} 
 							},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
 						});
-					}		
+					}	
 				$("body").css("cursor", "default");
 			});
 			$("#delete").click(function(){
@@ -619,6 +631,7 @@
 				$.fancybox.open('#confirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/project/delete/"+id;	
@@ -629,6 +642,7 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Project detail deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
@@ -639,6 +653,7 @@
 							} 
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}

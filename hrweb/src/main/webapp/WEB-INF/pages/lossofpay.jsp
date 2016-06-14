@@ -213,6 +213,7 @@
 			} 
 			
 			$('#addempCTCDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var empid = $("#empid").val();
@@ -229,6 +230,7 @@
 					if ((startdatevalidation) > (enddatevalidation))  validation = false; 
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/emplop/add/"+empid+"/"+startdate+"/"+enddate;
@@ -242,6 +244,7 @@
 							$("#empid").val('');
 							$("#startdate").val('');
 							$("#enddate").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#ctcMsgContent").html("Employee loss of pay added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
@@ -251,6 +254,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -308,6 +312,7 @@
 			});
 			
 			$('#updateDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
 				var validation = true;
@@ -326,6 +331,7 @@
 					if (startdatevalidation > enddatevalidation)  validation = false; 
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/emplop/update/"+emplopid+"/"+empid+"/"+editedstartdate+"/"+enddate;
@@ -340,6 +346,7 @@
 							$("#editemployeectc").val('');
 							$("#editstartdate").html('');
 							$("#editenddate").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Employee loss of pay details updated successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
@@ -349,6 +356,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

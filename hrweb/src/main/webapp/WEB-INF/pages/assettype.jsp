@@ -159,6 +159,7 @@
 			});
 				
 			$('#updateDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var name = $("#editname").val();
@@ -178,6 +179,7 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#editname").val('');
 								$("#editdispname").val('');
@@ -192,6 +194,7 @@
 							
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -201,6 +204,7 @@
 			});
 			
 			$("a[id^='delete_']").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#confirmMsgContent").html("Are you sure want to delete ?");
 				$.fancybox.open('#confirmMsg', {hideOnOverlayClick : false});
@@ -215,18 +219,17 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Deleted successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
-								
 							}else{
 								$("#errorMsgContent").html("Parent row cant be deleted.....");
 								$.fancybox.open('#errorMsg');
 							}
-							
 						},
-						
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							 $("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg'); 
 						}
@@ -236,6 +239,7 @@
 			});
 			
 			$('#addExpenseTypeDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var name = $("#name").val();
@@ -243,6 +247,7 @@
 				if(name == "" || name.length == 0) validation = false;
 				if(dispname == "" || dispname.length == 0) validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error1").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/assettype/add/"+name+"/"+dispname;
@@ -253,6 +258,7 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#name").val('');
 								$("#dispname").val('');
@@ -264,6 +270,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

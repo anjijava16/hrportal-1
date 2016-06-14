@@ -340,7 +340,7 @@
 					gotoCurrent: true
 	            })
 	        });
-			
+			$("#block_overlay").removeClass("hidden");
 			$("#invoicemonth").val("${fymonth}");
 			var amount = 0;
 			fymonthYear = monthConversion(fymonthYear);
@@ -361,6 +361,7 @@
 							amount = parseInt(amount) + parseInt(result.receivedamount);
 							amount = amount.toFixed(2);
 						});
+						$("#block_overlay").addClass("hidden");
 					}
 		        },
 		        error: function (xhr, ajaxOptions, thrownError) {
@@ -391,6 +392,7 @@
 						gotoCurrent: true
 		            })
 		        });
+				$("#block_overlay").addClass("hidden");
 			}
 			var table = $("#invoiceDataTable").dataTable({
 				"ajax":url,
@@ -447,6 +449,7 @@
 			} 
 			
 			function invoice(id){
+				$("#block_overlay").removeClass("hidden");
 				var projectid = "";
 				$("#invoiceList").addClass("hidden");
 				$("#invoicedetails").removeClass("hidden");
@@ -526,11 +529,13 @@
 								$(".ui-datepicker-trigger").addClass("hidden");
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -689,11 +694,13 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -721,11 +728,14 @@
 								}
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -734,7 +744,9 @@
 			} 
 			
 			$("#findByMonth").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				if($("#invoicemonth").datepicker().val() == ""){
+					$("#block_overlay").addClass("hidden");
 					 $("#confirmationMsgContentDate").html("Please select month...");
 					$.fancybox.open('#confirmMsgdate');
 				}else{
@@ -769,6 +781,7 @@
 									$("#currenttotalamttd").html(totalAmount);
 									$("#totaldiv").removeClass("hidden");
 								}
+								$("#block_overlay").addClass("hidden");
 								}
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
@@ -1175,6 +1188,7 @@
 			// Service TAX Effective Date calculation - END
 			
 			function declineInvoice(){
+				$("#block_overlay").removeClass("hidden");
 				$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 					var id = $(this).attr("id");
 					var i = id.substring(23, id.length);
@@ -1225,11 +1239,13 @@
 								$(".ui-datepicker-trigger").addClass("hidden");
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1376,11 +1392,14 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1388,6 +1407,7 @@
 			}
 			
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				var id = $("#id").val();
@@ -1475,6 +1495,7 @@
 					if ((servicefromvalidation) > (servicetovalidation))  validation = false;
 				});	
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -1675,6 +1696,7 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#errorMsgContent").html(thrownError);
@@ -1682,11 +1704,13 @@
 						}
 					});
 					updateinvoiceDetails();
+					
 				}	
 				
 			});
 			
 			function updateinvoiceDetails(){
+				$("#block_overlay").removeClass("hidden");
 				$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 					var id = $(this).attr("id");
 					var i = id.substring(23, id.length);
@@ -1721,11 +1745,14 @@
 								rateperhr = null;
 								dueamount = null;
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -1748,6 +1775,7 @@
 			});
 			
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/invoice/delete/"+id;	
@@ -1758,6 +1786,7 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 						if(successflag == "true"){
 								$("#successful_msg_content").html("Invoice deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
@@ -1768,6 +1797,7 @@
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1950,6 +1980,7 @@
 					
 				}
 				if(url != null && url != ""){
+					$("#block_overlay").removeClass("hidden");
 					$.ajax({
 			        url : url,
 			        type : 'GET',
@@ -1970,6 +2001,7 @@
 							});
 								$("#currenttotalamttd").html(numberWithCommas(amount.toFixed(2)));
 								$("#totaldiv").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 							}
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {

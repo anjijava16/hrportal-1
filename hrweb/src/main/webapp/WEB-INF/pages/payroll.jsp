@@ -372,7 +372,7 @@
 			$("#menu_payroll").addClass("active");
 			$("#lop_table").hide();
 			var monthYear = "${fymonth}";
-			
+			$("#block_overlay").removeClass("hidden");
 			if(monthYear != null && monthYear != ""){
 				$(function() {     
 		            $( "#payrollmonth" ).datepicker({
@@ -406,12 +406,15 @@
 				        dataType : 'json',
 				        success: function(data) {
 				        	$("#currenttotalamttd").html((data).toFixed(2));
+				        	$("#block_overlay").addClass("hidden");
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	$("#block_overlay").addClass("hidden");
 				        	$("#errorMsgContent").html(thrownError);
 				    		$.fancybox.open('#errorMsg');
 				   		}
 				   });
+					
 			} else {
 				$(function() {     
 		            $( "#payrollmonth" ).datepicker({
@@ -434,6 +437,7 @@
 		            }).datepicker('setDate',"0");
 		        });
 				url = $("#contextpath").val()+"/payroll/retrivebymonth";
+				$("#block_overlay").addClass("hidden");
 			}
 		 	$("#payrolltable").dataTable({
 		 		"ajax": url,
@@ -542,6 +546,7 @@
 			} 
 			
 			$("#findByMonth").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("#payrollList").removeClass("hidden");
 				$("#datedisable").addClass("hidden");
 				$("#optiondiv").removeClass("hidden");
@@ -570,8 +575,10 @@
 			        	}else{
 			        		$("#exportData").removeClass("hidden");
 			        	}
+			        	$("#block_overlay").addClass("hidden");
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
 			        	$("#errorMsgContent").html(thrownError);
 			    		$.fancybox.open('#errorMsg'); 
 			   		}
@@ -633,6 +640,7 @@
 	                     {sClass: "alignleft"}
 	                  ]
 			    });
+				
 			});
 			
 			$("#show_employee").click(function() {
@@ -642,6 +650,7 @@
 			});	
 			
 			$("#show_payroll").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("#selecteddate").datepicker('setDate', null);
 				$("#payrollDetail").addClass("hidden");
 				$("#payrollList").addClass("hidden");
@@ -716,7 +725,7 @@
                       {sClass: "alignleft"}
                     ]
 			    });
-				
+				$("#block_overlay").addClass("hidden");
 			});
 			
 			$(document).on('click','[id^="show_project_"]', function(e) {
@@ -727,7 +736,9 @@
 			});
 			
 			$("#paysal").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				 if($("#selecteddate").datepicker().val() == ""){
+					 $("#block_overlay").addClass("hidden");
 					 $("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				  }else{
 					$("#paysalarytab").removeClass("hidden");
@@ -752,30 +763,34 @@
 					        dataType : 'json',
 					        success: function(data) {
 					        	if(data == "1"){
+					        		$("#block_overlay").addClass("hidden");
 					        		$("#alertMsgContent").html("Advance salary already paid for selected month...");
 					        		$("#adsalarypay").removeClass("hidden");
 									$("#paysalarytab").addClass("hidden");
 					        		$.fancybox.open('#alertMsg');
-					        	
 					        	}else{
 					        		$.fancybox.close();
 					        		var saltype = "a";
 					        		payrollDetails(empid,date,saltype);
 					        	} 
+					        	$("#block_overlay").addClass("hidden");
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
+					        	$("#block_overlay").addClass("hidden");
 					        	$("#errorMsgContent").html(thrownError);
 					    		$.fancybox.open('#errorMsg');
 					   		}
 					   }); 
 						
 					}else{
+						$("#block_overlay").addClass("hidden");
 						$("#alertMsgContent").html("Cannot pay advance salary for selected month...");
 						$("#adsalarypay").removeClass("hidden");
 						$("#paysalarytab").addClass("hidden");
 						$.fancybox.open('#alertMsg');
 					} 
 				}
+				 
 			});
 			
 			$("#paysliptab").click(function() {
@@ -786,6 +801,7 @@
 				document.location.href =  $("#contextpath").val()+"/viewpayslip?employee="+employee+"&currentmonth="+currentdate+"&strcurrentmonth="+currentmonth+"&viewpayslip=viewpayslip";				
 			});
 			$("#sendPaysliptab").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var employee = $("#employeeid").html();
 				var currentmonth = $("#ptmonthdisable").val();
@@ -801,6 +817,7 @@
 						var successflag = data.response.successflag;
 			        	var errors = data.response.errors;
 			        	var results = data.response.result;
+			        	$("#block_overlay").addClass("hidden");
 			        	if(successflag == "true"){
 			        		$("#userMsgContent").html(" Payslip has been sent ...");
 			        		$.fancybox.open('#userMsg');
@@ -814,6 +831,7 @@
 				    		$("#optiondiv").removeClass("hidden");
 			        	}
 					},error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 			    		$.fancybox.open('#errorMsg'); 
 					}
@@ -821,6 +839,7 @@
 				$("body").css("cursor", "defult");
 			});
 			$("#paysalarytab").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("#adsalarypay").addClass("hidden");
 				var salarymonthdate = monthConversion($("#dynamicmonth").html());
 				var date = new Date();
@@ -937,7 +956,7 @@
 			}
 		}); */
 		function paysalarynow(payrolltype){
-			$("body").css("cursor", "progress");
+			$("#block_overlay").removeClass("hidden");
 			var basic = $("#mbasic").html();
 			var hra = $("#mhra").html();
 			var misc = $("#mmisc").html();
@@ -992,7 +1011,6 @@
 		        	var errors = data.response.errors;
 		        	var results = data.response.result;
 		        	if(successflag == "true"){
-		        		$("body").css("cursor", "progress");
 		        		$("#selecteddate").datepicker('setDate', null);
 		        		var employee = $("#employeeid").html();
 						var currentmonth = $("#ptmonthdisable").val();
@@ -1009,7 +1027,9 @@
 								var successflag = data.response.successflag;
 					        	var errors = data.response.errors;
 					        	var results = data.response.result;
+					        	$("#block_overlay").addClass("hidden");
 					        	if(successflag == "true"){
+					        		$("#block_overlay").addClass("hidden");
 					        		$("#userMsgContent").html("Salary has been paid and payslip sent...");
 					        		$.fancybox.open('#userMsg');
 					        		$("#datedisable").addClass("hidden");
@@ -1022,17 +1042,20 @@
 						    		$("#optiondiv").removeClass("hidden");
 					        	}
 							},error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 					    		$.fancybox.open('#errorMsg'); 
 							}
 						});		
 					   
 		        	}else{
+		        		$("#block_overlay").addClass("hidden");
 		        		$("#errorMsgContent").html(errors);
 			    		$.fancybox.open('#errorMsg');
 		        	} 
 		        },
 		        error: function (xhr, ajaxOptions, thrownError) {
+		        	$("#block_overlay").addClass("hidden");
 		        	$("#errorMsgContent").html(thrownError);
 		    		$.fancybox.open('#errorMsg'); 
 		   		}
@@ -1041,6 +1064,7 @@
 		}
 		
 		function payrollDetails(empid, date, saltype){
+			$("#block_overlay").removeClass("hidden");
 			$("#days").addClass("hidden");
 			$("#dayspayable").removeClass("hidden");
 			var selectedmonth  = date;
@@ -1098,6 +1122,7 @@
 										$("#pfno").html((result.pfno == undefined || result.pfno == null || result.pfno.length <= 0) ? "" : result.pfno);
 									}); 
 								}else{
+									$("#block_overlay").addClass("hidden");
 									fancybox.open('#errorMsg');
 								}
 							},
@@ -1301,8 +1326,11 @@
 									}); 
 								}else{
 								}
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								$("#tds").prop("contenteditable", true).css("border","1px solid #dcdcdc");
 								/* $("#mbonus").prop("contenteditable", true).css("border","1px solid #dcdcdc"); */
 								salarynotpaidcalculation(date);
@@ -1424,6 +1452,7 @@
 							}
 					   });
 					}else{
+						$("#block_overlay").addClass("hidden");
 						$("#paysalarytab").addClass("hidden");
 						$("#alertMsgContent").html("CTC not found for the employee...");
 						$.fancybox.open('#alertMsg');
@@ -1434,6 +1463,7 @@
 		   });
 			
 			function salarynotpaidcalculation(date){
+				$("#block_overlay").removeClass("hidden");
 				//getting no of days Payable value
 				$("#lop_table").hide();
 				var strCurrentMonth = $("#ptmonthdisable").val();
@@ -1588,6 +1618,7 @@
 							});
 						}else{
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
 					}
@@ -1601,7 +1632,9 @@
 				var daysinMonth = numberofDaysinMonth(monthyear[1], monthyear[2]);
 				$("#dayspayable").html(daysinMonth - $("#lossofpay").html());
 				$("#days").addClass("hidden");
+				$("#block_overlay").addClass("hidden");
 			}
+			
 		}
 
 		function montlySalCalculator(monltlyamount){

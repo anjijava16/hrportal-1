@@ -345,6 +345,7 @@
 			 });
 			var url = "";
 			var fymonthYear = "${fymonth}";
+			$("#block_overlay").removeClass("hidden");
 			if(fymonthYear != "" && fymonthYear != null){
 				$(function() {     
 		            $( "#invoicemonth" ).datepicker({
@@ -387,6 +388,7 @@
 								amount = parseInt(amount) + parseInt(result.receivedamount);
 								amount = amount.toFixed(2);
 							});
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -417,7 +419,9 @@
 						gotoCurrent: true
 		            })
 		        });
+				$("#block_overlay").addClass("hidden");
 			}
+			
 			var table = $("#invoiceDataTable").dataTable({
 				"ajax":url,
 				"aaSorting" : [],
@@ -473,6 +477,7 @@
 			} 
 			
 			function invoice(id){
+				$("#block_overlay").removeClass("hidden");
 				var projectid = "";
 				$("#invoiceList").addClass("hidden");
 				$("#invoicedetails").removeClass("hidden");
@@ -678,11 +683,13 @@
 								</c:forEach> 
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -710,20 +717,26 @@
 								}
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 			   });	 
+				
 				$("body").css("cursor", "default");
 			} 
 			
 			$("#findByMonth").click(function() {
+				$("#block_overlay").reoveClass("hidden");
 				if($("#invoicemonth").datepicker().val() == ""){
+					$("#block_overlay").addClass("hidden");
 					 $("#confirmationMsgContentDate").html("Please select month...");
 					$.fancybox.open('#confirmMsgdate');
 				}else{
@@ -758,6 +771,7 @@
 									$("#currenttotalamttd").html(totalAmount);
 									$("#totaldiv").removeClass("hidden");
 								}
+								$("#block_overlay").addClass("hidden");
 								}
 					        },
 					        error: function (xhr, ajaxOptions, thrownError) {
@@ -1152,6 +1166,7 @@
 			});
 			
 			function declineInvoice(){
+				$("#block_overlay").removeClass("hidden");
 				$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 					var id = $(this).attr("id");
 					var i = id.substring(23, id.length);
@@ -1344,11 +1359,14 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1356,6 +1374,7 @@
 			}
 			
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				var id = $("#id").val();
@@ -1408,6 +1427,7 @@
 				}
 			
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -1555,11 +1575,12 @@
 								$("#duedate").addClass("inputdisable");
 								$("#amounttype").addClass("inputdisable");
 								$("#status").addClass("inputdisable");
-							
+								$("#block_overlay").addClass("hidden");
 								$("#ctcMsgContent").html("Invoice updated successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
 								
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
@@ -1568,13 +1589,13 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
 					});
-					
 				}	
-				
+			
 			});
 	
 			$('#decline').click(function() {
@@ -1591,6 +1612,7 @@
 			});
 			
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/externalinvoice/delete/"+id;	
@@ -1601,6 +1623,7 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 						if(successflag == "true"){
 								$("#successful_msg_content").html("Invoice deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
@@ -1611,6 +1634,7 @@
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -1674,6 +1698,7 @@
 			});
 			
 			$("#show_showinvoiceList").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var amount = 0;
 				var table = $('#invoiceDataTable').DataTable();
@@ -1819,6 +1844,7 @@
 				   		}
 				   	});
 				}
+				$("#block_overlay").addClass("hidden");
 				$("body").css("cursor", "default");  
 			});
 			

@@ -2677,6 +2677,7 @@
 			});
 			//Employee Update Section 
 			$("#update").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					var id = $("#emp_id").val();
@@ -2712,6 +2713,7 @@
 					}
 					
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -2859,9 +2861,11 @@
 									$("#pan").addClass("inputdisable");
 									$("#aadharno").addClass("inputdisable");
 									$("#pfno").addClass("inputdisable");
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Employee updated successfully ...");
 										$.fancybox.open('#alertMsg');
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#edit").addClass("hidden");
 									$("#updatebutton").removeClass("hidden");
 									$("#errorMsgContent").html(errors);
@@ -2869,6 +2873,7 @@
 								} 
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -2877,6 +2882,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#empdetail_update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					var id = $("#emp_id").val();
@@ -2918,6 +2924,7 @@
 						if ((jdatevalidation) >= (rdatevalidation))  validation = false; 
 					}
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3063,9 +3070,11 @@
 									$("#b_group").addClass("inputdisable");
 									$("#joininglocation").addClass("inputdisable");
 									$("#illnessdescr").addClass("inputdisable");
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Employee detail updated successfully ...");
 										$.fancybox.open('#alertMsg');
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#empdetail_edit").addClass("hidden");
 										$("#empupdatebutton").removeClass("hidden");
 										$("#errorMsgContent").html(errors);
@@ -3073,6 +3082,7 @@
 									} 
 								},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 							}
@@ -3082,6 +3092,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#addressUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					var id = $("#emp_id").val();
@@ -3113,6 +3124,7 @@
 					if(pcountry == "" || pcountry == "-" || pcountry.length == 0) validation = false;
 					if(ppincode == "" || ppincode == "-" || ppincode.length == 0) validation = false;
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3193,9 +3205,11 @@
 									$("#pstate").addClass("inputdisable");
 									$("#pcountry").addClass("inputdisable");
 									$("#ppincode").addClass("inputdisable");
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Address updated successfully ...");
 									$.fancybox.open('#alertMsg');
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#address_edit").addClass("hidden");
 									$("#addrupdatebutton").removeClass("hidden");
 									$("#errorMsgContent").html(errors);
@@ -3203,6 +3217,7 @@
 								} 
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3212,6 +3227,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#empbank_acc_update").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var street = null;	
 					var validation = true;
@@ -3237,6 +3253,7 @@
 					if(bank_ifsc == "" || bank_ifsc == "-" || bank_ifsc.length == 0) validation = false;
 					if(isNaN(bank_pincode)  || bank_pincode.length != 6) validation = false;
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3313,9 +3330,11 @@
 									$("#bank_state").addClass("inputdisable");
 									$("#bank_pincode").addClass("inputdisable");
 									$("#bank_ifsc").addClass("inputdisable");
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Account details updated successfully ...");
 										$.fancybox.open('#alertMsg');
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#empbank_acc_edit").addClass("hidden");
 									$("#empbank_acc_update_button").removeClass("hidden");
 									$("#errorMsgContent").html(errors);
@@ -3323,6 +3342,7 @@
 								} 
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3332,6 +3352,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#emp_about_update").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var street = null;	
 					var validation = true;
@@ -3377,6 +3398,7 @@
 					if(expectedsalary == "" || expectedsalary == "-" || expectedsalary.length == 0) validation = false;
 					
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3447,9 +3469,11 @@
 									$("#emp_releventexp_mnths").addClass("inputdisable");
 									$("#emp_presentsalary").addClass("inputdisable");
 									$("#emp_expectedsalary").addClass("inputdisable");
+									$("#block_overlay").addClass("hidden");
 									$("#alertMsgContent").html("Employee personal details updated successfully ...");
 										$.fancybox.open('#alertMsg');
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#emp_about_edit").addClass("hidden");
 									$("#emp_about_update_button").removeClass("hidden");
 									$("#errorMsgContent").html(errors);
@@ -3457,6 +3481,7 @@
 								} 
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3466,6 +3491,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#familydetailsUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					var all = new Array();
@@ -3489,6 +3515,7 @@
 						}
 					}
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3568,8 +3595,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3581,6 +3610,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#educationUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_education_div_"]').each(function(i, item) {
@@ -3604,6 +3634,7 @@
 						if ((edufromvalidation) >= (edutovalidation))  validation = false; 
 					});
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3693,8 +3724,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3706,6 +3739,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#skillsetUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_skillset_tbl_"]').each(function(i, item) {
@@ -3717,6 +3751,7 @@
 						if(skillsetlevel == "" || skillsetlevel == "-" || skillsetlevel.length == 0) validation = false;
 					});
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3768,8 +3803,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3782,6 +3819,7 @@
 			});
 			
 			$("#referenceUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_reference_div_"]').each(function(i, item) {
@@ -3801,6 +3839,7 @@
 						if(isNaN(mobile)  || mobile.length != 10) validation = false;
 					});
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -3901,8 +3940,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -3914,6 +3955,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#languageknownUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_languageknown_div_"]').each(function(i, item) {
@@ -3930,6 +3972,7 @@
 					if(read == 'n' && write == 'n' && speak == 'n') validation = false;
 					});
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -4000,8 +4043,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -4014,6 +4059,7 @@
 			});
 			
 			$("#employmenthistoryUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_employmenthistory_div_"]').each(function(i, item) {
@@ -4042,6 +4088,7 @@
 					});
 					
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -4162,8 +4209,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -4175,6 +4224,7 @@
 				$("body").css("cursor", "default");
 			});
 			$("#achievementsUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_achievements_div_"]').each(function(i, item) {
@@ -4187,6 +4237,7 @@
 					});
 					
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -4241,8 +4292,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
-							error: function (xhr, ajaxOptions, thrownError) {
+							error: function (xhr, ajaxOptions, thrownError) 
+							    $("#block_overlay").addClass("hidden");{
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -4255,6 +4308,7 @@
 			});
 			
 			$("#culturalsUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_culturals_div_"]').each(function(i, item) {
@@ -4266,6 +4320,7 @@
 						if(achievements == "" || achievements == "-" || achievements.length == 0) validation = false;
 					});
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -4319,11 +4374,14 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
+							
 						});
 					});
 					$("#alertMsgContent").html("Culturals details updated successfully...");
@@ -4333,6 +4391,7 @@
 			});
 			
 			$("#sportsUpdate").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					var validation = true;
 					$('[id^="emp_sports_div_"]').each(function(i, item) {
@@ -4345,6 +4404,7 @@
 					});
 					
 					if(validation == false){
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 						$.fancybox.open('#errorMsg');
 					}else{
@@ -4398,8 +4458,10 @@
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -5091,6 +5153,7 @@
 					 $("body").css("cursor", "default");
 			 });
 			function EmployeeDetail(id) {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 					$("#employeeList").addClass("hidden");
 					$("#employeeDetail").removeClass("hidden");
@@ -5137,11 +5200,13 @@
 									$("#pfno").val((result.pfno == undefined || result.pfno == null || result.pfno.length <= 0) ? "-" : result.pfno);
 								}); 
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5210,11 +5275,13 @@
 									$("#illnessdescr").val((result.illnessdescr == undefined || result.illnessdescr == null || result.illnessdescr.length <= 0) ? "-" : result.illnessdescr);
 								}); 
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5250,11 +5317,13 @@
 									}
 								}); 
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5286,11 +5355,13 @@
 									$("#fb_occupation_"+count).val((result[i].occupation == undefined || result[i].occupation == null || result[i].occupation == "null" || result[i].occupation == 0  || result[i].occupation.length <= 0) ? "-" : result[i].occupation);
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5324,11 +5395,13 @@
 									$("#optional_edu_to_"+eduCount).html((result[i].eduto == undefined || result[i].eduto == null || result[i].eduto == "null" || result[i].eduto == 0  || result[i].eduto.length <= 0) ? "-" : result[i].eduto);
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5365,11 +5438,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5408,11 +5483,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5461,11 +5538,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5509,11 +5588,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5548,11 +5629,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5587,11 +5670,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5626,11 +5711,13 @@
 									}
 								}
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5674,11 +5761,13 @@
 											$("#emp_expectedsalary").val((result.expectedsalary == undefined || result.expectedsalary == null || result.expectedsalary == "null" || result.expectedsalary == 0  || result.expectedsalary.length <= 0) ? "-" : result.expectedsalary);
 									}); 
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								}
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -5707,11 +5796,14 @@
 											$("#bank_ifsc").val((result.ifsc == undefined || result.ifsc == null || result.ifsc == "null" || result.ifsc == 0  || result.ifsc <= 0) ? "-" : result.ifsc);
 									}); 
 								}else{
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								}
+								$("#block_overlay").addClass("hidden");
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
@@ -5719,6 +5811,7 @@
 				$("body").css("cursor", "default");
 			}
 			$('#emp_familydetails_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Family Details
@@ -5734,6 +5827,7 @@
 				if(addage == "" || addage.length == 0) validation = false;
 				 
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#familybackground_validation_error_msg").removeClass("hidden");
 				}else{
 					if(addeducation == "" || addeducation.length == 0) addeducation = "null";
@@ -5754,6 +5848,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Family details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -5763,6 +5858,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5772,6 +5868,7 @@
 		});
 			
 			$('#emp_education_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Family Details
@@ -5794,6 +5891,7 @@
 				if ((edufromvalidation) >= (edutovalidation))  validation = false; 
 				 
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#education_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreemployeeeducation/"+employeeid+"/"+institutionname+"/"+degree+"/"+specialization+"/"+rankscholarship+"/"+edufrom+"/"+eduto;
@@ -5813,6 +5911,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Education details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -5822,6 +5921,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5830,6 +5930,7 @@
 			$("body").css("cursor", "default");
 		});
 			$('#emp_skillset_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -5840,6 +5941,7 @@
 				if(name == "" || name.length == 0) validation = false;
 				if(level == "" || level.length == 0) validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#skillset_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreemployeeskillset/"+empid+"/"+name+"/"+level;
@@ -5855,6 +5957,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Skillset details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -5864,6 +5967,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5872,6 +5976,7 @@
 				$("body").css("cursor", "default");
 			});
 			$('#emp_references_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -5893,6 +5998,7 @@
 				if(phone == "" || phone.length == 0 || phone == "-") phone = "null";
 				 
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#reference_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreemployeereferences/"+empid+"/"+name+"/"+address+"/"+phone+"/"+mobile+"/"+skill+"/"+designation;
@@ -5912,6 +6018,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("References details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -5921,6 +6028,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5930,6 +6038,7 @@
 			});
 			
 			$('#emp_languageknown_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -5945,6 +6054,7 @@
 				if(speak == "" || speak.length == 0) validation = false;
 				if(speak == 'n' && read == 'n' && write == 'n') validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#language_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmorelanguageknown/"+empid+"/"+name+"/"+read+"/"+write+"/"+speak;
@@ -5962,6 +6072,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Language known details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -5971,6 +6082,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -5979,6 +6091,7 @@
 				$("body").css("cursor", "default");
 			});
 			$('#emp_employmenthistory_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -6008,6 +6121,7 @@
 				
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#employmenthistory_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreemploymenthistory/"+empid+"/"+name+"/"+address+"/"+fromdate+"/"+todate+"/"+startingsalary+"/"+lastsalary+"/"+designation+"/"+responsibility;
@@ -6029,6 +6143,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Employment history details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -6038,6 +6153,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6047,6 +6163,7 @@
 			});
 			
 			$('#emp_achievements_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -6058,6 +6175,7 @@
 				if(achievement == "" || achievement.length == 0) validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#achievements_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreachievements/"+empid+"/"+companyname+"/"+achievement;
@@ -6073,6 +6191,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Achievements details added successfully...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -6082,6 +6201,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6091,6 +6211,7 @@
 			});
 			
 			$('#emp_culturals_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -6102,6 +6223,7 @@
 				if(achievement == "" || achievement.length == 0) validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#culturals_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoreculturals/"+empid+"/"+eventname+"/"+achievement;
@@ -6117,6 +6239,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Cultural details added successfully...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -6126,6 +6249,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6134,6 +6258,7 @@
 				$("body").css("cursor", "default");
 			});
 			$('#emp_sports_btn').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "default");
 				var validation = true;
 				//Employee Skill Set Details
@@ -6145,6 +6270,7 @@
 				if(achievement == "" || achievement.length == 0) validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#sports_validation_error_msg").removeClass("hidden");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/employee/addmoresports/"+empid+"/"+eventname+"/"+achievement;
@@ -6160,6 +6286,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#successful_msg_content").html("Sports details added successfully ...");
 								$.fancybox.open('#addsuccessful_fancybox');
@@ -6169,6 +6296,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6177,6 +6305,7 @@
 				$("body").css("cursor", "default");
 			});
 			function declineEmployee(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/retrivebyid/"+id;
 				$.ajax({
@@ -6216,18 +6345,23 @@
 								$("#pfno").val((result.pfno == undefined || result.pfno == null || result.pfno.length <= 0) ? "-" : result.pfno);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
+				
 			}
 			
 			function declineEmployeeDetsils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/details/"+id;
 				$.ajax({
@@ -6293,14 +6427,17 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			function declineEmployeeAddress(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/address/"+id;
 				$.ajax({
@@ -6333,8 +6470,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6342,6 +6481,7 @@
 			}
 			
 			function declineEmployeeFamilyBackground(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getfamilybackgrounddetails/"+id;
 				$.ajax({
@@ -6372,8 +6512,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6381,6 +6523,7 @@
 			}
 			
 			function declineEmployeeEducation(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getempeducationdetails/"+id;
 				$.ajax({
@@ -6413,8 +6556,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6422,6 +6567,7 @@
 			}
 			
 			function declineEmployeeSkillset(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeeskillset/"+id;
 				$.ajax({
@@ -6457,14 +6603,17 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			function declineEmployeeReferences(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeereference/"+id;
 				$.ajax({
@@ -6498,8 +6647,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6507,6 +6658,7 @@
 			}
 			
 			function declineEmployeeLanguageKnown(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeelanguageknown/"+id;
 				$.ajax({
@@ -6554,8 +6706,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6563,6 +6717,7 @@
 			}
 			
 			function declineEmploymentHistory(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemploymenthistory/"+id;
 				$.ajax({
@@ -6600,8 +6755,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6609,6 +6766,7 @@
 			}
 			
 			function declineEmployeeAchievements(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeeachievements/"+id;
 				$.ajax({
@@ -6635,8 +6793,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6644,6 +6804,7 @@
 			}
 			
 			function declineEmployeeCulturals(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeeculturals/"+id;
 				$.ajax({
@@ -6670,8 +6831,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6679,6 +6842,7 @@
 			}
 			
 			function declineEmployeeSports(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/getemployeesports/"+id;
 				$.ajax({
@@ -6705,8 +6869,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6714,6 +6880,7 @@
 			}
 			
 			function declineEmployeeAbout(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/empaboutdetails/"+id;
 				$.ajax({
@@ -6755,8 +6922,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -6764,6 +6933,7 @@
 			}
 			
 			function declineEmployeeBankDetails(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#emp_id").val();
 				var resourceURL = $("#contextpath").val()+"/employee/empbankdetail/"+id;
 				$.ajax({
@@ -6793,8 +6963,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}

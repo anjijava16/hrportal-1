@@ -29,7 +29,6 @@ static Logger logger = Logger.getLogger(EmpLoseOfPayDAO.class.getName());
 			if (em != null && empBounsDO != null) {
 				logger.info("Entity Manager is not null");
 				TransactionManager.beginTransaction(em);
-				System.out.println("in");
 				em.persist(empBounsDO);
 				TransactionManager.commitTransaction();
 			}

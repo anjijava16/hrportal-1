@@ -448,6 +448,7 @@
 			});
 			
 			$("#submit").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				
 				var validation = true;
@@ -499,6 +500,7 @@
 				if(!validateEmail(emailid)) validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -511,6 +513,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Saptaprofile added successfully...");
 								$.fancybox.open('#userMsg');
@@ -544,6 +547,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -553,6 +557,7 @@
 			});
 			
 			$("#update").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				
@@ -604,6 +609,7 @@
 				if(country == "" || country.length == 0) validation = false;
 				if(!validateEmail(emailid)) validation = false;
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -616,6 +622,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#add").addClass("hidden");
 								$("#submitbutton").addClass("hidden");
@@ -764,8 +771,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

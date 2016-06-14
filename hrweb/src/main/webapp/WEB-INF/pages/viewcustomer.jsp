@@ -140,6 +140,7 @@
 					$("#optiondiv").addClass("hidden");
 				} 
 				function customerDetails(custid){
+					$("#block_overlay").removeClass("hidden");
 					$("#viewCustomerTbl_wrapper").addClass("hidden");
 					$("#customerDetail").removeClass("hidden");
 					$("#headlist").addClass("hidden");
@@ -173,8 +174,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -330,6 +333,7 @@
 					 $.fancybox.close();
 				});
 				function declineCustomerDetails(){
+					$("#block_overlay").removeClass("hidden");
 					var id = $("#id").val();
 					var resourceURL = $("#contextpath").val()+"/customer/retrivebyid/"+id;
 					$.ajax({
@@ -360,14 +364,17 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
 					});
 				}
 				$("#update").click(function(){
+					$("#block_overlay").removeClass("hidden");
 					$("body").css("cursor", "progress");
 						var validation = true;
 						var id = $("#id").val();
@@ -393,6 +400,7 @@
 							if(mobile.length < 10) validation = false;
 						}
 						if(validation == false){
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 							$.fancybox.open('#errorMsg');
 						}else{
@@ -481,17 +489,20 @@
 										$("#fax").addClass("inputdisable");
 										$("#mobileno").addClass("inputdisable");
 										$("#emailid").addClass("inputdisable"); 
+										$("#block_overlay").addClass("hidden");
 										$("#alertMsgContent").html("Customer details updated successfully ...");
 										$.fancybox.open('#alertMsg');
 									}else{
 										$("#edit").addClass("hidden");
 										$("#delete").addClass("hidden");
 										$("#updatebutton").removeClass("hidden");
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									} 
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}

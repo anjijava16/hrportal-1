@@ -262,6 +262,7 @@
 			} 
 			
 			$('#addempCTCDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var empid = $("#empid").val();
@@ -283,6 +284,7 @@
 					if ((startdatevalidation) >= (enddatevalidation))  validation = false; 
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/empctc/add/"+empid+"/"+empctc+"/"+startdate+"/"+enddate;
@@ -297,7 +299,7 @@
 							$("#employeectc").val('');
 							$("#startdate").val('');
 							$("#enddate").val('');
-							
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#ctcMsgContent").html("Employee CTC added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
@@ -307,6 +309,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -316,6 +319,7 @@
 			});
 			
 			$("a[id^='edit_']").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $(this).attr('id');
 				var recordid = id.substring(5);
@@ -373,11 +377,13 @@
 						
 					}
 				</c:forEach>
+				$("#block_overlay").addClass("hidden");
 				$.fancybox.open('#editdetail');
 				$("body").css("cursor", "default");
 			});
 			
 			$("a[id^='view_']").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var table = $('#ctcviewtable').DataTable();
 				table.destroy();
@@ -422,6 +428,7 @@
 			    });
 				
 				$("body").css("cursor", "default");
+				$("#block_overlay").addClass("hidden");
 			});
 			var url = $("#contextpath").val()+"/empctc/getbygrid";
 
@@ -459,6 +466,7 @@
 				}
 			});
 			$('#updateDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
 				var validation = true;
@@ -520,6 +528,7 @@
 					}
 				} */
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(enddate == "" || enddate.length == 0) enddate = "null";
@@ -549,6 +558,7 @@
 										var successflag = data.response.successflag;
 							        	var errors = data.response.errors;
 							        	var results = data.response.result;
+							        	$("#block_overlay").addClass("hidden");
 							        	if(successflag == "true"){
 							        		$("#userMsgContent").html("Details updated successfully and email sent...");
 											$.fancybox.open('#userMsg', {closeBtn: false});
@@ -560,12 +570,14 @@
 											$("body").css("cursor", "default");
 							        	}
 									},error: function (xhr, ajaxOptions, thrownError) {
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(thrownError);
 							    		$.fancybox.open('#errorMsg'); 
 									}
 								});		
 								
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
@@ -577,6 +589,7 @@
 							$("input[id='editbandchange']").removeAttr("checked");							
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

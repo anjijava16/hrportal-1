@@ -233,6 +233,7 @@
 		    });
 		    
 			$('#addempPFDetails').click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var empid = $("#empid").val();
@@ -246,6 +247,7 @@
 				if(pfmonth == "" || pfmonth.length == 0 || pfmonth == "undefined-undefined-undefined") validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_errors").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/emppf/add/"+empid+"/"+emppf+"/"+pfmonth;
@@ -259,7 +261,7 @@
 							$("#empid").val('');
 							$("#emppfamount").val('');
 							$("#emppfmonth").val('');
-							
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#pfMsgContent").html("Employee PF added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
@@ -269,6 +271,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -330,6 +333,7 @@
 			});
 			
 			$("#updateDetails").click(function() {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				$("#notify_error").html("");
 				var validation = true;
@@ -349,6 +353,7 @@
 				if(editedstartdate == "" || editedstartdate.length == 0) validation = false;
 				
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#notify_error").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					var resourceURL = $("#contextpath").val()+"/emppf/update/"+id+"/"+empid+"/"+employeepf+"/"+editedstartdate;
@@ -362,6 +367,7 @@
 							$("#editempid").html('');
 							$("#editemployeepf").val('');
 							$("#editstartdate").val('');
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Details updated successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
@@ -371,6 +377,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

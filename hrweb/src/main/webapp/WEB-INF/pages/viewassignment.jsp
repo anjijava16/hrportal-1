@@ -295,6 +295,7 @@
 			}
 			
 			function assignmentDetails(id) {
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var empid = null;
 				var projectid = null;
@@ -369,11 +370,13 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -397,11 +400,13 @@
 								$("#emobile").html((result.mobile == undefined || result.mobile == null || result.mobile.length <= 0) ? "-" : result.mobile);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -428,16 +433,20 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 			   });	
 				$("body").css("cursor", "default");
+				
 			}
 			$('#findoption').on('change', function (e) {
 				$("#assignid").val("");
@@ -579,6 +588,7 @@
 				 $.fancybox.close();
 			});
 			function declineAssingmentDeatils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#assign_id").val();
 				var resourceURL = $("#contextpath").val()+"/assignment/retrivebyid/"+id;
 				$.ajax({
@@ -655,14 +665,17 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#assign_id").val();
@@ -694,6 +707,7 @@
 					enddate = "null";
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -806,9 +820,11 @@
 								$("#amount").addClass("inputdisable");
 								$("#employeeid").addClass("inputdisable");
 								$("#pid").addClass("inputdisable");
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("Assignment details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
@@ -817,6 +833,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -829,6 +846,7 @@
 				$.fancybox.open('#confirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#assign_id").val();
 				var resourceURL = $("#contextpath").val()+"/assignment/delete/"+id;	
@@ -840,11 +858,13 @@
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
 						if(successflag == "true"){
+							$("#block_overlay").addClass("hidden");
 								$("#successful_msg_content").html("Assignment deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}

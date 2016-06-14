@@ -114,7 +114,8 @@
 	</body>
 	  <script type="text/javascript">
 	  $(document).ready(function(){
-		  $("option").css("border-right", "");
+		  $("#block_overlay").removeClass("hidden");
+		    $("option").css("border-right", "");
 			$("body").css("cursor", "progress");
 			$("#menu_payments").addClass("active");
 			$("#pageTitle").html("<b class='saptaColor'>New</b> Bill");
@@ -143,8 +144,10 @@
 		        	}else{
 		        		$("#billno").val("");
 		        	}
+		        	$("#block_overlay").addClass("hidden");
 		        },
 		        error: function (xhr, ajaxOptions, thrownError) {
+		        	$("#block_overlay").addClass("hidden");
 		        	$("#errorMsgContent").html(thrownError);
 		    		$.fancybox.open('#errorMsg');
 		   		}
@@ -232,6 +235,7 @@
 				 	 
 				 	
 			$('#addBill').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				//invoice
@@ -261,6 +265,7 @@
 					duedate = "null";
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -294,8 +299,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

@@ -86,6 +86,7 @@
 			$("#menu_misc").addClass("active");
 			$("#pageTitle").html("New Saptaprofile");
 			$('#addVendor').click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				//vendor
@@ -106,6 +107,7 @@
 				if(!validateEmail(email)) validation = false;
 				 
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -130,6 +132,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Vendor added successfully...");
 								$.fancybox.open('#userMsg');
@@ -139,6 +142,7 @@
 							} 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

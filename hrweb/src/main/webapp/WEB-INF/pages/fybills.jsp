@@ -128,6 +128,7 @@
 			});
 			
 			function finalYearReportProcess(currentdate, nextYear){
+				$("#block_overlay").removeClass("hidden");
 				var completeTotalAmount = 0;
 				var resourceURL = $("#contextpath").val()+"/fyreports/getbillsreport/"+currentdate+"/"+nextYear;
 				$.ajax({
@@ -197,12 +198,15 @@
 							$("#fy_details").addClass("hidden");
 							$("#totaldiv1").addClass("hidden");
 						} 
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
+				
 			}
 		});
 	</script>

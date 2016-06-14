@@ -260,7 +260,7 @@
 						gotoCurrent: true
 		            })
 		        });
-				
+				$("#block_overlay").removeClass("hidden");
 				$("#billmonth").val("${fymonth}");
 				var amount = 0;
 				fymonthYear = monthConversion(fymonthYear);
@@ -283,7 +283,7 @@
 								}
 								
 							});
-							
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -292,7 +292,9 @@
 				$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
 				$("#billsList").removeClass("hidden");
 				$("#norecords").addClass("hidden");
+				
 			}else {
+				$("#block_overlay").removeClass("hidden");
 				url = $("#contextpath").val()+"/bills/getlist";
 				$(function() {     
 		            $( "#billmonth" ).datepicker({
@@ -314,6 +316,7 @@
 						gotoCurrent: true
 		            })
 		        });
+				$("#block_overlay").addClass("hidden");
 			}
 			
 			var table = $("#billDataTable").dataTable({
@@ -389,6 +392,7 @@
 			});
 			
 			 $("#findByMonth").click(function() {
+				 $("#block_overlay").removeClass("hidden");
 				$("#billsList").addClass("hidden");
 				$("#mandatorycheck").addClass("hidden");
 				$("#billsdetails").addClass("hidden");
@@ -418,6 +422,7 @@
 									amount = parseInt(amount) + parseInt(result.dueamount);	
 								}
 							});
+							$("#block_overlay").addClass("hidden");
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
@@ -470,6 +475,7 @@
 			    });
 				$("#currenttotalamttd").val(numberWithCommas(parseFloat(amount).toFixed(2)));
 				}
+				 
 			  });
 			
 			 $("#show_vendor").click(function() {
@@ -486,6 +492,7 @@
 			});
 			 
 			function bills(id){
+				$("#block_overlay").removeClass("hidden");
 				$("#billsList").addClass("hidden");
 				$("#billsdetails").removeClass("hidden");
 				$("#headlist").addClass("hidden");
@@ -547,15 +554,19 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
+			
 			} 
 			
 			$("#edit").click(function() {
@@ -637,6 +648,7 @@
 			});
 			
 			function declineBill(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#id").val();
 				//var splitedinvoice = invoiceno.split('-');
 				var resourceURL = $("#contextpath").val()+"/bills/retrivebyid/"+id;
@@ -698,8 +710,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -707,6 +721,7 @@
 			}
 			
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
@@ -736,6 +751,7 @@
 					paidOn = new Date();
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -848,8 +864,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -874,7 +892,7 @@
 			$("#delete_yes").click(function(){
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
-				
+				$("#block_overlay").removeClass("hidden");
 				var resourceURL = $("#contextpath").val()+"/bills/delete/"+id;	
 				$.ajax({
 					url : resourceURL,
@@ -883,6 +901,7 @@
 					success: function(data) {
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
+						$("#block_overlay").addClass("hidden");
 						if(successflag == "true"){
 								$("#successful_msg_content").html("Bill deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox');
@@ -893,6 +912,7 @@
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -905,6 +925,7 @@
 			 });
 			
 			$("#show_showbillsList").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var amount = 0;
 				var table = $('#billDataTable').DataTable();
@@ -984,6 +1005,7 @@
 							});
 								$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
 								$("#totaldiv").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 							}
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
@@ -1034,6 +1056,7 @@
 				$("#optional_status").removeClass("hidden");
 				
 				$("body").css("cursor", "default");
+				
 			});
 		});
 		

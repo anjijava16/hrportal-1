@@ -268,6 +268,7 @@
 		    	}
 		    });
 			function assetDetails(assetid){
+				$("#block_overlay").removeClass("hidden");
 				//Total Amount Div Hiding Process
 				$("#totaldiv1").addClass("hidden");
 				
@@ -315,8 +316,10 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
@@ -432,6 +435,7 @@
 				$.fancybox.close();
 			});
 			function declineAssetDeatils(){
+				$("#block_overlay").removeClass("hidden");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/asset/retrivebyid/"+id;
 				$.ajax({
@@ -483,14 +487,17 @@
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
+						$("#block_overlay").addClass("hidden");
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
 				});
 			}
 			$("#update").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var validation = true;
 				var id = $("#id").val();
@@ -517,6 +524,7 @@
 					if ((warrantyofexpiredvalidation) >= (guranteeofexpiredvalidation))  validation = false; 
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
@@ -609,8 +617,10 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
+							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}
@@ -623,6 +633,7 @@
 				$.fancybox.open('#confirmMsg');
 			});
 			$("#delete_yes").click(function(){
+				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
 				var resourceURL = $("#contextpath").val()+"/asset/delete/"+id;	
@@ -634,12 +645,14 @@
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
 						if(successflag == "true"){
+							$("#block_overlay").addClass("hidden");
 								$("#successful_msg_content").html("Asset deleted successfully...");
 								$.fancybox.open('#deletedsuccessful_fancybox'); 
 								//assetDeleteReloader();
 						}
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
+						$("#block_overlay").addClass("hidden");
 						$("#errorMsgContent").html(thrownError);
 						$.fancybox.open('#errorMsg');
 					}
