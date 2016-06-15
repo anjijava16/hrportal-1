@@ -2478,6 +2478,7 @@
 										var results = data.response.result;
 										
 										if(successflag == "true"){
+											
 											addFamilyBackgroundDetails();
 										}
 										$("#block_overlay").addClass("hidden");
@@ -2548,7 +2549,6 @@
 					}
 				// Add Employee Education Details Function
 					 function addEducationDetails(){
-						 $("#block_overlay").removeClass("hidden");
 						 $('[id^="education_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2600,7 +2600,6 @@
 						addSkillSetDetails();
 					} 
 					function addSkillSetDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="skillset_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(19, id.length);
@@ -2639,7 +2638,6 @@
 						addReferenceDetails();
 					}
 					function addReferenceDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="reference_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2700,7 +2698,6 @@
 						addLanguageKnownDetails();
 					}
 					function addLanguageKnownDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="languageknown_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(24, id.length);
@@ -2735,7 +2732,6 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2747,7 +2743,6 @@
 						addEmploymentHistoryDetails();
 					}
 					function addEmploymentHistoryDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="employmenthistory_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(28, id.length);
@@ -2805,7 +2800,6 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2818,7 +2812,6 @@
 					}
 					
 					function addEmpAchievementsDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="achievements_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(23, id.length);
@@ -2850,7 +2843,6 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2863,7 +2855,6 @@
 					}
 					
 					function addEmpCulturalsDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="culturals_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(20, id.length);
@@ -2895,7 +2886,6 @@
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2908,7 +2898,6 @@
 					}
 					
 					function addEmpSportsDetails(){
-						$("#block_overlay").removeClass("hidden");
 						$('[id^="sports_dynamictr_"]').each(function(i, item) {
 							var id = $(this).attr("id");
 							var i = id.substring(17, id.length);
@@ -2935,12 +2924,12 @@
 										//clear Variables as null
 										sportsname = null;
 										sportsachievement = null;
+										$("#block_overlay").addClass("hidden");
 									}else{
 										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2949,6 +2938,7 @@
 								}
 							});
 						});
+						   $("#block_overlay").addClass("hidden");
 							$("#successful_msg_content").html("Employee details added successfully ...");
 							$.fancybox.open('#addsuccessful_fancybox');
 					}

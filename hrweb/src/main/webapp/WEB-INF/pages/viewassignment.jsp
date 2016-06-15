@@ -951,6 +951,7 @@
 					}
 				</c:forEach>
 				if(count == 0){
+					$("#block_overlay").addClass("hidden");
 					if(aid != 0 || aid != "" || aid.length != 0 || aid != null && (!$("#assignsearch").hasClass("hidden"))){
 						document.getElementById("alertMsgContent").innerHTML = "Assignment details not found for the given assignment id " + aid.bold();
 						$.fancybox.open('#alertMsg');

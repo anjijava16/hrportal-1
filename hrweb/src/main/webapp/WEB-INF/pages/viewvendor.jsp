@@ -623,6 +623,7 @@
 						$("#vendorList").removeClass("hidden");
 					}
 				</c:forEach>
+				$("#block_overlay").addClass("hidden");
 				if(count == 0){
 					document.getElementById("alertMsgContent").innerHTML = "Vendor details not found for the given id " + id.bold();
 					$.fancybox.open('#alertMsg');

@@ -919,6 +919,7 @@
 							} */
 							montlySalCalculator(restrictedsalary);
 					}else{
+						$("#block_overlay").addClass("hidden");
 						$("#alertMsgContent").html(strCurrentMonth+" Have Only " + daysinMonth + " Days... ");
 			    		$.fancybox.open('#alertMsg');
 			    		$("#dayspayable").html(daysinMonth);

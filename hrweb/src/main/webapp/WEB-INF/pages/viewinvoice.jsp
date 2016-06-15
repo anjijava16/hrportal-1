@@ -831,6 +831,7 @@
 	                    ]
 				    });
 			  }
+				$("#block_overlay").addClass("hidden");
 			});
 			
 			$("#pdf").click(function() {

@@ -290,10 +290,11 @@
 											$.fancybox.open('#confirmMsg', {
 												hideOnOverlayClick : false
 											});
-											$("#block_overlay").removeClass("hidden");
+											
 											var id = $(this).attr('id');
 											var recordid = id.substring(7);
 											$("#confirmation").click(function() {
+												$("#block_overlay").removeClass("hidden");
 																var resourceURL = $(
 																		"#contextpath")
 																		.val()

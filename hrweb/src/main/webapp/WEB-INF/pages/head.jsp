@@ -128,6 +128,7 @@
 	});
 	 
 	function validateAccessPermission(){
+		$("#block_overlay").addClass("hidden");
 		$("#alertMsgContent").html("Access denied, Only Admistrator can access ...");
 		$.fancybox.open('#alertMsg');
 	}

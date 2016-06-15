@@ -307,6 +307,7 @@
 				var id = $(this).attr('id');
 				var empid = id.substring(7);
 				$("#confirmation").click(function() {
+					$("#block_overlay").removeClass("hidden");
 					var resourceURL = $("#contextpath").val()+"/emppf/delete/"+empid;
 					$.ajax({
 						url : resourceURL,

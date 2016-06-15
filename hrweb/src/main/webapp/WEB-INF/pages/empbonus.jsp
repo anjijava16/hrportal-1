@@ -341,10 +341,10 @@
 			$("a[id^='delete_']").click(function() {
 				$("#confirmMsgContent").html("Are you sure want to delete...?");
 				$.fancybox.open('#confirmMsg', {hideOnOverlayClick : false});
-				$("#block_overlay").removeClass("hidden");
 				var id = $(this).attr('id');
 				var recordid = id.substring(7);
 				$("#confirmation").click(function() {
+					$("#block_overlay").removeClass("hidden");
 					var resourceURL = $("#contextpath").val()+"/empbonus/delete/"+recordid;
 					$.ajax({
 						url : resourceURL,

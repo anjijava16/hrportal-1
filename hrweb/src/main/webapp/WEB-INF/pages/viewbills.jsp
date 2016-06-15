@@ -392,7 +392,7 @@
 			});
 			
 			 $("#findByMonth").click(function() {
-				 $("#block_overlay").removeClass("hidden");
+				 
 				$("#billsList").addClass("hidden");
 				$("#mandatorycheck").addClass("hidden");
 				$("#billsdetails").addClass("hidden");
@@ -407,6 +407,7 @@
 				month = month.split('/').join('-');
 				var resourceURL = $("#contextpath").val()+"/bills/getbydateajax/"+month;
 				var amount = 0;
+				$("#block_overlay").removeClass("hidden");
 				$.ajax({
 			        url : resourceURL,
 			        type : 'GET',
@@ -426,6 +427,7 @@
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
 			   		}
 			   }); 
 				var table = $('#billDataTable').DataTable();
@@ -473,6 +475,7 @@
                       {sClass: "alignright"}
                     ]
 			    });
+				$("#block_overlay").addClass("hidden");
 				$("#currenttotalamttd").val(numberWithCommas(parseFloat(amount).toFixed(2)));
 				}
 				 
@@ -856,6 +859,7 @@
 								$("#comments").addClass("inputdisable");
 								$("#amounttype").addClass("inputdisable");
 								$("#status").addClass("inputdisable");
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("Bill details updated successfully ...");
 								$.fancybox.open('#alertMsg');
 							}else{

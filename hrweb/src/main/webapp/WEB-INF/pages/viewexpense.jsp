@@ -779,7 +779,7 @@
 								$("#cardno").addClass("inputdisable");
 								$("#bankname").addClass("inputdisable");
 								$("#amount").addClass("inputdisable");
-								
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("Expense details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{

@@ -605,6 +605,7 @@
 							}
 						</c:forEach>
 						if(count == 0){
+							$("#block_overlay").addClass("hidden");
 							document.getElementById("alertMsgContent").innerHTML = "Customer details not found for the given id " + customerid.bold();
 							$.fancybox.open('#alertMsg');
 							 var resourceURL = $("#contextpath").val()+"/customer/get/";

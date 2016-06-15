@@ -721,6 +721,7 @@
 					}
 				</c:forEach>
 				if(count == 0){
+					$("#block_overlay").addClass("hidden");
 					document.getElementById("alertMsgContent").innerHTML = "Asset details not found for the given id " + assetid.bold();
 					$.fancybox.open('#alertMsg');
 					var resourceURL = $("#contextpath").val()+"/asset/get";

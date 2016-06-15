@@ -292,6 +292,7 @@
 				var id = $(this).attr('id');
 				var recordid = id.substring(7);
 				$("#confirmation").click(function() {
+					$("#block_overlay").removeClass("hidden");
 					var resourceURL = $("#contextpath").val()+"/emplop/delete/"+recordid;
 					$.ajax({
 						url : resourceURL,
@@ -300,12 +301,14 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("LOP deleted successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 						}
 					});
 				});

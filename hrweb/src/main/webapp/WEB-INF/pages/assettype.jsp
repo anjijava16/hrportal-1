@@ -206,13 +206,14 @@
 			});
 			
 			$("a[id^='delete_']").click(function() {
-				$("#block_overlay").removeClass("hidden");
+			
 				$("body").css("cursor", "progress");
 				$("#confirmMsgContent").html("Are you sure want to delete ?");
 				$.fancybox.open('#confirmMsg', {hideOnOverlayClick : false});
 				var id = $(this).attr('id');
 				var recordid = id.substring(7);
 				$("#confirmation").click(function() {
+					$("#block_overlay").removeClass("hidden");
 					var resourceURL = $("#contextpath").val()+"/assettype/delete/"+recordid;
 					$.ajax({
 						url : resourceURL,

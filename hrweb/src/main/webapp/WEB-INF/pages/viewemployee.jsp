@@ -1551,6 +1551,7 @@
 					}
 				</c:forEach>
 				if(count == 0){
+					$("#block_overlay").addClass("hidden");
 					document.getElementById("alertMsgContent").innerHTML = "Employee details not found for the given id " + empid.bold();
 					$.fancybox.open('#alertMsg');
 				}
@@ -4300,8 +4301,8 @@
 								} 
 								$("#block_overlay").addClass("hidden");
 							},
-							error: function (xhr, ajaxOptions, thrownError) 
-							    $("#block_overlay").addClass("hidden");{
+							error: function (xhr, ajaxOptions, thrownError) {
+							    $("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}
