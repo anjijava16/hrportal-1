@@ -342,6 +342,7 @@
 								
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -395,6 +396,7 @@
 							}else{
 								$("#expenseList").addClass("hidden");
 								$("#expenseDetail").addClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								document.getElementById("alertMsgContent").innerHTML =  optionval.val().substr(0,1).toUpperCase().bold()+ optionval.val().substr(1).bold() + " expense details not found" ;
 								$.fancybox.open('#alertMsg');
 							}
@@ -610,6 +612,7 @@
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -783,6 +786,7 @@
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
@@ -900,6 +904,7 @@
 								totalamount = parseFloat(totalamount) + parseFloat(result.amount);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}

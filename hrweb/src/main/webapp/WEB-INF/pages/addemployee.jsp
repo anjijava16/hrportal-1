@@ -1017,6 +1017,7 @@
 				$(document).on('click','[id^="fb_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(10, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(counter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1047,6 +1048,7 @@
 				$(document).on('click','[id^="education_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(17, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(eduCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1065,6 +1067,7 @@
 				$(document).on('click','[id^="skillset_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(16, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(skillsetCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1083,6 +1086,7 @@
 				$(document).on('click','[id^="reference_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(17, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(referenceCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1101,6 +1105,7 @@
 				$(document).on('click','[id^="languageknown_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(21, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(languageCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1131,6 +1136,7 @@
 				$(document).on('click','[id^="employmenthistory_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(25, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(historyCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1149,6 +1155,7 @@
 				$(document).on('click','[id^="achievements_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(20, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(achievementsCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1167,6 +1174,7 @@
 				$(document).on('click','[id^="culturals_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(17, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(culturalsCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1185,6 +1193,7 @@
 				$(document).on('click','[id^="sports_remove_"]', function(e) {
 					var id = $(this).attr("id");
 					var i = id.substring(14, id.length);
+					$("#block_overlay").addClass("hidden");
 					if(sportsCounter==2){
 						$("#errorMsgContent").html("Atleast one detail sholud be required...");
 						$.fancybox.open('#errorMsg');
@@ -1628,6 +1637,7 @@
 							if(isNaN(mobile)  || mobile.length != 10) validation = false;
 							if(!validateEmail(email)) validation = false;
 							if(!validateEmail(personalemailid)) validation = false;
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1687,7 +1697,7 @@
 								if(possessvehicle == "" || possessvehicle.length == 0) validation = false;
 								if(accidentillness == "" || accidentillness.length == 0) validation = false;
 								if(joininglocation == "" || joininglocation.length == 0) validation = false;
-								
+								$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1733,6 +1743,7 @@
 							if(pcountry == "" || pcountry.length == 0) validation = false;
 							if(ppincode == "" || ppincode.length == 0) validation = false;
 							if(isNaN(ppincode)  || ppincode.length != 6) validation = false;
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1765,6 +1776,7 @@
 									validation = false;
 							}
 						}
+						$("#block_overlay").addClass("hidden");
 						if(validation == false){
 							$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 							$.fancybox.open('#errorMsg');
@@ -1797,6 +1809,7 @@
 								var empedutovalidation = $.datepicker.parseDate('dd-mm-yy',empeduto);
 								if ((empedufromvalidation) >= (empedutovalidation))  validation = false; 	
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1818,6 +1831,7 @@
 								if(skillsetname == "" || skillsetname.length == 0) validation = false;
 								if(skillsetlevel == "" || skillsetlevel.length == 0) validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1846,6 +1860,7 @@
 								if(referencedesignation == "" || referencedesignation.length == 0) validation = false;
 								if(isNaN(referencemobile)  || referencemobile.length != 10) validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1872,6 +1887,7 @@
 								if(languagespeak == "" || languagespeak.length == 0) validation = false;
 								if(languageread == 'n' && languagewrite == 'n' && languagespeak == 'n') validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1908,6 +1924,7 @@
 								var emphistorytodatevalidation = $.datepicker.parseDate('dd-mm-yy',emphistorytodate);
 								if ((emphistoryfromdatevalidation) >= (emphistorytodatevalidation))  validation = false; 	
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1930,6 +1947,7 @@
 								if(companyname == "" || companyname.length == 0) validation = false;
 								if(companyname == "" || companyname.length == 0) validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1951,6 +1969,7 @@
 								if(eventname == "" || eventname.length == 0) validation = false;
 								if(eventachievement == "" || eventachievement.length == 0) validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -1972,6 +1991,7 @@
 								if(sportsname == "" || sportsname.length == 0) validation = false;
 								if(sportsachievement == "" || sportsachievement.length == 0) validation = false;
 							});
+							$("#block_overlay").addClass("hidden");
 							if(validation == false){
 								$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 								$.fancybox.open('#errorMsg');
@@ -2023,6 +2043,7 @@
 								if(emppresentsalary == "" || emppresentsalary.length == 0 ) validation = false;
 								if(empexpectedsalary == "" || empexpectedsalary.length == 0) validation = false;
 								if(empreleventexperience > emptotalexperience) validation = false;
+								$("#block_overlay").addClass("hidden");
 								if(validation == false){
 									$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 									$.fancybox.open('#errorMsg');
@@ -2472,6 +2493,7 @@
 					});
 				// Add Employee Family Background Function
 					function addFamilyBackgroundDetails(){
+						$("#block_overlay").removeClass("hidden");
 						$('[id^="fbdynamictr_"]').each(function(i, item) {
 						$("body").css("cursor", "default");
 							var id = $(this).attr("id");
@@ -2510,11 +2532,13 @@
 										education = null;
 										occupation = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(thrownError);
 									$.fancybox.open('#errorMsg');
 								}
@@ -2560,10 +2584,11 @@
 										empedufrom = null;
 										empeduto = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
+									
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2599,10 +2624,10 @@
 										skillsetname = null;
 										skillsetlevel = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2660,10 +2685,10 @@
 										referenceskill = null;
 										referencedesignation = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
-									$("#block_overlay").addClass("hidden");
 								},
 								error: function (xhr, ajaxOptions, thrownError) {
 									$("#block_overlay").addClass("hidden");
@@ -2706,6 +2731,7 @@
 										languagewrite = null;
 										languagespeak = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
@@ -2775,6 +2801,7 @@
 										emphistoryresponsibility = null;
 										emphistorydesignation = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
@@ -2819,6 +2846,7 @@
 										companyname = null;
 										achievementname = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
@@ -2863,6 +2891,7 @@
 										eventname = null;
 										eventachievement = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}
@@ -2907,6 +2936,7 @@
 										sportsname = null;
 										sportsachievement = null;
 									}else{
+										$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(errors);
 										$.fancybox.open('#errorMsg');
 									}

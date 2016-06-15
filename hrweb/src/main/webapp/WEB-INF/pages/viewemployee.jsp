@@ -3592,6 +3592,7 @@
 								}else{
 									$("#familydetails_edit_div").addClass("hidden");
 									$("#familydetails_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -3721,6 +3722,7 @@
 								}else{
 									$("#education_edit_div").addClass("hidden");
 									$("#education_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -3800,6 +3802,7 @@
 								}else{
 									$("#skillset_edit_div").addClass("hidden");
 									$("#skillset_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -3937,6 +3940,7 @@
 								}else{
 									$("#references_edit_div").addClass("hidden");
 									$("#references_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -4206,6 +4210,7 @@
 								}else{
 									$("#employmenthistory_edit_div").addClass("hidden");
 									$("#employmenthistory_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -4289,6 +4294,7 @@
 								}else{
 									$("#achievements_edit_div").addClass("hidden");
 									$("#achievements_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -4371,6 +4377,7 @@
 								}else{
 									$("#culturals_edit_div").addClass("hidden");
 									$("#culturals_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -4455,6 +4462,7 @@
 								}else{
 									$("#sports_edit_div").addClass("hidden");
 									$("#sports_updatebutton").removeClass("hidden");
+									$("#block_overlay").addClass("hidden");
 									$("#errorMsgContent").html(errors);
 									$.fancybox.open('#errorMsg');
 								} 
@@ -6424,6 +6432,7 @@
 								$("#illnessdescr").val((result.illnessdescr == undefined || result.illnessdescr == null || result.illnessdescr.length <= 0) ? "-" : result.illnessdescr);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6467,6 +6476,7 @@
 								}
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6509,6 +6519,7 @@
 								$("#fb_occupation_"+count).val((result[i].occupation == undefined || result[i].occupation == null || result[i].occupation == "null" || result[i].occupation == 0  || result[i].occupation.length <= 0) ? "-" : result[i].occupation);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6553,6 +6564,7 @@
 								$("#optional_edu_to_"+eduCount).html((result[i].eduto == undefined || result[i].eduto == null || result[i].eduto == "null" || result[i].eduto == 0  || result[i].eduto.length <= 0) ? "-" : result[i].eduto);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6600,6 +6612,7 @@
 								}
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6644,6 +6657,7 @@
 								$("#ref_designation_"+referenceCount).val((result[i].designation == undefined || result[i].designation == null || result[i].designation == "null" || result[i].designation == 0  || result[i].designation.length <= 0) ? "-" : result[i].designation);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6703,6 +6717,7 @@
 								}
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6752,6 +6767,7 @@
 								$("#history_responsibility_"+historyCount).val((result[i].responsibility == undefined || result[i].responsibility == null || result[i].responsibility == "null" || result[i].responsibility == 0  || result[i].responsibility.length <= 0) ? "-" : result[i].responsibility);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6790,6 +6806,7 @@
 								$("#achievements_eventname_"+achievementsCount).val((result[i].achievement == undefined || result[i].achievement == null || result[i].achievement == "null" || result[i].achievement == 0  || result[i].achievement.length <= 0) ? "-" : result[i].achievement);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6828,6 +6845,7 @@
 								$("#culturals_achievements_"+culturalsCount).val((result[i].achievement == undefined || result[i].achievement == null || result[i].achievement == "null" || result[i].achievement == 0  || result[i].achievement.length <= 0) ? "-" : result[i].achievement);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6866,6 +6884,7 @@
 								$("#sports_eventname_"+sportsCount).val((result[i].achievement == undefined || result[i].achievement == null || result[i].achievement == "null" || result[i].achievement == 0  || result[i].achievement.length <= 0) ? "-" : result[i].achievement);
 							}
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6919,6 +6938,7 @@
 									$("#emp_expectedsalary").val((result.expectedsalary == undefined || result.expectedsalary == null || result.expectedsalary == "null" || result.expectedsalary == 0  || result.expectedsalary.length <= 0) ? "-" : result.expectedsalary);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -6960,6 +6980,7 @@
 									$("#bank_ifsc").val((result.ifsc == undefined || result.ifsc == null || result.ifsc == "null" || result.ifsc == 0  || result.ifsc <= 0) ? "-" : result.ifsc);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}

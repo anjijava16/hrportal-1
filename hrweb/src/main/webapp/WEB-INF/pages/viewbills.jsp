@@ -707,6 +707,7 @@
 								$("#optional_status").removeClass("hidden");
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -861,6 +862,7 @@
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 

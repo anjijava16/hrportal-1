@@ -171,6 +171,7 @@
 									$("#emailid").val((result.email == undefined || result.email == null || result.email.length <= 0 || result.email.length == "") ? "-" : result.email);
 									}); 
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
@@ -361,6 +362,7 @@
 									$("#emailid").val((result.email == undefined || result.email == null || result.email.length <= 0) ? "-" : result.email);
 								}); 
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}
@@ -525,6 +527,7 @@
 							success: function(data) {
 								var successflag = data.response.successflag;
 								var errors = data.response.errors;
+								$("#block_overlay").addClass("hidden");
 								if(successflag == "true"){
 									$("#successful_msg_content").html("Customer deleted successfully ...");
 									$.fancybox.open('#deletedsuccessful_fancybox');
@@ -535,6 +538,7 @@
 								}
 							},
 							error: function (xhr, ajaxOptions, thrownError) {
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(thrownError);
 								$.fancybox.open('#errorMsg');
 							}

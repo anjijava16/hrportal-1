@@ -184,10 +184,12 @@
 								$("#editname").val('');
 								$("#editdispname").val('');
 								$("#editid").val('');
+								$("#block_overlay").addClass("hidden");
 								$("#userMsgContent").html("Details updated successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
 								
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							}

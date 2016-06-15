@@ -662,6 +662,7 @@
 								</c:forEach>
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}

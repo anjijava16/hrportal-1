@@ -315,6 +315,7 @@
 						success: function(data) {
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Deleted successfully...");
 								$.fancybox.open('#userMsg', {closeBtn: false});
@@ -324,6 +325,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							 $("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg'); 
 						}

@@ -292,6 +292,7 @@
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
+							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
 								$("#userMsgContent").html("Bill added successfully ...");
 								$.fancybox.open('#userMsg');
@@ -299,7 +300,6 @@
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
-							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#block_overlay").addClass("hidden");

@@ -1253,7 +1253,8 @@
 										}			
 															
 								},			
-								error: function (xhr, ajaxOptions, thrownError) {			
+								error: function (xhr, ajaxOptions, thrownError) {	
+									$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(thrownError);			
 										$.fancybox.open('#errorMsg');			
 								}			
@@ -1279,7 +1280,8 @@
 										}			
 															
 								},			
-								error: function (xhr, ajaxOptions, thrownError) {			
+								error: function (xhr, ajaxOptions, thrownError) {	
+									$("#block_overlay").addClass("hidden");
 										$("#errorMsgContent").html(thrownError);			
 										$.fancybox.open('#errorMsg');			
 								}			

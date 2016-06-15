@@ -1693,12 +1693,14 @@
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
 							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

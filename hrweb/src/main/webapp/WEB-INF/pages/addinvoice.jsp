@@ -667,6 +667,7 @@
 				var id = $(this).attr("id");
 				var i = id.substring(15, id.length);
 				if(removeCount==2){
+					$("#block_overlay").addClass("hidden");
 					$("#errorMsgContent").html("Atleast one detail sholud be required...");
 					$.fancybox.open('#errorMsg');
 			    }else{
@@ -1128,11 +1129,13 @@
 							var results = data.response.result;
 							if(successflag == "true"){
 								addInvoiceDetails();
+								$("#block_overlay").addClass("hidden");
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
-							$("#block_overlay").addClass("hidden");
+							
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#block_overlay").addClass("hidden");

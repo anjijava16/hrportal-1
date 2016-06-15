@@ -537,14 +537,14 @@
 								
 								$("#mandatory").addClass("hidden");
 								$("#buttons").addClass("hidden");
-								
+								$("#block_overlay").addClass("hidden");
 								$("#ctcMsgContent").html("Invoice  added successfully...");
 								$.fancybox.open('#assetMsg', {closeBtn: false});
 							}else{
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
-							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#block_overlay").addClass("hidden");

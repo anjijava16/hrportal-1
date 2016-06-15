@@ -313,6 +313,7 @@
 								$("#price").val((result.price == undefined || result.price == null || result.price.length <= 0) ? "-" : result.price);
 								}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -484,6 +485,7 @@
 								$("#price").val((result.price == undefined || result.price == null || result.price.length <= 0) ? "-" : result.price);
 							}); 
 						}else{
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
 							$.fancybox.open('#errorMsg');
 						}
@@ -608,16 +610,17 @@
 								$("#assetwarranty").addClass("inputdisable");
 								$("#assetguarantee").addClass("inputdisable");
 								$("#price").addClass("inputdisable");
+								$("#block_overlay").addClass("hidden");
 								$("#alertMsgContent").html("Asset details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{
 								$("#edit").addClass("hidden");
 								$("#delete").addClass("hidden");
 								$("#updatebutton").removeClass("hidden");
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
-							$("#block_overlay").addClass("hidden");
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#block_overlay").addClass("hidden");

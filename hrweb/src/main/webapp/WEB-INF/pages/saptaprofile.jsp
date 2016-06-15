@@ -759,7 +759,7 @@
 								$("#optional_state").addClass("inputdisable");
 								$("#country").addClass("inputdisable");
 								$("#optional_country").addClass("inputdisable");
-								
+								$("#block_overlay").addClass("hidden");
 								$("#update_userMsgContent").html("Saptaprofile updated successfully...");
 								$.fancybox.open('#update_userMsg');
 							}else{
@@ -767,11 +767,11 @@
 								$("#submitbutton").removeClass("hidden");
 								$("#updatebutton").addClass("hidden");
 								$("#edit").removeClass("hidden");
-								
+								$("#block_overlay").addClass("hidden");
 								$("#errorMsgContent").html(errors);
 								$.fancybox.open('#errorMsg');
 							} 
-							$("#block_overlay").addClass("hidden");
+							
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
 							$("#block_overlay").addClass("hidden");

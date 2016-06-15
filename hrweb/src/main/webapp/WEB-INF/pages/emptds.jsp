@@ -405,6 +405,7 @@
 							}
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
+							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(thrownError);
 							$.fancybox.open('#errorMsg');
 						}

@@ -163,6 +163,7 @@
 					enddate = "null";
 				}
 				if(validation == false){
+					$("#block_overlay").addClass("hidden");
 		    		$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 		    		$.fancybox.open('#errorMsg');
 				}else{
