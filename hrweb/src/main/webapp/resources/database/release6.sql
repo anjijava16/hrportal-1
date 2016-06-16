@@ -1,0 +1,11 @@
+CREATE TABLE "hrpotal.remptds" (
+  "ID" bigint(20) NOT NULL,
+  "PAIDON" date DEFAULT NULL,
+  "EMPID" bigint(20) DEFAULT NULL,
+  "UPDATEDBY" varchar(255) DEFAULT NULL,
+  "UPDATEDON" datetime DEFAULT NULL,
+  "TDSMONTH" date DEFAULT NULL,
+  "TDS" bigint(20) DEFAULT NULL,
+  "COMMENTS" varchar(255) DEFAULT NULL,
+  PRIMARY KEY ("ID")
+);

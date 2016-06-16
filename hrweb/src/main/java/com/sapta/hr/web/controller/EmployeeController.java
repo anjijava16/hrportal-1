@@ -1058,14 +1058,18 @@ public class EmployeeController {
 				
 				
 				//if(status == 'i'){
-					if(releasedate != null){
+					
 						// releasedate 					
 						
 						// Update Release Date in Employee Details
 						List<EmpDetailDO> empDetailDOList = new EmpDetailService().retriveByEmpId(id);
 						if(empDetailDOList != null && empDetailDOList.size() > 0){
 							EmpDetailDO empDetailDO = empDetailDOList.get(0);
-							empDetailDO.setRdate(CommonUtil.convertStringToDate(releasedate));
+							if(!releasedate.equalsIgnoreCase("null")){
+								empDetailDO.setRdate(CommonUtil.convertStringToDate(releasedate));
+							}else{
+								empDetailDO.setRdate(null);
+							}
 							new EmpDetailService().update(empDetailDO);
 						}
 						
@@ -1076,12 +1080,16 @@ public class EmployeeController {
 							for (EmpCTCDO empCTCDO : empCTCDOList) {
 								//if(empCTCDO.getStatus() == 'a'){
 									empCTCDO.setStatus(status);
-									empCTCDO.setEnddate(CommonUtil.convertStringToDate(releasedate));
+									if(!releasedate.equalsIgnoreCase("null")){
+										empCTCDO.setEnddate(CommonUtil.convertStringToDate(releasedate));
+									}else{
+										empCTCDO.setEnddate(null);
+									}
 									new EmpCTCService().update(empCTCDO);
 								//}
 							}
 						}		
-					}
+					
 				//}
 			}	
 		}catch (Exception e) {
