@@ -38,7 +38,7 @@
 							<tr id = "BillNo" class ="hidden">
 								<td align="right" ><sup class="saptaColor">*</sup>Bill&nbsp;Number&nbsp;:</sup></td>
 								<td align="left">						
-										<input id="billno"  class="MRGL10PX MARTOP13PX "  />
+										<input id="billno"  class="MRGL10PX MARTOP13PX " style="border: 1px solid #D9D9D9;" />
 								</td>
 							</tr>
 						</table>

@@ -1183,7 +1183,7 @@ table.optionTable td.invoivetd              { width:200px; }
 .ass_tab_arrow                              { display:none }
 .login_foot footer                          { background: transparent; width: 100%; }
 .login_foot footer a						{ background: transparent;}
-#billno                                     {     border: 1px solid #D9D9D9;   border-radius: 4px;    height: 20px;    margin: 10px;    width: 158px;}
+#billno                                     { border-radius: 4px;    height: 20px;    margin: 10px;    width: 158px;}
 /* responsive starts here */
 
 /* fy  */

@@ -67,10 +67,9 @@ public class VendorController {
 				address = address.replace("=","#");
 				address = address.replace("*","/");
 				vendorDO.setAddress(address);
-				
-				vendorDO.setPincode(pincode);
 				vendorDO.setVendorcode(vendorcode);
-				
+				if (!pincode.equalsIgnoreCase("null"))
+					vendorDO.setPincode(pincode);
 			    if (!fax.equalsIgnoreCase("null")) 
 			    	vendorDO.setFax(fax);
 			    if (!phoneno.equalsIgnoreCase("null")) 
@@ -226,10 +225,9 @@ public class VendorController {
 				addr = addr.replace("=","#");
 				addr = addr.replace("*","/");
 				vendor.setAddress(addr);
-				
-				vendor.setPincode(pincode);
 				vendor.setVendorcode(vendorcode);
-
+				if (!pincode.equalsIgnoreCase("null"))
+					vendor.setPincode(pincode);
 				if (!mobileno.equalsIgnoreCase("null"))
 					vendor.setMobileno(mobileno);
 				if (!phoneno.equalsIgnoreCase("null"))

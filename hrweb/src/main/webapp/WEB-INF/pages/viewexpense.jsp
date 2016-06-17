@@ -106,7 +106,7 @@
 						</tr>
 						<tr>
 							<td class="lableContent">Bill No</td>
-							<td class="value"><input id="billno" disabled="disabled" class="inputdisable"></td>
+							<td class="value"><input id="billno" disabled="disabled" class="inputdisable" style="margin:0px;"></td>
 						</tr>
 						<tr>
 							<td class="lableContentSelect">Mode Of Payment</td>
