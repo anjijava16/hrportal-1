@@ -27,6 +27,7 @@ import com.sapta.hr.service.PayrollService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
+import com.sapta.hr.web.util.EmpTdsUtil;
 import com.sapta.hr.web.util.WebManager;
 
 @Controller
@@ -191,4 +192,51 @@ public class EmpTDSController {
 		return jsonresp != null ? jsonresp.toString() : "";
 	}
 	
+	
+	@RequestMapping(value = "/viewfytds/{month}", method = RequestMethod.GET)
+	public String viewFyTDS(@PathVariable String month, Model model, HttpServletRequest request) {
+		String pagename = CommonConstants.JSP_LOGIN_FORWARD;
+		try {
+			if (WebManager.authenticateSession(request)) { 
+				pagename = CommonConstants.JSP_EMP_TDS;
+				if(month != null){
+					model.addAttribute(CommonConstants.FY_MONTH, month);
+				}
+				
+			}
+		} catch (Exception e) { }
+		return pagename;
+	}
+	
+	@RequestMapping(value = "/getbyemptdsmonth/{tdsmonth}", method = RequestMethod.GET)
+	public @ResponseBody String getByIdForGrid(@PathVariable String tdsmonth, Model model) {
+		JSONObject respJSON = null;
+		try {
+			String SDate = tdsmonth;		   
+			Date StartDate = CommonUtil.convertStringToDate(SDate);
+		    Calendar c = Calendar.getInstance();      
+		    c.setTime(StartDate);
+		    c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+		    Date edate= c.getTime();
+			List<EmpTDSDO> tdsList = new EmpTDSService().FindAllEvents(StartDate ,edate );
+			if (tdsList != null) {
+				Collections.reverse(tdsList);
+				respJSON = EmpTdsUtil.gettdsDataTableList(tdsList);
+			}
+		} catch (Exception e) { }
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public @ResponseBody String get( Model model) {
+		JSONObject respJSON = null;
+		try {
+			List<EmpTDSDO> tdsList = new EmpTDSService().retrive();
+			if (tdsList != null) {
+				Collections.reverse(tdsList);
+				respJSON = EmpTdsUtil.gettdsDataTableList(tdsList);
+			}
+		} catch (Exception e) { }
+		return respJSON != null ? respJSON.toString() : "";
+	}
 }

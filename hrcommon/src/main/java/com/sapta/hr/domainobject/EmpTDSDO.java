@@ -21,7 +21,9 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name = "EmpTDSDO.findAll", query = "SELECT a FROM EmpTDSDO  a"),
 	@NamedQuery(name = "EmpTDSDO.findbyEmpId", query = "SELECT a FROM EmpTDSDO  a where a.empid =:empid"),
 	@NamedQuery(name = "EmpTDSDO.findbyId", query = "SELECT a FROM EmpTDSDO  a where a.id =:id"),
-	@NamedQuery(name = "EmpTDSDO.findbyEmpIdMonth", query = "SELECT a FROM EmpTDSDO  a where a.empid =:empid and a.tdsmonth =:month")
+	@NamedQuery(name = "EmpTDSDO.findbysteddate", query = "SELECT e FROM EmpTDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate"),
+	@NamedQuery(name = "EmpTDSDO.findbyEmpIdMonth", query = "SELECT a FROM EmpTDSDO  a where a.empid =:empid and a.tdsmonth =:month"),
+	@NamedQuery(name = "EmpTDSDO.findbysteddatebyorder", query = "SELECT e FROM EmpTDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate order by e.tdsmonth")
 })
 
 public class EmpTDSDO implements Serializable{
@@ -35,6 +37,10 @@ public class EmpTDSDO implements Serializable{
 	public static final String FIND_BY_ID = "EmpTDSDO.findbyId";
 	
 	public static final String FIND_BY_EMPID_MONTH = "EmpTDSDO.findbyEmpIdMonth";
+	
+	public static final String FIND_BY_ST_ET_DATE_BY_ORDER = "EmpTDSDO.findbysteddatebyorder";
+	
+	public static final String FIND_BY_ST_ET_DATE = "EmpTDSDO.findbysteddate";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY,  generator = "emptds")

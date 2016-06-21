@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.sapta.hr.dao.EmpTDSDAO;
+import com.sapta.hr.dao.TDSDAO;
 import com.sapta.hr.domainobject.EmpTDSDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.AppException;
 
 public class EmpTDSService {
@@ -34,6 +36,13 @@ public class EmpTDSService {
 	
 	public boolean delete(EmpTDSDO empTDSDO) throws AppException {
 		return new EmpTDSDAO().delete(empTDSDO);
+	}
+	
+	public List<EmpTDSDO> getFinancialYearEmpTDSReport(Date stdate, Date eddate) throws AppException {
+		return new EmpTDSDAO().getFinancialYearEmpTDSReport(stdate, eddate);
+	}
+	public List<EmpTDSDO> FindAllEvents(Date stdate,Date eddate) throws AppException {
+		return new EmpTDSDAO().FindAllEvents(stdate,eddate);
 	}
 	
 }

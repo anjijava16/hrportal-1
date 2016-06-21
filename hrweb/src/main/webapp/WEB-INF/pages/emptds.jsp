@@ -17,6 +17,7 @@
 		<%@include file="menucomponents.jsp"%>
 		<div id="innerContainer">
 		<!--Expense Type List-->
+		
 		<div id="empTDSDetails" class="hidden">
 				<h1><b class="saptaColor">Add</b> New</h1>
 				<b class="saptaColor"><div id="notify_errors"></div></b>
@@ -76,7 +77,7 @@
 									<th class="">TDS&nbsp;Month</th>
 									<th class="">Paid&nbsp;On</th>
 									<th class="">Comments</th>
-									<th class="">Operation</th>
+									<th class="fyreportth">Operation</th>
 								</tr>
 							</thead>					
 							<c:forEach items="${empTDSList}" var="emptdsList">
@@ -195,11 +196,7 @@
 					 $('#ui-datepicker-div').toggleClass('hide-calendar');
 				 }
 			 });
-			$(function(){
-				$("#tdstable").dataTable({
-					"aaSorting": []
-				});
-			})
+			
 			$("#menu_payroll").addClass("active");
 			 
 			 
@@ -366,6 +363,89 @@
 					});
 				});
 			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			var fymonthYear = "${fymonth}";
+			if(fymonthYear != "" && fymonthYear != null){
+				$(".fyreportth").addClass("hidden");
+				var amount = 0;
+				var url = "";
+				fymonthYear = monthConversion(fymonthYear);
+				fymonthYear = fymonthYear.split('/').join('-');
+				url = $("#contextpath").val()+"/emptds/getbyemptdsmonth/"+fymonthYear;
+				var resourceurl = $("#contextpath").val()+"/emptds/getbyemptdsmonth/"+fymonthYear;
+				   $("#block_overlay").removeClass("hidden");  
+					$.ajax({
+			        url : resourceurl,
+			        type : 'GET',
+			        dataType : 'json',
+			        async : false,
+			        success: function(data) {
+			        	/* var successflag = data.response.successflag;
+						var errors = data.response.errors;
+						var results = data.response.result;
+						if(successflag == "true"){
+							alert(1);
+							$.each(results, function (i, result) {
+								amount = parseFloat(amount) + parseFloat(result.amount);	
+							});
+							
+						} */
+			        	$("#block_overlay").addClass("hidden");
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
+			   		}
+			   });   
+				$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
+				$("#tdsList").removeClass("hidden");
+				$("#norecords").addClass("hidden");
+				$('#tdstable').DataTable().clear().destroy();
+				$("#tdstable").dataTable({
+					"ajax": url,
+					"aaSorting" : [],
+					"aoColumns": [ 
+				                  {sClass: "center"}, 
+				                  {sClass: "alignright"},
+				                  {sClass: "center"},
+				                  {sClass: "center"},
+				                  {sClass: "center"},
+				                  {sClass: "hidden"}
+				                ]
+				}); 
+				
+			}else{
+				$(function(){
+					/* $('#tdstable').DataTable().clear().destroy(); */
+					var url = $("#contextpath").val()+"/emptds/get";
+					$("#tdstable").dataTable({
+						
+						"aaSorting": []
+					});
+				})
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			$('#updateDetails').click(function() {
 				$("#block_overlay").removeClass("hidden");

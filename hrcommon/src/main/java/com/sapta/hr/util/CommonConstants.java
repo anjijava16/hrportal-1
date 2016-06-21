@@ -58,6 +58,8 @@ public final class CommonConstants {
 	
 	public static final String JSP_FY_TDS = "fytds";
 	
+	public static final String JSP_FY_EMP_TDS = "fyemptds";
+	
 	public static final String JSP_FY_ASSET = "fyasset";
 	
 	public static final String JSP_FY_PROFESSIONALTAX= "fyprofessionaltax";

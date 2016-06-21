@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.sapta.hr.domainobject.EmpTDSDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.AppException;
 import com.sapta.hr.exception.CustomPropertyManager;
 import com.sapta.hr.exception.ExceptionConstant;
@@ -138,7 +139,48 @@ static Logger logger = Logger.getLogger(EmpLoseOfPayDAO.class.getName());
 		return status;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<EmpTDSDO> getFinancialYearEmpTDSReport(Date stdate, Date eddate) throws AppException {
+		List<EmpTDSDO> tdsList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpTDSDO.FIND_BY_ST_ET_DATE_BY_ORDER);
+				q.setParameter("stdate", stdate);
+				q.setParameter("eddate", eddate);
+				tdsList = (List<EmpTDSDO>) q.getResultList();
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010,CustomPropertyManager.getProperty(ExceptionConstant._91010),eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return tdsList;
+	}
 	
+	@SuppressWarnings("unchecked")
+	public List<EmpTDSDO> FindAllEvents(Date stdate , Date eddate) throws AppException {
+		List<EmpTDSDO> tdsList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null && stdate != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpTDSDO.FIND_BY_ST_ET_DATE);
+				q.setParameter(CommonConstants.PT_MONTH_STDATE, stdate);
+				q.setParameter(CommonConstants.PT_MONTH_EDDATE, eddate);
+				tdsList = (List<EmpTDSDO>) q.getResultList();
+			
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010, CustomPropertyManager.getProperty(ExceptionConstant._91010), eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return tdsList;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public boolean delete(EmpTDSDO empTDSDO) throws AppException {

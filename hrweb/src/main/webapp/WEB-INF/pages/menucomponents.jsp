@@ -144,6 +144,7 @@
 								<li><a href="<%=request.getContextPath() %>/fyreports/fytds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>TDS</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyprofessionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>PT</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fypayroll"><i class="fa fa-usd"></i>&nbsp;<span>Payroll</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/fyreports/fyemptds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Employee TDS</span></a></li>
 							</ul>
 						</li>
 						</c:when>
