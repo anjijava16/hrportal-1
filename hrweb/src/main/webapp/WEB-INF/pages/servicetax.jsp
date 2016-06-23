@@ -20,21 +20,21 @@
 		<!--Tds List Starts-->
 			<div id="contentArea">
 			
-				<div id="tds" class="hidden">
+				<div id="servicetax" class="hidden">
 					<h1>
-						Pay <b class="saptaColor">TDS</b>
+						Service <b class="saptaColor">Tax</b>
 					</h1>
 					<b class="saptaColor"><div id="tds_mandatory"></div></b>
 					<table id="tdsearch">
 						<tr>
-							<td align="right"><sup class="saptaColor">*</sup>TDS Month&nbsp;:</td>
+							<td align="right"><sup class="saptaColor">*</sup>Tax Month&nbsp;:</td>
 							<td><b style="float:left;margin-left: 11px;"><input name="add_tdm" id="add_tdm" type="text" class="datePcK" readonly="readonly" style="font-weight: bold;"/></b></td>
 							<td align="right"><sup class="saptaColor">*</sup>Amount&nbsp;:</td>
 							<td><input name="add_amount" id="add_amount" type="text" onkeypress="return validateNumericWithPrecision(event)"/></td>
 						</tr>
 						<tr>
-							<td align="right"><sup class="saptaColor">*</sup>References&nbsp;:</td>
-							<td><textarea style="height: 100px; resize:none;" id="add_references" name="add_references"></textarea></td>
+							<!-- <td align="right"><sup class="saptaColor">*</sup>References&nbsp;:</td>
+							<td><textarea style="height: 100px; resize:none;" id="add_references" name="add_references"></textarea></td> -->
 							<td align="right"><!-- <sup class="saptaColor">*</sup> -->Comments&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="add_comments" name="add_comments"></textarea></td>
 						</tr>
@@ -45,7 +45,7 @@
 								<a href ="#" style="text-decoration: none"><input id="decline" type="button" value="Decline" class="graybtn" />&nbsp;</a>
 							</div>
 							<div class="rightElement MRGL10PX">
-								<input type="button" value="Submit" id="payTds"/>
+								<input type="button" value="Submit" id="serviceTax"/>
 							</div>
 						 </div>
 				   </div>
@@ -56,9 +56,9 @@
 					style="cursor: pointer; margin-top: 0px; float: right"
 					class="rightElement MRGR10PX MRGT10PX MRGB10PX"> 
 					<img src="<%=request.getContextPath()%>/resources/images/add.png"
-						alt="Add More" title="Pay TDS" />
+						alt="Add More" title="Pay Service Tax" />
 				</div>
-				<div id="paytdstextid" class="addbutntext"><b class="saptaColor">Pay</b> TDS </div>
+				<div id="paytdstextid" class="addbutntext"><b class="saptaColor">Add</b> ServiceTax </div>
 				
 				<div id = "optiondiv" style="width: 100%;">
 					<table  align ="center" class="optionTable">
@@ -84,14 +84,15 @@
 				</div> -->
 					<!-- Project -->
 					<div class="responsive">
-						<table class="data display" id="tdstable" cellspacing="0" width="100%">
+						<table class="data display" id="servicetaxtable" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th class="first">Id</th>
 									<!-- <th class="">Employee&nbsp;Id</th> -->
-									 <th class="">References</th>
-									<th class="">TDS&nbsp;Month</th>
+									 <th class="">Invoice No</th>
+									<th class="">Tax&nbsp;Month</th>
 									<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
+									 <th class="">Comments</th>
 								</tr>
 							</thead>
 							
@@ -99,7 +100,7 @@
 						</table>
 					</div>
 					<div id="tdsDetails" class="MRGT10PX hidden">
-						<div align="left" id="back_tdsList" class=""><a href="#" id="show_showtdsList">TDS List </a>/ TDS Details</div><br/> 
+						<div align="left" id="back_tdsList" class=""><a href="#" id="show_showtdsList">Tax List </a>/ Tax Details</div><br/> 
 							<c:choose>
 								<c:when test="${ session.groupname == 'ad'}">
 									<td align = "right"><input type="button" value="Edit" class="leftElement MRGL10PX" id="edit"/></td>
@@ -115,32 +116,34 @@
 									<td class="lableContent">Id</td>
 									<td class="value"><input id="id" disabled="disabled" class="inputdisable"></td>
 								</tr>
-								<!-- <tr class="">
-									<td class="lableContent">Employee Id</td>
-									<td class="value"><a href="#" id="show_employee" style="cursor: pointer;"><input id="empid"   class="inputdisable" style="cursor: pointer;"></a></td>
-								</tr> -->
 								<tr class="">
-									<td class="lableContent">TDS Month</td>
+									<td class="lableContent">Invoice No</td>
+									<td class="value">
+										<div id="invoiceno" class="value"></div>
+									</td>
+								</tr>
+								<tr class="">
+									<td class="lableContent">Tax Month</td>
 									<td id="date_tabledata" class="value hidden">
-										<b style="float:left; height: 20px;"><input id="tdsmonth" readonly="readonly" disabled="disabled" type="text" class="inputdisable datePcKview" ></b>
+										<b style="float:left; height: 20px;"><input id="taxmonth" readonly="readonly" disabled="disabled" type="text" class="inputdisable datePcKview" ></b>
 
 									</td>
 										 <td  id="date_tablediv" class="value">
 											<div id="optional_date"></div>
 										</td> 
-									<!-- <td class="value" id="date_tablediv"><input id="tdsmonth" disabled="disabled" class="inputdisable" ></td> -->
+									<!-- <td class="value" id="date_tablediv"><input id="taxmonth" disabled="disabled" class="inputdisable" ></td> -->
 								</tr>
 								<tr class="">
 									<td class="lableContent">Amount</td>
 									<td class="value"><input id="amount" disabled="disabled" class="inputdisable" onkeypress="return validateNumericWithPrecision(event)"></td>
 								</tr>
-								<tr class="">
+								<!-- <tr class="">
 									<td class="lableContent">References</td>
 									<td class="value">
 										<input id="refers" disabled="disabled" class="inputdisable">
 										<div id="optional_refers" class="value"></div>
 									</td>
-								</tr>
+								</tr> -->
 								<tr class="">
 									<td class="lableContent">Comments</td>
 									<td class="value">
@@ -155,13 +158,13 @@
 						<h1><b class="saptaColor">Notification</b></h1>
 						<div id="userMsgContent"></div>
 						<div class="clearWidth MRGT10PX">
-							<a href="<%=request.getContextPath() %>/tds" style="text-decoration: none"><input type="button" value="Done" id="user" /></a>
+							<a href="<%=request.getContextPath() %>/servicetax" style="text-decoration: none"><input type="button" value="Done" id="user" /></a>
 						</div>
 				   </div>
 				<div id ="deletedsuccessful_fancybox" class="hidden">
 					<h1><b class="saptaColor">Notification</b></h1>
 					<div id = "successful_msg_content"></div>
-					<a href="<%=request.getContextPath() %>/tds" style="text-decoration: none">
+					<a href="<%=request.getContextPath() %>/servicetax" style="text-decoration: none">
 					<input id="familydetails_ok" type="button" value="Done" class="MRGT10PX"/>&nbsp;</a>
 				</div>
 				
@@ -197,25 +200,15 @@
 	<script>
 		
 		$(document).ready(function(){
-			$("#pageTitle").html("TDS<b class='saptaColor'> List</b>");
+			$("#pageTitle").html("Service Tax<b class='saptaColor'> List</b>");
 			$("#menu_payroll").addClass("active");
 			$("body").css("cursor", "default");
 			$("#paytds").removeClass("hidden");
 			$("#paytdstextid").removeClass("hidden");
 			
-			
-			$("#show_employee").click(function() {
-				$("body").css("cursor", "POINTER");
-				if($("#empid").val() == "-" ){
-				}else{
-					var resourceURL = $("#contextpath").val()+"/employee/viewemployee/"+$("#empid").val();
-					$(this).attr("href", resourceURL);
-				}
-					
-				$("body").css("cursor", "default");
-			});	
+		
 			$(function() {
-	            $( "#add_tdm,#tdsmonth" ).datepicker({
+	            $( "#add_tdm,#taxmonth" ).datepicker({
 					yearRange: '1950:2100',
 					defaultDate: new Date(),
 					changeMonth:true,
@@ -235,28 +228,28 @@
 	            })
 	        });
 	        
-	        $('#payTds').click(function(){
+	        $('#serviceTax').click(function(){
 	        	$("#block_overlay").removeClass("hidden");
 				var validation = true;
-				//tds
-				var tdsmonth = $("#add_tdm").datepicker().val();
-				if(tdsmonth != ""){
-					tdsmonth = monthConversion(tdsmonth);
-					tdsmonth = tdsmonth.split('/').join('-'); 
+				//servicetax
+				var taxmonth = $("#add_tdm").datepicker().val();
+				if(taxmonth != ""){
+					taxmonth = monthConversion(taxmonth);
+					taxmonth = taxmonth.split('/').join('-'); 
 				}
 				var amount = $("#add_amount").val();
-				var refer = $("#add_references").val();
+			//	var refer = $("#add_references").val();
 				var comments = $("#add_comments").val();
-				if(tdsmonth == "" || tdsmonth.length == 0) validation = false;
+				if(taxmonth == "" || taxmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
-				if(refer == "" || refer.length == 0) validation = false;
+		//		if(refer == "" || refer.length == 0) validation = false;
 				/* if(comments == "" || comments.length == 0) validation = false; */
 				if(validation == false){
 					$("#block_overlay").addClass("hidden");
 					$("#tds_mandatory").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(comments == "" || comments == null || comments.length == 0) comments = null;
-					var resourceURL = $("#contextpath").val()+"/tds/add/"+tdsmonth+"/"+amount+"/"+refer+"/"+comments;
+					var resourceURL = $("#contextpath").val()+"/servicetax/add/"+taxmonth+"/"+amount+"/"+comments;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -265,14 +258,14 @@
 							// Clearing Project
 							$("#add_tdm").val("");
 							$("#add_amount").val("");
-							$("#add_references").val("");
+						//	$("#add_references").val("");
 							$("#add_comments").val("");
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
 							var results = data.response.result;
 							$("#block_overlay").addClass("hidden");
 							if(successflag == "true"){
-								$("#userMsgContent").html("TDS added successfully ...");
+								$("#userMsgContent").html("Service Tax added successfully ...");
 								$.fancybox.open('#userMsg');
 								$("#tds_mandatory").html("");
 							}else{
@@ -318,33 +311,11 @@
 				var url = "";
 				fymonthYear = monthConversion(fymonthYear);
 				fymonthYear = fymonthYear.split('/').join('-');
-				url = $("#contextpath").val()+"/tds/getbytdsmonth/"+fymonthYear;
-				var resourceurl = $("#contextpath").val()+"/tds/getbytdsmonthajax/"+fymonthYear;
-				$("#block_overlay").removeClass("hidden");
-					$.ajax({
-			        url : resourceurl,
-			        type : 'GET',
-			        dataType : 'json',
-			        async : false,
-			        success: function(data) {
-			        	var successflag = data.response.successflag;
-						var errors = data.response.errors;
-						var results = data.response.result;
-						if(successflag == "true"){
-							$.each(results, function (i, result) {
-								amount = parseFloat(amount) + parseFloat(result.amount);	
-							});
-							$("#block_overlay").addClass("hidden");
-						}
-			        },
-			        error: function (xhr, ajaxOptions, thrownError) {
-			   		}
-			   }); 
-				$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
+				url = $("#contextpath").val()+"/servicetax/getbytaxmonth/"+fymonthYear;
 				$("#tdsList").removeClass("hidden");
 				$("#norecords").addClass("hidden");
 			}else {
-				url = $("#contextpath").val()+"/tds/get";
+				url = $("#contextpath").val()+"/servicetax/get";
 				$(function() {     
 		            $( "#tdsid" ).datepicker({
 						yearRange: '1950:2100',
@@ -366,12 +337,12 @@
 		            })
 		        });
 			}
-			$('#tdstable').dataTable({
+			
+			$('#servicetaxtable').dataTable({
 			      "ajax": url,
 			      "aaSorting": [],
 			      "footerCallback": function ( row, data, start, end, display ) {
 			            var api = this.api(), data;
-			 
 			            // Remove the formatting to get integer data for summation
 			            var intVal = function ( i ) {
 			                return typeof i === 'string' ?
@@ -379,7 +350,6 @@
 			                    typeof i === 'number' ?
 			                        i : 0;
 			            };
-			 
 			            // Total over all pages
 			            total = api
 			                .column( 3 )
@@ -396,43 +366,42 @@
 			                    return intVal(a) + intVal(b);
 			                }, 0 );
 			 
-			         
 			             $("#currenttotalamttd").val(numberWithCommas(parseFloat(pageTotal).toFixed(2)));   
-			           
 			        },
 			        "aoColumns": [ 
-                      {sClass: "alignleft"}, 
-                     /*  {sClass: "alignleft"},  */
-                      {sClass: "alignleft"}, 
+                      {sClass: "center"}, 
+                      {sClass: "center"}, 
                       {sClass: "center"},
-                      {sClass: "alignright"}
+                      {sClass: "alignright"},
+                      {sClass: "center"}
                     ]
 					
 		    });
 			
-			$('#tdstable tbody').on('click', 'tr', function(){
+			$('#servicetaxtable tbody').on('click', 'tr', function(){
+				$(".responsive").addClass("hidden");
 		        var id = $('td', this).eq(0).text();
 		        if(id != "No data available in table"){
 		        	$("#empid").prop( "disabled", true );
-					$("#tdsmonth").prop( "disabled", true );
-					$("#refers").prop( "disabled", true );
+					$("#taxmonth").prop( "disabled", true );
+				//	$("#refers").prop( "disabled", true );
 					$("#comments").prop( "disabled", true );
 					$("#amount").prop( "disabled", true );
 					
 					$("#empid").removeClass("inputBorder");
-					$("#tdsmonth").removeClass("inputBorder");
-					$("#refers").removeClass("inputBorder");
+					$("#taxmonth").removeClass("inputBorder");
+					//$("#refers").removeClass("inputBorder");
 					$("#comments").removeClass("inputBorder");
 					$("#amount").removeClass("inputBorder");
 					
 					$("#empid").addClass("inputdisable");
-					$("#tdsmonth").addClass("inputdisable");
-					$("#refers").addClass("inputdisable");
+					$("#taxmonth").addClass("inputdisable");
+				//	$("#refers").addClass("inputdisable");
 					$("#comments").addClass("inputdisable");
 					$("#amount").addClass("inputdisable");
 					$("#date_tabledata").addClass("hidden");
 					$("#date_tablediv").removeClass("hidden");
-		        	tds(id);	
+		        	servicetax(id);	
 		        	$("#delete").removeClass("hidden");
 					$("#edit").removeClass("hidden");
 		        	$("#paytds").addClass("hidden");
@@ -454,7 +423,7 @@
 				if(month != "" && month != null){
 					month =  monthConversion(month);
 				month = month.split('/').join('-');
-				var resourceURL = $("#contextpath").val()+"/tds/getbytdsmonthajax/"+month;
+				var resourceURL = $("#contextpath").val()+"/servicetax/getbytaxmonthajax/"+month;
 				var amount = 0;
 				$.ajax({
 			        url : resourceURL,
@@ -477,10 +446,10 @@
 			        	$("#block_overlay").addClass("hidden");
 			   		}
 			   }); 
-				var table = $('#tdstable').DataTable();
+				var table = $('#servicetaxtable').DataTable();
 				table.destroy();
-				var resourceURL = $("#contextpath").val()+"/tds/getbytdsmonth/"+month;
-				$('#tdstable').dataTable({
+				var resourceURL = $("#contextpath").val()+"/servicetax/getbytaxmonth/"+month;
+				$('#servicetaxtable').dataTable({
 			        "ajax": resourceURL,
 			        "aaSorting": [],
 			        "footerCallback": function ( row, data, start, end, display ) {
@@ -512,11 +481,11 @@
 			             $("#currenttotalamttd").val(numberWithCommas(parseFloat(pageTotal).toFixed(2)));   
 			        },
 			        "aoColumns": [ 
-                      {sClass: "alignleft"}, 
-                      /* {sClass: "alignleft"}, */ 
-                      {sClass: "alignleft"}, 
-                      {sClass: "alignleft"},
-                      {sClass: "alignright"}
+                      {sClass: "center"}, 
+                      {sClass: "center"}, 
+                      {sClass: "center"},
+                      {sClass: "alignright"},
+                      {sClass: "center"}
                     ]
 			    });
 				$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2)));
@@ -528,6 +497,7 @@
 			  });
 			
 			 $("#show_showtdsList").click(function(){
+				    $(".responsive").removeClass("hidden");
 			 		$("#paytds").removeClass("hidden");
 			 		$("#paytdstextid").removeClass("hidden");
 					$("#tdsDetails").addClass("hidden");
@@ -541,17 +511,17 @@
 					$("#update").addClass("hidden");
 					
 					$("#currenttotalamttd").removeClass("hidden");
-					var table = $('#tdstable').DataTable();
+					var table = $('#servicetaxtable').DataTable();
 					table.destroy();
 					var month = $("#tdsid").datepicker().val();
 					if($("#tdsid").datepicker().val() != ""){
 						month =  monthConversion(month);
 						month = month.split('/').join('-');
-						var resourceURL = $("#contextpath").val()+"/tds/getbytdsmonth/"+month;
+						var resourceURL = $("#contextpath").val()+"/servicetax/getbytaxmonth/"+month;
 					}else{
-						var resourceURL = $("#contextpath").val()+"/tds/get"
+						var resourceURL = $("#contextpath").val()+"/servicetax/get"
 					}
-					$('#tdstable').dataTable({
+					$('#servicetaxtable').dataTable({
 				        "ajax": resourceURL,
 				        "aaSorting": [],
 				        "footerCallback": function ( row, data, start, end, display ) {
@@ -585,17 +555,17 @@
 				             $("#currenttotalamttd").val(numberWithCommas(parseFloat(pageTotal).toFixed(2)));   
 				        },
 				        "aoColumns": [ 
-	                      {sClass: "alignleft"}, 
-	                      /* {sClass: "alignleft"},  */
-	                      {sClass: "alignleft"}, 
-	                      {sClass: "alignleft"},
+	                      {sClass: "center"}, 
+	                      {sClass: "center"}, 
+	                      {sClass: "center"},
+	                      {sClass: "center"},
 	                      {sClass: "alignright"}
 	                    ]
 				    });
 			 });
 		});
 	
-			function tds(id){ 
+			function servicetax(id){ 
 				$("#block_overlay").removeClass("hidden");
 				$("#data display").addClass("hidden");
 				$("#optiondiv").addClass("hidden");
@@ -608,7 +578,7 @@
 				$("#totaldiv").addClass("hidden");
 				$("#totaldiv2").addClass("hidden");
 				
-				var resourceURL = $("#contextpath").val()+"/tds/retrivebyid/"+id;
+				var resourceURL = $("#contextpath").val()+"/servicetax/retrivebyid/"+id;
 				$.ajax({
 					url : resourceURL,
 					type : 'GET',
@@ -630,17 +600,18 @@
 									$("#empid").css( ' color' ,'#000000');
 								    $("#empid").css('text-decoration', 'underline');
 								} */
-								$("#tdsmonth").val((result.tdsmonth == undefined || result.tdsmonth == null || result.tdsmonth.length <= 0) ? "-" : result.tdsmonth);
-								$("#optional_date").html((result.tdsmonth == undefined || result.tdsmonth == null || result.tdsmonth.length <= 0) ? "-" : result.tdsmonth);
+								$("#taxmonth").val((result.taxmonth == undefined || result.taxmonth == null || result.taxmonth.length <= 0) ? "-" : result.taxmonth);
+								$("#optional_date").html((result.taxmonth == undefined || result.taxmonth == null || result.taxmonth.length <= 0) ? "-" : result.taxmonth);
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
-								$("#refers").val((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
-								$("#optional_refers").html((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
-								$("#refers").addClass("hidden");
-								$("#optional_refers").removeClass("hidden");
+							//	$("#refers").val((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
+							//	$("#optional_refers").html((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
+							//	$("#refers").addClass("hidden");
+							//	$("#optional_refers").removeClass("hidden");
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#optional_comments").html((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#comments").addClass("hidden");
 								$("#optional_comments").removeClass("hidden");
+								$("#invoiceno").html((result.invoiceno == undefined || result.invoiceno== 'null' || result.invoiceno == null || result.invoiceno.length <= 0) ? "-" : result.invoiceno);
 							}); 
 						}else{
 							$("#block_overlay").addClass("hidden");
@@ -666,15 +637,15 @@
 			});
 			$("#decline_no").click(function(){
 				 $.fancybox.close();
-				 $.fancybox.open('#tds');
+				 $.fancybox.open('#servicetax');
 			 });
 			$('#paytds').click(function() {
 				$("#add_tdm").val("");
 				$("#add_amount").val("");
-				$("#add_references").val("");
+			//	$("#add_references").val("");
 				$("#add_comments").val("");
 				$("#tds_mandatory").html("");
-				$.fancybox.open('#tds');
+				$.fancybox.open('#servicetax');
 				$("body").css("cursor", "default");
 			});
 			
@@ -687,7 +658,7 @@
 				$("#block_overlay").removeClass("hidden");
 				$("body").css("cursor", "progress");
 				var id = $("#id").val();
-				var resourceURL = $("#contextpath").val()+"/tds/delete/"+id;	
+				var resourceURL = $("#contextpath").val()+"/servicetax/delete/"+id;	
 				$.ajax({
 					url : resourceURL,
 					type : 'GET',
@@ -728,22 +699,22 @@
 					$("#updatebutton").addClass("hidden");
 					$("#findoption").prop( 'disabled', false );
 					var id= $("#id").val();
-					tds(id)
+					servicetax(id)
 					
 					
-					$("#refers").prop( "disabled", true );
+				//	$("#refers").prop( "disabled", true );
 					$("#comments").prop( "disabled", true );
 					$("#empid").prop( "disabled", true );
 					$("#date").prop( "disabled", true );
 					$("#amount").prop( "disabled", true );
 					
-					$("#refers").removeClass("inputBorder");
+				//	$("#refers").removeClass("inputBorder");
 					$("#comments").removeClass("inputBorder");
 					$("#empid").removeClass("inputBorder");
 					$("#date").removeClass("inputBorder");
 					$("#amount").removeClass("inputBorder");
 					
-					$("#refers").addClass("inputdisable");
+				//	$("#refers").addClass("inputdisable");
 					$("#comments").addClass("inputdisable");
 					$("#empid").addClass("inputdisable");
 					$("#date").addClass("inputdisable");
@@ -766,15 +737,15 @@
 				$("#empid").addClass("inputBorder");
 				$("#empid").removeClass("inputdisable"); */
 					
-				/* $("#tdsmonth").addClass("hidden");
+				/* $("#taxmonth").addClass("hidden");
 				$("#date").removeClass("hidden"); */
 				
 					
-				$("#optional_refers").addClass("hidden");
-				$("#refers").removeClass("hidden");
-				$("#refers").prop( 'disabled', false );
-				$("#refers").addClass("inputBorder");
-				$("#refers").removeClass("inputdisable");
+				//$("#optional_refers").addClass("hidden");
+		//		$("#refers").removeClass("hidden");
+		//		$("#refers").prop( 'disabled', false );
+		//		$("#refers").addClass("inputBorder");
+		//		$("#refers").removeClass("inputdisable");
 				
 				$("#optional_comments").addClass("hidden");
 				$("#comments").removeClass("hidden");
@@ -802,17 +773,17 @@
 				var validation = true;
 				var id = $("#id").val();
 				/* var empid = $("#empid").val(); */
-				var date = $("#tdsmonth").datepicker().val();
+				var date = $("#taxmonth").datepicker().val();
 				if(date != ""){
 					date = monthConversion(date);
-					var tdsmonth = date.split('/').join('-'); 
+					var taxmonth = date.split('/').join('-'); 
 				}
 				var amount = $("#amount").val();
-				var refrence = $("#refers").val();
+		//		var refrence = $("#refers").val();
 				var comment = $("#comments").val();
-				if(tdsmonth == "" || tdsmonth.length == 0) validation = false;
+				if(taxmonth == "" || taxmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
-				if(refrence == "" || refrence.length == 0) validation = false;
+			//	if(refrence == "" || refrence.length == 0) validation = false;
 				/* if(comment == "" || comment.length == 0) validation = false; */
 				if(validation == false){
 					$("#block_overlay").addClass("hidden");
@@ -821,7 +792,7 @@
 				}else{
 					/* if(empid == "" || empid.length == 0 || empid == "-") empid = 0; *//* +empid+"/" */
 					if(comment == null || comment == "" || comment.length == 0 || comment == "-") comment = null;
-				var resourceURL = $("#contextpath").val()+"/tds/update/"+id+"/"+tdsmonth+"/"+amount+"/"+refrence+"/"+comment;
+				var resourceURL = $("#contextpath").val()+"/servicetax/update/"+id+"/"+taxmonth+"/"+amount+"/"+comment;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -834,20 +805,20 @@
 										$("#empid").val("-");
 									} */
 								$("#empid").prop( "disabled", true );
-								$("#tdsmonth").prop( "disabled", true );
-								$("#refers").prop( "disabled", true );
+								$("#taxmonth").prop( "disabled", true );
+						//		$("#refers").prop( "disabled", true );
 								$("#comments").prop( "disabled", true );
 								$("#amount").prop( "disabled", true );
 								
 								$("#empid").removeClass("inputBorder");
-								$("#tdsmonth").removeClass("inputBorder");
-								$("#refers").removeClass("inputBorder");
+								$("#taxmonth").removeClass("inputBorder");
+							//	$("#refers").removeClass("inputBorder");
 								$("#comments").removeClass("inputBorder");
 								$("#amount").removeClass("inputBorder");
 								
 								$("#empid").addClass("inputdisable");
-								$("#tdsmonth").addClass("inputdisable");
-								$("#refers").addClass("inputdisable");
+								$("#taxmonth").addClass("inputdisable");
+							//	$("#refers").addClass("inputdisable");
 								$("#comments").addClass("inputdisable");
 								$("#amount").addClass("inputdisable");
 								
@@ -858,7 +829,7 @@
 								$("#date_tabledata").addClass("hidden");
 								$("#date_tablediv").removeClass("hidden");
 								$("#block_overlay").addClass("hidden");
-								$("#alertMsgContent").html("TDS details updated successfully...");
+								$("#alertMsgContent").html("Service Tax details updated successfully...");
 								$.fancybox.open('#alertMsg');
 							}else{ 
 								$("#block_overlay").addClass("hidden");

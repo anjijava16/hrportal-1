@@ -16,34 +16,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sapta.hr.domainobject.AssetDO;
 import com.sapta.hr.domainobject.BillsDO;
+import com.sapta.hr.domainobject.EmpBonusDO;
 import com.sapta.hr.domainobject.EmpTDSDO;
 import com.sapta.hr.domainobject.ExpenseDO;
 import com.sapta.hr.domainobject.ExternalInvoiceDO;
 import com.sapta.hr.domainobject.InvoiceDO;
 import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.ProfessionalTaxDO;
+import com.sapta.hr.domainobject.ServiceTaxDO;
 import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.AssetService;
 import com.sapta.hr.service.BillsService;
+import com.sapta.hr.service.EmpBonusService;
 import com.sapta.hr.service.EmpTDSService;
 import com.sapta.hr.service.ExpenseService;
 import com.sapta.hr.service.ExternalInvoiceService;
 import com.sapta.hr.service.InvoiceService;
 import com.sapta.hr.service.PayrollService;
 import com.sapta.hr.service.ProfessionalTaxService;
+import com.sapta.hr.service.ServiceTaxService;
 import com.sapta.hr.service.TDSService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.AssetUtil;
 import com.sapta.hr.web.util.BillsUtil;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
+import com.sapta.hr.web.util.EmpBounsUtill;
 import com.sapta.hr.web.util.EmpTdsUtil;
 import com.sapta.hr.web.util.ExpenseUtil;
 import com.sapta.hr.web.util.ExternalInvoiceUtil;
 import com.sapta.hr.web.util.InvoiceUtil;
 import com.sapta.hr.web.util.PayrollUtil;
 import com.sapta.hr.web.util.ProfessionalTaxUtil;
+import com.sapta.hr.web.util.ServiceTaxUtill;
 import com.sapta.hr.web.util.TDSUtill;
 import com.sapta.hr.web.util.WebManager;
 
@@ -321,6 +327,65 @@ public class FYReportsController {
 		return respJSON != null ? respJSON.toString() : "";
 	}
 	
+	@RequestMapping(value = "/fyempbonus")
+	public String viewEmpBonusReport(Model model, HttpServletRequest request) {
+		String pagename = CommonConstants.JSP_LOGIN_FORWARD;
+		try {
+			if (WebManager.authenticateSession(request)) {
+				pagename = CommonConstants.JSP_FY_EMP_BONUS;
+			}
+		} catch (Exception e) {
+		}
+		return pagename;
+	}
 	
+	@RequestMapping(value = "/getempbonusreport/{firstdate}/{lastdate}", method = RequestMethod.GET)
+	public @ResponseBody String getEmpFinancialYearBonusReport(Model model, @PathVariable String firstdate, @PathVariable String lastdate ) {
+		JSONObject respJSON = null;
+		try {
+			Date stdate = CommonUtil.convertStringToDate(firstdate);
+			Date eddate = CommonUtil.convertStringToDate(lastdate);
+			List<EmpBonusDO> bonusList = new EmpBonusService().getFinancialYearEmpBonusReport(stdate, eddate);
+			if (bonusList != null && bonusList.size() > 0) {
+				respJSON = EmpBounsUtill.getBounsList(bonusList);
+			}else {
+				respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+			}
+		} catch (Exception e) {
+			respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+		}
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	
+	@RequestMapping(value = "/fyservicetax")
+	public String viewservicetaxReport(Model model, HttpServletRequest request) {
+		String pagename = CommonConstants.JSP_LOGIN_FORWARD;
+		try {
+			if (WebManager.authenticateSession(request)) {
+				pagename = CommonConstants.JSP_FY_SERVICETAX;
+			}
+		} catch (Exception e) {
+		}
+		return pagename;
+	}
+	
+	@RequestMapping(value = "/getservicetaxreport/{firstdate}/{lastdate}", method = RequestMethod.GET)
+	public @ResponseBody String getEmpFinancialYearservicetaxReport(Model model, @PathVariable String firstdate, @PathVariable String lastdate ) {
+		JSONObject respJSON = null;
+		try {
+			Date stdate = CommonUtil.convertStringToDate(firstdate);
+			Date eddate = CommonUtil.convertStringToDate(lastdate);
+			List<ServiceTaxDO> servicetaxList = new ServiceTaxService().getFinancialYearservicetaxReport(stdate, eddate);
+			
+			if (servicetaxList != null && servicetaxList.size() > 0) {
+				respJSON = ServiceTaxUtill.getservicetaxList(servicetaxList);
+			}else {
+				respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+			}
+		} catch (Exception e) {
+			respJSON = CommonWebUtil.buildErrorResponse(ExceptionConstant._91031);
+		}
+		return respJSON != null ? respJSON.toString() : "";
+	}
 	
 }

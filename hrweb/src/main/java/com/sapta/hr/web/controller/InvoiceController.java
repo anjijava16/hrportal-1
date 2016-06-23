@@ -20,12 +20,14 @@ import com.sapta.hr.domainobject.CustomerDO;
 import com.sapta.hr.domainobject.InvoiceDO;
 import com.sapta.hr.domainobject.InvoiceDetailsDO;
 import com.sapta.hr.domainobject.ProjectDO;
+import com.sapta.hr.domainobject.ServiceTaxDO;
 import com.sapta.hr.domainobject.UserDO;
 import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.CustomerService;
 import com.sapta.hr.service.InvoiceDetailsService;
 import com.sapta.hr.service.InvoiceService;
 import com.sapta.hr.service.ProjectService;
+import com.sapta.hr.service.ServiceTaxService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
@@ -232,9 +234,7 @@ public class InvoiceController {
 		   @PathVariable char invoicetype, @PathVariable String amounttype, @PathVariable String servicetaxper, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
-								
 				InvoiceDO invoiceDO = new InvoiceDO();
-				
 				invoiceDO.setInvoiceno(invoicenumber);
                 invoiceDO.setInvoicedate(CommonUtil.convertStringToDate(invoicedate));
                 invoiceDO.setDuedate(CommonUtil.convertStringToDate(duedate));
@@ -243,14 +243,22 @@ public class InvoiceController {
                 invoiceDO.setTypeofinvoice(invoicetype);
                 invoiceDO.setAmounttype(amounttype);
                 invoiceDO.setInvoicestatus('a');
-                if(servicetax != 0){
-                	invoiceDO.setServicetax(servicetax);
-                }
+            
                 invoiceDO.setTotalamount(totalamount);
                 invoiceDO.setServicetaxper(servicetaxper);
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				invoiceDO.setUpdatedby(user.getUsername());
 				invoiceDO.setUpdatedon(new Date());
+			    if(servicetax != 0){
+                	invoiceDO.setServicetax(servicetax);
+                	ServiceTaxDO  servicetaxDO = new ServiceTaxDO();
+                	servicetaxDO.setAmount(servicetax);
+                	servicetaxDO.setInvoiceno(invoicenumber);
+                	servicetaxDO.setTaxmonth(CommonUtil.convertStringToDate(invoicedate));
+                	servicetaxDO.setUpdatedby(user.getUsername());
+                	servicetaxDO.setUpdatedon(new Date());
+                	new ServiceTaxService().persistTds(servicetaxDO);
+                }
 				new InvoiceService().persistinvoice(invoiceDO);
 			}
 		} catch (Exception e) {

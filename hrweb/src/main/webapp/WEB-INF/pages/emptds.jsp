@@ -73,6 +73,7 @@
 							<thead>
 								<tr>
 									<th class="first">Employee&nbsp;Id</th>
+									<th class="">Employee&nbsp;Name</th>
 									<th class="">TDS Amount</th>
 									<th class="">TDS&nbsp;Month</th>
 									<th class="">Paid&nbsp;On</th>
@@ -83,8 +84,15 @@
 							<c:forEach items="${empTDSList}" var="emptdsList">
 								<tr>
 									
-									 <td id="name_${emptdsList.id}">${emptdsList.empid}</td>
-									 <td id="tds_${emptdsList.id}">${emptdsList.tds}</td> 
+									 <td id="name_${emptdsList.id}" style="text-align:center;">${emptdsList.empid}</td>
+									 
+									 <c:forEach items="${employeeList}" var="employeeList">
+										<c:if test="${emptdsList.empid == employeeList.id}">
+											<td id="employeename_${emptdsList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+										</c:if> 
+									 </c:forEach>
+									 
+									 <td id="tds_${emptdsList.id}" style="text-align:right;">${emptdsList.tds}</td> 
 								
 									 <fmt:formatDate value="${emptdsList.tdsmonth}" var="formattedDate" type="date" pattern="MMM yyyy" />
 									<td id="tdsmonth_${emptdsList.id}" style="text-align: center;">${formattedDate}</td>
@@ -97,7 +105,7 @@
 										<td id="enddate_${emptdsList.id}" style="text-align: center;">${formattedEndDate}</td>
 									</c:if> 
 									
-									<td id="comments_${emptdsList.id}">${emptdsList.comments}</td>
+									<td id="comments_${emptdsList.id}" style="text-align:center;">${emptdsList.comments}</td>
 									<td style="text-align:center"><a href='#' id="edit_${emptdsList.id}">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' id="delete_${emptdsList.id}">Delete</a></td>
 								</tr>
 							</c:forEach>
@@ -364,20 +372,6 @@
 				});
 			});
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			var fymonthYear = "${fymonth}";
 			if(fymonthYear != "" && fymonthYear != null){
 				$(".fyreportth").addClass("hidden");
@@ -419,6 +413,7 @@
 					"aaSorting" : [],
 					"aoColumns": [ 
 				                  {sClass: "center"}, 
+				                  {sClass: "center"},
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},
@@ -437,14 +432,6 @@
 					});
 				})
 			}
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			$('#updateDetails').click(function() {

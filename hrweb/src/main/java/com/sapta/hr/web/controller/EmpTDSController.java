@@ -43,6 +43,10 @@ public class EmpTDSController {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				List<EmpTDSDO> empTDSList = new EmpTDSService().retrive();
+				List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
+				if (employeeList != null && employeeList.size() > 0) {
+					model.addAttribute(CommonConstants.EMPLOYEE_LIST, 	employeeList);
+				}
 				if (empTDSList != null && empTDSList.size() > 0) {
 					Collections.reverse(empTDSList);
 					model.addAttribute(CommonConstants.EMP_TDS_LIST, empTDSList);

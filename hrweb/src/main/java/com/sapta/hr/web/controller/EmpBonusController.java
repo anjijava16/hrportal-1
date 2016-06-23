@@ -17,16 +17,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sapta.hr.domainobject.EmpBonusDO;
+import com.sapta.hr.domainobject.EmpTDSDO;
 import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.PayrollDO;
 import com.sapta.hr.domainobject.UserDO;
 import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.EmpBonusService;
+import com.sapta.hr.service.EmpTDSService;
 import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.service.PayrollService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
+import com.sapta.hr.web.util.EmpBounsUtill;
+import com.sapta.hr.web.util.EmpTdsUtil;
 import com.sapta.hr.web.util.WebManager;
 
 @Controller
@@ -42,6 +46,10 @@ public class EmpBonusController {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				List<EmpBonusDO> empBonusList = new EmpBonusService().retrive();
+				List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
+				if (employeeList != null && employeeList.size() > 0) {
+					model.addAttribute(CommonConstants.EMPLOYEE_LIST, 	employeeList);
+				}
 				if (empBonusList != null && empBonusList.size() > 0) {
 					Collections.reverse(empBonusList);
 					model.addAttribute(CommonConstants.EMP_BOUNS_LIST, empBonusList);
@@ -170,7 +178,6 @@ public class EmpBonusController {
 	@RequestMapping(value = "/getempbonus/{empid}/{bonusMonth}", method = RequestMethod.GET)
 	public @ResponseBody String getEmpBonus(@PathVariable long empid, @PathVariable String bonusMonth, Model model) {
 		String jsonresp = null;
-		System.out.println("1");
 		try {
 			Calendar c = Calendar.getInstance();
 			String selectemonth = bonusMonth;
@@ -180,17 +187,49 @@ public class EmpBonusController {
 			
 			long bonusamount = 0;
 			List<EmpBonusDO> empBonusList = new EmpBonusService().retriveByEmpIdMonth(empid, startdate);
-			System.out.println("2 "+empBonusList.size());
 			if(empBonusList.size() > 0){
 				for (EmpBonusDO empBonusDO : empBonusList) {
 					bonusamount = bonusamount + empBonusDO.getBonusamount();
 				}
 			}
-			System.out.println("3 "+bonusamount);
 			jsonresp = String.valueOf(bonusamount);
 		} catch (Exception e) { }
 
 		return jsonresp != null ? jsonresp.toString() : "";
+	}
+	
+	@RequestMapping(value = "/viewfybonus/{month}", method = RequestMethod.GET)
+	public String viewFyBonus(@PathVariable String month, Model model, HttpServletRequest request) {
+		String pagename = CommonConstants.JSP_LOGIN_FORWARD;
+		try {
+			if (WebManager.authenticateSession(request)) { 
+				pagename = CommonConstants.JSP_EMP_BOUNS;
+				if(month != null){
+					model.addAttribute(CommonConstants.FY_MONTH, month);
+				}
+				
+			}
+		} catch (Exception e) { }
+		return pagename;
+	}
+	
+	@RequestMapping(value = "/getbyempbonusmonth/{bonusmonth}", method = RequestMethod.GET)
+	public @ResponseBody String getByIdForGrid(@PathVariable String bonusmonth, Model model) {
+		JSONObject respJSON = null;
+		try {
+			String SDate = bonusmonth;		   
+			Date StartDate = CommonUtil.convertStringToDate(SDate);
+		    Calendar c = Calendar.getInstance();      
+		    c.setTime(StartDate);
+		    c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+		    Date edate= c.getTime();
+			List<EmpBonusDO> bonusList = new EmpBonusService().FindAllEvents(StartDate ,edate );
+			if (bonusList != null) {
+				Collections.reverse(bonusList);
+				respJSON = EmpBounsUtill.gettdsDataTableList(bonusList);
+			}
+		} catch (Exception e) { }
+		return respJSON != null ? respJSON.toString() : "";
 	}
 	
 }

@@ -66,6 +66,8 @@ public final class CommonConstants {
 	
 	public static final String JSP_FY_PAYROLL = "fypayroll";
 	
+	public static final String JSP_FY_EMP_BONUS = "fyempbonus";
+	
 	public static final String TDS_DATE = "tdsdate"; 
 	
 	public static final String PF_DATE = "pfdate"; 
@@ -703,6 +705,11 @@ public final class CommonConstants {
 	public static final String JSP_ADD_EXT_INVOICE = "addexternalinvoice";
 	
 	public static final String JSP_VIEW_EXT_INVOICE = "viewexternalinvoice";
+	//bonus
+	
+	public static final String BONUSMONTH = "tdsmonth";
+	
+	public static final String BONUS_DATE_MONTH = "bonusdatemonth";
 	
 	//tds
 	
@@ -724,7 +731,7 @@ public final class CommonConstants {
 	
 	public static final String JSP_TDS = "tds";
 	
-   public static final String  PAYROLL_LIST = "payedListstatus";
+    public static final String  PAYROLL_LIST = "payedListstatus";
 	
 	public static final String  PAYROLL_LIST_SIZE = "payedListstatussize";
 	
@@ -735,6 +742,15 @@ public final class CommonConstants {
 	public static final String PT_MONTH_DATE = "ptmonthdate";
 	
 	public static final String FY_MONTH = "fymonth";
+	//service tax
+	
+	public static final String JSP_SERVICETAX = "servicetax";
+	
+	public static final String TAXMONTH = "taxmonth";
+	
+	public static final String TAX_DATE_MONTH = "taxdatemonth";
+	
+	public static final String JSP_FY_SERVICETAX = "fyservicetax";
 	
 	//Bill
 	

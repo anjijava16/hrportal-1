@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.sapta.hr.domainobject.EmpBonusDO;
+import com.sapta.hr.domainobject.EmpTDSDO;
 import com.sapta.hr.exception.AppException;
 import com.sapta.hr.exception.CustomPropertyManager;
 import com.sapta.hr.exception.ExceptionConstant;
@@ -119,6 +120,30 @@ static Logger logger = Logger.getLogger(EmpLoseOfPayDAO.class.getName());
 		return empBounsList;
 	}
 	
+
+	@SuppressWarnings("unchecked")
+	public List<EmpBonusDO> getFinancialYearEmpBonusReport(Date stdate, Date eddate) throws AppException {
+		List<EmpBonusDO> bonusList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpBonusDO.FIND_BY_ST_ET_DATE_BY_ORDER);
+				q.setParameter("stdate", stdate);
+				q.setParameter("eddate", eddate);
+				bonusList = (List<EmpBonusDO>) q.getResultList();
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010,CustomPropertyManager.getProperty(ExceptionConstant._91010),eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return bonusList;
+	}
+	
+	
+	
 	public boolean update(EmpBonusDO empBounsDO) throws AppException {
 		boolean status = false;
 		try {
@@ -162,5 +187,27 @@ static Logger logger = Logger.getLogger(EmpLoseOfPayDAO.class.getName());
 			SessionManager.closeEntityManager(em);
 		}
 		return status;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<EmpBonusDO> FindAllEvents(Date stdate , Date eddate) throws AppException {
+		List<EmpBonusDO> tdsList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null && stdate != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpBonusDO.FIND_BY_ST_ET_DATE);
+				q.setParameter(CommonConstants.PT_MONTH_STDATE, stdate);
+				q.setParameter(CommonConstants.PT_MONTH_EDDATE, eddate);
+				tdsList = (List<EmpBonusDO>) q.getResultList();
+			
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010, CustomPropertyManager.getProperty(ExceptionConstant._91010), eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return tdsList;
 	}
 }

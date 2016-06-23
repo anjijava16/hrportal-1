@@ -20,19 +20,19 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.sapta.hr.domainobject.EmpTDSDO;
+import com.sapta.hr.domainobject.EmpBonusDO;
 import com.sapta.hr.domainobject.EmployeeDO;
+import com.sapta.hr.domainobject.ServiceTaxDO;
 import com.sapta.hr.domainobject.VendorDO;
-import com.sapta.hr.service.EmpTDSService;
-import com.sapta.hr.service.EmployeeService;
+import com.sapta.hr.service.ServiceTaxService;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.FooterUtil;
 import com.sapta.hr.web.util.HeaderFooterPDFUtil;
 import com.sapta.hr.web.util.HeaderUtil;
 
 @SuppressWarnings("serial")
-@WebServlet("/emptdspdfreport")
-public class EmpTdsReportServlet extends BaseServlet {
+@WebServlet("/empsevicetaxpdfreport")
+public class ServiceTaxServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws IOException, ServletException {
 		doPost(req, resp);
 	}
@@ -44,9 +44,8 @@ public class EmpTdsReportServlet extends BaseServlet {
 		String startDate = req.getParameter("startDate");
 		String endDate = req.getParameter("endDate");
 		
-		List<EmpTDSDO> tdslist = null;
+		List<ServiceTaxDO> servicetaxlist = null;
 		List<VendorDO> vendorlist = null;
-		List<EmployeeDO> employeeList = null;
 		
 		PdfPTable horizontalrow = null;
 		PdfPTable totalamount = null;
@@ -72,7 +71,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			Font fontbold8 = new Font(base, 8, Font.BOLD, BaseColor.BLACK);
 			Font font6 = new Font(base, 6, Font.NORMAL, BaseColor.BLACK);
 			resp.setContentType("application/pdf");
-			resp.setHeader("Content-Disposition","attachment; filename=\""+startDate+"_"+endDate+"_"+"EmpTDS_Report.pdf\"");
+			resp.setHeader("Content-Disposition","attachment; filename=\""+startDate+"_"+endDate+"_"+"EmpServicetax_Report.pdf\"");
 			PdfWriter writer = PdfWriter.getInstance(document, resp.getOutputStream());
 			
 			PdfPTable header = HeaderUtil.getHeaderDetails(req);
@@ -88,7 +87,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			horizontalrow.setWidthPercentage(100);
 			horizontalrow.setSpacingBefore(25f);
 			
-			PdfPCell contenerowcell = new PdfPCell(new Paragraph("Employee TDS report between"+" "+startDate+" and "+endDate, fontitalic10));
+			PdfPCell contenerowcell = new PdfPCell(new Paragraph("Service Tax report between"+" "+startDate+" and "+endDate, fontitalic10));
 			contenerowcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			contenerowcell.setBorder(0);
 			contenerowcell.setPaddingTop(-5);
@@ -100,10 +99,9 @@ public class EmpTdsReportServlet extends BaseServlet {
 			totalamount.setWidthPercentage(100);
 			totalamount.setSpacingBefore(10f);
 			
-			tdslist = new EmpTDSService().getFinancialYearEmpTDSReport(CommonUtil.convertStringToDate(startDate), CommonUtil.convertStringToDate(endDate));
-			employeeList  = new EmployeeService().retriveEmployee();
-			for (EmpTDSDO EMPTDSDO : tdslist) {
-				totalpay = totalpay + (EMPTDSDO.getTds());
+			servicetaxlist = new ServiceTaxService().getFinancialYearservicetaxReport(CommonUtil.convertStringToDate(startDate), CommonUtil.convertStringToDate(endDate));
+			for (ServiceTaxDO servicetaxDO : servicetaxlist) {
+				totalpay = totalpay + (servicetaxDO.getAmount());
 			}
 			
 			PdfPCell totalvalue = new PdfPCell(new Paragraph("Total : "+decimalformat.format(totalpay), fontbold8)); 
@@ -123,41 +121,41 @@ public class EmpTdsReportServlet extends BaseServlet {
 			tdsheading.setSpacingBefore(30f);
 			tdsheading.setWidths(new float[]{15f,15f,15f,30f,15f});
 			
-			PdfPCell tdsId = new PdfPCell(new Paragraph("TDS Id", fontbold8));
+			PdfPCell tdsId = new PdfPCell(new Paragraph("Tax Id", fontbold8));
 			tdsId.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tdsId.setBackgroundColor(new BaseColor(211,211,211));
 			tdsId.setBorderColor(BaseColor.GRAY);
 			tdsId.setFixedHeight(15);
 			tdsheading.addCell(tdsId);
 			
-			PdfPCell tds_empId = new PdfPCell(new Paragraph("Employee Id", fontbold8));
+			PdfPCell tds_empId = new PdfPCell(new Paragraph("Invoice Number", fontbold8));
 			tds_empId.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tds_empId.setBackgroundColor(new BaseColor(211,211,211));
 			tds_empId.setBorderColor(BaseColor.GRAY);
 			tdsheading.addCell(tds_empId);
 			
-			PdfPCell tds_ref = new PdfPCell(new Paragraph("Employee Name", fontbold8));
-			tds_ref.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tds_ref.setBackgroundColor(new BaseColor(211,211,211));
-			tds_ref.setBorderColor(BaseColor.GRAY);
-			tdsheading.addCell(tds_ref);
 			
-			PdfPCell tdsMonth = new PdfPCell(new Paragraph("TDS month", fontbold8));
+			PdfPCell tdsMonth = new PdfPCell(new Paragraph("Bonus month", fontbold8));
 			tdsMonth.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tdsMonth.setBackgroundColor(new BaseColor(211,211,211));
 			tdsMonth.setBorderColor(BaseColor.GRAY);
 			tdsheading.addCell(tdsMonth);
 			
 			
-			PdfPCell amount = new PdfPCell(new Paragraph("Amount ", fontbold8));
+			PdfPCell amount = new PdfPCell(new Paragraph("Tax Amount ", fontbold8));
 			amount.setHorizontalAlignment(Element.ALIGN_CENTER);
 			amount.setBackgroundColor(new BaseColor(211,211,211));
 			amount.setBorderColor(BaseColor.GRAY);
 			tdsheading.addCell(amount);
 			
+			PdfPCell comment = new PdfPCell(new Paragraph("Comment ", fontbold8));
+			comment.setHorizontalAlignment(Element.ALIGN_CENTER);
+			comment.setBackgroundColor(new BaseColor(211,211,211));
+			comment.setBorderColor(BaseColor.GRAY);
+			tdsheading.addCell(comment);
 			document.add(tdsheading);
 			
-			for (EmpTDSDO TDSDO : tdslist) {
+			for (ServiceTaxDO servicetaxDO : servicetaxlist) {
 		
 				tdsvalues = new PdfPTable(5);
 				tdsvalues.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -165,40 +163,35 @@ public class EmpTdsReportServlet extends BaseServlet {
 				tdsvalues.setWidths(new float[]{15f,15f,15f,30f,15f});
 				
 				
-				PdfPCell id_value = new PdfPCell(new Paragraph(TDSDO.getId().toString(), font8));
+				PdfPCell id_value = new PdfPCell(new Paragraph(servicetaxDO.getId().toString(), font8));
 				id_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 				id_value.setBorderColor(BaseColor.GRAY);
 				id_value.setFixedHeight(15);
 				tdsvalues.addCell(id_value);
 				
-				PdfPCell empId_value = new PdfPCell(new Paragraph(TDSDO.getEmpid().toString(), font8));
+				PdfPCell empId_value = new PdfPCell(new Paragraph(servicetaxDO.getInvoiceno(), font8));
 				empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 				empId_value.setBorderColor(BaseColor.GRAY);
 				tdsvalues.addCell(empId_value);
-				System.out.println(employeeList.size());
-				for (EmployeeDO employeeDO : employeeList) {
-					if(employeeDO.getId().equals(TDSDO.getEmpid())){
-						PdfPCell reference = new PdfPCell(new Paragraph(employeeDO.getFname()+" "+employeeDO.getLname(), font8));
-						reference.setHorizontalAlignment(Element.ALIGN_LEFT);
-						reference.setNoWrap(false);
-						reference.setBorderColor(BaseColor.GRAY);
-						tdsvalues.addCell(reference);
 
-					}
-				}
-
-				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(TDSDO.getTdsmonth()), font8)); 
+				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(servicetaxDO.getTaxmonth()), font8)); 
 				tdsMonth_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				tdsMonth_value.setBorderColor(BaseColor.GRAY);
 				tdsMonth_value.setPaddingRight(5);
 				tdsvalues.addCell(tdsMonth_value);
 				
-				PdfPCell tds_amount = new PdfPCell(new Paragraph(decimalformat.format(TDSDO.getTds()), font8));
+				PdfPCell tds_amount = new PdfPCell(new Paragraph(decimalformat.format(servicetaxDO.getAmount()), font8));
 				tds_amount.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				tds_amount.setBorderColor(BaseColor.GRAY);
 				tds_amount.setPaddingRight(5);
 				tdsvalues.addCell(tds_amount);
 					
+				PdfPCell Comment = new PdfPCell(new Paragraph(servicetaxDO.getComments(), font8));
+				Comment.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				Comment.setBorderColor(BaseColor.GRAY);
+				Comment.setPaddingRight(5);
+				tdsvalues.addCell(Comment);
+				
 				document.add(tdsvalues);
 			}	
 			

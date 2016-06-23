@@ -20,9 +20,11 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sapta.hr.domainobject.EmpBonusDO;
 import com.sapta.hr.domainobject.EmpTDSDO;
 import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.VendorDO;
+import com.sapta.hr.service.EmpBonusService;
 import com.sapta.hr.service.EmpTDSService;
 import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.web.util.CommonUtil;
@@ -31,8 +33,8 @@ import com.sapta.hr.web.util.HeaderFooterPDFUtil;
 import com.sapta.hr.web.util.HeaderUtil;
 
 @SuppressWarnings("serial")
-@WebServlet("/emptdspdfreport")
-public class EmpTdsReportServlet extends BaseServlet {
+@WebServlet("/empbonuspdfreport")
+public class EmpBonusServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws IOException, ServletException {
 		doPost(req, resp);
 	}
@@ -44,7 +46,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 		String startDate = req.getParameter("startDate");
 		String endDate = req.getParameter("endDate");
 		
-		List<EmpTDSDO> tdslist = null;
+		List<EmpBonusDO> bonuslist = null;
 		List<VendorDO> vendorlist = null;
 		List<EmployeeDO> employeeList = null;
 		
@@ -72,7 +74,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			Font fontbold8 = new Font(base, 8, Font.BOLD, BaseColor.BLACK);
 			Font font6 = new Font(base, 6, Font.NORMAL, BaseColor.BLACK);
 			resp.setContentType("application/pdf");
-			resp.setHeader("Content-Disposition","attachment; filename=\""+startDate+"_"+endDate+"_"+"EmpTDS_Report.pdf\"");
+			resp.setHeader("Content-Disposition","attachment; filename=\""+startDate+"_"+endDate+"_"+"EmpBonus_Report.pdf\"");
 			PdfWriter writer = PdfWriter.getInstance(document, resp.getOutputStream());
 			
 			PdfPTable header = HeaderUtil.getHeaderDetails(req);
@@ -88,7 +90,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			horizontalrow.setWidthPercentage(100);
 			horizontalrow.setSpacingBefore(25f);
 			
-			PdfPCell contenerowcell = new PdfPCell(new Paragraph("Employee TDS report between"+" "+startDate+" and "+endDate, fontitalic10));
+			PdfPCell contenerowcell = new PdfPCell(new Paragraph("Employee Bonus report between"+" "+startDate+" and "+endDate, fontitalic10));
 			contenerowcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			contenerowcell.setBorder(0);
 			contenerowcell.setPaddingTop(-5);
@@ -100,10 +102,10 @@ public class EmpTdsReportServlet extends BaseServlet {
 			totalamount.setWidthPercentage(100);
 			totalamount.setSpacingBefore(10f);
 			
-			tdslist = new EmpTDSService().getFinancialYearEmpTDSReport(CommonUtil.convertStringToDate(startDate), CommonUtil.convertStringToDate(endDate));
+			bonuslist = new EmpBonusService().getFinancialYearEmpBonusReport(CommonUtil.convertStringToDate(startDate), CommonUtil.convertStringToDate(endDate));
 			employeeList  = new EmployeeService().retriveEmployee();
-			for (EmpTDSDO EMPTDSDO : tdslist) {
-				totalpay = totalpay + (EMPTDSDO.getTds());
+			for (EmpBonusDO EMPbonusDO : bonuslist) {
+				totalpay = totalpay + (EMPbonusDO.getBonusamount());
 			}
 			
 			PdfPCell totalvalue = new PdfPCell(new Paragraph("Total : "+decimalformat.format(totalpay), fontbold8)); 
@@ -123,7 +125,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			tdsheading.setSpacingBefore(30f);
 			tdsheading.setWidths(new float[]{15f,15f,15f,30f,15f});
 			
-			PdfPCell tdsId = new PdfPCell(new Paragraph("TDS Id", fontbold8));
+			PdfPCell tdsId = new PdfPCell(new Paragraph("Bonus Id", fontbold8));
 			tdsId.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tdsId.setBackgroundColor(new BaseColor(211,211,211));
 			tdsId.setBorderColor(BaseColor.GRAY);
@@ -142,14 +144,14 @@ public class EmpTdsReportServlet extends BaseServlet {
 			tds_ref.setBorderColor(BaseColor.GRAY);
 			tdsheading.addCell(tds_ref);
 			
-			PdfPCell tdsMonth = new PdfPCell(new Paragraph("TDS month", fontbold8));
+			PdfPCell tdsMonth = new PdfPCell(new Paragraph("Bonus month", fontbold8));
 			tdsMonth.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tdsMonth.setBackgroundColor(new BaseColor(211,211,211));
 			tdsMonth.setBorderColor(BaseColor.GRAY);
 			tdsheading.addCell(tdsMonth);
 			
 			
-			PdfPCell amount = new PdfPCell(new Paragraph("Amount ", fontbold8));
+			PdfPCell amount = new PdfPCell(new Paragraph("Bonus Amount ", fontbold8));
 			amount.setHorizontalAlignment(Element.ALIGN_CENTER);
 			amount.setBackgroundColor(new BaseColor(211,211,211));
 			amount.setBorderColor(BaseColor.GRAY);
@@ -157,7 +159,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 			
 			document.add(tdsheading);
 			
-			for (EmpTDSDO TDSDO : tdslist) {
+			for (EmpBonusDO empbonusdo : bonuslist) {
 		
 				tdsvalues = new PdfPTable(5);
 				tdsvalues.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -165,19 +167,19 @@ public class EmpTdsReportServlet extends BaseServlet {
 				tdsvalues.setWidths(new float[]{15f,15f,15f,30f,15f});
 				
 				
-				PdfPCell id_value = new PdfPCell(new Paragraph(TDSDO.getId().toString(), font8));
+				PdfPCell id_value = new PdfPCell(new Paragraph(empbonusdo.getId().toString(), font8));
 				id_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 				id_value.setBorderColor(BaseColor.GRAY);
 				id_value.setFixedHeight(15);
 				tdsvalues.addCell(id_value);
 				
-				PdfPCell empId_value = new PdfPCell(new Paragraph(TDSDO.getEmpid().toString(), font8));
+				PdfPCell empId_value = new PdfPCell(new Paragraph(empbonusdo.getEmpid().toString(), font8));
 				empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 				empId_value.setBorderColor(BaseColor.GRAY);
 				tdsvalues.addCell(empId_value);
-				System.out.println(employeeList.size());
+				
 				for (EmployeeDO employeeDO : employeeList) {
-					if(employeeDO.getId().equals(TDSDO.getEmpid())){
+					if(employeeDO.getId().equals(empbonusdo.getEmpid())){
 						PdfPCell reference = new PdfPCell(new Paragraph(employeeDO.getFname()+" "+employeeDO.getLname(), font8));
 						reference.setHorizontalAlignment(Element.ALIGN_LEFT);
 						reference.setNoWrap(false);
@@ -187,13 +189,13 @@ public class EmpTdsReportServlet extends BaseServlet {
 					}
 				}
 
-				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(TDSDO.getTdsmonth()), font8)); 
+				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(empbonusdo.getBonusmonth()), font8)); 
 				tdsMonth_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				tdsMonth_value.setBorderColor(BaseColor.GRAY);
 				tdsMonth_value.setPaddingRight(5);
 				tdsvalues.addCell(tdsMonth_value);
 				
-				PdfPCell tds_amount = new PdfPCell(new Paragraph(decimalformat.format(TDSDO.getTds()), font8));
+				PdfPCell tds_amount = new PdfPCell(new Paragraph(decimalformat.format(empbonusdo.getBonusamount()), font8));
 				tds_amount.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				tds_amount.setBorderColor(BaseColor.GRAY);
 				tds_amount.setPaddingRight(5);

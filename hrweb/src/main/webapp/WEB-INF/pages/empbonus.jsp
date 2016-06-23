@@ -72,6 +72,7 @@
 							<thead>
 								<tr>
 									<th class="first">Employee&nbsp;Id</th>
+									<th class="first">Employee&nbsp;Name</th>
 									<th class="">Bonus Amount</th>
 									<th class="">Bonus&nbsp;Month</th>
 									<th class="">Paid&nbsp;On</th>
@@ -83,7 +84,12 @@
 								<tr>
 									
 									 <td id="name_${empbonusList.id}">${empbonusList.empid}</td>
-									 <td id="bonus_${empbonusList.id}">${empbonusList.bonusamount}</td> 
+									  <c:forEach items="${employeeList}" var="employeeList">
+										<c:if test="${empbonusList.empid == employeeList.id}">
+											<td id="employeename_${empbonusList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+										</c:if> 
+									 </c:forEach>
+									 <td id="bonus_${empbonusList.id}" style="text-align: right;">${empbonusList.bonusamount}</td> 
 								
 									 <fmt:formatDate value="${empbonusList.bonusmonth}" var="formattedDate" type="date" pattern="MMM yyyy" />
 									<td id="bonusmonth_${empbonusList.id}" style="text-align: center;">${formattedDate}</td>
@@ -195,28 +201,10 @@
 					 $('#ui-datepicker-div').toggleClass('hide-calendar');
 				 }
 			 });
-			$(function(){
-				$("#bonustable").dataTable({
-					"aaSorting": []
-				});
-			})
+		
 			$("#menu_payroll").addClass("active");
-			 
-			 
-			 /* $( "#bonusmonth" ).focus(function() {
-				$("#ui-datepicker-div").removeClass("hide-calendar")
-			 }); */
+			
 			$(function() {
-				 /*  $("#bonusmonth,#editbonusmonth").datepicker({
-					 yearRange: '1950:2100',
-					 defaultDate: new Date(),
-					 changeMonth: true,
-					 changeYear: true,
-					 showOn: "button",
-	               	 buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
-	                 buttonImageOnly: true,
-					 dateFormat :"dd-mm-yy"
-	            }) */
 	            $("#bonusmonth,#editbonusmonth").datepicker({
 						yearRange: '1950:2100',
 						defaultDate: new Date(),
@@ -235,17 +223,6 @@
 						},
 						gotoCurrent: true
 		            }).datepicker('setDate',"0");
-	          /*   $("#editenddate").datepicker({
-					 yearRange: '1950:2100',
-					 changeMonth: true,
-					 defaultDate: new Date(),
-					 changeYear: true,
-					 showOn: "button",
-	               	 buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
-	                 buttonImageOnly: true,
-					 dateFormat :"dd-mm-yy"
-	            }) */
-	            
 	        });
 			
 			var lopSize = "${emplopListsize}";
@@ -267,6 +244,69 @@
 			}else{ 
 				$("#noctcAvailable").removeClass("hidden");
 			} 
+			
+			var fymonthYear = "${fymonth}";
+			if(fymonthYear != "" && fymonthYear != null){
+				$(".fyreportth").addClass("hidden");
+				var amount = 0;
+				var url = "";
+				fymonthYear = monthConversion(fymonthYear);
+				fymonthYear = fymonthYear.split('/').join('-');
+				url = $("#contextpath").val()+"/empbonus/getbyempbonusmonth/"+fymonthYear;
+				var resourceurl = $("#contextpath").val()+"/empbonus/getbyempbonusmonth/"+fymonthYear;
+				   $("#block_overlay").removeClass("hidden");  
+					$.ajax({
+			        url : resourceurl,
+			        type : 'GET',
+			        dataType : 'json',
+			        async : false,
+			        success: function(data) {
+			        	/* var successflag = data.response.successflag;
+						var errors = data.response.errors;
+						var results = data.response.result;
+						if(successflag == "true"){
+							alert(1);
+							$.each(results, function (i, result) {
+								amount = parseFloat(amount) + parseFloat(result.amount);	
+							});
+							
+						} */
+			        	$("#block_overlay").addClass("hidden");
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
+			   		}
+			   });   
+			/* 	$("#currenttotalamttd").val(numberWithCommas(amount.toFixed(2))); */
+				$("#norecords").addClass("hidden");
+				$("#bonustable").DataTable().clear().destroy();
+				$("#bonustable").dataTable({
+					"ajax": url,
+					"aaSorting" : [],
+					"aoColumns": [ 
+				                  {sClass: "center"}, 
+				                  {sClass: "center"},
+				                  {sClass: "alignright"},
+				                  {sClass: "center"},
+				                  {sClass: "center"},
+				                  {sClass: "center"},
+				                  {sClass: "center"}
+				                ]
+				}); 
+				
+			}else{
+				$(function(){
+					$("#bonustable").dataTable({
+						"aaSorting": []
+					});
+				})
+			}
+			
+			
+			
+			
+			
+			
 			
 			$('#addempBonusDetails').click(function() {
 				$("#block_overlay").removeClass("hidden");

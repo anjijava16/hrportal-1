@@ -7,8 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sapta.hr.domainobject.EmpTDSDO;
+import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.AppException;
+import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.util.CommonConstants;
 
 public class EmpTdsUtil {
@@ -49,10 +51,8 @@ public class EmpTdsUtil {
 		JSONObject responseJSON = new JSONObject();
 		try {
 			JSONArray resultJSONArray = new JSONArray();
-			System.out.println(tdList.size()+" Util");
 			if (tdList.size() > 0) {
 				for(EmpTDSDO tdsdo : tdList) {
-					System.out.println(tdsdo);
 					resultJSONArray.put(gettdsDataTableObject(tdsdo));
 				}
 			}
@@ -65,8 +65,16 @@ public class EmpTdsUtil {
 
 	private static JSONArray gettdsDataTableObject(EmpTDSDO tdsdo)throws JSONException, AppException {
 		JSONArray result = new JSONArray();
-		System.out.println("calling");
 		result.put(String.valueOf(tdsdo.getEmpid()));
+		List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
+		if(employeeList.size() > 0){
+			for (EmployeeDO employeeDO : employeeList) {
+				if(employeeDO.getId().equals(tdsdo.getEmpid())){
+					result.put(String.valueOf(employeeDO.getFname() +" "+employeeDO.getLname()));
+				}
+			}
+		}
+		
 		result.put(CommonUtil.convertnumberValueWithcomma(tdsdo.getTds()));
 		result.put(CommonUtil.convertDateToStringWithdatetime(tdsdo.getTdsmonth()));
 		if(tdsdo.getPaidon() != null){
