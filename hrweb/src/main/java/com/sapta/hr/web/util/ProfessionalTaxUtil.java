@@ -6,8 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.ProfessionalTaxDO;
 import com.sapta.hr.exception.AppException;
+import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.util.CommonConstants;
 
 public final class ProfessionalTaxUtil {
@@ -90,6 +92,14 @@ public final class ProfessionalTaxUtil {
 	private static JSONArray getptDataTableObject(ProfessionalTaxDO ptList)throws JSONException, AppException {
 		JSONArray result = new JSONArray();
 		result.put(String.valueOf(ptList.getEmpid()));
+		List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
+		if(employeeList.size() > 0){
+			for (EmployeeDO employeeDO : employeeList) {
+				if(employeeDO.getId().equals(ptList.getEmpid())){
+					result.put(String.valueOf(employeeDO.getFname() +" "+employeeDO.getLname()));
+				}
+			}
+		}
 		result.put(CommonUtil.convertDateToStringWithdatetime(ptList.getPtmonth()));
 		result.put(ptList.getAmount());
 		return result;

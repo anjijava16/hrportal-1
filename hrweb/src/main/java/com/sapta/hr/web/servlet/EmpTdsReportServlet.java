@@ -175,7 +175,6 @@ public class EmpTdsReportServlet extends BaseServlet {
 				empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 				empId_value.setBorderColor(BaseColor.GRAY);
 				tdsvalues.addCell(empId_value);
-				System.out.println(employeeList.size());
 				for (EmployeeDO employeeDO : employeeList) {
 					if(employeeDO.getId().equals(TDSDO.getEmpid())){
 						PdfPCell reference = new PdfPCell(new Paragraph(employeeDO.getFname()+" "+employeeDO.getLname(), font8));
@@ -183,7 +182,6 @@ public class EmpTdsReportServlet extends BaseServlet {
 						reference.setNoWrap(false);
 						reference.setBorderColor(BaseColor.GRAY);
 						tdsvalues.addCell(reference);
-
 					}
 				}
 

@@ -40,6 +40,7 @@
 						<thead>
 							<tr>
 								<th class="first">Employee&nbsp;Id  &nbsp</th>
+								<th class="">Employee&nbsp;Name</th>
 								<th class="">PT&nbsp;Month</th>
 								<th class="">Amount(<span class="rupyaINR WebRupee">&#x20B9;</span>) &nbsp</th>
 							</tr>
@@ -181,6 +182,7 @@
 			        "aoColumns": [ 
                       {sClass: "alignleft"}, 
                       {sClass: "center"}, 
+                      {sClass: "center"}, 
                       {sClass: "alignright"}
                     ]
 			 
@@ -234,6 +236,7 @@
 			        "aaSorting": [],
 			        "aoColumns": [ 
                       {sClass: "alignleft"}, 
+                      {sClass: "center"}, 
                       {sClass: "alignleft"}, 
                       {sClass: "alignright"}
                     ]

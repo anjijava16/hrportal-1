@@ -20,8 +20,10 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.domainobject.ProfessionalTaxDO;
 import com.sapta.hr.domainobject.VendorDO;
+import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.service.ProfessionalTaxService;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.FooterUtil;
@@ -44,7 +46,7 @@ public class PTReportServlet extends BaseServlet {
 		String endDate = req.getParameter("endDate");
 		
 		List<ProfessionalTaxDO> ptlist = null;
-		List<VendorDO> vendorlist = null;
+		List<EmployeeDO> employeeList = null;
 		
 		PdfPTable horizontalrow = null;
 		PdfPTable totalamount = null;
@@ -99,6 +101,7 @@ public class PTReportServlet extends BaseServlet {
 			totalamount.setSpacingBefore(10f);
 			
 			ptlist = new ProfessionalTaxService().getFinancialYearProfessionalTaxReport(CommonUtil.convertStringToDate(startDate), CommonUtil.convertStringToDate(endDate));
+			employeeList  = new EmployeeService().retriveEmployee();
 			for (ProfessionalTaxDO ProfessionalTaxDO : ptlist) {
 				totalpay = totalpay + (ProfessionalTaxDO.getAmount());
 			}
@@ -114,16 +117,11 @@ public class PTReportServlet extends BaseServlet {
 			
 			document.add(totalamount);
 		
-			ptheading = new PdfPTable(3);
+			ptheading = new PdfPTable(4);
 			ptheading.setHorizontalAlignment(Element.ALIGN_LEFT);
 			ptheading.setWidthPercentage(100);
-			ptheading.setSpacingBefore(30f);
+			ptheading.setSpacingBefore(25f);
 			
-			PdfPCell ptmonth = new PdfPCell(new Paragraph("PT Month", fontbold8));
-			ptmonth.setHorizontalAlignment(Element.ALIGN_CENTER);
-			ptmonth.setBackgroundColor(new BaseColor(211,211,211));
-			ptmonth.setBorderColor(BaseColor.GRAY);
-			ptheading.addCell(ptmonth);
 			
 			PdfPCell pt_empId = new PdfPCell(new Paragraph("Employee ID", fontbold8));
 			pt_empId.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -131,6 +129,20 @@ public class PTReportServlet extends BaseServlet {
 			pt_empId.setBorderColor(BaseColor.GRAY);
 			pt_empId.setFixedHeight(15);
 			ptheading.addCell(pt_empId);
+			
+			PdfPCell pt_empName = new PdfPCell(new Paragraph("Employee Name", fontbold8));
+			pt_empName.setHorizontalAlignment(Element.ALIGN_CENTER);
+			pt_empName.setBackgroundColor(new BaseColor(211,211,211));
+			pt_empName.setBorderColor(BaseColor.GRAY);
+			pt_empName.setFixedHeight(15);
+			ptheading.addCell(pt_empName);
+			
+			PdfPCell ptmonth = new PdfPCell(new Paragraph("PT Month", fontbold8));
+			ptmonth.setHorizontalAlignment(Element.ALIGN_CENTER);
+			ptmonth.setBackgroundColor(new BaseColor(211,211,211));
+			ptmonth.setBorderColor(BaseColor.GRAY);
+			ptheading.addCell(ptmonth);
+			
 			
 			PdfPCell ptAmount = new PdfPCell(new Paragraph("Amount", fontbold8));
 			ptAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -142,21 +154,32 @@ public class PTReportServlet extends BaseServlet {
 			
 			for (ProfessionalTaxDO ProfessionalTaxDO : ptlist) {
 		
-				ptvalues = new PdfPTable(3);
+				ptvalues = new PdfPTable(4);
 				ptvalues.setHorizontalAlignment(Element.ALIGN_LEFT);
 				ptvalues.setWidthPercentage(100);
 				
+				PdfPCell emp_id = new PdfPCell(new Paragraph(ProfessionalTaxDO.getEmpid().toString(), font8));
+				emp_id.setHorizontalAlignment(Element.ALIGN_CENTER);
+				emp_id.setBorderColor(BaseColor.GRAY);
+				emp_id.setFixedHeight(15);
+				ptvalues.addCell(emp_id);
+				
+				for (EmployeeDO employeeDO : employeeList) {
+					if(employeeDO.getId().equals(ProfessionalTaxDO.getEmpid())){
+						PdfPCell reference = new PdfPCell(new Paragraph(employeeDO.getFname()+" "+employeeDO.getLname(), font8));
+						reference.setHorizontalAlignment(Element.ALIGN_LEFT);
+						reference.setNoWrap(false);
+						reference.setBorderColor(BaseColor.GRAY);
+						ptvalues.addCell(reference);
+					}
+				}
+				
+
 				PdfPCell pt_month = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(ProfessionalTaxDO.getPtmonth()), font8));
 				pt_month.setHorizontalAlignment(Element.ALIGN_CENTER);
 				pt_month.setBorderColor(BaseColor.GRAY);
 				ptvalues.addCell(pt_month);
 				
-				PdfPCell emp_id = new PdfPCell(new Paragraph(ProfessionalTaxDO.getEmpid().toString(), font8));
-				emp_id.setHorizontalAlignment(Element.ALIGN_LEFT);
-				emp_id.setBorderColor(BaseColor.GRAY);
-				emp_id.setFixedHeight(15);
-				ptvalues.addCell(emp_id);
-	
 				PdfPCell pt_amount = new PdfPCell(new Paragraph(decimalformat.format(ProfessionalTaxDO.getAmount()), font8));
 				pt_amount.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				pt_amount.setBorderColor(BaseColor.GRAY);

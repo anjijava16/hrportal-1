@@ -224,7 +224,7 @@
 										<td class="bottomcell2 MOBWIDTH ">Conveyance&nbsp;Allowances</td>
 										<td class="bottomcell6 MOBWIDTH"><div id="mconvay" class="sal_details_table_div"></div></td>
 										<td class="bottomcell2 MOBWIDTH">TDS</td>
-										<td class="bottomcell3 MOBWIDTH"><div id="tds" class="sal_details_table_div" contenteditable="true" style="width: 100px; float: right; border: 1px solid #dcdcdc;border-radius: 2px;padding: 2px;"></div></td>
+										<td class="bottomcell3 MOBWIDTH"><div id="tds" class="sal_details_table_div"  style="width: 100px; float: right;padding: 2px;"></div></td>
 									</tr>
 									<tr>
 										<td class="bottomcell2 MOBWIDTH">Personal&nbsp;Allowances</td>
@@ -1334,7 +1334,7 @@
 							error: function (xhr, ajaxOptions, thrownError) {
 								$("#block_overlay").addClass("hidden");
 								$("#block_overlay").addClass("hidden");
-								$("#tds").prop("contenteditable", true).css("border","1px solid #dcdcdc");
+								
 								/* $("#mbonus").prop("contenteditable", true).css("border","1px solid #dcdcdc"); */
 								salarynotpaidcalculation(date);
 							}

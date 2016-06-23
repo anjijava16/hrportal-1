@@ -70,6 +70,7 @@
 						<thead>
 							<tr>
 								<th class="first">Employee&nbsp;Id</th>
+								<th class="">Employee&nbsp;Name</th>
 								<th class="">PF&nbsp;Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 								<th class="">PF&nbsp;Month</th>
 								<th class="">Operation</th>
@@ -78,6 +79,11 @@
 						<c:forEach items="${emppfList}" var="emppfList">
 							<tr>
 								<td id="name_${emppfList.id}">${emppfList.empid}</td>
+								 <c:forEach items="${employeeList}" var="employeeList">
+									<c:if test="${emppfList.empid == employeeList.id}">
+										<td id="employeename_${emppfList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+									</c:if> 
+								 </c:forEach>
 								<fmt:formatNumber type="number" var="decimalnumber"  minFractionDigits="2"  value="${emppfList.pfamount}" />
 								<td id="number_${emppfList.id}" class="alignright">${decimalnumber}</td>
 								<fmt:formatDate value="${emppfList.pfmonth}" var="formattedDate" type="date" pattern="MMM yyyy" />

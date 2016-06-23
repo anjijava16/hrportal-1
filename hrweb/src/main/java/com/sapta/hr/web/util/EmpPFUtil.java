@@ -7,7 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sapta.hr.domainobject.EmpPFDO;
+import com.sapta.hr.domainobject.EmployeeDO;
 import com.sapta.hr.exception.AppException;
+import com.sapta.hr.service.EmployeeService;
 import com.sapta.hr.util.CommonConstants;
 
 public class EmpPFUtil {
@@ -18,6 +20,14 @@ public class EmpPFUtil {
 		
 		result.put(String.valueOf(emppfDO.getId()));
 		result.put(String.valueOf(emppfDO.getEmpid()));
+		List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
+		if(employeeList.size() > 0){
+			for (EmployeeDO employeeDO : employeeList) {
+				if(employeeDO.getId().equals(emppfDO.getEmpid())){
+					result.put(String.valueOf(employeeDO.getFname() +" "+employeeDO.getLname()));
+				}
+			}
+		}
 		result.put(String.valueOf(emppfDO.getPfamount()));
 		result.put(CommonUtil.convertDateToStringWithdatetime(emppfDO.getPfmonth()));
 		return result;
