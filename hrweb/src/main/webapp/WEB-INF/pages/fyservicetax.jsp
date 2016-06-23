@@ -130,7 +130,7 @@
 			});
 			
 			function finalYearReportProcess(currentdate, nextYear){
-				/* $("#block_overlay").removeClass("hidden"); */
+			$("#block_overlay").removeClass("hidden");
 				var completeTotalAmount = 0;
 				var resourceURL = $("#contextpath").val()+"/fyreports/getservicetaxreport/"+currentdate+"/"+nextYear;
 				$.ajax({
