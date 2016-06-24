@@ -29,12 +29,12 @@
 						<tr>
 							<td align="right"><sup class="saptaColor">*</sup>Tax Month&nbsp;:</td>
 							<td><b style="float:left;margin-left: 11px;"><input name="add_tdm" id="add_tdm" type="text" class="datePcK" readonly="readonly" style="font-weight: bold;"/></b></td>
-							<td align="right"><sup class="saptaColor">*</sup>Amount&nbsp;:</td>
-							<td><input name="add_amount" id="add_amount" type="text" onkeypress="return validateNumericWithPrecision(event)"/></td>
+							<td align="right">Invoice No&nbsp;:</td>
+							<td><input type="text"  id="Invoice_no" name="Invoice_no"></input></td>
 						</tr>
 						<tr>
-							<!-- <td align="right"><sup class="saptaColor">*</sup>References&nbsp;:</td>
-							<td><textarea style="height: 100px; resize:none;" id="add_references" name="add_references"></textarea></td> -->
+						    <td align="right"><sup class="saptaColor">*</sup>Amount&nbsp;:</td>
+							<td><input name="add_amount" id="add_amount" type="text" onkeypress="return validateNumericWithPrecision(event)"/></td>
 							<td align="right"><!-- <sup class="saptaColor">*</sup> -->Comments&nbsp;:</td>
 							<td><textarea style="height: 100px; resize:none;" id="add_comments" name="add_comments"></textarea></td>
 						</tr>
@@ -238,18 +238,19 @@
 					taxmonth = taxmonth.split('/').join('-'); 
 				}
 				var amount = $("#add_amount").val();
-			//	var refer = $("#add_references").val();
+				var Invoiceno = $("#Invoice_no").val();
 				var comments = $("#add_comments").val();
 				if(taxmonth == "" || taxmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
-		//		if(refer == "" || refer.length == 0) validation = false;
+				//if(refer == "" || refer.length == 0) validation = false;
 				/* if(comments == "" || comments.length == 0) validation = false; */
 				if(validation == false){
 					$("#block_overlay").addClass("hidden");
 					$("#tds_mandatory").html("All necessary information has not been provided or it may be invalid data");
 				}else{
 					if(comments == "" || comments == null || comments.length == 0) comments = null;
-					var resourceURL = $("#contextpath").val()+"/servicetax/add/"+taxmonth+"/"+amount+"/"+comments;
+					if(Invoiceno == "" || Invoiceno == null || Invoiceno.length == 0) Invoiceno = null;
+					var resourceURL = $("#contextpath").val()+"/servicetax/add/"+taxmonth+"/"+amount+"/"+comments+"/"+Invoiceno;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -258,7 +259,7 @@
 							// Clearing Project
 							$("#add_tdm").val("");
 							$("#add_amount").val("");
-						//	$("#add_references").val("");
+							$("#Invoice_no").val("");
 							$("#add_comments").val("");
 							var successflag = data.response.successflag;
 							var errors = data.response.errors;
@@ -384,19 +385,19 @@
 		        if(id != "No data available in table"){
 		        	$("#empid").prop( "disabled", true );
 					$("#taxmonth").prop( "disabled", true );
-				//	$("#refers").prop( "disabled", true );
+					$("#invoiceno").prop( "disabled", true );
 					$("#comments").prop( "disabled", true );
 					$("#amount").prop( "disabled", true );
 					
 					$("#empid").removeClass("inputBorder");
 					$("#taxmonth").removeClass("inputBorder");
-					//$("#refers").removeClass("inputBorder");
+					$("#invoiceno").removeClass("inputBorder");
 					$("#comments").removeClass("inputBorder");
 					$("#amount").removeClass("inputBorder");
 					
 					$("#empid").addClass("inputdisable");
 					$("#taxmonth").addClass("inputdisable");
-				//	$("#refers").addClass("inputdisable");
+					$("#invoiceno").addClass("inputdisable");
 					$("#comments").addClass("inputdisable");
 					$("#amount").addClass("inputdisable");
 					$("#date_tabledata").addClass("hidden");
@@ -591,22 +592,9 @@
 							
 							$.each(results, function (i, result) {
 								$("#id").val((result.id == undefined || result.id == null || result.id.length <= 0) ? "-" : result.id);
-								/* if(result.empid == 0 || result.empid == null || result.empid == "null"){
-									$("#empid").val("-");
-									$("#empid").css( ' color' ,'rgb(84, 84, 84)');
-									 $("#empid").css('text-decoration', 'none');
-								}else{
-									$("#empid").val(result.empid);
-									$("#empid").css( ' color' ,'#000000');
-								    $("#empid").css('text-decoration', 'underline');
-								} */
 								$("#taxmonth").val((result.taxmonth == undefined || result.taxmonth == null || result.taxmonth.length <= 0) ? "-" : result.taxmonth);
 								$("#optional_date").html((result.taxmonth == undefined || result.taxmonth == null || result.taxmonth.length <= 0) ? "-" : result.taxmonth);
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
-							//	$("#refers").val((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
-							//	$("#optional_refers").html((result.refer == undefined || result.refer == null || result.refer.length <= 0) ? "-" : result.refer);
-							//	$("#refers").addClass("hidden");
-							//	$("#optional_refers").removeClass("hidden");
 								$("#comments").val((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#optional_comments").html((result.comments == undefined || result.comments == null || result.comments.length <= 0) ? "-" : result.comments);
 								$("#comments").addClass("hidden");
@@ -642,7 +630,7 @@
 			$('#paytds').click(function() {
 				$("#add_tdm").val("");
 				$("#add_amount").val("");
-			//	$("#add_references").val("");
+				$("#Invoice_no").val("");
 				$("#add_comments").val("");
 				$("#tds_mandatory").html("");
 				$.fancybox.open('#servicetax');
@@ -702,19 +690,19 @@
 					servicetax(id)
 					
 					
-				//	$("#refers").prop( "disabled", true );
+					$("#invoiceno").prop( "disabled", true );
 					$("#comments").prop( "disabled", true );
 					$("#empid").prop( "disabled", true );
 					$("#date").prop( "disabled", true );
 					$("#amount").prop( "disabled", true );
 					
-				//	$("#refers").removeClass("inputBorder");
+					$("#invoiceno").removeClass("inputBorder");
 					$("#comments").removeClass("inputBorder");
 					$("#empid").removeClass("inputBorder");
 					$("#date").removeClass("inputBorder");
 					$("#amount").removeClass("inputBorder");
 					
-				//	$("#refers").addClass("inputdisable");
+					$("#invoiceno").addClass("inputdisable");
 					$("#comments").addClass("inputdisable");
 					$("#empid").addClass("inputdisable");
 					$("#date").addClass("inputdisable");
@@ -743,9 +731,13 @@
 					
 				//$("#optional_refers").addClass("hidden");
 		//		$("#refers").removeClass("hidden");
-		//		$("#refers").prop( 'disabled', false );
-		//		$("#refers").addClass("inputBorder");
-		//		$("#refers").removeClass("inputdisable");
+				if($("#invoiceno").html() == "-")$("#invoiceno").html("");
+				if($("#comments").val() == "-")$("#comments").val("");
+				
+				$("#invoiceno").prop( 'contenteditable', true );
+				$("#invoiceno").prop( 'disabled', false );
+				$("#invoiceno").addClass("inputBorder");
+				$("#invoiceno").removeClass("inputdisable");
 				
 				$("#optional_comments").addClass("hidden");
 				$("#comments").removeClass("hidden");
@@ -779,7 +771,7 @@
 					var taxmonth = date.split('/').join('-'); 
 				}
 				var amount = $("#amount").val();
-		//		var refrence = $("#refers").val();
+				var invoiceno = $("#invoiceno").html();
 				var comment = $("#comments").val();
 				if(taxmonth == "" || taxmonth.length == 0) validation = false;
 				if(amount == "" || amount.length == 0) validation = false;
@@ -790,9 +782,9 @@
 					$("#errorMsgContent").html("All necessary information has not been provided or it may be invalid data");
 					$.fancybox.open('#errorMsg');
 				}else{
-					/* if(empid == "" || empid.length == 0 || empid == "-") empid = 0; *//* +empid+"/" */
+					if(invoiceno == "" || invoiceno.length == 0 || invoiceno == "-") invoiceno  = null;
 					if(comment == null || comment == "" || comment.length == 0 || comment == "-") comment = null;
-				var resourceURL = $("#contextpath").val()+"/servicetax/update/"+id+"/"+taxmonth+"/"+amount+"/"+comment;
+				var resourceURL = $("#contextpath").val()+"/servicetax/update/"+id+"/"+taxmonth+"/"+amount+"/"+comment+"/"+invoiceno;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -806,19 +798,19 @@
 									} */
 								$("#empid").prop( "disabled", true );
 								$("#taxmonth").prop( "disabled", true );
-						//		$("#refers").prop( "disabled", true );
+								$("#invoiceno").prop( "disabled", true );
 								$("#comments").prop( "disabled", true );
 								$("#amount").prop( "disabled", true );
 								
 								$("#empid").removeClass("inputBorder");
 								$("#taxmonth").removeClass("inputBorder");
-							//	$("#refers").removeClass("inputBorder");
+								$("#invoiceno").removeClass("inputBorder");
 								$("#comments").removeClass("inputBorder");
 								$("#amount").removeClass("inputBorder");
 								
 								$("#empid").addClass("inputdisable");
 								$("#taxmonth").addClass("inputdisable");
-							//	$("#refers").addClass("inputdisable");
+								$("#invoiceno").addClass("inputdisable");
 								$("#comments").addClass("inputdisable");
 								$("#amount").addClass("inputdisable");
 								

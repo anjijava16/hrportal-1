@@ -29,6 +29,7 @@ public class CTCEmailServlet extends BaseServlet {
 		String employeeid = req.getParameter("employee");
 		String startdate = req.getParameter("startdate");
 		String employeectc = req.getParameter("employeectc");
+		String designation = req.getParameter("designation");
 		String value = "";
 		JSONObject jsonResponse = null;
 		try {
@@ -58,7 +59,7 @@ public class CTCEmailServlet extends BaseServlet {
 			document.close();*/
 			
 			//to send a mail
-			CTCEmailProxyUtil.sendEmail(baos, startdate, employeeid, employeectc, req, resp);
+			CTCEmailProxyUtil.sendEmail(baos, startdate, employeeid, employeectc, designation, req, resp);
 			
 			value = (String)req.getAttribute("resvalue");
 			if(value == "true"){

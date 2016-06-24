@@ -184,7 +184,6 @@ public class EmpTDSController {
 			
 			long tdsamount = 0;
 			List<EmpTDSDO> empTDSList = new EmpTDSService().retriveByEmpIdMonth(empid, startdate);
-			System.out.println("2 "+empTDSList.size());
 			if(empTDSList.size() > 0){
 				for (EmpTDSDO empTDSDO : empTDSList) {
 					tdsamount = tdsamount + empTDSDO.getTds();

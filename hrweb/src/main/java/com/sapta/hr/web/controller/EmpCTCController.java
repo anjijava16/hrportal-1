@@ -128,7 +128,6 @@ public class EmpCTCController {
 						status = new EmpCTCService().update(empctcDO);
 						respJSON = CommonWebUtil.buildSuccessResponse();
 					}
-					System.out.println("Status   "+ respJSON);
 					if(status && empdetail.get(0).getStatus() == 'a'){
 						EmpCTCDO ctcDO = new EmpCTCDO();
 						ctcDO.setEmpctc(empctc);
@@ -145,6 +144,9 @@ public class EmpCTCController {
 						if(bandchange.equalsIgnoreCase("y")){
 							ctcDO.setBandchange(bandchange);
 							ctcDO.setDesignation(designation);
+						}else if(empctcList.size() > 0){
+							Collections.reverse(empctcList);
+							ctcDO.setDesignation(empctcList.get(0).getDesignation());
 						}
 						UserDO userDO = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 						ctcDO.setUpdatedby(userDO.getUsername());

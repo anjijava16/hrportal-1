@@ -161,7 +161,7 @@
 			 
 			            // Total over all pages
 			            total = api
-			                .column( 2 )
+			                .column( 3 )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -169,7 +169,7 @@
 			 
 			            // Total over this page
 			            pageTotal = api
-			                .column( 2, { "filter": "applied"} )
+			                .column( 3, { "filter": "applied"} )
 			                .data()
 			                .reduce( function (a, b) {
 			                    return intVal(a) + intVal(b);
@@ -180,8 +180,8 @@
 			           
 			        },
 			        "aoColumns": [ 
-                      {sClass: "alignleft"}, 
                       {sClass: "center"}, 
+                      {sClass: "alignleft"}, 
                       {sClass: "center"}, 
                       {sClass: "alignright"}
                     ]
@@ -235,9 +235,9 @@
 			        "ajax": resourceURL,
 			        "aaSorting": [],
 			        "aoColumns": [ 
-                      {sClass: "alignleft"}, 
                       {sClass: "center"}, 
                       {sClass: "alignleft"}, 
+                      {sClass: "center"}, 
                       {sClass: "alignright"}
                     ]
 			    });

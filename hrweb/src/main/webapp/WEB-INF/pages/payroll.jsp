@@ -72,7 +72,6 @@
 								<th class="">Status</th>
  							</tr>
 						</thead>
-						
 						<tbody>
 						</tbody>					
 					</table>

@@ -86,7 +86,7 @@
 									 <td id="name_${empbonusList.id}">${empbonusList.empid}</td>
 									  <c:forEach items="${employeeList}" var="employeeList">
 										<c:if test="${empbonusList.empid == employeeList.id}">
-											<td id="employeename_${empbonusList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+											<td id="employeename_${empbonusList.id}" >${employeeList.fname} ${employeeList.lname}</td>
 										</c:if> 
 									 </c:forEach>
 									 <td id="bonus_${empbonusList.id}" style="text-align: right;">${empbonusList.bonusamount}</td> 
@@ -285,7 +285,7 @@
 					"aaSorting" : [],
 					"aoColumns": [ 
 				                  {sClass: "center"}, 
-				                  {sClass: "center"},
+				                  {sClass: "alignleft"},
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},

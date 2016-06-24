@@ -69,7 +69,7 @@
 									<td id="name_${emploplist.id}">${emploplist.empid}</td>
 									<c:forEach items="${empdetailList}" var="employeedo">
 										<c:if test="${employeedo.id == emploplist.empid}">
-											<td id="empname_${emploplist.id}" style="text-align: center;">${employeedo.fname} ${employeedo.lname}</td>
+											<td id="empname_${emploplist.id}" >${employeedo.fname} ${employeedo.lname}</td>
 										</c:if>
 									</c:forEach>
 									<fmt:formatDate value="${emploplist.startdate}" var="formattedDate" type="date" pattern="dd-MM-yyyy" />

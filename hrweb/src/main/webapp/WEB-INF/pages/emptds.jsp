@@ -88,7 +88,7 @@
 									 
 									 <c:forEach items="${employeeList}" var="employeeList">
 										<c:if test="${emptdsList.empid == employeeList.id}">
-											<td id="employeename_${emptdsList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+											<td id="employeename_${emptdsList.id}" >${employeeList.fname} ${employeeList.lname}</td>
 										</c:if> 
 									 </c:forEach>
 									 
@@ -413,7 +413,7 @@
 					"aaSorting" : [],
 					"aoColumns": [ 
 				                  {sClass: "center"}, 
-				                  {sClass: "center"},
+				                  {sClass: "alignleft"},
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},

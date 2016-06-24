@@ -92,19 +92,19 @@ static Logger logger = Logger.getLogger(TDSController.class.getName());
 		return respJSON != null ? respJSON.toString() : "";
 	}
 	
-	@RequestMapping(value = "/add/{tdsmonth}/{amount}/{comments}", method = RequestMethod.GET)
-	public @ResponseBody String add(@PathVariable String tdsmonth, @PathVariable double amount, @PathVariable String comments, 
+	@RequestMapping(value = "/add/{tdsmonth}/{amount}/{comments}/{Invoiceno}", method = RequestMethod.GET)
+	public @ResponseBody String add(@PathVariable String tdsmonth, @PathVariable double amount, @PathVariable String comments, @PathVariable String Invoiceno, 
 			Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				ServiceTaxDO tdsdo = new ServiceTaxDO();
 				tdsdo.setTaxmonth(CommonUtil.convertStringToDate(tdsmonth));
 				tdsdo.setAmount(amount);
-				/*tdsdo.setRefer(refer);*/
-				/*tdsdo.setComments(comments);*/
-				if (!comments.equalsIgnoreCase("null")){
+				if (!comments.equalsIgnoreCase("null"))
 					tdsdo.setComments(comments);
-				}
+				if (!Invoiceno.equalsIgnoreCase("null"))
+					tdsdo.setInvoiceno(Invoiceno);
+				
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				tdsdo.setUpdatedby(user.getUsername());
 				tdsdo.setUpdatedon(new Date());
@@ -183,34 +183,33 @@ static Logger logger = Logger.getLogger(TDSController.class.getName());
 		return pagename;
 	}
 	
-	@RequestMapping(value = "/update/{id}/{tdsmonth}/{amount}/{comment}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update/{id}/{tdsmonth}/{amount}/{comment}/{Invoiceno}", method = RequestMethod.GET)
 	public @ResponseBody String update(@PathVariable long id, @PathVariable String tdsmonth,  @PathVariable Double amount, 
-		@PathVariable String comment, Model model, HttpServletRequest request) {
+		@PathVariable String comment,@PathVariable String Invoiceno, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				if(id > 0){
 					List<ServiceTaxDO> taxList = new ServiceTaxService().retriveTdsById(id);
 					if(taxList != null && taxList.size() > 0){
-						ServiceTaxDO tdsdatalist = taxList.get(0);
-						if(tdsdatalist != null){
-							
-							/*if(empid != 0)tdsdatalist.setEmpid((empid));*/
+						ServiceTaxDO servicetaxDO = taxList.get(0);
+						if(servicetaxDO != null){
 							if(!tdsmonth.equalsIgnoreCase("null"))
-								tdsdatalist.setTaxmonth(CommonUtil.convertStringToDate(tdsmonth));	
+								servicetaxDO.setTaxmonth(CommonUtil.convertStringToDate(tdsmonth));	
 							if(amount !=null)
-								tdsdatalist.setAmount(amount);
-							/*if (!refrence.equalsIgnoreCase("null"))
-								tdsdatalist.setRefer(refrence);*/
-							if (!comment.equalsIgnoreCase("null")){
-								tdsdatalist.setComments(comment);
-							}else{
-								tdsdatalist.setComments(null);
-							}
+								servicetaxDO.setAmount(amount);
 							
-							tdsdatalist.setUpdatedby(user.getUsername());
-							tdsdatalist.setUpdatedon(new Date());
-							new ServiceTaxService().update(tdsdatalist);
+							if (!Invoiceno.equalsIgnoreCase("null"))
+								servicetaxDO.setInvoiceno(Invoiceno);
+							if (!comment.equalsIgnoreCase("null"))
+								servicetaxDO.setComments(comment);
+							else
+								servicetaxDO.setComments(null);
+							
+							
+							servicetaxDO.setUpdatedby(user.getUsername());
+							servicetaxDO.setUpdatedon(new Date());
+							new ServiceTaxService().update(servicetaxDO);
 							
 							
 						}

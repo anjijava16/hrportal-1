@@ -37,9 +37,8 @@ public class EmpPFController {
 			if (WebManager.authenticateSession(request)) {
 				List<EmpPFDO> emppfList = new EmpPFService().retrive();
 				List<EmployeeDO> employeeList = new EmployeeService().retriveEmployee();
-				if(employeeList != null && employeeList.size() > 0) {
+				if(employeeList != null && employeeList.size() > 0)
 					model.addAttribute(CommonConstants.EMPLOYEE_LIST, employeeList);
-				}
 				if (emppfList != null && emppfList.size() > 0) {
 					Collections.reverse(emppfList);
 					model.addAttribute(CommonConstants.EMP_PF_LIST, emppfList);

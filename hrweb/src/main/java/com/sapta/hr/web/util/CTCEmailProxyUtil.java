@@ -40,7 +40,7 @@ import freemarker.template.Configuration;
  *
  */
 public class CTCEmailProxyUtil {
-	public static void sendEmail(ByteArrayOutputStream baos, String startdate, String employeeid, String employeectc, final HttpServletRequest request, HttpServletResponse res) throws IOException, NumberFormatException, AppException, ServletException {
+	public static void sendEmail(ByteArrayOutputStream baos, String startdate, String employeeid, String employeectc, String designation, final HttpServletRequest request, HttpServletResponse res) throws IOException, NumberFormatException, AppException, ServletException {
 		
 		List<EmployeeDO> employeeList = null;
 		
@@ -99,6 +99,7 @@ public class CTCEmailProxyUtil {
 	        rootMap.put("name", employeeList.get(0).getFname() +" "+employeeList.get(0).getLname());
 	        rootMap.put("from", startdate);
 	        rootMap.put("ctc", employeectc);
+	        rootMap.put("designation", designation);
 	        Writer out = new StringWriter();
 	        template.process(rootMap, out);
 

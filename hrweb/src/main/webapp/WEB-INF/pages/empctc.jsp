@@ -331,15 +331,15 @@
 							$("#editemployeectc").val("${empctclist.empctc}");
 							$("#editstartdate").val("${formattedDate}");
 							$("#ctcid").val("${empctclist.id}");
-							if("${empctclist.bandchange}"=="y"){
+							/* if("${empctclist.bandchange}"=="y"){
 								$("input[id='editbandchange']").attr("checked","checked");
 								//$("#editdesignation").removeAttr("disabled");
 								$("input[id='editdesignation']").removeAttr("disabled").val("${empctclist.designation}");								
-							}else {
+							}else { */
 								$("input[id='editbandchange']").removeAttr("checked","checked");
 								$("input[id='editdesignation']").attr("disabled","disabled");
 								$("input[id='editdesignation']").val("");
-							}
+							/* } */
 							var formatedate = "";
 							if("${empctclist.enddate}" != ""){
 								<fmt:formatDate value="${empctclist.enddate}" var="formattedEndDate" type="date" pattern="dd-MM-yyyy" />
@@ -547,7 +547,7 @@
 							var empctc = numberWithCommas(employeectc);
 							if(successflag == "true"){
 								$.fancybox.close('#editdetail');
-								var base = $("#contextpath").val()+"/sendctc?employee="+empid+"&startdate="+editedstartdate+"&employeectc="+empctc;
+								var base = $("#contextpath").val()+"/sendctc?employee="+empid+"&startdate="+editedstartdate+"&employeectc="+empctc+"&designation="+designation
 								$("body").css("cursor", "progress");
 								$.ajax({
 									url : base,

@@ -81,7 +81,7 @@
 								<td id="name_${emppfList.id}">${emppfList.empid}</td>
 								 <c:forEach items="${employeeList}" var="employeeList">
 									<c:if test="${emppfList.empid == employeeList.id}">
-										<td id="employeename_${emppfList.id}" style="text-align: center;">${employeeList.fname} ${employeeList.lname}</td>
+										<td id="employeename_${emppfList.id}" >${employeeList.fname} ${employeeList.lname}</td>
 									</c:if> 
 								 </c:forEach>
 								<fmt:formatNumber type="number" var="decimalnumber"  minFractionDigits="2"  value="${emppfList.pfamount}" />
