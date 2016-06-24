@@ -228,12 +228,11 @@
 		 
 		            // Total over this page
 		            pageTotal = api
-		                .column( 1, { "filter": "applied"} )
+		                .column( 2, { "filter": "applied"} )
 		                .data()
 		                .reduce( function (a, b) {
 		                    return intVal(a) + intVal(b);
 		                }, 0 );
-		            
 		             $("#currenttotalamttd").val(numberWithCommas(pageTotal.toFixed(2)));   
 		        }
 		    });

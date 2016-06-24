@@ -164,7 +164,7 @@ public class ServiceTaxServlet extends BaseServlet {
 				
 				
 				PdfPCell id_value = new PdfPCell(new Paragraph(servicetaxDO.getId().toString(), font8));
-				id_value.setHorizontalAlignment(Element.ALIGN_LEFT);
+				id_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				id_value.setBorderColor(BaseColor.GRAY);
 				id_value.setFixedHeight(15);
 				tdsvalues.addCell(id_value);
@@ -187,7 +187,7 @@ public class ServiceTaxServlet extends BaseServlet {
 				tdsvalues.addCell(tds_amount);
 					
 				PdfPCell Comment = new PdfPCell(new Paragraph(servicetaxDO.getComments(), font8));
-				Comment.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				Comment.setHorizontalAlignment(Element.ALIGN_LEFT);
 				Comment.setBorderColor(BaseColor.GRAY);
 				Comment.setPaddingRight(5);
 				tdsvalues.addCell(Comment);

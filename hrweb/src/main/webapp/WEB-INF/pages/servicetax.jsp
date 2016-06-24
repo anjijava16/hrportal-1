@@ -58,7 +58,7 @@
 					<img src="<%=request.getContextPath()%>/resources/images/add.png"
 						alt="Add More" title="Pay Service Tax" />
 				</div>
-				<div id="paytdstextid" class="addbutntext"><b class="saptaColor">Add</b> ServiceTax </div>
+				<div id="paytdstextid" class="addbutntext"><b class="saptaColor">Add</b> Service Tax </div>
 				
 				<div id = "optiondiv" style="width: 100%;">
 					<table  align ="center" class="optionTable">
