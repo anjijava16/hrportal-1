@@ -101,7 +101,7 @@ public final class ProfessionalTaxUtil {
 			}
 		}
 		result.put(CommonUtil.convertDateToStringWithdatetime(ptList.getPtmonth()));
-		result.put(ptList.getAmount());
+		result.put(CommonUtil.convertfloatValueWithTwoDecimalPoints(ptList.getAmount()));
 		return result;
 	}
 }

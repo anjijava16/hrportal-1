@@ -51,6 +51,8 @@
 						<thead>
 							<tr>
 								<th class="first">Invoice&nbsp;No</th>
+								<th class="first">Customer&nbsp;Name</th>
+								<th class="first">Due&nbsp;Date</th>
 								<th class="">Status</th>
 								<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 							</tr>	
@@ -409,20 +411,20 @@
 		            };
 		            // Total over all pages
 		            total = api
-		                .column( 2 )
+		                .column( 4 )
 		                .data()
 		                .reduce( function (a, b) {
 		                    return intVal(a) + intVal(b);
 		                },0 );
 		            // Total over this page
 		            pageTotal = api
-		                .column( 2, { "filter" : "applied"} )
+		                .column( 4, { "filter" : "applied"} )
 		                .data()
 		                .reduce( function (a, b) {
 		                    return intVal(a) + intVal(b);
 		                }, 0 );
 		            // Update footer
-		            $( api.column( 2).footer() ).html(
+		            $( api.column( 4).footer() ).html(
 		            	 '$'+pageTotal +' ( $'+ total +' total)' 
 		            		
 		            );
@@ -431,6 +433,8 @@
 		        }, 
 		        "aoColumns": [ 
                    {sClass: "alignleft"}, 
+                   {sClass: "alignleft"},
+                   {sClass: "center"},
                    {sClass: "alignleft"},
                    {sClass: "alignright"}
                  ]
@@ -806,26 +810,28 @@
 				            };
 				            // Total over all pages
 				            total = api
-				                .column( 2 )
+				                .column( 4 )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                },0 );
 				            // Total over this page
 				            pageTotal = api
-				                .column( 2, { "filter" : "applied"} )
+				                .column(4, { "filter" : "applied"} )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                }, 0 );
 				            // Update footer
-				            $( api.column(2).footer() ).html(
+				            $( api.column(4).footer() ).html(
 				            	 '$'+pageTotal +' ( $'+ total +' total)' 
 				            );
 				            $("#currenttotalamttd").html(numberWithCommas(parseFloat(pageTotal).toFixed(2))); 
 				        },
 				        "aoColumns": [ 
 	                      {sClass: "alignleft"}, 
+	                      {sClass: "alignleft"},
+	                      {sClass: "center"},
 	                      {sClass: "alignleft"},
 	                      {sClass: "alignright"}
 	                    ]
@@ -1897,26 +1903,28 @@
 				            };
 				            // Total over all pages
 				            total = api
-				                .column( 2 )
+				                .column( 4 )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                },0 );
 				            // Total over this page
 				            pageTotal = api
-				                .column( 2, { "filter" : "applied"} )
+				                .column( 4, { "filter" : "applied"} )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                }, 0 );
 				            // Update footer
-				            $( api.column(2).footer() ).html(
+				            $( api.column(4).footer() ).html(
 				            	 '$'+pageTotal +' ( $'+ total +' total)' 
 				            );
 				            $("#currenttotalamttd").html(numberWithCommas(parseFloat(pageTotal).toFixed(2))); 
 				        }, 
 				        "aoColumns": [ 
 	                      {sClass: "alignleft"}, 
+	                      {sClass: "alignleft"},
+	                      {sClass: "center"},
 	                      {sClass: "alignleft"},
 	                      {sClass: "alignright"}
 	                    ]

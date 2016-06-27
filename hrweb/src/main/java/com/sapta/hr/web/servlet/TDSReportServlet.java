@@ -113,11 +113,11 @@ public class TDSReportServlet extends BaseServlet {
 			
 			document.add(totalamount);
 		
-			tdsheading = new PdfPTable(5);
+			tdsheading = new PdfPTable(4);
 			tdsheading.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tdsheading.setWidthPercentage(100);
 			tdsheading.setSpacingBefore(30f);
-			tdsheading.setWidths(new float[]{15f,15f,15f,30f,15f});
+			tdsheading.setWidths(new float[]{15f,15f,30f,15f});
 			
 			PdfPCell tdsMonth = new PdfPCell(new Paragraph("TDS month", fontbold8));
 			tdsMonth.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -132,11 +132,11 @@ public class TDSReportServlet extends BaseServlet {
 			tdsId.setFixedHeight(15);
 			tdsheading.addCell(tdsId);
 			
-			PdfPCell tds_empId = new PdfPCell(new Paragraph("Employee ID", fontbold8));
+			/*PdfPCell tds_empId = new PdfPCell(new Paragraph("Employee ID", fontbold8));
 			tds_empId.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tds_empId.setBackgroundColor(new BaseColor(211,211,211));
 			tds_empId.setBorderColor(BaseColor.GRAY);
-			tdsheading.addCell(tds_empId);
+			tdsheading.addCell(tds_empId);*/
 			
 			PdfPCell tds_ref = new PdfPCell(new Paragraph("References", fontbold8));
 			tds_ref.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -154,12 +154,12 @@ public class TDSReportServlet extends BaseServlet {
 			
 			for (TDSDO TDSDO : tdslist) {
 		
-				tdsvalues = new PdfPTable(5);
+				tdsvalues = new PdfPTable(4);
 				tdsvalues.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tdsvalues.setWidthPercentage(100);
-				tdsvalues.setWidths(new float[]{15f,15f,15f,30f,15f});
+				tdsvalues.setWidths(new float[]{15f,15f,30f,15f});
 				
-				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(TDSDO.getTdsmonth()), font8)); 
+				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithdatetime(TDSDO.getTdsmonth()), font8)); 
 				tdsMonth_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				tdsMonth_value.setBorderColor(BaseColor.GRAY);
 				tdsMonth_value.setPaddingRight(5);
@@ -176,12 +176,12 @@ public class TDSReportServlet extends BaseServlet {
 					empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 					empId_value.setBorderColor(BaseColor.GRAY);
 					tdsvalues.addCell(empId_value);
-				}else{*/
+				}else{
 					PdfPCell empId_value = new PdfPCell(new Paragraph("", font8));
 					empId_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 					empId_value.setBorderColor(BaseColor.GRAY);
 					tdsvalues.addCell(empId_value);
-				/*}*/
+				}*/
 				
 				PdfPCell reference = new PdfPCell(new Paragraph(TDSDO.getRefer(), font8));
 				reference.setHorizontalAlignment(Element.ALIGN_LEFT);

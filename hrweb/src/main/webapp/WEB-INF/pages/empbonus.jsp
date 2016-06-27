@@ -284,13 +284,13 @@
 					"ajax": url,
 					"aaSorting" : [],
 					"aoColumns": [ 
-				                  {sClass: "center"}, 
+				                  {sClass: "alignleft"}, 
 				                  {sClass: "alignleft"},
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},
 				                  {sClass: "center"},
-				                  {sClass: "center"},
-				                  {sClass: "center"}
+				                  {sClass: "alignleft"},
+				                  {sClass: "alignleft"}
 				                ]
 				}); 
 				

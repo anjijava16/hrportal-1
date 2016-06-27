@@ -1,5 +1,6 @@
 package com.sapta.hr.web.controller;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -16,13 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sapta.hr.domainobject.EmpPFDO;
 import com.sapta.hr.domainobject.EmployeeDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.domainobject.UserDO;
 import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.EmpPFService;
 import com.sapta.hr.service.EmployeeService;
+import com.sapta.hr.service.TDSService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
+import com.sapta.hr.web.util.EmpPFUtil;
+import com.sapta.hr.web.util.TDSUtill;
 import com.sapta.hr.web.util.WebManager;
 
 
@@ -150,6 +155,45 @@ public class EmpPFController {
 				}
 			}
 		}catch (Exception e) { e.printStackTrace();}
+		
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	@RequestMapping(value = "/getbypfmonth/{tdsmonth}", method = RequestMethod.GET)
+	public @ResponseBody String getByIdForGrid(@PathVariable String tdsmonth, Model model) {
+		JSONObject respJSON = null;
+		try {
+			String SDate = tdsmonth;		   
+			Date StartDate = CommonUtil.convertStringToDate(SDate);
+		    Calendar c = Calendar.getInstance();      
+		    c.setTime(StartDate);
+		    c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+		    Date edate= c.getTime();
+			List<EmpPFDO> pfList = new EmpPFService().FindAllEvents(StartDate ,edate );
+			if (pfList != null) {
+				Collections.reverse(pfList);
+				respJSON = EmpPFUtil.gettdsDataTableList(pfList);
+			}
+		} catch (Exception e) { }
+		
+		return respJSON != null ? respJSON.toString() : "";
+	}
+	
+	@RequestMapping(value = "/getbypfmonthajax/{tdsmonth}", method = RequestMethod.GET)
+	public @ResponseBody String getByIdForajax(@PathVariable String tdsmonth, Model model) {
+		JSONObject respJSON = null;
+		try {
+			String SDate = tdsmonth;		   
+			Date StartDate = CommonUtil.convertStringToDate(SDate);
+		    Calendar c = Calendar.getInstance();      
+		    c.setTime(StartDate);
+		    c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+		    Date edate= c.getTime();
+			List<EmpPFDO> pfList = new EmpPFService().FindAllEvents(StartDate ,edate );
+			if (pfList != null) {
+				respJSON = EmpPFUtil.getPFList(pfList);
+			}
+			System.out.println(respJSON.toString());
+		} catch (Exception e) { }
 		
 		return respJSON != null ? respJSON.toString() : "";
 	}

@@ -84,7 +84,7 @@
 							<c:forEach items="${empTDSList}" var="emptdsList">
 								<tr>
 									
-									 <td id="name_${emptdsList.id}" style="text-align:center;">${emptdsList.empid}</td>
+									 <td id="name_${emptdsList.id}" >${emptdsList.empid}</td>
 									 
 									 <c:forEach items="${employeeList}" var="employeeList">
 										<c:if test="${emptdsList.empid == employeeList.id}">
@@ -101,11 +101,11 @@
 									<c:if test="${emptdsList.paidon == null}">
 										<td id="enddate_${emptdsList.id}" style="text-align: center;"></td>
 									</c:if>
-									<c:if test="${emptdsList.paidon != null}">
-										<td id="enddate_${emptdsList.id}" style="text-align: center;">${formattedEndDate}</td>
+									<c:if test="${emptdsList.paidon != null}" >
+										<td id="enddate_${emptdsList.id}" style="text-align:center;">${formattedEndDate}</td>
 									</c:if> 
 									
-									<td id="comments_${emptdsList.id}" style="text-align:center;">${emptdsList.comments}</td>
+									<td id="comments_${emptdsList.id}" >${emptdsList.comments}</td>
 									<td style="text-align:center"><a href='#' id="edit_${emptdsList.id}">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' id="delete_${emptdsList.id}">Delete</a></td>
 								</tr>
 							</c:forEach>
@@ -412,7 +412,7 @@
 					"ajax": url,
 					"aaSorting" : [],
 					"aoColumns": [ 
-				                  {sClass: "center"}, 
+				                  {sClass: "alignleft"}, 
 				                  {sClass: "alignleft"},
 				                  {sClass: "alignright"},
 				                  {sClass: "center"},

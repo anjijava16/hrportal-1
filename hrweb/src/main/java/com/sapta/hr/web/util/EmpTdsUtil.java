@@ -42,7 +42,7 @@ public class EmpTdsUtil {
 		result.put(CommonConstants.EMP_ID, String.valueOf(tdsdo.getEmpid()));
 		result.put(CommonConstants.TDMONTH, CommonUtil.convertDateToStringWithdatetime(tdsdo.getTdsmonth()));
 		result.put(CommonConstants.TDS_DATE_MONTH, CommonUtil.convertDateToStringWithOutTime(tdsdo.getTdsmonth()));
-		result.put(CommonConstants.AMOUNT, tdsdo.getTds());
+		result.put(CommonConstants.AMOUNT, CommonUtil.convertnumberValueWithcomma(tdsdo.getTds()));
 		result.put(CommonConstants.COMMENTS, tdsdo.getComments());
 		return result;
 	}
@@ -80,12 +80,12 @@ public class EmpTdsUtil {
 		if(tdsdo.getPaidon() != null){
 			result.put(String.valueOf(tdsdo.getPaidon()));
 		}else{
-			result.put(String.valueOf("-"));
+			result.put(String.valueOf(""));
 		}
 		if(tdsdo.getComments() != null){
 			result.put(String.valueOf(tdsdo.getComments()));
 		}else{
-			result.put(String.valueOf("-"));
+			result.put(String.valueOf(""));
 		}
 		result.put("");
 		/*result.put(String.valueOf(tdsdo.getId()));*/

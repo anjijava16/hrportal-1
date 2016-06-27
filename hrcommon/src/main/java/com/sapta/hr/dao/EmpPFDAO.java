@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.sapta.hr.domainobject.EmpPFDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.AppException;
 import com.sapta.hr.exception.CustomPropertyManager;
 import com.sapta.hr.exception.ExceptionConstant;
@@ -77,7 +78,28 @@ static Logger logger = Logger.getLogger(EmpCTCDAO.class.getName());
 		}
 		return status;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<EmpPFDO> FindAllEvents(Date stdate , Date eddate) throws AppException {
+		List<EmpPFDO> pfList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null && stdate != null) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(EmpPFDO.FIND_BY_ST_ET_DATE);
+				q.setParameter(CommonConstants.PT_MONTH_STDATE, stdate);
+				q.setParameter(CommonConstants.PT_MONTH_EDDATE, eddate);
+				pfList = (List<EmpPFDO>) q.getResultList();
+			
+			}
+		} catch (Exception eException) {
+			logger.info(eException.getMessage());
+			throw new AppException(ExceptionConstant._91010, CustomPropertyManager.getProperty(ExceptionConstant._91010), eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return pfList;
+	}
 
 	@SuppressWarnings("unchecked")
 	public boolean delete(long id) throws AppException {

@@ -71,8 +71,15 @@ public class EmpPFUtil {
 
 	private static JSONObject getProjectDetailObject(EmpPFDO pfdo)throws JSONException, AppException {
 		JSONObject result = new JSONObject();
-		result.put(CommonConstants.ID, String.valueOf(pfdo.getId()));
 		result.put(CommonConstants.EMPLOYEE_ID, pfdo.getEmpid());
+		List<EmployeeDO>  employeeList= new EmployeeService().retriveEmployee();
+		if(employeeList.size() > 0){
+			for (EmployeeDO employeeDO : employeeList) {
+				if( employeeDO.getId().equals(pfdo.getEmpid())){
+					result.put(CommonConstants.NAME,String.valueOf(employeeDO.getFname() +" "+employeeDO.getLname()));
+				}
+			}
+		}    
 		result.put(CommonConstants.EMPLOYEE_PFAMOUNT, String.valueOf(pfdo.getPfamount()));
 		result.put(CommonConstants.EMPLOYEE_PFMONTH, CommonUtil.convertDateToStringWithOutTime(pfdo.getPfmonth()));
 		return result;

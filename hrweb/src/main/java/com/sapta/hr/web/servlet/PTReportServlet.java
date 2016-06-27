@@ -159,7 +159,7 @@ public class PTReportServlet extends BaseServlet {
 				ptvalues.setWidthPercentage(100);
 				
 				PdfPCell emp_id = new PdfPCell(new Paragraph(ProfessionalTaxDO.getEmpid().toString(), font8));
-				emp_id.setHorizontalAlignment(Element.ALIGN_CENTER);
+				emp_id.setHorizontalAlignment(Element.ALIGN_LEFT);
 				emp_id.setBorderColor(BaseColor.GRAY);
 				emp_id.setFixedHeight(15);
 				ptvalues.addCell(emp_id);
@@ -175,7 +175,7 @@ public class PTReportServlet extends BaseServlet {
 				}
 				
 
-				PdfPCell pt_month = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(ProfessionalTaxDO.getPtmonth()), font8));
+				PdfPCell pt_month = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithdatetime(ProfessionalTaxDO.getPtmonth()), font8));
 				pt_month.setHorizontalAlignment(Element.ALIGN_CENTER);
 				pt_month.setBorderColor(BaseColor.GRAY);
 				ptvalues.addCell(pt_month);

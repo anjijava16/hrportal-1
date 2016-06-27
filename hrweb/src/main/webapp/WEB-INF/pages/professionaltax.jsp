@@ -24,17 +24,34 @@
 						<div id = "mandatorycheck" class = "hidden" style="text-align: center;"><br/><b class="saptaColor">*</b>mandatory fields<br/></div>
 					</div>
 				</div>
-				<div  align="center" style="width: 100%;" class="amount_table">
-					<table id="pttable"  align ="center" class="optionTable" >
-						<tr >
-							<td  align="right" id="totalcounttd1"   style="margin-left:auto;margin-top:0px;">PT&nbsp;Amount&nbsp;Paid&nbsp;:</td>
-						    <!-- <td class="WebRupee BLD rupyaINR" class="rupyaINR WebRupee" >&#x20B9;</td>   -->
-							<%-- <td id="currenttotalamttd" class="PADDLFT1PX BLD"  >${totalamount}</td> --%>
-							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px; padding: 0px;" /></td>
-							<!-- <td id="choosentotalamttd"  class="PADDLFT1PX hidden BLD"></td> -->
+				<div id = "optiondiv" style="width: 100%;">
+					<table  align ="center" class="optionTable">
+						<tr>
+							<td align="right"  >Choose&nbsp;Month&nbsp;:</td>
+							<td align="left" colspan = "2"  class="classMob"   style="padding-left:10px;">
+								<b style="float:left"><input name="tdsid" id="tdsid" type="text" class="datePcKview dateInput" readonly="readonly"/></b>
+								<input type="button" value="Find" style="float:left;margin-top: 4px;" id="findByMonth"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="currenttotalamtrupyatd1 mobMART0PX"  align="right" id="totalcounttd1">Total&nbsp;Amount&nbsp;Paid&nbsp;:</td>
+							<!-- <td class="currenttotalamtrupyatd " style="margin-left:auto;" class="rupyaINR WebRupee">&#x20B9;</td>
+							<td id="currenttotalamttd" class="fyBillsPaidTd PADDLFT1PX BLD" style="margin-left:auto;"></td> -->
+							<td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold; width: 109px;" /></td>
 						</tr>
 					</table>
-				</div>	
+				</div>
+				<!-- <div  align="center" style="width: 100%;" class="amount_table">
+					<table id="pttable"  align ="center" class="optionTable" >
+						<tr > -->
+							<!-- <td  align="right" id="totalcounttd1"   style="margin-left:auto;margin-top:0px;">PT&nbsp;Amount&nbsp;Paid&nbsp;:</td> -->
+						    <!-- <td class="WebRupee BLD rupyaINR" class="rupyaINR WebRupee" >&#x20B9;</td>   -->
+							<%-- <td id="currenttotalamttd" class="PADDLFT1PX BLD"  >${totalamount}</td> --%>
+							<!-- <td align="left"  class="fyBillsPaidTd PADDLFT1PX BLD" ><span style="margin-left: 10px;font-weight:bold;" class="rupyaINR WebRupee">&#x20B9;</span><input id="currenttotalamttd" disabled style="border: 0;background-color: white;font-weight:bold;width: 109px; padding: 0px;" /></td> -->
+							<!-- <td id="choosentotalamttd"  class="PADDLFT1PX hidden BLD"></td> -->
+						<!-- </tr>
+					</table>
+				</div>	 -->
 				<div class="responsive">
 					<table class="data display" id="ptaxtable" cellspacing="0" width="100%">
 						<thead>
@@ -71,6 +88,27 @@
 			$("#menu_payroll").addClass("active");
 			$("body").css("cursor", "default");
 			$("#block_overlay").removeClass("hidden");
+			
+			$(function() {
+	            $("#tdsid").datepicker({
+	               changeMonth:true,
+	               changeYear:true,
+	               dateFormat :'MM yy',
+	               showButtonPanel:true,
+	               constrainInput: false,
+	               showOn: "button",
+				   buttonImage:  $("#contextpath").val()+"/resources/images/calendar.gif",
+				   buttonImageOnly: true,
+	               monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	               duration: '',
+	               onClose: function(dateText, inst){
+	            	   var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            	   var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            	   $(this).datepicker('setDate', new Date(year, month, 1));
+	               },
+	            gotoCurrent: true
+	            })
+			});
 			var fymonthYear = "${fymonth}";
 			if(fymonthYear != "" && fymonthYear != null){
 				$(function() {
@@ -176,11 +214,11 @@
 			                }, 0 );
 			 
 			         
-			             $("#currenttotalamttd").val(numberWithCommas(pageTotal));   
+			             $("#currenttotalamttd").val(numberWithCommas(parseFloat(pageTotal).toFixed(2)));   
 			           
 			        },
 			        "aoColumns": [ 
-                      {sClass: "center"}, 
+                      {sClass: "alignleft"}, 
                       {sClass: "alignleft"}, 
                       {sClass: "center"}, 
                       {sClass: "alignright"}
@@ -202,7 +240,7 @@
 			});
 			 function findByMonth(){
 				 $("#block_overlay").removeClass("hidden");
-				var month = $("#month_tax").datepicker().val();
+				var month = $("#tdsid").datepicker().val();
 				month =  monthConversion(month);
 				month = month.split('/').join('-');
 				var resourceURL = $("#contextpath").val()+"/professionaltax/gettotal/"+month; 
@@ -225,17 +263,17 @@
 						}
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	$("#block_overlay").addClass("hidden");
 			   		}
 			   });   
 				var table = $('#ptaxtable').DataTable();
 				table.destroy();
-				
 				var resourceURL = $("#contextpath").val()+"/professionaltax/getbymonth/"+month;
 				$('#ptaxtable').dataTable({
 			        "ajax": resourceURL,
 			        "aaSorting": [],
 			        "aoColumns": [ 
-                      {sClass: "center"}, 
+                      {sClass: "alignleft"}, 
                       {sClass: "alignleft"}, 
                       {sClass: "center"}, 
                       {sClass: "alignright"}

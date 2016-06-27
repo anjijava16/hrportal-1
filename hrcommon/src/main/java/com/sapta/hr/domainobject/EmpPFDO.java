@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name = "EmpPFDO.findAll", query = "SELECT a FROM EmpPFDO  a"),
 	@NamedQuery(name = "EmpPFDO.findbyId", query = "SELECT a FROM EmpPFDO  a where a.id =:id"),
 	@NamedQuery(name = "EmpPFDO.findbyEmpId", query = "SELECT a FROM EmpPFDO  a where a.empid =:empid"),
+	@NamedQuery(name = "EmpPFDO.findbysteddate", query = "SELECT e FROM EmpPFDO e WHERE e.pfmonth BETWEEN :stdate AND :eddate"),
 	@NamedQuery(name = "EmpPFDO.findbyempidpfdate", query = "SELECT e FROM EmpPFDO e WHERE e.empid =:empid AND e.pfmonth =:pfdate"),
 	@NamedQuery(name = "EmpPFDO.findbydate", query = "SELECT e FROM EmpPFDO e WHERE e.empid =:empid  AND e.pfmonth = :pfmonth"),
 })
@@ -37,6 +38,7 @@ public class EmpPFDO implements Serializable{
 	
 	public static final String FIND_BY_EMPID_DATE = "EmpPFDO.findbyempidpfdate";
 	
+	public static final String FIND_BY_ST_ET_DATE = "EmpPFDO.findbysteddate";
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY,  generator = "emppf")
 	private Long id;

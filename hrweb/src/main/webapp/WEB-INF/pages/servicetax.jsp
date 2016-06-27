@@ -370,11 +370,11 @@
 			             $("#currenttotalamttd").val(numberWithCommas(parseFloat(pageTotal).toFixed(2)));   
 			        },
 			        "aoColumns": [ 
-                      {sClass: "center"}, 
-                      {sClass: "center"}, 
+                      {sClass: "alignleft"}, 
+                      {sClass: "alignleft"}, 
                       {sClass: "center"},
                       {sClass: "alignright"},
-                      {sClass: "center"}
+                      {sClass: "alignleft"}
                     ]
 					
 		    });

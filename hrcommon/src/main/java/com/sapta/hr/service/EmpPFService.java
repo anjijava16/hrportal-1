@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.sapta.hr.dao.EmpPFDAO;
+import com.sapta.hr.dao.TDSDAO;
 import com.sapta.hr.domainobject.EmpPFDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.exception.AppException;
 
 public class EmpPFService {
@@ -40,5 +42,7 @@ public class EmpPFService {
 	public List<EmpPFDO> FindByEmpIdAndDate(Long empid,Date pfdate) throws AppException {
 		return new EmpPFDAO().FindByEmpIdAndDate(empid,pfdate);
 	}
-	
+	public List<EmpPFDO> FindAllEvents(Date stdate,Date eddate) throws AppException {
+		return new EmpPFDAO().FindAllEvents(stdate,eddate);
+	}
 }

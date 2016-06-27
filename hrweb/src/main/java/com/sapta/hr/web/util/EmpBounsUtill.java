@@ -79,12 +79,12 @@ public class EmpBounsUtill {
 		if(empbounsdo.getPaidon() != null){
 			result.put(String.valueOf(empbounsdo.getPaidon()));
 		}else{
-			result.put(String.valueOf("-"));
+			result.put(String.valueOf(""));
 		}
 		if(empbounsdo.getComments() != null){
 			result.put(String.valueOf(empbounsdo.getComments()));
 		}else{
-			result.put(String.valueOf("-"));
+			result.put(String.valueOf(""));
 		}
 		result.put(String.valueOf(""));
 		return result;

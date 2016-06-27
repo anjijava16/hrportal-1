@@ -6,8 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sapta.hr.domainobject.CustomerDO;
 import com.sapta.hr.domainobject.InvoiceDO;
 import com.sapta.hr.exception.AppException;
+import com.sapta.hr.service.CustomerService;
 import com.sapta.hr.util.CommonConstants;
 
 public final class InvoiceUtil {
@@ -130,6 +132,11 @@ public final class InvoiceUtil {
 			status = CommonConstants.PENDING;
 			receivedamount = "";
 		}
+		List<CustomerDO>  customerList = new CustomerService().retriveById(invdo.getCustomerid());
+		if(customerList.size() > 0)result.put(customerList.get(0).getName());
+		else result.put("");
+		
+		result.put(CommonUtil.convertDateToStringWithOutTime(invdo.getDuedate()));
 		result.put(status);
 		result.put(receivedamount);
 		

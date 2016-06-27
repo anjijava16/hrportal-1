@@ -185,7 +185,7 @@ public class EmpTdsReportServlet extends BaseServlet {
 					}
 				}
 
-				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithOutTime(TDSDO.getTdsmonth()), font8)); 
+				PdfPCell tdsMonth_value = new PdfPCell(new Paragraph(CommonUtil.convertDateToStringWithdatetime(TDSDO.getTdsmonth()), font8)); 
 				tdsMonth_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 				tdsMonth_value.setBorderColor(BaseColor.GRAY);
 				tdsMonth_value.setPaddingRight(5);
