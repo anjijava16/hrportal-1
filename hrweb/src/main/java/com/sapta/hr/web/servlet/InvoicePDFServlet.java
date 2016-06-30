@@ -642,7 +642,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				subtotaltbl.setWidthPercentage(100f);
 				subtotaltbl.setSpacingBefore(10f);
 				
-				PdfPCell subtotalcell = new PdfPCell(new Paragraph("Sub Total("+amounttype+")", fontbold8));
+				PdfPCell subtotalcell = new PdfPCell(new Paragraph("Sub Total ("+amounttype+")", fontbold8));
 				subtotalcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				subtotalcell.setBorder(0);
 				subtotaltbl.addCell(subtotalcell);
@@ -672,7 +672,7 @@ public class InvoicePDFServlet extends BaseServlet {
 				grandtotal.setWidthPercentage(100);
 				grandtotal.setSpacingBefore(10f);
 				
-				PdfPCell grandtotalcell = new PdfPCell(new Paragraph("Total", fontbold8));
+				PdfPCell grandtotalcell = new PdfPCell(new Paragraph("Total ("+amounttype+")", fontbold8));
 				grandtotalcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				grandtotalcell.setBorder(0);
 				grandtotal.addCell(grandtotalcell);

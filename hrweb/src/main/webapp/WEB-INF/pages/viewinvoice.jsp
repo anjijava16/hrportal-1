@@ -209,7 +209,7 @@
 					</div>
 					<div class="clearWidth hidden " id="service_tax" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGR5PX  div_Width_view">
-							<div class="leftElement BLDTEXT12PX" >Service Tax(<span id="serviceTaxPer"></span>%)</div>
+							<div class="leftElement BLDTEXT12PX" >Service Tax&nbsp;(<span id="serviceTaxPer"></span>%)</div>
 							<div id="servicetax" class="rightElement BLDTEXT12PX"></div>
 						</div>
 					</div>
