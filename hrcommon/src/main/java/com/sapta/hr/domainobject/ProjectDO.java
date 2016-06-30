@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 		@NamedQuery(name = "ProjectDO.findAll", query = "SELECT u FROM ProjectDO u"),
 		@NamedQuery(name = "ProjectDO.findbyId", query = "SELECT u FROM ProjectDO u where u.id =:id"),
-		@NamedQuery(name = "ProjectDO.customerId", query = "SELECT u FROM ProjectDO u where u.customerid =:customerid"),
+		@NamedQuery(name = "ProjectDO.customerId", query = "SELECT u FROM ProjectDO u where u.customerid =:customerid and u.status=:status"),
 		@NamedQuery(name = "ProjectDO.status", query = "SELECT u FROM ProjectDO u where u.status =:status")
 		
 		})

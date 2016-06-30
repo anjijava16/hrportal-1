@@ -701,7 +701,7 @@
 			    }   
 			 });
 			$('#custselect').on('change', function (e){
-				$("#block_overlay").removeClass("hidden")
+				$("#block_overlay").removeClass("hidden");
 				/* $("#mandatory").addClass("hidden");
 			 	$("#buttons").addClass("hidden"); */
 			 	/* $("#invoice").addClass("hidden"); */
@@ -806,6 +806,7 @@
 						});
 						$("#invoicedate").val("");
 						$("#duedate").val("");
+						$("#block_overlay").addClass("hidden")
 				 	}
 				});
 			
@@ -1425,9 +1426,9 @@
 				 		/* $("#sub_total").removeClass("hidden");
 					 	$("#service_tax").removeClass("hidden");
 					 	$("#totalamountunderline").removeClass("hidden"); */
-				 		$(".headamounttype").html("&#x20B9;");
-				 		$(".headamounttype").addClass("WebRupee");
-				 		$(".headamounttype").addClass("rupyaINR");
+				 		$(".headamounttype").html("INR");
+// 				 		$(".headamounttype").addClass("WebRupee");
+// 				 		$(".headamounttype").addClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "usd"){
 				 		/* $("#sub_total").removeClass("hidden");
@@ -1437,9 +1438,9 @@
 				 		$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
 					 	$("#totalamountdivision").html(totalamount.toFixed(2));
 					 	/* $("#totalamountunderline").addClass("hidden"); */
-				 		$(".headamounttype").html("&#36;");
-				 		$(".headamounttype").removeClass("WebRupee");
-				 		$(".headamounttype").removeClass("rupyaINR");
+				 		$(".headamounttype").html("USD");
+// 				 		$(".headamounttype").removeClass("WebRupee");
+// 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "eur"){
 				 		/* $("#sub_total").removeClass("hidden");
@@ -1449,9 +1450,9 @@
 					 	$("#servicetax").html(0.00);
 					 	$("#totalamountdivision").html(totalamount.toFixed(2));
 					 	//$("#totalamountunderline").addClass("hidden");
-				 		$(".headamounttype").html("&#8364;");
-				 		$(".headamounttype").removeClass("WebRupee");
-				 		$(".headamounttype").removeClass("rupyaINR");
+				 		$(".headamounttype").html("EUR");
+// 				 		$(".headamounttype").removeClass("WebRupee");
+// 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
 				 	if($("#amounttype").val() == "gbp"){
 				 		/* $("#sub_total").removeClass("hidden");
@@ -1461,9 +1462,9 @@
 					 	$("#servicetax").html(0.00);
 					 	$("#subtotalamountdivision").html(parseFloat(totalamount).toFixed(2));
 					 	$("#totalamountdivision").html(totalamount.toFixed(2));
-				 		$(".headamounttype").html("&#163;");
-				 		$(".headamounttype").removeClass("WebRupee");
-				 		$(".headamounttype").removeClass("rupyaINR");
+				 		$(".headamounttype").html("GBP");
+// 				 		$(".headamounttype").removeClass("WebRupee");
+// 				 		$(".headamounttype").removeClass("rupyaINR");
 				 	}
 				 	$("#buttons").removeClass("hidden");
 			 	}else{
@@ -1561,7 +1562,9 @@
 								$("#powo").val((result.powo == undefined || result.powo == null || result.powo.length <= 0) ? "-" : result.powo);
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
+								$("#service_tax").addClass("hidden");
 								if(result.amounttype == "inr"){
+									$("#service_tax").removeClass("hidden");
 									$("#optional_amounttype").html("INR");
 								}else if(result.amounttype == "usd"){
 									$("#optional_amounttype").html("USD");

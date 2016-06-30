@@ -88,6 +88,7 @@ public class ProjectDAO {
 				logger.info("Entity Manager is not null");
 				Query q = em.createNamedQuery(ProjectDO.FIND_BY_CUSTOMER_ID);
 				q.setParameter(CommonConstants.CUSTOMER_ID, customerid);
+				q.setParameter(CommonConstants.STATUS, 'a');
 				projectList = (List<ProjectDO>) q.getResultList();
 			}
 		} catch (Exception eException) {
