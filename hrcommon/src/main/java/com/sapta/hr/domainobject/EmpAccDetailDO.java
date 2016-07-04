@@ -40,7 +40,7 @@ public class EmpAccDetailDO implements Serializable {
 
 	private String bankname;
 	
-	private Long accountno;
+	private String accountno;
 
 	private String branch;
 
@@ -59,6 +59,8 @@ public class EmpAccDetailDO implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedon;
 	
+	
+
 	public EmpAccDetailDO() {
 	}
 
@@ -84,14 +86,6 @@ public class EmpAccDetailDO implements Serializable {
 
 	public void setBankname(String bankname) {
 		this.bankname = bankname;
-	}
-
-	public Long getAccountno() {
-		return accountno;
-	}
-
-	public void setAccountno(Long accountno) {
-		this.accountno = accountno;
 	}
 
 	public String getBranch() {
@@ -157,5 +151,12 @@ public class EmpAccDetailDO implements Serializable {
 	public void setUpdatedon(Date updatedon) {
 		this.updatedon = updatedon;
 	}
+	
+	public String getAccountno() {
+		return accountno;
+	}
 
+	public void setAccountno(String accountno) {
+		this.accountno = accountno;
+	}
 }

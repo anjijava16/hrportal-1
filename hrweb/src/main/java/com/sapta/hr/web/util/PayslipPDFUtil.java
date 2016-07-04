@@ -477,7 +477,7 @@ public class PayslipPDFUtil  extends PdfPageEventHelper {
 						leftcoloncell_7.setBorder(Rectangle.BOTTOM);
 						payslip.addCell(leftcoloncell_7);
 						
-						if (employeeAccList.getAccountno() != null && !String.valueOf(employeeAccList.getAccountno()).equalsIgnoreCase("null") && employeeAccList.getAccountno() != 0) {
+						if (employeeAccList.getAccountno() != null && !String.valueOf(employeeAccList.getAccountno()).equalsIgnoreCase("null") ) {
 							PdfPCell leftcontentcellvalue_7 = new PdfPCell(new Paragraph(String.valueOf(employeeAccList.getAccountno()), font8));
 							leftcontentcellvalue_7.setHorizontalAlignment(Element.ALIGN_LEFT);
 							leftcontentcellvalue_7.setPaddingTop(5);

@@ -266,7 +266,7 @@ public class EmployeeController {
 								if (!bank_name.equalsIgnoreCase("null"))
 									empAccDetailDO.setBankname(bank_name);
 								if (!bank_accno.equalsIgnoreCase("null"))
-									empAccDetailDO.setAccountno(Long.parseLong(bank_accno));
+									empAccDetailDO.setAccountno(bank_accno);
 								if (!bank_branch.equalsIgnoreCase("null"))
 									empAccDetailDO.setBranch(bank_branch);
 								bank_address = bank_address.replace("=","#");
@@ -1477,7 +1477,7 @@ public class EmployeeController {
 					if (!bank_name.equalsIgnoreCase("null"))
 					empAccDetailDO.setBankname(bank_name);
 					if (!bank_accno.equalsIgnoreCase("null"))
-					empAccDetailDO.setAccountno(Long.parseLong(bank_accno));
+					empAccDetailDO.setAccountno(bank_accno);
 					if (!bank_branch.equalsIgnoreCase("null"))
 					empAccDetailDO.setBranch(bank_branch);
 					if (!bank_address.equalsIgnoreCase("null"))

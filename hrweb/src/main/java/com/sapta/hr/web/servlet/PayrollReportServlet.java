@@ -216,7 +216,7 @@ public class PayrollReportServlet extends BaseServlet {
 				employeelist = new EmpAccDetailService().retriveByEmpId(payrollDO.getEmpid());
 				
 				if(employeelist.size() > 0 && employeelist != null){
-					if(employeelist.get(0).getAccountno() != null && employeelist.get(0).getAccountno() > 0){
+					if(employeelist.get(0).getAccountno() != null ){
 						PdfPCell accountno_value = new PdfPCell(new Paragraph(employeelist.get(0).getAccountno().toString(), font8));
 						accountno_value.setHorizontalAlignment(Element.ALIGN_LEFT);
 						accountno_value.setBorderColor(BaseColor.GRAY);
