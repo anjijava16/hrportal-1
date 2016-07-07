@@ -207,6 +207,28 @@ public class TDSDAO {
 	}	
 	
 	@SuppressWarnings("unchecked")
+	public List<TDSDO> retriveByInvoicenumber(String invoice) throws AppException {
+		List<TDSDO> tdsList = null;
+		try {
+			em = SessionManager.createManager(PersistenceUnitNames.PERSISTENCE_UNIT_NAME);
+			if (em != null && invoice.length() > 0) {
+				logger.info("Entity Manager is not null");
+				Query q = em.createNamedQuery(TDSDO.FIND_BY_INVOICE);
+				q.setParameter(CommonConstants.REFER, invoice);
+				tdsList = (List<TDSDO>) q.getResultList();
+			}
+		} catch (Exception eException) {
+			eException.printStackTrace();
+			throw new AppException(ExceptionConstant._91010, CustomPropertyManager.getProperty(ExceptionConstant._91010), eException);
+		} finally {
+			SessionManager.closeEntityManager(em);
+		}
+		return tdsList;
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<TDSDO> retriveByTDMONTH(String tdsmonth) throws AppException {
 		List<TDSDO> tdsList = null;
 		try {

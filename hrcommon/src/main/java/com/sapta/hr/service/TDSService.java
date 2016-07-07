@@ -31,6 +31,10 @@ public class TDSService {
 		return new TDSDAO().retriveByEmpId(id);
 	}
 	
+	public List<TDSDO> retriveByInvoicenumber(String invoice) throws AppException {
+		return new TDSDAO().retriveByInvoicenumber(invoice);
+	}
+	
 	public List<TDSDO> retriveTdsByEmpIdMonth(long empid,Date tdsdate) throws AppException {
 		return new TDSDAO().retriveTDSByEmpIdMonth(empid,tdsdate);
 	}

@@ -51,10 +51,24 @@ public class InvoiceDetailsDO implements Serializable {
 	
 	private Long noofdays;
 	
+	private Double tds;
+	
 	private String updatedby;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedon;
+
+	
+
+	public Double getTds() {
+		return tds;
+	}
+	
+
+	public void setTds(Double tds) {
+		this.tds = tds;
+	}
+	
 
 	public Long getId() {
 		return id;

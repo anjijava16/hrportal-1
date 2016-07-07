@@ -285,7 +285,8 @@
 								   <th id="totalhours" class=""><sup class="saptaColor">*</sup>Total&nbsp;<span id="typeofperiod">Days</th>
 								   <th id="rate_header" class=""><sup class="saptaColor">*</sup>Rate<span id="slashspan">/</span><span id="fixedtypeofperiodrate hidden"></span><span id="typeofperiodrate"></span></th>
 								   <th class="total_amt"><sup class="saptaColor">*</sup>Total&nbsp;(<span class="headamounttype"></span>)</th>
-								   <th class="last"><sup class="saptaColor">*</sup>Net&nbsp;Amount&nbsp;(<span class="headamounttype"></span>)</th>
+								   <th class=""><sup class="saptaColor">*</sup>Net&nbsp;Amount&nbsp;(<span class="headamounttype"></span>)</th>
+								   <th class="last tds_th"><sup class="saptaColor">*</sup>TDS</th>
 								   <th style="background-color: white; border:0; padding:0;"><div id="addinvoice" style="cursor: pointer" class="rightElement MRGR10PX MRGT10PX MRGB10PX"><img src="<%=request.getContextPath() %>/resources/images/add.png" alt="Add More"/></div></th>
 							   </tr>                                        
 							   <tr id="invoicecontenttablerow_1">
@@ -297,6 +298,7 @@
 							   	   <td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_1" id="rateperhr_1" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td id="rate_value"><div style="width: 95%; margin: 0 auto;"><input name="total_1" id="total_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td id="netamt_td"><div style="width: 100%; margin: 0 auto;"><input name="netamt_1" id="netamt_1" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
+							   	   <td class = "tds_td_1"><div style="width: 95%; margin: 0 auto;"><input name="tds_1"  class="" id="tds_1" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>
 							   	   <td class="noborder">
 										<div id="invoice_remove_1" style="cursor: pointer" class="rightElement MRGR10PX">
 											&nbsp;<%-- <img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/> --%>
@@ -308,7 +310,7 @@
 					</div>
 					<div class="clearWidth" id="sub_total" style="margin: 10px 0;">
 						<div class="clearTable rightElement MRGRINVDIV sub_tot_div">
-							<div class="leftElement BLDTEXT12PX ">Sub Total</div>
+							<div class="leftElement BLDTEXT12PX ">Sub Total&nbsp;(<span class="headamounttype"></span>)</div>
 							<div id="subtotalamountdivision" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
@@ -325,7 +327,7 @@
 					</div>
 					<div class="clearWidth" id="total_amount" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGRINVDIV tot_div">
-							<div class="leftElement BLDTEXT12PX ">Total	</div>
+							<div class="leftElement BLDTEXT12PX ">Total&nbsp;(<span class="headamounttype"></span>)	</div>
 							<div id="totalamountdivision" class="rightElement BLDTEXT12PX">0.00</div>
 						</div>
 					</div>
@@ -607,14 +609,15 @@
 				if($("#billtype").val() != "f"){
 					/* <td><div style="width: 95%; margin: 0 auto;"><input name="total_' + counter +'" id="total_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td> */
 					if($("#billtype").val() == "d"){
-						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class = "tds_td_' + counter +'"><div style="width: 95%; margin: 0 auto;"><input name="tds_' + counter +'"  class="" id="tds_' + counter +'" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
 					}else{
-						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysrow"><div style="width: 95%; margin: 0 auto;"><input name="totaldays_' + counter +'" id="totaldays_' + counter +'" class="" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+						newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td style="width: 161px;"><div style=" margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysrow"><div style="width: 95%; margin: 0 auto;"><input name="totaldays_' + counter +'" id="totaldays_' + counter +'" class="" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)""/></div></td><td class = "tds_td_' + counter +'"><div style="width: 95%; margin: 0 auto;"><input name="tds_' + counter +'"  class="" id="tds_' + counter +'" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
 					}
 				}
 				if($("#billtype").val() == "f"){
-					newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
+					newemp_dynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="refnumbername_' + counter +'" id="refnumbername_' + counter +'" type="text"/></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="servicefrom_' + counter +'" id="servicefrom_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td  style="width: 161px;"><div style="margin: 0 auto;"><b style="float:left" class="datePicInput"><input name="serviceto_' + counter +'" id="serviceto_' + counter +'" readonly="readonly" type="text"  class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totalhrsrow"><div style="width: 95%; margin: 0 auto;"><input name="totalhrss_' + counter +'" id="totalhrss_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rateperhr_' + counter +'" id="rateperhr_' + counter +'" class="perrateperiod" type="text" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="netamt_' + counter +'" id="netamt_' + counter +'" disabled="disabled" class="inputdisable" style="text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "tds_td_' + counter +'"><div style="width: 95%; margin: 0 auto;"><input name="tds_' + counter +'"  class="" id="tds_' + counter +'" type="text" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="noborder"><div id="invoice_remove_' + counter +'" style="cursor: pointer" class="rightElement MRGR10PX"><img src="<%=request.getContextPath() %>/resources/images/delete.png" alt="Remove"/></div></td>');
 				}
+				
 				newemp_dynamic.appendTo("#invoicetablecontent");
 				$(function() {
 					 $( "#servicefrom_"+counter+",#serviceto_"+counter).datepicker({
@@ -628,6 +631,10 @@
 						 dateFormat :"dd-mm-yy"
 					 });
 				 });
+				if($("#amounttype").val() != "inr"){
+					var classs = "tds_td_"+counter;
+					$("."+classs).addClass("hidden");
+				}
 				counter++;
 				removeCount++;
 			});
@@ -1052,6 +1059,7 @@
 						var invoicetype = $("#billtype").val();
 						var amounttype = $("#amounttype").val();
 						
+						
 						if(invoicenumber == "" || invoicenumber.length == 0) validation = false;
 						if(invoicedate == "" || invoicedate.length == 0) validation = false;
 						if(duedate == "" || duedate.length == 0) validation = false;
@@ -1063,6 +1071,7 @@
 						var invoicedatevalidation = $.datepicker.parseDate('dd-mm-yy',invoicedate);
 						var duedatevalidation = $.datepicker.parseDate('dd-mm-yy',duedate);
 						if ((invoicedatevalidation) > (duedatevalidation))  validation = false; 
+						
 						
 				 $('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 						var id = $(this).attr("id");
@@ -1076,6 +1085,8 @@
 						/* var dueamount = $("#total_"+i).val(); */
 						var dueamount = $("#netamt_"+i).val();
 						var noofdays = $("#totaldays_"+i).val();
+						var tds = $("#tds_"+i).val();
+						
 						if(reference == "" || reference.length == 0) validation = false;
 						if(servicefrom == "" || servicefrom.length == 0) validation = false;
 						if(serviceto == "" || serviceto.length == 0) validation = false;
@@ -1089,6 +1100,9 @@
 						}
 						if(rateperhr == "" || rateperhr.length == 0) validation = false;
 						if(dueamount == "" || dueamount.length == 0) validation = false;
+						if(amounttype == "inr") {
+							if(tds == "" || tds.length == 0) validation = false;
+						}
 						
 						var servicefromvalidation = $.datepicker.parseDate('dd-mm-yy',servicefrom);
 						var servicetovalidation = $.datepicker.parseDate('dd-mm-yy',serviceto);
@@ -1151,12 +1165,14 @@
 					var id = $(this).attr("id");
 					var i = id.substring(23, id.length);
 					var invoicenumber = $("#invoiceno").val();
+					var invoicedate = $("#invoicedate").datepicker().val();
 					var reference = $("#refnumbername_"+i).val();
 					var servicefrom = $("#servicefrom_"+i).val();
 					var serviceto = $("#serviceto_"+i).val();
 					var dueamount = $("#netamt_"+i).val();
 					var noofdays = $("#totaldays_"+i).val();
 					var totalhrs = $("#totalhrss_"+i).val();
+					var tds = $("#tds_"+i).val();
 					if($("#billtype").val() == "f"){
 						noofdays = totalhrs
 						totalhrs = 0;
@@ -1167,9 +1183,10 @@
 					if(noofdays == "" || noofdays == undefined){
 						noofdays = 0;
 					}
+					if(tds == "" || tds.length == 0 ) tds ="null";
 					var rateperhr = $("#rateperhr_"+i).val();
 					//var dueamount = $("#total_"+i).val();
-					var resourceURL = $("#contextpath").val()+"/invoice/addinvoicedetails/"+invoicenumber+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+totalhrs+"/"+rateperhr+"/"+dueamount+"/"+noofdays;
+					var resourceURL = $("#contextpath").val()+"/invoice/addinvoicedetails/"+invoicenumber+"/"+invoicedate+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+totalhrs+"/"+rateperhr+"/"+dueamount+"/"+noofdays+"/"+tds;
 					$.ajax({
 							url : resourceURL,
 							type : 'GET',
@@ -1563,7 +1580,9 @@
 								$("#amount").val((result.amount == undefined || result.amount == null || result.amount.length <= 0) ? "-" : result.amount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
 								$("#service_tax").addClass("hidden");
+								$('.tds_th,.tds_td_1').addClass("hidden");
 								if(result.amounttype == "inr"){
+									$('.tds_th,.tds_td_1').removeClass("hidden");
 									$("#service_tax").removeClass("hidden");
 									$("#optional_amounttype").html("INR");
 								}else if(result.amounttype == "usd"){

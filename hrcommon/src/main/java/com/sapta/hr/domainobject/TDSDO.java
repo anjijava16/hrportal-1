@@ -24,7 +24,8 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "TdsDO.findbyTdmonth", query = "SELECT u FROM TDSDO u where u.tdsmonth =:tdsmonth"),
 		@NamedQuery(name = "TDSDO.findbysteddate", query = "SELECT e FROM TDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate"),
 		/*@NamedQuery(name = "TDSDO.findbyempidtdsdate", query = "SELECT e FROM TDSDO e WHERE e.empid =:empid AND e.tdsmonth =:tdsdate"),*/
-		@NamedQuery(name = "TDSDO.findbysteddatebyorder", query = "SELECT e FROM TDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate order by e.tdsmonth")
+		@NamedQuery(name = "TDSDO.findbysteddatebyorder", query = "SELECT e FROM TDSDO e WHERE e.tdsmonth BETWEEN :stdate AND :eddate order by e.tdsmonth"),
+		@NamedQuery(name = "TDSDO.findbyinvoice", query = "SELECT e FROM TDSDO e WHERE e.refer =:refer")
 	})
 
      public class TDSDO implements Serializable {
@@ -44,6 +45,8 @@ import javax.persistence.TemporalType;
 	public static final String FIND_BY_EMPID_DATE = "TDSDO.findbyempidtdsdate";
 	
 	public static final String FIND_BY_ST_ET_DATE_BY_ORDER = "TDSDO.findbysteddatebyorder";
+	
+	public static final String FIND_BY_INVOICE = "TDSDO.findbyinvoice";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "tds")

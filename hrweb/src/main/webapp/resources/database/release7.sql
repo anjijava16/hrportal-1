@@ -1,0 +1,3 @@
+ALTER TABLE hrportal.empaccdetail CHANGE ACCOUNTNO  ACCOUNTNO VARCHAR(255);
+
+ALTER TABLE hrportal.invoicedetails ADD COLUMN tds DOUBLE DEFAULT NULL;

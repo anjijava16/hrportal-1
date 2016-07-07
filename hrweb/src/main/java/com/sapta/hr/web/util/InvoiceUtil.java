@@ -138,6 +138,8 @@ public final class InvoiceUtil {
 		
 		result.put(CommonUtil.convertDateToStringWithOutTime(invdo.getDuedate()));
 		result.put(status);
+		
+		result.put(invdo.getAmounttype().toUpperCase());
 		result.put(receivedamount);
 		
 		return result;

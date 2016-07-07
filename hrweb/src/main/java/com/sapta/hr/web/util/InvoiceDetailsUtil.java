@@ -41,9 +41,13 @@ public final class InvoiceDetailsUtil {
 		result.put(CommonConstants.SERVICE_TO, CommonUtil.convertDateToStringWithOutTime(invoiceDetailsDO.getServiceto()));
 		result.put(CommonConstants.DUE_AMOUNT, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invoiceDetailsDO.getDueamount()));
 		result.put(CommonConstants.NO_OF_DAYS, String.valueOf(invoiceDetailsDO.getNoofdays()));
-System.out.println(invoiceDetailsDO.getNoofdays());
 		result.put(CommonConstants.TIME_PERIOD, String.valueOf(invoiceDetailsDO.getTimeperiod()));
 		result.put(CommonConstants.RATE_OF_PERIOD, CommonUtil.convertDoubleValueWithTwoDecimalPoints(invoiceDetailsDO.getRateofperiod()));
+		if(invoiceDetailsDO.getTds() == null){
+			result.put(CommonConstants.TDS,"");
+		}else{
+			result.put(CommonConstants.TDS,CommonUtil.convertDoubleValueWithTwoDecimalPoints(invoiceDetailsDO.getTds()));
+		}
 		return result;
 	}
 	

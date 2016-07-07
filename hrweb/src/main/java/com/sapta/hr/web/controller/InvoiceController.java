@@ -21,6 +21,7 @@ import com.sapta.hr.domainobject.InvoiceDO;
 import com.sapta.hr.domainobject.InvoiceDetailsDO;
 import com.sapta.hr.domainobject.ProjectDO;
 import com.sapta.hr.domainobject.ServiceTaxDO;
+import com.sapta.hr.domainobject.TDSDO;
 import com.sapta.hr.domainobject.UserDO;
 import com.sapta.hr.exception.ExceptionConstant;
 import com.sapta.hr.service.CustomerService;
@@ -28,6 +29,7 @@ import com.sapta.hr.service.InvoiceDetailsService;
 import com.sapta.hr.service.InvoiceService;
 import com.sapta.hr.service.ProjectService;
 import com.sapta.hr.service.ServiceTaxService;
+import com.sapta.hr.service.TDSService;
 import com.sapta.hr.util.CommonConstants;
 import com.sapta.hr.web.util.CommonUtil;
 import com.sapta.hr.web.util.CommonWebUtil;
@@ -267,12 +269,11 @@ public class InvoiceController {
 		return CommonWebUtil.buildSuccessResponse().toString();
 	}
 	
-	@RequestMapping(value = "/addinvoicedetails/{invoicenumber}/{reference}/{servicefrom}/{serviceto}/{totalhrs}/{rateperhr}/{dueamount}/{noofdays}", method = RequestMethod.GET)
-	public @ResponseBody String addInvoiceDetails(@PathVariable String invoicenumber, @PathVariable String reference, @PathVariable String servicefrom, 
-		   @PathVariable String serviceto, @PathVariable long totalhrs, @PathVariable double rateperhr, @PathVariable double dueamount, @PathVariable long noofdays, Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/addinvoicedetails/{invoicenumber}/{invoicedate}/{reference}/{servicefrom}/{serviceto}/{totalhrs}/{rateperhr}/{dueamount}/{noofdays}/{tds}", method = RequestMethod.GET)
+	public @ResponseBody String addInvoiceDetails(@PathVariable String invoicenumber, @PathVariable String invoicedate, @PathVariable String reference, @PathVariable String servicefrom, 
+		   @PathVariable String serviceto, @PathVariable long totalhrs, @PathVariable double rateperhr, @PathVariable double dueamount, @PathVariable long noofdays, @PathVariable String tds,Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
-								
 				InvoiceDetailsDO invoiceDetailsDO = new InvoiceDetailsDO();
 				invoiceDetailsDO.setInvoiceno(invoicenumber);
 				invoiceDetailsDO.setRefnumbername(reference);
@@ -286,10 +287,23 @@ public class InvoiceController {
 				if(noofdays != 0){
 					invoiceDetailsDO.setNoofdays(noofdays);
 				}
+				if(!tds.equalsIgnoreCase("null")) invoiceDetailsDO.setTds(Double.parseDouble(tds));
 				UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 				invoiceDetailsDO.setUpdatedby(user.getUsername());
 				invoiceDetailsDO.setUpdatedon(new Date());
 				new InvoiceDetailsService().persistinvoice(invoiceDetailsDO);
+				
+				if(!tds.equalsIgnoreCase("null")){
+	                TDSDO tdsdo = new TDSDO();
+					tdsdo.setAmount(Double.parseDouble(tds));
+					tdsdo.setTdsmonth(CommonUtil.convertStringToDate(invoicedate));
+					//tdsdo.setComments("TDS for the month of"+" "+payrollmonth);
+					tdsdo.setRefer(invoicenumber);
+					tdsdo.setUpdatedby(user.getUsername());
+					tdsdo.setUpdatedon(new Date());
+					new TDSService().persistTds(tdsdo);
+                }
+				
 			}
 		} catch (Exception e) {
 			return CommonWebUtil.buildErrorResponse("").toString();
@@ -326,7 +340,9 @@ public class InvoiceController {
 		String jsonresp = null;
 		try {
 			List<InvoiceDetailsDO> invoiceDetailsList = new InvoiceDetailsService().retriveByInvoiceNo(invoiceno);
+			System.out.println("---------------------------------------------------"+invoiceno+" invoiceDetailsList "+invoiceDetailsList.size());
 			jsonresp = InvoiceDetailsUtil.getinvoiceDetailList(invoiceDetailsList).toString();
+			System.out.println(jsonresp);
 		} catch (Exception e) {}
 		
 		return jsonresp != null ? jsonresp.toString() : "";
@@ -373,9 +389,9 @@ public class InvoiceController {
 		return CommonWebUtil.buildSuccessResponse().toString();
 	}
 	
-	@RequestMapping(value = "/updateinvoicedetails/{id}/{invoiceno}/{reference}/{servicefrom}/{serviceto}/{timeperiod}/{rateperiod}/{dueamount}", method = RequestMethod.GET)
-	public @ResponseBody String updateInvoiceDetails(@PathVariable long id, @PathVariable String invoiceno, @PathVariable String reference, @PathVariable String servicefrom, @PathVariable String serviceto, 
-			@PathVariable long timeperiod, @PathVariable double rateperiod, @PathVariable double dueamount, Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/updateinvoicedetails/{id}/{invoiceno}/{invoicedate}/{reference}/{servicefrom}/{serviceto}/{timeperiod}/{rateperiod}/{dueamount}/{tds}", method = RequestMethod.GET)
+	public @ResponseBody String updateInvoiceDetails(@PathVariable long id, @PathVariable String invoiceno, @PathVariable String invoicedate, @PathVariable String reference, @PathVariable String servicefrom, @PathVariable String serviceto, 
+			@PathVariable long timeperiod, @PathVariable double rateperiod, @PathVariable double dueamount, @PathVariable String tds, Model model, HttpServletRequest request) {
 		try {
 			if (WebManager.authenticateSession(request)) {
 				
@@ -388,10 +404,40 @@ public class InvoiceController {
 					invoiceDetailsDO.setTimeperiod(timeperiod);
 					invoiceDetailsDO.setRateofperiod(rateperiod);
 					invoiceDetailsDO.setDueamount(dueamount);
+					if(!tds.equalsIgnoreCase("null"))invoiceDetailsDO.setTds(Double.parseDouble(tds));
+					else invoiceDetailsDO.setTds(null);
 					UserDO user = (UserDO) request.getSession().getAttribute(CommonConstants.SESSION);
 					invoiceDetailsDO.setUpdatedby(user.getUsername());
 					invoiceDetailsDO.setUpdatedon(new Date());
 					new InvoiceDetailsService().update(invoiceDetailsDO);
+					
+					
+					
+					List<TDSDO> tdsList = new TDSService().retriveByInvoicenumber(invoiceno);
+					System.out.println(tdsList.size());
+					if(!tds.equalsIgnoreCase("null")){
+						if(tdsList != null && tdsList.size() > 0){
+							TDSDO tdsdo = tdsList.get(0);
+							tdsdo.setAmount(Double.parseDouble(tds));
+							tdsdo.setTdsmonth(CommonUtil.convertStringToDate(invoicedate));
+							tdsdo.setUpdatedby(user.getUsername());
+							tdsdo.setUpdatedon(new Date());
+			                new TDSService().update(tdsdo);
+						}else{
+							 TDSDO tdsdo = new TDSDO();
+								tdsdo.setAmount(Double.parseDouble(tds));
+								tdsdo.setTdsmonth(CommonUtil.convertStringToDate(invoicedate));
+								tdsdo.setRefer(invoiceno);
+								tdsdo.setUpdatedby(user.getUsername());
+								tdsdo.setUpdatedon(new Date());
+								new TDSService().persistTds(tdsdo);
+						}
+					}else{
+						for (TDSDO tdsdo : tdsList) {
+							System.out.println("delete "+tdsdo.getId());
+							new TDSService().delete(tdsdo);
+						}
+					}
 			}	
 		} catch (Exception e) {
 			return CommonWebUtil.buildErrorResponse("").toString();

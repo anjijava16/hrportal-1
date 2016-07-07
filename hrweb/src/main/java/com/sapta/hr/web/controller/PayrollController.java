@@ -195,9 +195,8 @@ public class PayrollController {
 	                new ProfessionalTaxService().persistProfessionalTax(ptdo);
                 }
                 
-                if(tds > 0){
+               /* if(tds > 0){
 	                TDSDO tdsdo = new TDSDO();
-					/*tdsdo.setEmpid(empid);*/
 					tdsdo.setAmount(tds);
 					tdsdo.setTdsmonth(CommonUtil.convertStringToDate(payrollmonth));
 					tdsdo.setComments("TDS for the month of"+" "+payrollmonth);
@@ -205,7 +204,7 @@ public class PayrollController {
 					tdsdo.setUpdatedby(user.getUsername());
 					tdsdo.setUpdatedon(new Date());
 					new TDSService().persistTds(tdsdo);
-                }
+                }*/
                 
                 if(pf > 0){
 					EmpPFDO pfdo = new EmpPFDO();

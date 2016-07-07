@@ -72,6 +72,8 @@ public final class CommonConstants {
 	
 	public static final String PF_DATE = "pfdate"; 
 	
+	public static final String TDS = "tds"; 
+	
 	public static final String PF_MONTH = "pfmonth"; 
 	
 	// Employee Assignment JSP Names
@@ -337,6 +339,8 @@ public final class CommonConstants {
 	public static final String PROJECT_ID = "projectid";
 	
 	public static final String REFERENCE = "reference";
+	
+	public static final String REFER = "refer";
 	
 	public static final String START_DATE = "startdate";
 	

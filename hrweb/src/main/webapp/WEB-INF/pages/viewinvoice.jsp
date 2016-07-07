@@ -54,6 +54,7 @@
 								<th class="first">Customer&nbsp;Name</th>
 								<th class="first">Due&nbsp;Date</th>
 								<th class="">Status</th>
+								<th class="">Amount&nbsp;Type</th>
 								<th class="">Amount&nbsp;(<span class="rupyaINR WebRupee">&#x20B9;</span>)</th>
 							</tr>	
 						</thead>				
@@ -195,15 +196,16 @@
 								   <th id="totaldays" class="">Total&nbsp;Days</th>
 								   <th id="totalhours" class="">Total&nbsp;<span id="typeofperiod"></span></th>
 								   <th id="rate_header" class=""><!-- <span id="fixedtypeofperiodrate"></span> -->Rate<span id="slashspan">/</span><span id="typeofperiodrate"></span></th>
-								   <th class="total_amt">Total&nbsp;(<span class="headamounttype rupyaINR WebRupee"></span>)</th>
-								   <th class="last">Net&nbsp;Amount&nbsp;(<span class="headamounttype WebRupee rupyaINR"></span>)</th>
+								   <th class="total_amt">Total&nbsp;(<span class="headamounttype"></span>)</th>
+								   <th class="">Net&nbsp;Amount&nbsp;(<span class="headamounttype"></span>)</th>
+								   <th  class="last tds_th">TDS</th>
 							   </tr>                                        
 					   </table>
 					</div>
 					</div>
 					<div class="clearWidth hidden" id="sub_total" style="margin: 10px 0;">
 						<div class="clearTable rightElement MRGR5PX  sub_tot_div_view ">
-							<div class="leftElement MRGL10PX BLDTEXT12PX">Sub Total</div>
+							<div class="leftElement MRGL10PX BLDTEXT12PX">Sub Total&nbsp;(<span class="headamounttype"></span>)</div>
 							<div id="subtotalamount" class="rightElement BLDTEXT12PX"></div>
 						</div>
 					</div>
@@ -220,7 +222,7 @@
 					</div>
 					<div class="clearWidth" id="total_amount" style="margin-bottom: 10px;">
 						<div class="clearTable rightElement MRGR5PX tot_div_view">
-							<div class="leftElement  BLDTEXT12PX">Total	</div>
+							<div class="leftElement  BLDTEXT12PX">Total&nbsp;(<span class="headamounttype"></span>)	</div>
 							<div id="totalamount" class="rightElement BLDTEXT12PX">
 							</div>
 						</div>
@@ -342,6 +344,7 @@
 					gotoCurrent: true
 	            })
 	        });
+			
 			$("#block_overlay").removeClass("hidden");
 			$("#invoicemonth").val("${fymonth}");
 			var amount = 0;
@@ -411,20 +414,20 @@
 		            };
 		            // Total over all pages
 		            total = api
-		                .column( 4 )
+		                .column( 5 )
 		                .data()
 		                .reduce( function (a, b) {
 		                    return intVal(a) + intVal(b);
 		                },0 );
 		            // Total over this page
 		            pageTotal = api
-		                .column( 4, { "filter" : "applied"} )
+		                .column( 5, { "filter" : "applied"} )
 		                .data()
 		                .reduce( function (a, b) {
 		                    return intVal(a) + intVal(b);
 		                }, 0 );
 		            // Update footer
-		            $( api.column( 4).footer() ).html(
+		            $( api.column( 5).footer() ).html(
 		            	 '$'+pageTotal +' ( $'+ total +' total)' 
 		            		
 		            );
@@ -436,6 +439,7 @@
                    {sClass: "alignleft"},
                    {sClass: "center"},
                    {sClass: "alignleft"},
+                   {sClass: "center"},
                    {sClass: "alignright"}
                  ]
 			});
@@ -454,6 +458,7 @@
 			
 			function invoice(id){
 				$("#block_overlay").removeClass("hidden");
+				$(".tds_th").removeClass("hidden");
 				var projectid = "";
 				$("#invoiceList").addClass("hidden");
 				$("#invoicedetails").removeClass("hidden");
@@ -475,11 +480,11 @@
 					dataType : 'json',
 					async : false,
 					success: function(data) {
-						
 						var successflag = data.response.successflag;
 						var errors = data.response.errors;
 						var result = data.response.result;
 						if(successflag == "true"){
+							
 							for(var i=0;i<result.length;i++){
 								$(".total_amt").removeClass("hidden");
 								$(".rate_td").removeClass("hidden");
@@ -488,17 +493,17 @@
 								if(result[i].noofdays != "null" && result[i].timeperiod == "null") {
 									$("#totaldays").hide();
 									$(".total_amt").show();
-									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" /></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" /></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td><td class="tds_th"><div style="margin: 0 auto;"><input name="tds_' + count +'" id="tds_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>');
 								}
 								if(result[i].noofdays == "null" && result[i].timeperiod != "null") {
 									$("#totaldays").hide();
 									$(".total_amt").hide();
-									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="netamt_td"><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="netamt_td"><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td><td class="tds_th"><div style="margin: 0 auto;"><input name="tds_' + count +'" id="tds_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>');
 								}
 								if(result[i].noofdays != "null" && result[i].timeperiod != "null") {
 									$(".total_amt").hide();
 									$("#totaldays").show();
-									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysdata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="total_days_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td>');
+									invoicedynamic.html('<td><div style="margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" /></div></td><td><b class="datePicInput"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style=" color: #777777;" class="datePcK datePicMob" /></b></td><td><b class="datePicInput"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="color: #777777;" class="datePcK datePicMob" style="float:left"/></b></div></td><td class = "totaldaysdata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="total_days_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class = "timeperiodtabledata"><div style=" margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_td"><div style="margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" /></td><td class="tds_th"><div style="margin: 0 auto;"><input name="tds_' + count +'" id="tds_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td>');
 								}
 								invoicedynamic.appendTo("#invoicetablecontent");
 								$("#reference_"+count).val((result[i].reference == undefined || result[i].reference == null || result[i].reference == "null" || result[i].reference == 0 || result[i].reference.length <= 0) ? "-" : result[i].reference);
@@ -512,6 +517,7 @@
 								$("#invoice_details_id_"+count).val((result[i].id == undefined || result[i].id == null || result[i].id == "null" || result[i].id == 0  || result[i].id.length <= 0) ? "-" : result[i].id);
 								$("#invoice_due_amount_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
 								$("#netamt_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
+								$("#tds_"+count).val((result[i].tds == undefined || result[i].tds == null || result[i].tds == "null" || result[i].tds == 0  || result[i].tds.length <= 0) ? "" : result[i].tds);
 								if((result[i].timeperiod == undefined || result[i].timeperiod == null || result[i].timeperiod == "null" || result[i].timeperiod == 0  || result[i].timeperiod.length <= 0)){
 									$(".total_amt").addClass("hidden");
 									$(".total_amt").css("display",'none');
@@ -532,6 +538,8 @@
 								 });
 								$(".ui-datepicker-trigger").addClass("hidden");
 							}
+							$(".tds_th").removeClass("hidden");
+							
 						}else{
 							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
@@ -567,9 +575,12 @@
 								$("#optional_duedate").html((result.duedate == undefined || result.duedate == null || result.duedate.length <= 0) ? "-" : result.duedate);
 								$("#dueamount").val((result.dueamount == undefined || result.dueamount == null || result.dueamount.length <= 0) ? "-" : result.dueamount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
+								if(result.amounttype != "inr"){
+									$(".tds_th").addClass("hidden");
+								}
 								if(result.amounttype == "inr"){
 									$("#optional_amounttype").html("INR");
-									$(".headamounttype").html("&#x20B9;");
+									$(".headamounttype").html("INR");
 									$("#totalamount").removeClass("hidden");
 									/*var subtotalamount = result.totalamount;  - result.servicetax; */
 									$("#subtotalamount").html(result.totalamount);
@@ -578,11 +589,10 @@
 									$("#serviceTaxPer").html((result.servicetaxper == undefined || result.servicetaxper == null || result.servicetaxper.length <= 0) ? "-" : result.servicetaxper);
 									$("#service_tax").removeClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
-									$(".headamounttype").addClass("WebRupee");
-					 				$(".headamounttype").addClass("rupyaINR");
+									
 								}else if(result.amounttype == "usd"){
 									$("#optional_amounttype").html("USD");
-									$(".headamounttype").html("&#36;");
+									$(".headamounttype").html("USD");
 									$("#sub_total").removeClass("hidden");
 									$("#subtotalamount").html(result.totalamount);
 									$("#service_tax").addClass("hidden");
@@ -591,7 +601,7 @@
 					 				$(".headamounttype").removeClass("rupyaINR");
 								}else if(result.amounttype == "eur"){
 									$("#optional_amounttype").html("EUR");
-									$(".headamounttype").html("&#8364;");
+									$(".headamounttype").html("EUR");
 									$("#sub_total").removeClass("hidden");
 									$("#subtotalamount").html(result.totalamount);
 									$("#service_tax").addClass("hidden");
@@ -600,7 +610,7 @@
 					 				$(".headamounttype").removeClass("rupyaINR");
 								}else if(result.amounttype == "gbp"){
 									$("#optional_amounttype").html("GBP");
-									$(".headamounttype").html("&#163;");
+									$(".headamounttype").html("GBP");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
@@ -810,14 +820,14 @@
 				            };
 				            // Total over all pages
 				            total = api
-				                .column( 4 )
+				                .column( 5 )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                },0 );
 				            // Total over this page
 				            pageTotal = api
-				                .column(4, { "filter" : "applied"} )
+				                .column(5, { "filter" : "applied"} )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
@@ -833,6 +843,7 @@
 	                      {sClass: "alignleft"},
 	                      {sClass: "center"},
 	                      {sClass: "alignleft"},
+	                      {sClass: "center"},
 	                      {sClass: "alignright"}
 	                    ]
 				    });
@@ -916,6 +927,9 @@
 						$("#reference_"+i).prop( "disabled", false );
 						$("#rate_period_"+i).prop( "disabled", false );
 						
+						$("#tds_"+i).prop( "disabled", false );
+						$("#tds_"+i).removeClass("inputdisable");
+						$("#tds_"+i).addClass("inputBorder");
 						$("#reference_"+i).removeClass("inputdisable");
 						$("#rate_period_"+i).removeClass("inputdisable");
 						
@@ -944,6 +958,7 @@
 							$("#rate_period_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
+							$("#tds_"+i).val("");
 							$("#time_period_"+i).prop( "disabled", false );
 							$("#time_period_"+i).removeClass("inputdisable");
 							$("#time_period_"+i).addClass("inputBorder");
@@ -964,6 +979,7 @@
 							var i = id.substring(23, id.length);
 							$("#time_period_"+i).val("");
 							$("#rate_period_"+i).val("");
+							$("#tds_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
 							$("#time_period_"+i).prop( "disabled", false );
@@ -988,6 +1004,7 @@
 							$("#rate_period_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
+							$("#tds_"+i).val("");
 							$("#time_period_"+i).prop( "disabled", false );
 							$("#time_period_"+i).removeClass("inputdisable");
 							$("#time_period_"+i).addClass("inputBorder");
@@ -1008,6 +1025,7 @@
 							var i = id.substring(23, id.length);
 							$("#time_period_"+i).val("");
 							$("#rate_period_"+i).val("");
+							$("#tds_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
 							$("#time_period_"+i).prop( "disabled", false );
@@ -1032,6 +1050,7 @@
 							var i = id.substring(23, id.length);
 							$("#time_period_"+i).val("");
 							$("#rate_period_"+i).val("");
+							$("#tds_"+i).val("");
 							$("#invoice_due_amount_"+i).val("");
 							$("#netamt_"+i).val("");
 							/* $("#time_period_"+i).prop( "disabled", true );
@@ -1045,10 +1064,27 @@
 				 }
 			});
 			 $('#amounttype').on('change', function (e){
+				 $(".tds_th").addClass("hidden");
 				 	if($("#amounttype").val() == "inr"){
-				 		$(".headamounttype").html("&#x20B9;");
+				 		var invDate = "";
+						var june2016 = "";
+						var invoiceDate = $("#invoicedate").val();
+						invoiceDate = invoiceDate.split("-");
+						invoiceDate = invoiceDate[2]+"-"+invoiceDate[1]+"-"+invoiceDate[0];
+						invDate = new Date(invoiceDate);
+						june2016 = new Date("Jun 01 2016");
+						if(invDate >= june2016){
+							serviceTaxPercentage = 15;
+							$(".perrateperiod").trigger("focusout");
+						}else{
+							serviceTaxPercentage = 14.5;
+							$(".perrateperiod").trigger("focusout");
+						}
+						$("#serviceTaxPer").html(serviceTaxPercentage);
+				 		$(".tds_th").removeClass("hidden");
+				 		$(".headamounttype").html("INR");
 				 		var totalamount = $("#totalamount").html();
-				 		var serviceTaxPer = $("#serviceTaxPer").html()
+				 		var serviceTaxPer = $("#serviceTaxPer").html();
 				 		$("#subtotalamount").html(totalamount);
 				 		var servicetax = (parseFloat(totalamount) * parseFloat(serviceTaxPer))/100;
 				 		
@@ -1058,12 +1094,12 @@
 				 		$("#service_tax").removeClass("hidden");
 				 		$("#sub_total").removeClass("hidden");
 				 		$("#totalamountunderline").removeClass("hidden");
-				 		$(".headamounttype").addClass("WebRupee");
-				 		$(".headamounttype").addClass("rupyaINR");
+				 		/* $(".headamounttype").addClass("WebRupee");
+				 		$(".headamounttype").addClass("rupyaINR"); */
 				 	}
 				 	if($("#amounttype").val() == "usd"){
 				 		var servicetax = 0;
-				 		$(".headamounttype").html("&#36;");
+				 		$(".headamounttype").html("USD");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
 				 			servicetax = $("#servicetax").html();
 				 		}
@@ -1080,7 +1116,7 @@
 				 	}
 				 	if($("#amounttype").val() == "eur"){
 				 		var servicetax = 0;
-				 		$(".headamounttype").html("&#8364;");
+				 		$(".headamounttype").html("EUR");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
 				 			servicetax = $("#servicetax").html();
 				 		}
@@ -1097,7 +1133,7 @@
 				 	}
 				 	if($("#amounttype").val() == "gbp"){
 				 		var servicetax = 0;
-				 		$(".headamounttype").html("&#163;");
+				 		$(".headamounttype").html("GRB");
 				 		if($("#servicetax").html() != null && $("#servicetax").html() != ""){
 				 			servicetax = $("#servicetax").html();
 				 		}
@@ -1136,6 +1172,7 @@
 					$("#reference_"+i).prop( "disabled", true );
 					$("#time_period_"+i).prop( "disabled", true );
 					$("#rate_period_"+i).prop( "disabled", true );
+					$("#tds_"+i).prop( "disabled", true );
 					$("#invoice_due_amount_"+i).prop( "disabled", true );
 					$("#netamt_"+i).prop( "disabled", true );
 					
@@ -1144,12 +1181,14 @@
 					$("#service_to_"+i).addClass("inputdisable");
 					$("#time_period_"+i).addClass("inputdisable");
 					$("#rate_period_"+i).addClass("inputdisable");
+					$("#tds_"+i).addClass("inputdisable");
 					$("#invoice_due_amount_"+i).addClass("inputdisable");
 					$("#netamt_"+i).addClass("inputdisable");
 					
 					$("#reference_"+i).removeClass("inputBorder");
 					$("#time_period_"+i).removeClass("inputBorder");
 					$("#rate_period_"+i).removeClass("inputBorder");
+					$("#tds_"+i).removeClass("inputBorder");
 					$("#invoice_due_amount_"+i).removeClass("inputBorder");
 					$("#netamt_"+i).removeClass("inputBorder");
 			 });
@@ -1218,7 +1257,7 @@
 							for(var i=0;i<result.length;i++){
 								count=i+1;
 								var invoicedynamic = $(document.createElement('tr')).attr({"id":'invoicecontenttablerow_' + count});
-								invoicedynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" style="width: 110px;"/></div></td><td><div style="width: 95%; margin: 0 auto;"><b style="float:left"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style="width: 215px; color: #777777;" class="datePcK" style="float:left"/></b></div></td><td><div style="width: 95%; margin: 0 auto;"><b style="float:left"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="width: 215px; color: #777777;" class="datePcK" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style="width: 95%; margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="width: 75px; text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="width: 75px; text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="width: 100%; margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style="width: 75px; text-align: right;" /></div></td><td><div style="width: 76%; margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="width: 119px; text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" style="width: 100px;"/></td>');
+								invoicedynamic.html('<td><div style="width: 95%; margin: 0 auto;"><input name="reference_' + count +'" id="reference_' + count +'"  disabled="disabled" class="inputdisable" style="width: 110px;"/></div></td><td><div style="width: 95%; margin: 0 auto;"><b style="float:left"><input name="service_from_' + count +'" id="service_from_' + count +'" readonly="readonly" type="text" style="width: 215px; color: #777777;" class="datePcK" style="float:left"/></b></div></td><td><div style="width: 95%; margin: 0 auto;"><b style="float:left"><input name="service_to_' + count +'" id="service_to_' + count +'" readonly="readonly" type="text" style="width: 215px; color: #777777;" class="datePcK" style="float:left"/></b></div></td><td class = "timeperiodtabledata"><div style="width: 95%; margin: 0 auto;"><input name="time_period_' + count +'" id="time_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="width: 75px; text-align: center;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td><div style="width: 95%; margin: 0 auto;"><input name="rate_period_' + count +'" id="rate_period_' + count +'"  disabled="disabled" class="inputdisable perrateperiod" style="width: 75px; text-align: right;" onkeypress="return validateNumericWithPrecision(event)"/></div></td><td class="rate_value"><div style="width: 100%; margin: 0 auto;"><input name="invoice_due_amount_' + count +'" id="invoice_due_amount_' + count +'"  disabled="disabled" class="inputdisable" style="width: 75px; text-align: right;" /></div></td><td><div style="width: 76%; margin: 0 auto;"><input name="netamt_' + count +'" id="netamt_' + count +'"  disabled="disabled" class="inputdisable" style="width: 119px; text-align: right;"/></div><input name="invoice_details_id_' + count +'" class="hidden" id="invoice_details_id_' + count +'" type="text" style="width: 100px;"/></td><td class="tds_th"><div style="margin: 0 auto;"><input name="tds_' + count +'" id="tds_' + count +'"  disabled="disabled" class="inputdisable" style=" text-align: right;" /></div></td>');
 								invoicedynamic.appendTo("#invoicetablecontent");
 								$("#reference_"+count).val((result[i].reference == undefined || result[i].reference == null || result[i].reference == "null" || result[i].reference == 0 || result[i].reference.length <= 0) ? "-" : result[i].reference);
 								$("#service_from_"+count).val((result[i].servicefrom == undefined || result[i].servicefrom == null || result[i].servicefrom == "null" || result[i].servicefrom == 0 || result[i].servicefrom.length <= 0) ? "-" : result[i].servicefrom);
@@ -1230,6 +1269,7 @@
 								$("#invoice_details_id_"+count).val((result[i].id == undefined || result[i].id == null || result[i].id == "null" || result[i].id == 0  || result[i].id.length <= 0) ? "-" : result[i].id);
 								$("#invoice_due_amount_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
 								$("#netamt_"+count).val((result[i].dueamount == undefined || result[i].dueamount == null || result[i].dueamount == "null" || result[i].dueamount == 0  || result[i].dueamount.length <= 0) ? "-" : result[i].dueamount);
+								$("#tds_"+count).val((result[i].tds == undefined || result[i].tds == null || result[i].tds == "null" || result[i].tds == 0  || result[i].tds.length <= 0) ? "" : result[i].tds);
 								
 								$(function() {
 									 $( "#service_from_" + count + ", #service_to_" + count).datepicker({
@@ -1245,6 +1285,8 @@
 								 });
 								$(".ui-datepicker-trigger").addClass("hidden");
 							}
+							$(".tds_th").removeClass("hidden");
+							
 						}else{
 							$("#block_overlay").addClass("hidden");
 							$("#errorMsgContent").html(errors);
@@ -1280,9 +1322,12 @@
 								$("#optional_duedate").html((result.duedate == undefined || result.duedate == null || result.duedate.length <= 0) ? "-" : result.duedate);
 								$("#dueamount").val((result.dueamount == undefined || result.dueamount == null || result.dueamount.length <= 0) ? "-" : result.dueamount);
 								$("#amounttype").val((result.amounttype == undefined || result.amounttype == null || result.amounttype.length <= 0) ? "-" : result.amounttype);
+								if(result.amounttype != "inr"){
+									$(".tds_th").addClass("hidden");
+								}
 								if(result.amounttype == "inr"){
 									$("#optional_amounttype").html("INR");
-									$(".headamounttype").html("&#x20B9;");
+									$(".headamounttype").html("INR");
 									$("#totalamount").removeClass("hidden");
 									//var subtotalamount = result.totalamount - result.servicetax;
 									$("#subtotalamount").html((result.totalamount));
@@ -1293,21 +1338,21 @@
 									$("#totalamountunderline").removeClass("hidden");
 								}else if(result.amounttype == "usd"){
 									$("#optional_amounttype").html("USD");
-									$(".headamounttype").html("&#36;");
+									$(".headamounttype").html("USD");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
 								}else if(result.amounttype == "eur"){
 									$("#optional_amounttype").html("EUR");
-									$(".headamounttype").html("&#8364;");
+									$(".headamounttype").html("EUR");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
 									$("#totalamountunderline").removeClass("hidden");
 								}else if(result.amounttype == "gbp"){
 									$("#optional_amounttype").html("GBP");
-									$(".headamounttype").html("&#163;");
+									$(".headamounttype").html("GBP");
 									$("#subtotalamount").html(result.totalamount);
 									$("#sub_total").removeClass("hidden");
 									$("#service_tax").addClass("hidden");
@@ -1488,6 +1533,7 @@
 					var timeperiod = $("#time_period_"+i).val();
 					var rateperiod = $("#rate_period_"+i).val();
 					var dueamount = $("#netamt_"+i).val();
+					var tds = $("#tds_"+i).val();
 					if(reference == "" || reference.length == 0) validation = false;
 					if(servicefrom == "" || servicefrom.length == 0) validation = false;
 					if(serviceto == "" || serviceto.length == 0) validation = false;
@@ -1496,6 +1542,9 @@
 					//}
 					if(rateperiod == "" || rateperiod.length == 0) validation = false;
 					if(dueamount == "" || dueamount.length == 0) validation = false;
+					if($("#amounttype").val() == "inr"){
+						if(tds == "" || tds.length == 0) validation = false;
+					}
 					
 					var servicefromvalidation = $.datepicker.parseDate('dd-mm-yy',servicefrom); 
 					var servicetovalidation = $.datepicker.parseDate('dd-mm-yy',serviceto);
@@ -1681,18 +1730,21 @@
 									$("#reference_"+i).prop( "disabled", true );
 									$("#time_period_"+i).prop( "disabled", true );
 									$("#rate_period_"+i).prop( "disabled", true );
+									$("#tds_"+i).prop( "disabled", true );
 									$("#invoice_due_amount_"+i).prop( "disabled", true );
 									$("#netamt_"+i).prop( "disabled", true );
 									
 									$("#reference_"+i).addClass("inputdisable");
 									$("#time_period_"+i).addClass("inputdisable");
 									$("#rate_period_"+i).addClass("inputdisable");
+									$("#tds_"+i).addClass("inputdisable");
 									$("#invoice_due_amount_"+i).addClass("inputdisable");
 									$("#netamt_"+i).addClass("inputdisable");
 									
 									$("#reference_"+i).removeClass("inputBorder");
 									$("#time_period_"+i).removeClass("inputBorder");
 									$("#rate_period_"+i).removeClass("inputBorder");
+									$("#tds_"+i).removeClass("inputBorder");
 									$("#invoice_due_amount_"+i).removeClass("inputBorder");
 									$("#netamt_"+i).removeClass("inputBorder");
 							 });
@@ -1720,6 +1772,7 @@
 			
 			function updateinvoiceDetails(){
 				$("#block_overlay").removeClass("hidden");
+				var invoicedate = $("#invoicedate").datepicker().val();
 				$('[id^="invoicecontenttablerow_"]').each(function(i, item) {
 					var id = $(this).attr("id");
 					var i = id.substring(23, id.length);
@@ -1734,8 +1787,12 @@
 					//}
 					var rateperiod = $("#rate_period_"+i).val();
 					var dueamount = $("#netamt_"+i).val();
+					var tds = "null"
 					
-					var resourceURL = $("#contextpath").val()+"/invoice/updateinvoicedetails/"+id+"/"+invoiceno+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+timeperiod+"/"+rateperiod+"/"+dueamount;
+					if($("#amounttype").val() == "inr"){
+						tds = $("#tds_"+i).val();
+					}
+					var resourceURL = $("#contextpath").val()+"/invoice/updateinvoicedetails/"+id+"/"+invoiceno+"/"+invoicedate+"/"+reference+"/"+servicefrom+"/"+serviceto+"/"+timeperiod+"/"+rateperiod+"/"+dueamount+"/"+tds;
 					$.ajax({
 						url : resourceURL,
 						type : 'GET',
@@ -1903,14 +1960,14 @@
 				            };
 				            // Total over all pages
 				            total = api
-				                .column( 4 )
+				                .column( 5 )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
 				                },0 );
 				            // Total over this page
 				            pageTotal = api
-				                .column( 4, { "filter" : "applied"} )
+				                .column( 5, { "filter" : "applied"} )
 				                .data()
 				                .reduce( function (a, b) {
 				                    return intVal(a) + intVal(b);
@@ -1926,6 +1983,7 @@
 	                      {sClass: "alignleft"},
 	                      {sClass: "center"},
 	                      {sClass: "alignleft"},
+	                      {sClass: "center"},
 	                      {sClass: "alignright"}
 	                    ]
 				    });

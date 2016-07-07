@@ -73,7 +73,7 @@
 								
 								<li><a href="<%=request.getContextPath() %>/professionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>Professional&nbsp;Tax</span></a></li>								
 								<%-- <li><a href="<%=request.getContextPath() %>/tds/paytds"><aside><img src="<%=request.getContextPath() %>/resources/icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Pay&nbsp;TDS</span></a></li> --%>
-								<li><a href="<%=request.getContextPath() %>/tds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>TDS</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/tds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Company TDS</span></a></li>
 									
 								<li><a href="<%=request.getContextPath() %>/emppf"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/pf.png"/></aside>&nbsp;&nbsp;<span>Provident&nbsp;Fund</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/emplop"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee LOP</span></a></li>
@@ -142,7 +142,7 @@
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_add.png"/></aside>&nbsp;&nbsp;<span>Invoices</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyexpense"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/expenses_add.png"/></aside>&nbsp;&nbsp;<span>Expenses</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyasset"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/asset_view.png"/></aside>&nbsp;&nbsp;<span>Assets</span></a></li>
-								<li><a href="<%=request.getContextPath() %>/fyreports/fytds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>TDS</span></a></li>
+								<li><a href="<%=request.getContextPath() %>/fyreports/fytds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Company TDS</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyprofessionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>PT</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fypayroll"><i class="fa fa-usd"></i>&nbsp;<span>Payroll</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/fyreports/fyemptds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Employee TDS</span></a></li>

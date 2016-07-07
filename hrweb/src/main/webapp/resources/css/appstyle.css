@@ -1171,11 +1171,11 @@ div#totaldiv table#invoicepaid tr td	{  width:44% !important; margin-top:0px !im
  .FYDIVP                                    { color: black !important;padding: 10px 0;  margin: 10px 0; }
 .MRGRINVDIV 								{ margin-right: 35px; }
  .DISBOX						           	{ display:-webkit-box;}
- .div_Width                                 { width: 259px; }
+ .div_Width                                 { width: 215px; }
  .sub_tot_div 								{ width: 192px; } 
  .tot_div									{ width: 163px; }
  .sub_tot_div_view							{ width: 192px; } 
- .div_Width_view                            { width: 273px !important; }
+ .div_Width_view                            { width: 229px; }
  .tot_div_view                           	{ width: 178px !important; }
  .datePicClass                              { padding-left:0px !important }
 table.optionTable td.invoivetd              { width:200px; }
@@ -1216,7 +1216,7 @@ table.optionTable td.invoivetd              { width:200px; }
 }
 @media  (min-width: 1150px){
 	.sub_tot_div_view					{ width: 217px; }
-	.div_Width_view						{ width: 279px; }
+	.div_Width_view						{ width: 229px; }
 	.tot_div_view  						{ width: 174px; }
 	
 	
