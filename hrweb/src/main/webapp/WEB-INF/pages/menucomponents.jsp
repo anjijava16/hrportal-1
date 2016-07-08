@@ -73,11 +73,8 @@
 								
 								<li><a href="<%=request.getContextPath() %>/professionaltax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/prof_tax.png"/></aside>&nbsp;&nbsp;<span>Professional&nbsp;Tax</span></a></li>								
 								<%-- <li><a href="<%=request.getContextPath() %>/tds/paytds"><aside><img src="<%=request.getContextPath() %>/resources/icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Pay&nbsp;TDS</span></a></li> --%>
-								<li><a href="<%=request.getContextPath() %>/tds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Company TDS</span></a></li>
-									
 								<li><a href="<%=request.getContextPath() %>/emppf"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/pf.png"/></aside>&nbsp;&nbsp;<span>Provident&nbsp;Fund</span></a></li>
 								<li><a href="<%=request.getContextPath() %>/emplop"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Employee LOP</span></a></li>
-								<li><a href="<%=request.getContextPath() %>/servicetax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Service Tax</span></a></li>
 							</ul>
 						</li>
 					</c:when>
@@ -91,6 +88,8 @@
 									<c:when test="${ session.groupname == 'ad' || session.groupname == 'fi'}">
 										<li><a href="<%=request.getContextPath() %>/invoice/addinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_add.png"/></aside>&nbsp;&nbsp;<span>New&nbsp;Invoice</span></a></li>
 										<li><a href="<%=request.getContextPath() %>/invoice/viewinvoice"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/invoice_view.png"/></aside>&nbsp;&nbsp;<span>View&nbsp;Invoices</span></a></li>
+										<li><a href="<%=request.getContextPath() %>/tds"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/tds_pay.png"/></aside>&nbsp;&nbsp;<span>Company TDS</span></a></li>
+										<li><a href="<%=request.getContextPath() %>/servicetax"><aside><img src="<%=request.getContextPath() %>/resources/images/menu_icons/lop.png"/></aside>&nbsp;&nbsp;<span>Service Tax</span></a></li>
 									</c:when>
 								</c:choose>
 								<%-- <c:choose>
