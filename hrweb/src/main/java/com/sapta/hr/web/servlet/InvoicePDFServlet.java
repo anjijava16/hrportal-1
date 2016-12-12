@@ -244,25 +244,21 @@ public class InvoicePDFServlet extends BaseServlet {
 						billtocell_2.setPaddingLeft(5);
 						billtocell_2.setPaddingTop(5);
 						billto.addCell(billtocell_2);
-						billtocell_2 = new PdfPCell(new Paragraph(customerDO.getAddress(),font8));
+						billtocell_2 = new PdfPCell(new Paragraph(customerDO.getAddress() == null?"":customerDO.getAddress(),font8));
 						billtocell_2.setHorizontalAlignment(Element.ALIGN_LEFT);
 						billtocell_2.setBorderColor(BaseColor.GRAY);
 						billtocell_2.setBorder(Rectangle.LEFT | Rectangle.RIGHT);
 						billtocell_2.setPaddingLeft(5);
 						billto.addCell(billtocell_2);
-						billtocell_2 = new PdfPCell(new Paragraph("Pin : "+customerDO.getPincode(),font8));
+						String pin = customerDO.getPincode() == null ? "":customerDO.getPincode();
+						billtocell_2 = new PdfPCell(new Paragraph("Pin : "+pin ,font8));
 						billtocell_2.setHorizontalAlignment(Element.ALIGN_LEFT);
 						billtocell_2.setBorderColor(BaseColor.GRAY);
 						billtocell_2.setBorder(Rectangle.LEFT | Rectangle.RIGHT);
 						billtocell_2.setPaddingLeft(5);
 						billto.addCell(billtocell_2);
-						String custEmail = customerlist.get(0).getEmail();
-						if(custEmail != null && custEmail != "" ){
-							custEmail = customerlist.get(0).getEmail();
-						}else{
-							custEmail = "";
-						}
-						billtocell_2 = new PdfPCell(new Paragraph("Email : "+custEmail,font8));
+						String email = customerDO.getEmail() == null ? "" : customerDO.getEmail();
+						billtocell_2 = new PdfPCell(new Paragraph("Email : "+email,font8));
 						billtocell_2.setHorizontalAlignment(Element.ALIGN_LEFT);
 						billtocell_2.setBorderColor(BaseColor.GRAY);
 						billtocell_2.setBorder(Rectangle.LEFT | Rectangle.RIGHT | Rectangle.BOTTOM);
@@ -552,9 +548,10 @@ public class InvoicePDFServlet extends BaseServlet {
 					tocell_value.setPaddingTop(5);
 					totaltbl.addCell(tocell_value);
 					
+					Long noofdays = invoiceDetailsDO.getNoofdays();
 					if(String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("f")){
 						if(invoiceDetailsDO.getNoofdays() != 0){
-							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getNoofdays()), font8));
+							PdfPCell totalhrscell_value = new PdfPCell(new Paragraph(noofdays != null ?  String.valueOf(invoiceDetailsDO.getNoofdays()) : "", font8));
 							totalhrscell_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 							totalhrscell_value.setBorderColor(BaseColor.GRAY);
 							totalhrscell_value.setFixedHeight(20);
@@ -570,7 +567,7 @@ public class InvoicePDFServlet extends BaseServlet {
 						}
 					}else{
 						if(!String.valueOf(invoice.getTypeofinvoice()).equalsIgnoreCase("d")){
-							PdfPCell noofdays_value = new PdfPCell(new Paragraph(String.valueOf(invoiceDetailsDO.getNoofdays()), font8));
+							PdfPCell noofdays_value = new PdfPCell(new Paragraph(noofdays != null ?  String.valueOf(invoiceDetailsDO.getNoofdays()) : "", font8));
 							noofdays_value.setHorizontalAlignment(Element.ALIGN_CENTER);
 							noofdays_value.setBorderColor(BaseColor.GRAY);
 							noofdays_value.setFixedHeight(20);
